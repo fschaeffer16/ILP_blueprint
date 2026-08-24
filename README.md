@@ -14,18 +14,22 @@ product model, the non-negotiable principles, the data schemas, the API contract
 Lucie County (Florida) pilot entry strategy; [`packages/core`](packages/core) is the running,
 tested TypeScript kernel.
 
-**What runs today** (`@ilp/core`, deterministic, no AI keys, 51 tests):
+**What runs today:**
 
-- **Assign-once compiler** — one teacher assignment → individualized delivery per student, objective and rigor locked.
-- **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate.
-- **Teacher-reviewed grading** — AI recommends with criterion evidence; only a teacher decision releases a grade.
-- **Remediation + the 75% rule** — classwide-failure evaluation, materially-different reteach, equivalent reassessment.
+- **`@ilp/core`** — deterministic engine, no AI keys, 51 tests:
+  - **Assign-once compiler** — one teacher assignment → individualized delivery per student, objective and rigor locked.
+  - **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate.
+  - **Teacher-reviewed grading** — AI recommends with criterion evidence; only a teacher decision releases a grade.
+  - **Remediation + the 75% rule** — classwide-failure evaluation, materially-different reteach, equivalent reassessment.
+- **`@ilp/web`** — the teacher command center (Next.js): Today board, My class, Assign-once composer, Grading review — every screen driven by the engine above on synthetic data.
 
 ```bash
 npm install
-npm run demo         # assign once → individualized for a synthetic class of 6
-npm run demo:cycle   # assess → grade → teacher decision → 75% rule → remediation
-npm test
+npm run build --workspace @ilp/core   # the web app imports the built engine
+npm run demo                          # assign once → individualized for a synthetic class of 6
+npm run demo:cycle                    # assess → grade → teacher decision → 75% rule → remediation
+npm test                              # 51 tests
+npm run dev --workspace @ilp/web      # the teacher command center at http://localhost:3000
 ```
 
 The stack is TypeScript throughout; the AI provider and client framework are deliberately
@@ -71,6 +75,7 @@ instructional action.
 | [`docs/st-lucie-entry.md`](docs/st-lucie-entry.md) | District entry strategy, integration map, and discovery checklist |
 | [`docs/glossary.md`](docs/glossary.md) | Shared vocabulary |
 | [`packages/core/`](packages/core) | **`@ilp/core`** — the running engine: compiler, assessment, grading, remediation |
+| [`apps/web/`](apps/web) | **`@ilp/web`** — the teacher command center (Next.js), wired to the engine |
 | [`schemas/`](schemas/) | JSON Schema definitions for the objective and core entities |
 | [`api/openapi.yaml`](api/openapi.yaml) | The `/v1` API contract outline |
 | [`examples/`](examples/) | Synthetic fixtures: a sample objective, synthetic students, and compile request/response |

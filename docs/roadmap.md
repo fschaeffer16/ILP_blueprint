@@ -25,6 +25,10 @@ deepened through assessment, teacher-reviewed grading, and remediation. The AI s
 (`ItemGenerator`, `SubmissionGrader`) are where a real model gateway slots in later; the
 guardrails around them are deterministic and tested.
 
+**A teacher command center UI** ([`@ilp/web`](../apps/web), Next.js) now sits on top of the
+engine: a Today board, a class overview, the assign-once composer with a live compile preview,
+and an interactive grading review. Every screen renders real engine output on synthetic data.
+
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |
@@ -37,7 +41,7 @@ guardrails around them are deterministic and tested.
 | 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | E3 | 2 |
 | 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | E5 | 1 |
 | 5 | Assignment-aware bot (mode-governed, grounded) + red-team suite | E6 | 4 |
-| 9 | Teacher command center (Today board, temporary groups, duplicate suppression) | E10 | 3, 7 |
+| 9 | **Teacher command center (Today board, class overview, assign composer, grading review)** 🟡 | E10 | 1, 6, 7 |
 | 10 | One branching simulation + problem-solving evidence model | E11 | 2 |
 | 11 | District-contained collaboration thread + moderation | E12 | 2 |
 | 12 | Roster/SSO integration path; Canvas/Skyward discovery adapters | E13 | 2 |
