@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: ILP API
+  version: 0.2.0
+  description: >
+    Outline of the ILP `/v1` API (build spec §40). This is a contract sketch for the pilot
+    vertical slice, not a finished server. Authority notes on each operation reflect the
+    division-of-labor rules: the system produces and analyzes; teachers decide. Every query
+    is scoped by district tenant; no operation crosses tenant boundaries.
+  license:
+    name: UNLICENSED
+servers:
+  - url: https://{tenant}.ilp.example/v1
+    variables:
+      tenant:
+        default: district
+tags:
+  - name: objectives
+  - name: assignments
+  - name: student
+  - name: grading
+  - name: remediation
+  - name: teacher
+  - name: simulations
+  - name: collaboration
+paths:
+  /classes:
+    get:
+      tags: [assignments]
+      summary: List classes (MVP import may be CSV/OneRoster)
+      description: "Authority: district/teacher by role."
+      responses:
+        "200": { description: OK }
+    post:
+      tags: [assignments]
+      summary: Create a class
+      responses:
+        "201": { description: Created }
+  /objectives:
+    post:
+      tags: [objectives]
+      summary: Create a draft objective version
+      description: "Authority: curriculum reviewer. New versions start as draft and must be published before assignment."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "../schemas/objective.schema.json" }
+      responses:
+        "201": { description: Draft created }
+  /objectives/{id}:
+    get:
+      tags: [objectives]
+      summary: Retrieve a published objective version and its dependencies
+      description: "Authority: authenticated instructional users."
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "../schemas/objective.schema.json" }
+  /assignments/compile:
+    post:
+      tags: [assignments]
+      summary: Validate teacher intent and produce the class adaptation summary
+      description: >
+        The assign-once compiler. Takes one teacher assignment and returns a per-student
+        adaptation summary for teacher review. Nothing reaches students until /publish.
+        Authority: teacher. Reference implementation: @ilp/core `compileAssignment`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CompileRequest" }
+            example:
+              class_id: CLS-103
+              objective_version_ids: ["M3.NF.01:v1"]
+              duration_minutes: 35
+              delivery_mode: lesson_practice
+              bot_mode: lesson
+              collaboration: { enabled: true, scope: class }
+              teacher_constraints: { require_handwriting: true, max_read_aloud_fraction: 0.50 }
+      responses:
+        "200":
+          description: Compile result ready for teacher review (or blocked on integrity failure)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CompileResponse" }
+              example:
+                status: ready_for_teacher_review
+                objective_integrity: pass
+                student_count: 24
+                patterns: { core: 12, vocabulary_supported: 4, visual_first: 3, guided_practice: 3, advanced_transfer: 2 }
+                objective_modifications: 0
+                warnings: []
+                publish_token: one-time-token
+  /assignments/{id}/publish:
+    post:
+      tags: [assignments]
+      summary: Freeze objective versions and create student manifests
+      description: "Authority: teacher. Requires a valid one-time publish_token from a passing compile."
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Published; manifests created }
+        "409": { description: Objective integrity not passing; cannot publish }
+  /student/manifests/today:
+    get:
+      tags: [student]
+      summary: Retrieve the student's assignment queue
+      description: "Authority: the assigned student."
+      responses:
+        "200": { description: OK }
+  /bot/respond:
+    post:
+      tags: [student]
+      summary: Return a mode-governed, grounded assistance response
+      description: >
+        Authority: the assigned student. Every response identifies the active objective,
+        uses only permitted assignment context, logs the help category, and preserves an
+        independent mastery check. Asking for help never reduces a grade.
+      responses:
+        "200": { description: OK }
+  /submissions:
+    post:
+      tags: [student]
+      summary: Store a student response and support metadata
+      description: "Authority: the assigned student. The original response is never silently rewritten."
+      responses:
+        "201": { description: Stored }
+  /grading/recommend:
+    post:
+      tags: [grading]
+      summary: Create criterion evidence and a score recommendation
+      description: "Authority: system/teacher. The recommendation is non-authoritative and cannot release a final grade."
+      responses:
+        "200": { description: OK }
+  /teacher-decisions:
+    post:
+      tags: [grading]
+      summary: Accept, change or reject an AI recommendation
+      description: "Authority: teacher. The teacher decision is authoritative for grades and consequential actions."
+      responses:
+        "201": { description: Recorded }
+  /remediation/plan:
+    post:
+      tags: [remediation]
+      summary: Create an evidence-backed alternative lesson and reassessment
+      description: "Authority: system/teacher. Must be materially different from the failed lesson."
+      responses:
+        "200": { description: OK }
+  /teacher/today:
+    get:
+      tags: [teacher]
+      summary: Return prioritized action cards and prepared materials
+      description: "Authority: teacher. Checklist model; duplicate tasks and raw-data overload are suppressed."
+      responses:
+        "200": { description: OK }
+  /simulations/{id}/decisions:
+    post:
+      tags: [simulations]
+      summary: Advance a scenario and return the next state or a critical pause
+      description: "Authority: the assigned student."
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: OK }
+  /spaces/{id}/posts:
+    get:
+      tags: [collaboration]
+      summary: Read within a verified collaboration space
+      description: "Authority: authorized roster member. No public indexing; no unrestricted adults."
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: OK }
+    post:
+      tags: [collaboration]
+      summary: Contribute within a verified collaboration space
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "201": { description: Created (subject to moderation) }
+components:
+  schemas:
+    CompileRequest:
+      type: object
+      required: [class_id, objective_version_ids, duration_minutes, delivery_mode, bot_mode]
+      properties:
+        class_id: { type: string }
+        objective_version_ids:
+          type: array
+          items: { type: string, description: "objectiveId:vN" }
+        duration_minutes: { type: integer, minimum: 1 }
+        delivery_mode: { type: string, enum: [lesson_practice, assessment, remediation] }
+        bot_mode: { type: string, enum: [lesson, homework, quiz, exam, research] }
+        collaboration:
+          type: object
+          properties:
+            enabled: { type: boolean }
+            scope: { type: string, enum: [none, class, district] }
+        teacher_constraints:
+          type: object
+          properties:
+            require_handwriting: { type: boolean }
+            max_read_aloud_fraction: { type: number, minimum: 0, maximum: 1 }
+            force_adaptations: { type: array, items: { type: string } }
+            disable_adaptations: { type: array, items: { type: string } }
+            objective_modification_authorized_for: { type: array, items: { type: string } }
+    CompileResponse:
+      type: object
+      required: [status, objective_integrity, student_count, patterns]
+      properties:
+        status: { type: string, enum: [ready_for_teacher_review, blocked] }
+        objective_integrity: { type: string, enum: [pass, fail] }
+        student_count: { type: integer }
+        patterns:
+          type: object
+          properties:
+            core: { type: integer }
+            vocabulary_supported: { type: integer }
+            visual_first: { type: integer }
+            guided_practice: { type: integer }
+            advanced_transfer: { type: integer }
+        objective_modifications: { type: integer }
+        warnings:
+          type: array
+          items:
+            type: object
+            properties:
+              code: { type: string }
+              severity: { type: string, enum: [info, warning, blocking] }
+              message: { type: string }
+              student_id: { type: string }
+        publish_token: { type: string, description: "One-time token; present only when status is ready_for_teacher_review." }

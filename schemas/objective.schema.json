@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ilp.dev/schemas/objective.schema.json",
+  "title": "ObjectiveVersion",
+  "description": "A versioned, immutable-after-publication learning objective. The objective is the contract among curriculum, lesson generation, assessment, remediation and analytics. Blueprint §8 / build spec §31.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectiveId",
+    "version",
+    "status",
+    "subject",
+    "gradeBand",
+    "standardRefs",
+    "studentOutcome",
+    "essentialKnowledge",
+    "requiredReasoning",
+    "prerequisites",
+    "mastery",
+    "permittedAdaptations",
+    "prohibitedAdaptations",
+    "misconceptions",
+    "sourceIds",
+    "remediationPatternIds"
+  ],
+  "properties": {
+    "objectiveId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable objective identifier, e.g. 'M3.NF.01'.",
+      "examples": ["M3.NF.01"]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonic version. A published version is immutable."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "retired"],
+      "description": "Only a 'published' objective may be assigned to students."
+    },
+    "subject": {
+      "type": "string",
+      "enum": ["mathematics", "reading", "writing", "science", "history_civics"]
+    },
+    "gradeBand": {
+      "type": "string",
+      "enum": ["K", "1", "2", "3", "4", "5"]
+    },
+    "standardRefs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Jurisdictional standard references, e.g. Florida B.E.S.T. benchmark codes."
+    },
+    "studentOutcome": {
+      "type": "string",
+      "minLength": 1,
+      "description": "LOCKED. Plain-language 'the student will…' statement."
+    },
+    "essentialKnowledge": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "LOCKED. Knowledge every student version must require."
+    },
+    "requiredReasoning": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "LOCKED. Reasoning demands, e.g. ['represent','explain','transfer']."
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "mastery": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "LOCKED. The mastery contract; identical across all student versions.",
+      "required": ["threshold", "minimumEvidenceTypes", "transferRequired"],
+      "properties": {
+        "threshold": { "type": "number", "minimum": 0, "maximum": 1 },
+        "minimumEvidenceTypes": { "type": "integer", "minimum": 1 },
+        "transferRequired": { "type": "boolean" }
+      }
+    },
+    "permittedAdaptations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Adaptation ids the district/curriculum team approved for this objective."
+    },
+    "prohibitedAdaptations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Adaptation ids that would compromise the objective and must never be applied. Must not overlap permittedAdaptations."
+    },
+    "misconceptions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sourceIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "References to approved SourceRecords."
+    },
+    "remediationPatternIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Materially-different reteach patterns available if this objective is failed."
+    }
+  },
+  "examples": [
+    {
+      "objectiveId": "M3.NF.01",
+      "version": 1,
+      "status": "published",
+      "subject": "mathematics",
+      "gradeBand": "3",
+      "standardRefs": ["MA.3.FR.1.1"],
+      "studentOutcome": "Explain and represent a fraction as equal parts of a whole.",
+      "essentialKnowledge": ["numerator", "denominator", "equal parts", "whole/part relationship"],
+      "requiredReasoning": ["represent", "explain", "transfer"],
+      "prerequisites": ["equal partitioning", "whole/part relationship"],
+      "mastery": { "threshold": 0.8, "minimumEvidenceTypes": 2, "transferRequired": true },
+      "permittedAdaptations": ["vocabulary_preview", "read_aloud", "visual_first_models", "worked_example_fade", "chunked_prompt", "advanced_transfer_case"],
+      "prohibitedAdaptations": ["reduce_to_recognition_only", "remove_explanation"],
+      "misconceptions": ["larger denominator means larger fraction"],
+      "sourceIds": ["SRC-001", "SRC-002"],
+      "remediationPatternIds": ["REM-FRACTION-AREA", "REM-FRACTION-SET"]
+    }
+  ]
+}

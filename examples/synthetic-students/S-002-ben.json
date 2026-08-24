@@ -1,0 +1,17 @@
+{
+  "studentId": "S-002",
+  "displayName": "Ben",
+  "gradeBand": "3",
+  "hypotheses": [
+    {
+      "domain": "language_access",
+      "statement": "Reads below grade level; understands more when text is read aloud.",
+      "readiness": 0.3,
+      "confidence": 0.85,
+      "evidenceIds": ["EV-1002", "EV-1003"],
+      "reviewAt": "2099-06-01",
+      "effectiveSupports": ["read_aloud"],
+      "teacherConfirmed": true
+    }
+  ]
+}

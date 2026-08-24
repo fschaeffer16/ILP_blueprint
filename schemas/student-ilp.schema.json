@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ilp.dev/schemas/student-ilp.schema.json",
+  "title": "StudentILP",
+  "description": "A student and the ILP profile the compiler reads. The ILP is an evolving evidence model, not a permanent label; every hypothesis carries its evidence, confidence and review date, and a teacher can correct or expire it. Blueprint §6; build spec §32.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["studentId", "displayName", "gradeBand", "hypotheses"],
+  "properties": {
+    "studentId": { "type": "string", "minLength": 1 },
+    "displayName": { "type": "string", "minLength": 1 },
+    "gradeBand": { "type": "string", "enum": ["K", "1", "2", "3", "4", "5"] },
+    "hypotheses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ilpHypothesis" }
+    }
+  },
+  "$defs": {
+    "ilpHypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "statement", "readiness", "confidence", "evidenceIds", "reviewAt"],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "enum": [
+            "objective_mastery",
+            "prerequisite_knowledge",
+            "language_access",
+            "mathematical_reasoning",
+            "written_expression",
+            "problem_solving",
+            "assessment_conditions",
+            "effective_supports"
+          ]
+        },
+        "statement": { "type": "string", "minLength": 1 },
+        "readiness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Demonstrated readiness in this domain. Lower = more support warranted."
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in the hypothesis itself."
+        },
+        "evidenceIds": { "type": "array", "items": { "type": "string" } },
+        "reviewAt": {
+          "type": "string",
+          "format": "date",
+          "description": "ISO date after which the hypothesis must be re-reviewed; expired hypotheses are ignored by the compiler."
+        },
+        "effectiveSupports": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Adaptation ids that have previously improved this student's independent performance."
+        },
+        "teacherConfirmed": {
+          "type": "boolean",
+          "description": "True if a teacher has explicitly corrected/confirmed this hypothesis."
+        }
+      }
+    }
+  }
+}

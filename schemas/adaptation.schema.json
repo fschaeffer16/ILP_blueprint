@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ilp.dev/schemas/adaptation.schema.json",
+  "title": "Adaptation",
+  "description": "A reusable, district-customizable adaptation — the vocabulary of individualization. Each adaptation declares what it may and may not change, keeping customization inside the objective-integrity guardrails. Blueprint §6/§10; build spec §32.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "adaptationClass",
+    "permittedChange",
+    "prohibitedChange",
+    "triggers",
+    "fadeRule",
+    "contributesToPattern",
+    "costWeight"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "examples": ["vocabulary_preview"] },
+    "label": { "type": "string", "minLength": 1 },
+    "adaptationClass": {
+      "type": "string",
+      "enum": ["access", "scaffold", "difficulty", "objective_modification"],
+      "description": "Only 'objective_modification' may change the expected learning, and it is never applied automatically."
+    },
+    "permittedChange": { "type": "string", "minLength": 1 },
+    "prohibitedChange": { "type": "string", "minLength": 1 },
+    "triggers": {
+      "type": "array",
+      "description": "ILP evidence signals that make this adaptation appropriate.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain"],
+        "anyOf": [{ "required": ["maxReadiness"] }, { "required": ["minReadiness"] }],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "enum": [
+              "objective_mastery",
+              "prerequisite_knowledge",
+              "language_access",
+              "mathematical_reasoning",
+              "written_expression",
+              "problem_solving",
+              "assessment_conditions",
+              "effective_supports"
+            ]
+          },
+          "maxReadiness": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minReadiness": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "fadeRule": {
+      "type": ["string", "null"],
+      "description": "How/when the scaffold fades. null for non-fading access adaptations."
+    },
+    "contributesToPattern": {
+      "type": "string",
+      "enum": ["core", "vocabulary_supported", "visual_first", "guided_practice", "advanced_transfer"]
+    },
+    "costWeight": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Relative cost hint (0 = rendering-only change; higher = more content/AI cost)."
+    }
+  }
+}

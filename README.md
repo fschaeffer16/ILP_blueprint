@@ -1,0 +1,109 @@
+# ILP — Individualized Lesson Planning
+
+**A teacher-controlled, AI-powered instructional operating system for K-12 education.**
+
+> Common objectives. Individual starting points. Adaptive pathways. Equivalent evidence of mastery. Teachers remain in command.
+
+---
+
+## What this repository is
+
+This repository is the working home for the **ILP product blueprint and pilot build
+specification**. It captures the product model, the non-negotiable instructional
+principles, the core data schemas, the API contract, and the St. Lucie County (Florida)
+pilot entry strategy in a form developers, curriculum reviewers, and district partners can
+all read and act on.
+
+It is **documentation and stack-neutral engineering artifacts**, not yet an application.
+The build spec deliberately defers the choice of AI provider and client framework; the
+schemas and contracts here are designed to survive those decisions.
+
+## The product thesis
+
+> The teacher assigns once. The system individualizes instruction, assessment and
+> remediation automatically while preserving the learning objective, mastery requirement
+> and teacher authority.
+
+The problem ILP addresses is **not** a lack of educational apps. Schools already run an
+LMS, adaptive-practice tools, state assessments, and publisher platforms. The problem is
+**fragmentation**: teachers must connect those pieces manually while also teaching,
+grading, and intervening. ILP is the layer that connects evidence to prepared
+instructional action.
+
+### ILP is / ILP is not
+
+| ILP is | ILP is not |
+| --- | --- |
+| Teacher-controlled instructional infrastructure | An autonomous AI teacher |
+| A connected objective-to-mastery system | A collection of unrelated AI tools |
+| Student-level adaptive development | Permanent ability tracking or fixed labels |
+| A living, sourced curriculum | A PDF textbook placed on a screen |
+| Transparent teacher-reviewed assessment support | Black-box automated grading |
+| A protected verified student community | Open public social media |
+| A tablet-first learning environment | Seven hours of passive screen time |
+
+## Repository map
+
+| Path | Contents |
+| --- | --- |
+| [`docs/product-blueprint.md`](docs/product-blueprint.md) | Part I — the full product blueprint (v0.1 content, sections 1–25 + appendices) |
+| [`docs/build-spec.md`](docs/build-spec.md) | Part II — St. Lucie enhancement proposal and executable developer build spec (sections 26–50) |
+| [`docs/principles.md`](docs/principles.md) | The ten non-negotiable instructional principles (P1–P10) |
+| [`docs/instructional-cycle.md`](docs/instructional-cycle.md) | The connected instructional cycle and traceability rules |
+| [`docs/data-model.md`](docs/data-model.md) | Core data entities, field-level rules, and how the schemas fit together |
+| [`docs/acceptance-criteria.md`](docs/acceptance-criteria.md) | MVP acceptance criteria (AC-01…AC-14) |
+| [`docs/requirements-catalog.md`](docs/requirements-catalog.md) | Requirement catalog (LRN/OBJ/ASN/…) and non-functional requirements |
+| [`docs/roadmap.md`](docs/roadmap.md) | Build sequence, developer epics, and pilot decision gates |
+| [`docs/st-lucie-entry.md`](docs/st-lucie-entry.md) | District entry strategy, integration map, and discovery checklist |
+| [`docs/glossary.md`](docs/glossary.md) | Shared vocabulary |
+| [`schemas/`](schemas/) | JSON Schema definitions for the objective and core entities |
+| [`api/openapi.yaml`](api/openapi.yaml) | The `/v1` API contract outline |
+| [`examples/`](examples/) | Synthetic fixtures: a sample objective, synthetic students, and compile request/response |
+
+New to the project? Read [`docs/principles.md`](docs/principles.md) first — every technical
+decision in this repo is downstream of those ten rules.
+
+## Non-negotiable principles (summary)
+
+1. **Teacher authority** — AI creates, adapts, analyzes and recommends; teachers teach, intervene, correct and decide.
+2. **Objective integrity** — every lesson, item, rubric criterion, remediation and reassessment traces to a learning objective.
+3. **Adaptive route, visible rigor** — the route may change; any change to the objective or rigor is explicit and teacher-approved.
+4. **Access plus development** — don't let an unrelated weakness hide subject knowledge; strengthen that weakness over time.
+5. **Knowledge before unsupported opinion** — teach facts, chronology and competing evidence before asking students to evaluate.
+6. **Remediation is mandatory** — no failed objective is a dead-end grade.
+7. **Assessment is evidence** — a score shows what was demonstrated, what support was used, and where judgment remains.
+8. **No ideological advocacy** — distinguish documented fact, inference, interpretation and disagreement without demanding conformity.
+9. **Technology must serve learning** — the tablet also directs students into discussion, experiments, handwriting and physical work.
+10. **No manipulative engagement** — reward helpfulness, accuracy and constructive participation, not outrage or follower counts.
+
+Full text with requirements in [`docs/principles.md`](docs/principles.md).
+
+## Scope of the first build
+
+A **narrow but complete vertical slice** that proves the connected cycle before any
+statewide curriculum:
+
+- **Grade 3** as the first independent-use validation point (patterns reusable down to K-2).
+- One mathematics unit, one reading/writing unit, and one short history/civics simulation.
+- **8–12** Florida B.E.S.T.-mapped objectives with prerequisites and remediation.
+- **Synthetic student data first**; live data only after district approval and consent.
+- Teacher control over lesson approval, adaptations, interventions, and **final grades**.
+
+### Explicitly not in the first build
+
+- A custom hardware device or national procurement program.
+- Every grade and subject, or a statewide curriculum adoption.
+- Open-ended nationwide student social networking or unrestricted messaging.
+- Automated high-stakes final grading.
+- A full replacement for district SIS, LMS, or state reporting.
+- Full IEP/AAC/severe-disability functionality without specialist-led design.
+
+## Status
+
+Blueprint **v0.2** — combines the strategic product model with a St. Lucie enhancement
+proposal and executable build specification. This is **not** a legal opinion, a validated
+curriculum, a psychometric validation report, or a final procurement response. District
+discovery and expert validation remain required before any live student pilot.
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how the documentation and schemas are kept in
+sync, and [`docs/roadmap.md`](docs/roadmap.md) for what to build first.

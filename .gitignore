@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnp.*
+.yarn/*
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+.next/
+out/
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Env & secrets — ILP never commits credentials or student data
+.env
+.env.*
+!.env.example
+*.pem
+
+# Local data (student data must never be committed; synthetic fixtures live in-repo)
+/data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.recommended.json

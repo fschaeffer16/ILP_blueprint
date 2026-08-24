@@ -1,0 +1,15 @@
+{
+  "status": "ready_for_teacher_review",
+  "objective_integrity": "pass",
+  "student_count": 6,
+  "patterns": {
+    "core": 1,
+    "vocabulary_supported": 1,
+    "visual_first": 1,
+    "guided_practice": 2,
+    "advanced_transfer": 1
+  },
+  "objective_modifications": 0,
+  "warnings": [],
+  "publish_token": "one-time-token"
+}

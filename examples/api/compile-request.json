@@ -1,0 +1,12 @@
+{
+  "class_id": "CLS-103",
+  "objective_version_ids": ["M3.NF.01:v1"],
+  "duration_minutes": 35,
+  "delivery_mode": "lesson_practice",
+  "bot_mode": "lesson",
+  "collaboration": { "enabled": true, "scope": "class" },
+  "teacher_constraints": {
+    "require_handwriting": true,
+    "max_read_aloud_fraction": 0.5
+  }
+}
