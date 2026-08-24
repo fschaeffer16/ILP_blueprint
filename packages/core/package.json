@@ -21,7 +21,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "demo": "tsx src/cli.ts"
+    "demo": "tsx src/cli.ts",
+    "demo:cycle": "tsx src/cycle-cli.ts"
   },
   "dependencies": {
     "zod": "^3.23.8"

@@ -6,29 +6,37 @@ developer epics (§44).
 
 ## Current state
 
-**Slice 1 — the assign-once compiler — is built.** ([`@ilp/core`](../packages/core))
+**Most of the connected cycle's engine is built** ([`@ilp/core`](../packages/core)) — runnable
+on synthetic data, no AI keys, **51 passing tests**, two demos (`npm run demo`, `npm run demo:cycle`).
 
-- One teacher assignment compiles into a reproducible, individualized delivery manifest per
-  student, with the objective, rigor and mastery rule locked identically across all of them.
-- District-customizable adaptation engine with objective-integrity enforcement.
-- Runnable on synthetic data, no AI keys, 24 passing tests.
+- **Assign-once compiler** — one teacher assignment → a reproducible, individualized delivery
+  manifest per student, with the objective, rigor and mastery rule locked identically.
+- **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate
+  (alignment, answerability, answer-key/leak, prohibited clues); a pluggable `ItemGenerator`.
+- **Grading engine** — a pluggable `SubmissionGrader` + reference grader producing
+  criterion evidence, flags and confidence; a `releaseFinalGrade` gate that makes a grade
+  impossible without a teacher accept/modify decision; an append-only audit log.
+- **Remediation + the 75% rule** — classwide-failure evaluation that suspends the grade and
+  opens an integrity audit, plus materially-different / equivalent-reassessment checks.
 
-This is deliberately the *hardest and most differentiating* piece first: it is the thing a
-menu-of-generators competitor (Kira, SchoolAI) does not do, and everything else composes
-around it.
+This started with the *hardest and most differentiating* piece — the assign-once compiler,
+the thing a menu-of-generators competitor (Kira, SchoolAI) does not do — and has now
+deepened through assessment, teacher-reviewed grading, and remediation. The AI seams
+(`ItemGenerator`, `SubmissionGrader`) are where a real model gateway slots in later; the
+guardrails around them are deterministic and tested.
 
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |
 | --- | --- | --- | --- |
 | 1 | **Objective graph + assign-once compiler** ✅ | E2, E4 | — |
+| 6 | **Assessment specs, items, item-integrity gate, grading recommendations** ✅ | E7, E8 | 1 |
+| 7 | **Teacher final-grade workflow + audit trail** ✅ | E8 | 6 |
+| 8 | **Remediation, reassessment, and the 75% classwide-failure workflow** ✅ | E9 | 6 |
 | 2 | Foundation: tenant, role, roster, class, synthetic students + audit log | E1 | 1 |
 | 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | E3 | 2 |
 | 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | E5 | 1 |
 | 5 | Assignment-aware bot (mode-governed, grounded) + red-team suite | E6 | 4 |
-| 6 | Assessment specs, submissions, grading recommendations | E7, E8 | 3 |
-| 7 | Teacher final-grade workflow + audit trail | E8 | 6 |
-| 8 | Remediation, reassessment, and the 75% classwide-failure workflow | E9 | 6 |
 | 9 | Teacher command center (Today board, temporary groups, duplicate suppression) | E10 | 3, 7 |
 | 10 | One branching simulation + problem-solving evidence model | E11 | 2 |
 | 11 | District-contained collaboration thread + moderation | E12 | 2 |

@@ -10,3 +10,6 @@ export * from './schema.js';
 export * from './adaptation.js';
 export * from './integrity.js';
 export * from './compiler.js';
+export * from './assessment.js';
+export * from './grading.js';
+export * from './remediation.js';

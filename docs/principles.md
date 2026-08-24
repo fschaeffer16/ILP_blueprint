@@ -43,13 +43,19 @@ enforces several of these mechanically:
   for access, and separately adds an in-objective enrichment/transfer target when a student
   is ready — supports are also marked with `fadeRule`s so they are removed as independence
   grows, rather than becoming permanent.
-- **P7 — Assessment is evidence.** Manifests carry a `rationale` explaining every adaptation
-  decision; the grading schema (build spec §36) requires criterion-level evidence and
-  confidence before a teacher decision. *(Grading UI: later slice.)*
+- **P6 — Remediation is mandatory.** `evaluateClasswideFailure` turns a failed objective into
+  a required next action rather than a dead-end grade: at ≥75% miss it suspends the grade and
+  opens an integrity audit; below that it routes individual remediation. `checkRemediationPlan`
+  rejects a reteach that is not *materially different* from the failed lesson and a reassessment
+  that is not *equivalent*.
+- **P7 — Assessment is evidence.** The grader produces criterion-level evidence, confidence and
+  flags; `releaseFinalGrade` is the only path to a grade and requires a teacher accept/modify
+  decision (a reject/second-review releases nothing). An append-only audit log (`appendAudit`)
+  keeps the original recommendation even after a teacher correction.
 
-Principles **P5, P6, P8, P9, P10** are honored in the schemas and specifications and will be
-enforced in later slices (remediation engine, editorial governance, collaboration network,
-device management). Each of those slices should add its own enforcement notes here so this
+Principles **P5, P8, P9, P10** are honored in the schemas and specifications and will be
+enforced in later slices (editorial governance, collaboration network, device management, the
+assignment-aware bot). Each of those slices should add its own enforcement notes here so this
 table stays a live map of promise → mechanism, not a static list.
 
 ## The central prohibition

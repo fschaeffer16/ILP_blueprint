@@ -4,3 +4,4 @@ export * from './adaptations.js';
 export * from './objectives.js';
 export * from './roster.js';
 export * from './assignments.js';
+export * from './assessment.js';

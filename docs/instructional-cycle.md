@@ -40,9 +40,11 @@ These are the invariants that make the cycle auditable (P2, P7):
 | --- | --- |
 | 1–3 | `ObjectiveVersion` — [`schemas/objective.schema.json`](../schemas/objective.schema.json), [`packages/core/src/types.ts`](../packages/core/src/types.ts) |
 | 4 | The **assign-once compiler** — [`packages/core/src/compiler.ts`](../packages/core/src/compiler.ts) — turns one objective + each ILP into an individualized, integrity-checked delivery manifest |
-| 6–7 | Assessment & grading specs — [`build-spec.md`](build-spec.md) §36 *(engine: later slice)* |
-| 8–10 | Remediation & the 75% rule — [`build-spec.md`](build-spec.md) §37 *(engine: later slice)* |
-| 11–12 | Mastery rule (locked) + objective graph successors |
+| 6 | **Assessment engine** — [`packages/core/src/assessment.ts`](../packages/core/src/assessment.ts) — rubrics, specs, items, and the item-integrity gate |
+| 7 | **Grading engine** — [`packages/core/src/grading.ts`](../packages/core/src/grading.ts) — AI recommends with criterion evidence; only a teacher decision releases a grade |
+| 8–10 | **Remediation + the 75% rule** — [`packages/core/src/remediation.ts`](../packages/core/src/remediation.ts) — classwide-failure evaluation, materially-different reteach, equivalent reassessment |
+| 11–12 | Mastery rule (locked, enforced in `releaseFinalGrade`) + objective graph successors |
 
-The compiler (step 4) is the first fully-built stage; the remaining stages are specified in
-the build spec and scheduled in [`roadmap.md`](roadmap.md).
+Steps 4 and 6–10 are built; run the second half end-to-end with `npm run demo:cycle`. The
+remaining stages (instruction delivery UI, the bot, simulations, collaboration) are specified
+in the build spec and scheduled in [`roadmap.md`](roadmap.md).

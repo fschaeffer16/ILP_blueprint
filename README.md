@@ -8,15 +8,29 @@
 
 ## What this repository is
 
-This repository is the working home for the **ILP product blueprint and pilot build
-specification**. It captures the product model, the non-negotiable instructional
-principles, the core data schemas, the API contract, and the St. Lucie County (Florida)
-pilot entry strategy in a form developers, curriculum reviewers, and district partners can
-all read and act on.
+This repository holds the **ILP product blueprint and pilot build specification** *and* the
+**working engine** that implements its connected instructional cycle. The docs capture the
+product model, the non-negotiable principles, the data schemas, the API contract, and the St.
+Lucie County (Florida) pilot entry strategy; [`packages/core`](packages/core) is the running,
+tested TypeScript kernel.
 
-It is **documentation and stack-neutral engineering artifacts**, not yet an application.
-The build spec deliberately defers the choice of AI provider and client framework; the
-schemas and contracts here are designed to survive those decisions.
+**What runs today** (`@ilp/core`, deterministic, no AI keys, 51 tests):
+
+- **Assign-once compiler** — one teacher assignment → individualized delivery per student, objective and rigor locked.
+- **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate.
+- **Teacher-reviewed grading** — AI recommends with criterion evidence; only a teacher decision releases a grade.
+- **Remediation + the 75% rule** — classwide-failure evaluation, materially-different reteach, equivalent reassessment.
+
+```bash
+npm install
+npm run demo         # assign once → individualized for a synthetic class of 6
+npm run demo:cycle   # assess → grade → teacher decision → 75% rule → remediation
+npm test
+```
+
+The stack is TypeScript throughout; the AI provider and client framework are deliberately
+deferred behind seams (`ItemGenerator`, `SubmissionGrader`, a future model gateway), so the
+schemas and guardrails survive those decisions.
 
 ## The product thesis
 
@@ -56,6 +70,7 @@ instructional action.
 | [`docs/roadmap.md`](docs/roadmap.md) | Build sequence, developer epics, and pilot decision gates |
 | [`docs/st-lucie-entry.md`](docs/st-lucie-entry.md) | District entry strategy, integration map, and discovery checklist |
 | [`docs/glossary.md`](docs/glossary.md) | Shared vocabulary |
+| [`packages/core/`](packages/core) | **`@ilp/core`** — the running engine: compiler, assessment, grading, remediation |
 | [`schemas/`](schemas/) | JSON Schema definitions for the objective and core entities |
 | [`api/openapi.yaml`](api/openapi.yaml) | The `/v1` API contract outline |
 | [`examples/`](examples/) | Synthetic fixtures: a sample objective, synthetic students, and compile request/response |

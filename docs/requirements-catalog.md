@@ -15,12 +15,12 @@ build spec (§43). The **Status** column links requirements to the code that sat
 | ASN-02 | Assignment | Record every adaptation and whether rigor changed. | ✅ `appliedAdaptationIds`, `objectiveModified` |
 | BOT-01 | Bot | Ground responses in approved assignment material and sources. | ⬜ bot slice |
 | BOT-02 | Bot | Enforce teacher-configured help boundaries. | ⬜ bot slice (`botMode` modeled) |
-| ASM-01 | Assessment | Generate equivalent items from an approved specification. | ⬜ assessment slice |
-| ASM-02 | Assessment | Flag ambiguity, misalignment and abnormal item behavior. | ⬜ assessment slice |
-| GRD-01 | Grading | Provide criterion recommendations, evidence and confidence. | ⬜ grading slice |
-| GRD-02 | Grading | Require teacher action before final grade release. | ⬜ grading slice (modeled: `TeacherDecision` authoritative) |
-| REM-01 | Remediation | Generate a materially different lesson for failed objectives. | ⬜ remediation slice |
-| REM-02 | Remediation | Suspend affected grades at the classwide threshold. | ⬜ 75% workflow |
+| ASM-01 | Assessment | Generate equivalent items from an approved specification. | 🟡 `ItemGenerator` seam + reference generator + equivalence-band check; richer generation via model gateway |
+| ASM-02 | Assessment | Flag ambiguity, misalignment and abnormal item behavior. | ✅ `checkItemIntegrity` (alignment, answerability, answer-key/leak, prohibited clue) |
+| GRD-01 | Grading | Provide criterion recommendations, evidence and confidence. | ✅ `referenceGrader` → `GradingRecommendation` |
+| GRD-02 | Grading | Require teacher action before final grade release. | ✅ `releaseFinalGrade` gate; recommendation can never become a grade |
+| REM-01 | Remediation | Generate a materially different lesson for failed objectives. | ✅ `checkRemediationPlan` enforces materially-different + equivalent reassessment |
+| REM-02 | Remediation | Suspend affected grades at the classwide threshold. | ✅ `evaluateClasswideFailure` (75% rule) |
 | SIM-01 | Simulation | Pause at critical points and return decisions to the student. | ⬜ simulation slice |
 | SIM-02 | Simulation | Track reasoning, consequences, revision, recovery and transfer. | ⬜ simulation slice |
 | NET-01 | Network | Restrict participation to verified, policy-appropriate users. | ⬜ collaboration slice |
@@ -28,7 +28,7 @@ build spec (§43). The **Status** column links requirements to the code that sat
 | TCH-01 | Teacher UX | Present a short prioritized action list instead of raw data overload. | ⬜ teacher command center |
 | TCH-02 | Teacher UX | Generate temporary groups and ready-to-use intervention materials. | ⬜ teacher command center |
 | DEV-01 | Device | Run in locked managed mode with offline assignment support. | ⬜ device / player slice |
-| AUD-01 | Audit | Preserve AI recommendation, teacher decision and curriculum-version history. | 🟡 compile results carry integrity + rationale; append-only audit log pending |
+| AUD-01 | Audit | Preserve AI recommendation, teacher decision and curriculum-version history. | 🟡 grading has an append-only audit log (`appendAudit`); compile results carry integrity + rationale; unified store pending |
 
 Legend: ✅ met · 🟡 partially met / modeled · ⬜ not yet built.
 
