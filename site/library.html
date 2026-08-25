@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Grade 3 Content Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+
+<style>
+  :root {
+    --ground:#f3f5fa; --surface:#ffffff; --surface-2:#eaeef6; --border:#dde3ee; --border-2:#c8d1e2;
+    --ink:#161d2b; --sec:#505d72; --muted:#7c8699;
+    --accent:#2f56c9; --accent-2:#2545a6; --accent-weak:#e2e8fb;
+    --good:#12824a; --good-w:#dcefe4;
+    --shadow:0 1px 2px rgba(20,30,60,.05), 0 6px 18px rgba(20,30,60,.06);
+    --r:12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0d1017; --surface:#161b26; --surface-2:#1f2532; --border:#28303f; --border-2:#38435a;
+      --ink:#e8ecf5; --sec:#a6b1c4; --muted:#7a8598;
+      --accent:#7d9bf2; --accent-2:#9cb2f6; --accent-weak:#1a2540;
+      --good:#48c07f; --good-w:#12301f;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0d1017; --surface:#161b26; --surface-2:#1f2532; --border:#28303f; --border-2:#38435a;
+    --ink:#e8ecf5; --sec:#a6b1c4; --muted:#7a8598;
+    --accent:#7d9bf2; --accent-2:#9cb2f6; --accent-weak:#1a2540;
+    --good:#48c07f; --good-w:#12301f;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { font-family:"Fraunces", Georgia, serif; font-weight:600; margin:0; text-wrap:balance; line-height:1.15; }
+  .mono { font-family:"IBM Plex Mono", monospace; }
+
+  header.top { background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:10; }
+  .top-in { max-width:940px; margin:0 auto; padding:12px 22px; display:flex; align-items:center; gap:12px; }
+  .mk { width:30px; height:30px; border-radius:8px; background:var(--accent); color:#fff; display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:600; }
+  .top b { font-family:"Fraunces",serif; font-weight:600; }
+  .top small { display:block; color:var(--muted); font-size:.72rem; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:8px; padding:6px 10px; }
+  .theme:hover { color:var(--ink); }
+
+  main { max-width:940px; margin:0 auto; padding:24px 22px 80px; }
+  h1.pg { font-size:1.9rem; }
+  .say { color:var(--sec); max-width:66ch; margin:8px 0 20px; }
+  h2 { font-size:1.25rem; margin:0; }
+
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:11px; margin-bottom:18px; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:13px 15px; }
+  .kpi .n { font-family:"Fraunces",serif; font-weight:600; font-size:1.55rem; line-height:1; }
+  .kpi .l { color:var(--sec); font-size:.77rem; margin-top:4px; }
+
+  .subhead { display:flex; align-items:center; gap:10px; margin:24px 0 10px; }
+  .subhead .c { color:var(--muted); font-size:.83rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; }
+  .card { text-align:left; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:15px 16px; cursor:pointer; font:inherit; color:var(--ink); }
+  .card:hover { border-color:var(--accent); }
+  .card .code { font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:var(--accent-2); font-weight:600; }
+  .card .ttl { font-weight:600; font-size:.94rem; margin:5px 0 10px; }
+  .card .meta { display:flex; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:.79rem; }
+  .ok { display:inline-flex; align-items:center; gap:4px; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--good-w); color:var(--good); }
+
+  .back { background:none; border:none; color:var(--accent-2); font:inherit; font-size:.9rem; cursor:pointer; padding:0; margin-bottom:12px; }
+  .eyebrow { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .locked { background:var(--surface-2); border:1px dashed var(--border-2); border-radius:10px; padding:12px 14px; font-size:.88rem; margin:12px 0 20px; }
+  .locked .k { color:var(--muted); font-weight:600; }
+
+  .block { border:1px solid var(--border); border-radius:10px; padding:13px 15px; margin-bottom:10px; background:var(--surface); }
+  .bhead { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:6px; }
+  .kind { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:2px 8px; border-radius:6px; background:var(--accent-weak); color:var(--accent-2); }
+  .btitle { font-weight:600; font-size:.94rem; }
+  .bbody { font-size:.92rem; color:var(--ink); }
+  .bmeta { color:var(--muted); font-size:.77rem; margin-top:8px; }
+
+  table { width:100%; border-collapse:collapse; font-size:.88rem; }
+  th,td { text-align:left; padding:9px 11px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:var(--muted); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; font-weight:600; }
+  tr:last-child td { border-bottom:none; }
+  .wrap { overflow-x:auto; border:1px solid var(--border); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow); margin-bottom:18px; }
+  .foot { color:var(--muted); font-size:.8rem; margin-top:26px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<script type="application/json" id="lib">{"summary":{"objectives":6,"lessons":6,"items":12,"sources":9,"subjects":4,"allValid":true},"objectives":[{"id":"M3.NF.01","subject":"mathematics","std":"MA.3.FR.1.1","outcome":"Explain and represent a fraction as equal parts of a whole.","reasoning":["represent","explain","transfer"],"mastery":{"t":0.8,"e":2,"x":true},"ok":true,"blocks":[{"kind":"objective_preview","title":"Today you will…","body":"Today you will show a fraction using equal parts of a whole, and explain what the top and bottom numbers mean.","targets":[],"src":[]},{"kind":"instruction","title":"Equal parts and the whole","body":"When we split one whole into equal parts, each part is a unit fraction. The bottom number (denominator) tells how many equal parts the whole was split into. The top number (numerator) tells how many of those parts we are talking about. So 1/4 means the whole was split into 4 equal parts, and we have 1 of them.","targets":["represent","explain"],"src":["SRC-001"]},{"kind":"worked_example","title":"Naming a shaded part","body":"A rectangle is split into 3 equal parts and 1 part is shaded. There are 3 equal parts, so the denominator is 3. One part is shaded, so the numerator is 1. The shaded amount is 1/3.","targets":["represent"],"src":["SRC-001"]},{"kind":"practice","title":"Shade and name","body":"Shade the fraction shown and write the fraction. Explain how you know the parts are equal.","targets":["represent","explain"],"src":["SRC-001"]},{"kind":"mastery_task","title":"Represent, explain, transfer","body":"Draw 2/6 on a bar model. Explain what the 2 and the 6 mean. Then show the same amount on a different whole (a circle) and explain why it is still 2/6.","targets":["represent","explain","transfer"],"src":["SRC-002"]},{"kind":"reflection","title":"Think back","body":"What helped you know the parts were equal? What is still tricky?","targets":[],"src":[]}],"lessonTitle":"Fractions as equal parts","items":[{"id":"IT-M3.NF.01-1","claim":"represent","fmt":"multiple_choice","prompt":"A pizza is cut into 4 equal slices and you take 1 slice. Which fraction shows how much you took?"},{"id":"IT-M3.NF.01-2","claim":"explain","fmt":"constructed_response","prompt":"Draw 2/6 and explain what the 2 and the 6 mean, then show the same amount on a different whole."}],"sources":[{"id":"SRC-001","title":"Fraction models and tasks (grade 3)","tier":"oer","license":"cc_by"},{"id":"SRC-002","title":"Real-world fractions media","tier":"primary","license":"public_domain"}]},{"id":"M3.NF.02","subject":"mathematics","std":"MA.3.FR.1.2","outcome":"Compare two fractions with the same numerator or the same denominator, and justify the comparison.","reasoning":["compare","justify"],"mastery":{"t":0.8,"e":2,"x":false},"ok":true,"blocks":[{"kind":"objective_preview","title":"Today you will…","body":"Today you will compare two fractions and explain which is greater — and why.","targets":[],"src":[]},{"kind":"instruction","title":"Same whole, compare the parts","body":"To compare fairly, both fractions must come from the same-size whole. With the same denominator, the fraction with the bigger numerator is greater (3/5 > 2/5). With the same numerator, the fraction with the SMALLER denominator is greater, because the whole was cut into fewer, bigger pieces (1/3 > 1/4).","targets":["compare"],"src":["SRC-011"]},{"kind":"practice","title":"Which is greater?","body":"Use a bar model to compare 2/6 and 4/6, then 1/2 and 1/5. Circle the greater fraction each time.","targets":["compare"],"src":["SRC-001"]},{"kind":"mastery_task","title":"Compare and justify","body":"Compare 1/3 and 1/6. Which is greater? Justify your answer with a picture and a sentence about the size of the pieces.","targets":["compare","justify"],"src":["SRC-001"]},{"kind":"reflection","title":"Think back","body":"When can a bigger bottom number make a SMALLER fraction? Explain.","targets":[],"src":[]}],"lessonTitle":"Comparing fractions","items":[{"id":"IT-M3.NF.02-1","claim":"compare","fmt":"multiple_choice","prompt":"Which fraction is greater, if the wholes are the same size?"},{"id":"IT-M3.NF.02-2","claim":"justify","fmt":"constructed_response","prompt":"Compare 1/3 and 1/6. Justify which is greater using the size of the pieces."}],"sources":[{"id":"SRC-001","title":"Fraction models and tasks (grade 3)","tier":"oer","license":"cc_by"},{"id":"SRC-011","title":"Fractions FlexBook","tier":"oer","license":"cc_by_nc"}]},{"id":"M3.NF.03","subject":"mathematics","std":"MA.3.FR.1.3","outcome":"Recognize and generate simple equivalent fractions and explain why they are equal.","reasoning":["represent","generate","explain"],"mastery":{"t":0.8,"e":2,"x":true},"ok":true,"blocks":[{"kind":"objective_preview","title":"Today you will…","body":"Today you will find fractions that name the same amount and explain why they are equal.","targets":[],"src":[]},{"kind":"instruction","title":"Same amount, different names","body":"Two fractions are equivalent when they cover the same amount of the same whole. If you split each part in half, you have twice as many parts (a bigger denominator) but each is half the size — so 1/2 and 2/4 name the same amount.","targets":["represent","explain"],"src":["SRC-010"]},{"kind":"worked_example","title":"Making an equivalent fraction","body":"Start with 1/2 of a bar. Split each half into 2. Now there are 4 parts and 2 are shaded: 2/4. The shaded amount did not change, so 1/2 = 2/4.","targets":["generate"],"src":["SRC-001"]},{"kind":"practice","title":"Find a match","body":"Draw a fraction equal to 1/3 by splitting each part into 2. Write both fractions.","targets":["represent","generate"],"src":["SRC-001"]},{"kind":"mastery_task","title":"Generate and explain","body":"Show a fraction equivalent to 2/3 using a new whole, and explain why the two fractions are equal.","targets":["represent","generate","explain"],"src":["SRC-010"]},{"kind":"reflection","title":"Think back","body":"How can two fractions with different numbers name the same amount?","targets":[],"src":[]}],"lessonTitle":"Equivalent fractions","items":[{"id":"IT-M3.NF.03-1","claim":"generate","fmt":"constructed_response","prompt":"Show a fraction equal to 1/2 by splitting the parts, and write both fractions."},{"id":"IT-M3.NF.03-2","claim":"explain","fmt":"constructed_response","prompt":"Explain why 2/3 and 4/6 name the same amount."}],"sources":[{"id":"SRC-001","title":"Fraction models and tasks (grade 3)","tier":"oer","license":"cc_by"},{"id":"SRC-010","title":"Elementary mathematics reference","tier":"oer","license":"cc_by"}]},{"id":"RW3.01","subject":"reading","std":"ELA.3.R.2.2","outcome":"Determine the main idea of a text and explain how key details support it.","reasoning":["identify","explain"],"mastery":{"t":0.8,"e":2,"x":false},"ok":true,"blocks":[{"kind":"objective_preview","title":"Today you will…","body":"Today you will find the main idea of a passage and show the details that back it up.","targets":[],"src":[]},{"kind":"instruction","title":"Main idea vs. details","body":"The main idea is what the whole text is mostly about — not just the first sentence. Key details are the facts and examples that support it. To find the main idea, ask: what do most of the details have in common?","targets":["identify","explain"],"src":["SRC-013"]},{"kind":"practice","title":"Detail hunt","body":"Read the passage. Underline three key details. Then write one sentence for the main idea they support.","targets":["identify"],"src":["SRC-013"]},{"kind":"mastery_task","title":"Main idea + support","body":"Read the short passage. Write the main idea in one sentence, then explain how two key details support it.","targets":["identify","explain"],"src":["SRC-012"]},{"kind":"reflection","title":"Think back","body":"Why is the first sentence not always the main idea?","targets":[],"src":[]}],"lessonTitle":"Finding the main idea","items":[{"id":"IT-RW3.01-1","claim":"identify","fmt":"constructed_response","prompt":"Read the passage and write the main idea in one sentence."},{"id":"IT-RW3.01-2","claim":"explain","fmt":"constructed_response","prompt":"Explain how two key details support the main idea you found."}],"sources":[{"id":"SRC-013","title":"Leveled current-events article","tier":"licensed","license":"licensed"},{"id":"SRC-012","title":"Primary texts for young readers","tier":"primary","license":"public_domain"}]},{"id":"RW3.02","subject":"writing","std":"ELA.3.C.1.4","outcome":"Write an answer that states a claim and supports it with specific evidence from the text.","reasoning":["state","cite","explain"],"mastery":{"t":0.8,"e":2,"x":false},"ok":true,"blocks":[{"kind":"objective_preview","title":"Today you will…","body":"Today you will answer a question by making a claim and backing it up with evidence from the text.","targets":[],"src":[]},{"kind":"instruction","title":"Claim, evidence, explain","body":"A strong answer has three parts: a claim (your answer in one sentence), evidence (a specific detail or quote from the text), and an explanation (how the evidence supports your claim). Longer is not better — specific is better.","targets":["state","cite","explain"],"src":["SRC-013"]},{"kind":"practice","title":"Find the evidence","body":"For the question given, write your claim, then copy the exact sentence from the text that proves it.","targets":["state","cite"],"src":["SRC-012"]},{"kind":"mastery_task","title":"Full answer","body":"Answer the question in a short paragraph: state your claim, cite one piece of evidence from the text, and explain how it supports your claim.","targets":["state","cite","explain"],"src":["SRC-012"]},{"kind":"reflection","title":"Think back","body":"What makes evidence strong instead of just long?","targets":[],"src":[]}],"lessonTitle":"Answer with evidence","items":[{"id":"IT-RW3.02-1","claim":"cite","fmt":"constructed_response","prompt":"Answer the question and copy the exact sentence from the text that proves your answer."},{"id":"IT-RW3.02-2","claim":"explain","fmt":"constructed_response","prompt":"Explain how your evidence supports your claim."}],"sources":[{"id":"SRC-012","title":"Primary texts for young readers","tier":"primary","license":"public_domain"},{"id":"SRC-013","title":"Leveled current-events article","tier":"licensed","license":"licensed"}]},{"id":"CIV3.01","subject":"history_civics","std":"SS.3.CG.1.4","outcome":"Weigh community needs and evidence to make a resource decision and defend it, revising when evidence changes.","reasoning":["analyze","decide","defend","revise"],"mastery":{"t":0.8,"e":2,"x":true},"ok":true,"blocks":[{"kind":"objective_preview","title":"Your mission","body":"Your town has one budget and three needs: a new park, repairing old water pipes, and a summer reading program. You will study the evidence, make a choice, defend it, and revise if the facts change.","targets":[],"src":[]},{"kind":"instruction","title":"Needs, trade-offs, stakeholders","body":"Every choice has trade-offs — spending on one need means less for another. Different people (stakeholders) care about different things. A good decision weighs the evidence and thinks about who is affected, not just who is loudest.","targets":["analyze"],"src":["SRC-014"]},{"kind":"instruction","title":"Read the evidence","body":"Study the water-use data and the town notes. Which need affects health and safety? Which affects the most people? Which can wait?","targets":["analyze"],"src":["SRC-016"]},{"kind":"practice","title":"Make your choice","body":"Choose one need to fund first. Write one reason based on the evidence.","targets":["decide"],"src":["SRC-016"]},{"kind":"mastery_task","title":"Decide, defend, revise","body":"A pause: a new report shows the old pipes are leaking clean water faster than expected. Decide what to fund first, defend it with evidence, and explain whether the new report changes your plan and why.","targets":["decide","defend","revise"],"src":["SRC-016"]},{"kind":"reflection","title":"Think back","body":"Did changing your mind when the evidence changed make your decision weaker or stronger? Why?","targets":[],"src":[]}],"lessonTitle":"The community water decision (simulation)","items":[{"id":"IT-CIV3.01-1","claim":"decide","fmt":"constructed_response","prompt":"Choose which community need to fund first and give one reason based on the evidence."},{"id":"IT-CIV3.01-2","claim":"revise","fmt":"constructed_response","prompt":"The pipe report changed. Explain whether your plan changes and why, using the new evidence."}],"sources":[{"id":"SRC-014","title":"Community decision primary documents","tier":"primary","license":"public_domain"},{"id":"SRC-016","title":"Local water-use data","tier":"primary","license":"public_domain"}]}]}</script>
+
+<header class="top">
+  <div class="top-in">
+    <div class="mk">▤</div>
+    <div><b>Content Library</b><small>ILP · district-approved · grade 3</small></div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<script>
+  const LIB = JSON.parse(document.getElementById('lib').textContent);
+  const main = document.getElementById('main');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const SUBJECT = { mathematics:'Mathematics', reading:'Reading', writing:'Writing', science:'Science', history_civics:'History & Civics' };
+  const KIND = { objective_preview:'Preview', instruction:'Instruction', worked_example:'Worked example', practice:'Practice', collaboration:'Collaboration', mastery_task:'Mastery task', reflection:'Reflection' };
+
+  function catalog() {
+    const s = LIB.summary;
+    const groups = {};
+    LIB.objectives.forEach(o => { (groups[o.subject] = groups[o.subject] || []).push(o); });
+    main.innerHTML = `
+      <div class="eyebrow">District-approved content · grade 3</div>
+      <h1 class="pg">Content library</h1>
+      <p class="say">The approved curriculum a teacher builds from — objectives, authored lessons, assessment items, and vetted sources. Every objective below has passed every guardrail: standard-mapped, approved sources, the lesson covers the required reasoning, and items trace without leaking answers.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="n">${s.objectives}</div><div class="l">objectives</div></div>
+        <div class="kpi"><div class="n">${s.lessons}</div><div class="l">authored lessons</div></div>
+        <div class="kpi"><div class="n">${s.items}</div><div class="l">assessment items</div></div>
+        <div class="kpi"><div class="n">${s.sources}</div><div class="l">approved sources</div></div>
+        <div class="kpi"><div class="n">${s.allValid ? '✓ All' : '⚠'}</div><div class="l">pass every gate</div></div>
+      </div>
+      ${Object.entries(groups).map(([sub, objs]) => `
+        <div class="subhead"><h2>${SUBJECT[sub] || sub}</h2><span class="c">${objs.length} objective${objs.length===1?'':'s'}</span></div>
+        <div class="grid">
+          ${objs.map(o => `
+            <button class="card" data-id="${o.id}">
+              <span class="code">${o.id}</span> ${o.ok ? '<span class="ok">✓ valid</span>' : ''}
+              <div class="ttl">${esc(o.outcome)}</div>
+              <div class="meta"><span>${o.blocks.length} blocks</span><span>${o.items.length} items</span><span>${o.sources.length} sources</span></div>
+            </button>`).join('')}
+        </div>`).join('')}
+      <p class="foot">Computed by the ILP engine (<span class="mono">buildCatalog</span>): every objective is run through the objective-authoring, lesson-coverage, and item-integrity gates. Synthetic content; sources are representative candidates confirmed in the vetting pipeline.</p>`;
+    main.querySelectorAll('.card').forEach(b => b.addEventListener('click', () => detail(b.dataset.id)));
+    window.scrollTo(0, 0);
+  }
+
+  function detail(id) {
+    const o = LIB.objectives.find(x => x.id === id);
+    main.innerHTML = `
+      <button class="back" id="back">← Content library</button>
+      <div class="eyebrow">${SUBJECT[o.subject] || o.subject} · ${o.id} · ${o.std} ${o.ok ? '· <span class="ok">✓ passes every gate</span>' : ''}</div>
+      <h1 class="pg">${esc(o.outcome)}</h1>
+      <div class="locked"><span class="k">Locked contract</span> — required reasoning: <strong>${o.reasoning.join(', ')}</strong> · mastery ≥ ${Math.round(o.mastery.t*100)}%, ${o.mastery.e} evidence types, transfer ${o.mastery.x ? 'required' : 'optional'}.</div>
+      <h2 style="margin-bottom:12px">The lesson: ${esc(o.lessonTitle)}</h2>
+      ${o.blocks.map(b => `
+        <div class="block">
+          <div class="bhead"><span class="kind">${KIND[b.kind] || b.kind}</span><span class="btitle">${esc(b.title)}</span></div>
+          ${b.body ? `<div class="bbody">${esc(b.body)}</div>` : ''}
+          <div class="bmeta">${b.targets.length ? 'builds: ' + b.targets.join(', ') + ' · ' : ''}${b.src.length ? 'source: ' + b.src.join(', ') : 'no source needed'}</div>
+        </div>`).join('')}
+      <h2 style="margin:22px 0 10px">Assessment items</h2>
+      <div class="wrap"><table><thead><tr><th>Item</th><th>Measures</th><th>Format</th><th>Prompt</th></tr></thead><tbody>
+        ${o.items.map(i => `<tr><td class="mono">${i.id}</td><td>${i.claim}</td><td>${i.fmt.replace('_',' ')}</td><td>${esc(i.prompt)}</td></tr>`).join('')}
+      </tbody></table></div>
+      <h2 style="margin:22px 0 10px">Sources</h2>
+      <div class="wrap"><table><thead><tr><th>Source</th><th>Tier</th><th>License</th><th>Status</th></tr></thead><tbody>
+        ${o.sources.map(s => `<tr><td>${esc(s.title)} <span class="mono" style="color:var(--muted)">${s.id}</span></td><td>${s.tier}</td><td>${s.license.replace(/_/g,' ')}</td><td><span class="ok">✓ approved</span></td></tr>`).join('')}
+      </tbody></table></div>
+      <p class="foot">This is what a teacher assigns and a student sees. Assigning it runs the compiler to individualize it for each student while keeping this objective locked.</p>`;
+    document.getElementById('back').addEventListener('click', catalog);
+    window.scrollTo(0, 0);
+  }
+
+  catalog();
+
+  const btn = document.getElementById('themeBtn');
+  const apply = t => { if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); };
+  try { const s = localStorage.getItem('ilp-lib-theme'); if (s) apply(s); } catch (e) {}
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const n = dark ? 'light' : 'dark'; apply(n);
+    try { localStorage.setItem('ilp-lib-theme', n); } catch (e) {}
+  });
+</script>
+
+</body>
+</html>

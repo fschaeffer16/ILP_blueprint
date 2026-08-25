@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Baseline Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+
+<style>
+  :root {
+    --ground:#f3f6f8; --surface:#ffffff; --surface-2:#eaeff3; --track:#e3e9ee;
+    --border:#dde4ea; --border-2:#c8d2db;
+    --ink:#182430; --sec:#4f5e6c; --muted:#7c8a97;
+    --accent:#2f6f9c; --accent-2:#245a80; --accent-weak:#dceaf3;
+    --notable:#c0392b; --notable-w:#f6e1de;
+    --emerging:#9a6a12; --emerging-w:#f6ecd4;
+    --monitor:#5a6875; --monitor-w:#e7ecf0;
+    --good:#2f8b6f; --good-w:#dcefe7;
+    --shadow:0 1px 2px rgba(20,35,50,.05), 0 6px 18px rgba(20,35,50,.07);
+    --r:13px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0e141a; --surface:#161e26; --surface-2:#1f2831; --track:#28333d;
+      --border:#28333d; --border-2:#37454f;
+      --ink:#e8eef4; --sec:#a7b4bf; --muted:#7d8b97;
+      --accent:#67a9d6; --accent-2:#8ec0e4; --accent-weak:#13293a;
+      --notable:#e97f72; --notable-w:#33161a;
+      --emerging:#dcb057; --emerging-w:#2f2810;
+      --monitor:#9aa7b3; --monitor-w:#232c34;
+      --good:#54bd98; --good-w:#15302a;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0e141a; --surface:#161e26; --surface-2:#1f2831; --track:#28333d;
+    --border:#28333d; --border-2:#37454f;
+    --ink:#e8eef4; --sec:#a7b4bf; --muted:#7d8b97;
+    --accent:#67a9d6; --accent-2:#8ec0e4; --accent-weak:#13293a;
+    --notable:#e97f72; --notable-w:#33161a;
+    --emerging:#dcb057; --emerging-w:#2f2810;
+    --monitor:#9aa7b3; --monitor-w:#232c34;
+    --good:#54bd98; --good-w:#15302a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { font-family:"Spectral", Georgia, serif; font-weight:600; margin:0; text-wrap:balance; line-height:1.18; }
+  .mono { font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; }
+
+  header.top { background:var(--surface); border-bottom:1px solid var(--border); }
+  .top-in { max-width:880px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; gap:12px; }
+  .mk { width:32px; height:32px; border-radius:9px; background:var(--accent); color:#fff; display:grid; place-items:center; font-weight:700; }
+  .eyebrow { font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
+  .top b { font-family:"Spectral",serif; font-weight:600; font-size:1.02rem; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:8px; padding:6px 10px; }
+  .theme:hover { color:var(--ink); }
+
+  main { max-width:880px; margin:0 auto; padding:26px 22px 80px; }
+  h1.pg { font-size:2rem; letter-spacing:-.01em; }
+  .say { color:var(--sec); max-width:64ch; margin:8px 0 0; font-size:1.04rem; }
+  h2 { font-size:1.3rem; margin:32px 0 12px; }
+
+  .banner { display:flex; gap:14px; align-items:flex-start; background:var(--accent-weak); border-radius:var(--r); padding:16px 18px; margin:22px 0; box-shadow:var(--shadow); }
+  .banner .ic { font-size:1.4rem; flex:none; }
+  .banner b { color:var(--accent-2); }
+  .banner p { margin:4px 0 0; font-size:.94rem; }
+
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:6px; }
+  .kpi { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:14px 16px; }
+  .kpi .n { font-family:"Spectral",serif; font-weight:600; font-size:1.7rem; line-height:1; }
+  .kpi .l { color:var(--sec); font-size:.79rem; margin-top:5px; }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:17px 19px; }
+  .bars { display:flex; flex-direction:column; gap:10px; }
+  .brow { display:grid; grid-template-columns:210px 1fr 118px; gap:13px; align-items:center; }
+  @media (max-width:620px){ .brow{ grid-template-columns:130px 1fr 96px; } }
+  .brow .nm { font-size:.9rem; font-weight:500; }
+  .track { height:22px; background:var(--track); border-radius:7px; overflow:hidden; }
+  .fill { height:100%; border-radius:7px 5px 5px 7px; }
+  .fill.low { background:var(--notable); } .fill.mid { background:var(--emerging); } .fill.ok { background:var(--good); }
+  .brow .v { text-align:right; font-family:"IBM Plex Mono",monospace; font-size:.85rem; font-variant-numeric:tabular-nums; }
+  .brow .v small { color:var(--muted); }
+  .note { color:var(--sec); font-size:.87rem; margin-top:13px; }
+
+  .indicator { border:1px solid var(--border); border-radius:11px; padding:14px 16px; margin-bottom:11px; background:var(--surface); box-shadow:var(--shadow); }
+  .ihead { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:7px; }
+  .idom { font-family:"Spectral",serif; font-weight:600; font-size:1.02rem; }
+  .sig { font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; text-transform:uppercase; letter-spacing:.03em; }
+  .sig.notable { background:var(--notable-w); color:var(--notable); }
+  .sig.emerging { background:var(--emerging-w); color:var(--emerging); }
+  .sig.monitor { background:var(--monitor-w); color:var(--monitor); }
+  .itype { font-size:.78rem; color:var(--muted); }
+  .ipl { font-size:.92rem; }
+  .steps { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .sp { font-size:.78rem; font-weight:600; padding:3px 10px; border-radius:8px; background:var(--surface-2); border:1px solid var(--border); }
+  .sp.referral { background:var(--notable-w); color:var(--notable); border-color:transparent; }
+  .sp.notify { background:var(--accent-weak); color:var(--accent-2); border-color:transparent; }
+
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+  @media (max-width:620px){ .grid2{ grid-template-columns:1fr; } }
+  .card h3 { font-size:1.1rem; margin-bottom:3px; }
+  .card .sub { color:var(--muted); font-size:.84rem; margin:0 0 12px; }
+  .quote { font-style:italic; border-left:3px solid var(--accent); padding-left:13px; font-size:.92rem; color:var(--ink); }
+  .foot { color:var(--muted); font-size:.8rem; margin-top:26px; border-top:1px solid var(--border); padding-top:14px; }
+  .foot a { color:var(--accent-2); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="mk">◎</div>
+    <div><div class="eyebrow">ILP · baseline intake</div><b>Universal screening (MTSS/RTI)</b></div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main>
+  <h1 class="pg">Meeting Noah where he is</h1>
+  <p class="say">A short, age-appropriate baseline across the ways a child receives and processes information — spread over several sessions, never a single test. It surfaces subtle, early signals so support can start now, in grade 3, not years later.</p>
+
+  <div class="banner">
+    <span class="ic">🧭</span>
+    <div>
+      <b>This is a screening, not a diagnosis.</b>
+      <p>It highlights where a child may need a closer look so support can start early. Every signal below routes to a person — a teacher, a specialist screener, or a family conversation. Only qualified professionals, with the family, can determine a learning disability.</p>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">3</div><div class="l">sessions of evidence (never one test)</div></div>
+    <div class="kpi"><div class="n">5</div><div class="l">signals to review</div></div>
+    <div class="kpi"><div class="n">5</div><div class="l">supports seeded into his plan</div></div>
+    <div class="kpi"><div class="n">Grade 3</div><div class="l">age-appropriate tasks</div></div>
+  </div>
+
+  <h2>How he receives &amp; processes information</h2>
+  <div class="card">
+    <div class="bars">
+      <div class="brow"><span class="nm">Phonological awareness</span><span class="track"><span class="fill low" style="width:25%"></span></span><span class="v">25% <small>· conf 83%</small></span></div>
+      <div class="brow"><span class="nm">Letter–sound decoding</span><span class="track"><span class="fill low" style="width:32%"></span></span><span class="v">32% <small>· conf 83%</small></span></div>
+      <div class="brow"><span class="nm">Rapid naming</span><span class="track"><span class="fill mid" style="width:40%"></span></span><span class="v">40% <small>· conf 68%</small></span></div>
+      <div class="brow"><span class="nm">Performance conditions</span><span class="track"><span class="fill mid" style="width:49%"></span></span><span class="v">49% <small>· conf 69%</small></span></div>
+      <div class="brow"><span class="nm">Working memory</span><span class="track"><span class="fill mid" style="width:52%"></span></span><span class="v">52% <small>· conf 83%</small></span></div>
+      <div class="brow"><span class="nm">Oral language</span><span class="track"><span class="fill ok" style="width:70%"></span></span><span class="v">70% <small>· conf 68%</small></span></div>
+      <div class="brow"><span class="nm">Number sense</span><span class="track"><span class="fill ok" style="width:80%"></span></span><span class="v">80% <small>· conf 68%</small></span></div>
+    </div>
+    <p class="note">Higher is stronger. Low areas become <em>where to look</em> and <em>where support starts</em> — never a lower standard, and never a label on the whole child. Notice Noah's real strengths: <strong>number sense (80%)</strong> and oral language. The screener does not turn one difficulty into a verdict about everything.</p>
+  </div>
+
+  <h2>Signals a person should look at</h2>
+
+  <div class="indicator">
+    <div class="ihead"><span class="idom">Phonological awareness</span><span class="sig notable">Notable</span><span class="itype">reading / dyslexia-characteristic indicator</span></div>
+    <div class="ipl">A clear early signal that a person should look at more closely — hearing and manipulating the sounds in words. This is where support starts, not a conclusion.</div>
+    <div class="steps"><span class="sp">Targeted intervention</span><span class="sp referral">Specialist screening referral</span><span class="sp notify">Notify family</span></div>
+  </div>
+
+  <div class="indicator">
+    <div class="ihead"><span class="idom">Letter–sound decoding</span><span class="sig emerging">Emerging</span><span class="itype">reading / dyslexia-characteristic indicator</span></div>
+    <div class="ipl">An early signal in connecting letters to their sounds. Immediate classroom and targeted support begin now.</div>
+    <div class="steps"><span class="sp">Classroom support</span><span class="sp">Targeted intervention</span><span class="sp notify">Notify family</span></div>
+  </div>
+
+  <div class="indicator">
+    <div class="ihead"><span class="idom">Rapid naming</span><span class="sig emerging">Emerging</span><span class="itype">reading / dyslexia-characteristic indicator</span></div>
+    <div class="ipl">Quick recall of familiar names is slower than expected — another early reading predictor worth support and a closer look.</div>
+    <div class="steps"><span class="sp">Classroom support</span><span class="sp">Targeted intervention</span><span class="sp notify">Notify family</span></div>
+  </div>
+
+  <div class="indicator">
+    <div class="ihead"><span class="idom">Working memory</span><span class="sig monitor">Monitor</span><span class="itype">working-memory / processing indicator</span></div>
+    <div class="ipl">A pattern worth watching in holding several steps in mind. Chunking and pacing supports help; keep monitoring.</div>
+    <div class="steps"><span class="sp">Keep monitoring</span><span class="sp">Classroom support</span></div>
+  </div>
+
+  <div class="indicator">
+    <div class="ihead"><span class="idom">Performance conditions</span><span class="sig monitor">Monitor</span><span class="itype">test-conditions indicator</span></div>
+    <div class="ipl">Accuracy dips under time pressure. Presentation and timing supports help while we keep watching.</div>
+    <div class="steps"><span class="sp">Keep monitoring</span><span class="sp">Classroom support</span></div>
+  </div>
+
+  <h2>What happens next</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>It becomes support, automatically</h3>
+      <p class="sub">The baseline seeds Noah's learning plan.</p>
+      <p style="font-size:.93rem">Five evidence-based hypotheses now feed the assign-once compiler, so his very first lessons already start with the right supports — read-aloud, chunking, extra time. <strong>Access first</strong>, plus a plan to <strong>strengthen the underlying skill over time</strong>. None of it lowers what he's expected to learn.</p>
+    </div>
+    <div class="card">
+      <h3>The family hears about it — right away</h3>
+      <p class="sub">No surprises. Aligned with Florida's K-3 notification rule.</p>
+      <p class="quote">"Early screening shows your child may benefit from extra reading support, which will begin right away. This is a screening, not a diagnosis — a specialist may follow up. The teacher will share what support looks like and answer your questions."</p>
+    </div>
+  </div>
+
+  <p class="foot">A synthetic example. Every figure is produced by the real engine (<span class="mono">buildBaselineProfile</span>) — which has no field in which a diagnosis could be stored. Modeled on MTSS/RTI universal screening and <a href="https://www.flsenate.gov/laws/statutes/2024/1008.25">Florida's K-3 dyslexia-screening statute (F.S. 1008.25)</a>; "screening does not diagnose" per the <a href="https://improvingliteracy.org/category/literacy-screening-and-assessment/">National Center on Improving Literacy</a>.</p>
+</main>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const apply = t => { if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); };
+  try { const s = localStorage.getItem('ilp-base-theme'); if (s) apply(s); } catch (e) {}
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const n = dark ? 'light' : 'dark'; apply(n);
+    try { localStorage.setItem('ilp-base-theme', n); } catch (e) {}
+  });
+</script>
+
+</body>
+</html>

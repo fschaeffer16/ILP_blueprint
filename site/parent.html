@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mia's ILP Week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --ground:#f3f6f1; --surface:#ffffff; --surface-2:#eaefe6; --track:#e2e8dd;
+    --border:#dfe5d9; --border-2:#cbd3c3;
+    --ink:#182420; --sec:#54615a; --muted:#7c867c;
+    --green:#2f8b6f; --green-2:#23705a; --green-weak:#dcefe7;
+    --bar:#2f8b6f;
+    --good:#0ca30c; --good-w:#e2f3e2;
+    --watch:#9a6a12; --watch-w:#f6ecd4;
+    --alert:#c23b2f; --alert-w:#f6e0dd;
+    --shadow:0 1px 2px rgba(20,40,30,.05), 0 6px 18px rgba(20,40,30,.07);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#10130f; --surface:#181c16; --surface-2:#20241e; --track:#2a2f27;
+      --border:#2b302a; --border-2:#3a4038;
+      --ink:#eef2ea; --sec:#b8c1b6; --muted:#869184;
+      --green:#54bd98; --green-2:#6cc9a8; --green-weak:#15302a;
+      --bar:#54bd98;
+      --good:#3ec13e; --good-w:#12300f;
+      --watch:#dcb057; --watch-w:#2f2810;
+      --alert:#e66767; --alert-w:#311513;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#10130f; --surface:#181c16; --surface-2:#20241e; --track:#2a2f27;
+    --border:#2b302a; --border-2:#3a4038;
+    --ink:#eef2ea; --sec:#b8c1b6; --muted:#869184;
+    --green:#54bd98; --green-2:#6cc9a8; --green-weak:#15302a;
+    --bar:#54bd98;
+    --good:#3ec13e; --good-w:#12300f;
+    --watch:#dcb057; --watch-w:#2f2810;
+    --alert:#e66767; --alert-w:#311513;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Public Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { font-family:"Bricolage Grotesque", Georgia, serif; font-weight:600; margin:0; text-wrap:balance; line-height:1.12; }
+
+  header.top { background:var(--surface); border-bottom:1px solid var(--border); }
+  .top-in { max-width:900px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; gap:12px; }
+  .avatar { width:40px; height:40px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-family:"Bricolage Grotesque",serif; font-weight:700; font-size:1.1rem; }
+  .who b { font-family:"Bricolage Grotesque",serif; font-weight:600; font-size:1.02rem; display:block; }
+  .who small { color:var(--muted); font-size:.75rem; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:9px; padding:6px 10px; }
+  .theme:hover { color:var(--ink); }
+
+  main { max-width:900px; margin:0 auto; padding:26px 22px 80px; }
+  .hero h1 { font-size:2.1rem; letter-spacing:-.01em; }
+  .hero p { color:var(--sec); max-width:60ch; margin:8px 0 0; font-size:1.05rem; }
+  h2 { font-size:1.3rem; margin:30px 0 12px; }
+
+  .flags { display:flex; flex-direction:column; gap:10px; margin:22px 0; }
+  .flag { display:flex; gap:12px; align-items:flex-start; padding:13px 16px; border-radius:var(--r); box-shadow:var(--shadow); }
+  .flag .ic { font-size:1.15rem; flex:none; line-height:1.3; }
+  .flag.celebrate { background:var(--good-w); }
+  .flag.watch { background:var(--watch-w); }
+  .flag.attention { background:var(--alert-w); }
+  .flag .m { font-size:.98rem; }
+
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:620px){ .grid2{ grid-template-columns:1fr; } }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:17px 19px; }
+  .card h3 { font-size:1.1rem; margin-bottom:3px; }
+  .card .sub { color:var(--muted); font-size:.86rem; margin:0 0 14px; }
+
+  .work { display:flex; flex-direction:column; gap:9px; }
+  .wi { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 13px; border:1px solid var(--border); border-radius:10px; }
+  .wi .t { font-weight:500; font-size:.94rem; }
+  .tag { font-size:.76rem; font-weight:600; padding:3px 10px; border-radius:999px; white-space:nowrap; }
+  .tag.go { background:var(--green-weak); color:var(--green-2); }
+  .tag.ok { background:var(--good-w); color:var(--good); }
+  .tag.mut { background:var(--surface-2); color:var(--muted); }
+  .tag.wa { background:var(--watch-w); color:var(--watch); }
+
+  .mini { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; }
+  .mini .m { background:var(--surface-2); border-radius:11px; padding:13px; text-align:left; }
+  .mini .m .n { font-family:"Bricolage Grotesque",serif; font-size:1.6rem; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; color:var(--green-2); }
+  .mini .m .l { color:var(--sec); font-size:.76rem; margin-top:5px; }
+
+  .bars { display:flex; flex-direction:column; gap:11px; }
+  .brow { display:grid; grid-template-columns:200px 1fr 62px; gap:14px; align-items:center; }
+  @media (max-width:620px){ .brow{ grid-template-columns:130px 1fr 54px; } }
+  .brow .nm { font-size:.9rem; font-weight:500; }
+  .track { height:22px; background:var(--track); border-radius:7px; overflow:hidden; }
+  .fill { height:100%; background:var(--bar); border-radius:7px 5px 5px 7px; }
+  .brow .v { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; font-size:.9rem; }
+  .note { color:var(--sec); font-size:.88rem; margin-top:14px; }
+
+  .safe { display:flex; align-items:center; gap:11px; font-size:.98rem; }
+  .badge { font-size:.78rem; font-weight:700; padding:3px 11px; border-radius:999px; }
+  .badge.clear { background:var(--good-w); color:var(--good); }
+  .badge.alert { background:var(--alert-w); color:var(--alert); }
+
+  .privacy { display:flex; gap:13px; align-items:flex-start; background:var(--green-weak); border-radius:var(--r); padding:15px 18px; margin-top:24px; font-size:.92rem; color:var(--ink); }
+  .privacy .k { font-size:1.2rem; }
+  .foot { color:var(--muted); font-size:.8rem; margin-top:24px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="avatar">M</div>
+    <div class="who"><b>Mia Alvarez</b><small>Grade 3 · Riverbend Elementary</small></div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Mia's week</h1>
+    <p>Everything Mia is doing in ILP, in plain language — no surprises. What she's working on right now, how her time is spent, how she's collaborating, and how she's growing.</p>
+  </div>
+
+  <div class="flags">
+    <div class="flag celebrate"><span class="ic">🎉</span><span class="m"><strong>Scores are up 21 points</strong> since the start of the year.</span></div>
+    <div class="flag celebrate"><span class="ic">🤝</span><span class="m"><strong>Helped 4 classmates</strong> understand their work this week.</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Right now</h3>
+      <p class="sub">What Mia is working on today.</p>
+      <div class="work">
+        <div class="wi"><span class="t">Fractions as equal parts</span><span class="tag go">Working on it</span></div>
+        <div class="wi"><span class="t">Explain your answer with evidence</span><span class="tag mut">Turned in</span></div>
+        <div class="wi"><span class="t">Compare fractions</span><span class="tag ok">Mastered</span></div>
+        <div class="wi"><span class="t">Community water use — simulation</span><span class="tag go">Working on it</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Growth this year</h3>
+      <p class="sub">Where she started, where she is now.</p>
+      <div class="mini">
+        <div class="m"><div class="n">6</div><div class="l">objectives mastered</div></div>
+        <div class="m"><div class="n">3</div><div class="l">in progress</div></div>
+        <div class="m"><div class="n">+21</div><div class="l">points since fall</div></div>
+      </div>
+      <p class="note">Average score rose from <strong>58%</strong> at the start of the year to <strong>79%</strong> now.</p>
+    </div>
+  </div>
+
+  <h2>Time in ILP this week — 4h 52m total</h2>
+  <div class="card">
+    <div class="bars">
+      <div class="brow"><span class="nm">Lessons</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v">1h 45m</span></div>
+      <div class="brow"><span class="nm">Practice</span><span class="track"><span class="fill" style="width:45%"></span></span><span class="v">47m</span></div>
+      <div class="brow"><span class="nm">Collaboration lab</span><span class="track"><span class="fill" style="width:43%"></span></span><span class="v">45m</span></div>
+      <div class="brow"><span class="nm">Simulations</span><span class="track"><span class="fill" style="width:36%"></span></span><span class="v">38m</span></div>
+      <div class="brow"><span class="nm">Assessments</span><span class="track"><span class="fill" style="width:24%"></span></span><span class="v">25m</span></div>
+      <div class="brow"><span class="nm">Help from the helper</span><span class="track"><span class="fill" style="width:17%"></span></span><span class="v">18m</span></div>
+      <div class="brow"><span class="nm">Reflection</span><span class="track"><span class="fill" style="width:13%"></span></span><span class="v">14m</span></div>
+    </div>
+    <p class="note">The <strong>Collaboration lab</strong> was 45m — about <strong>15%</strong> of her ILP time. It's a verified, teacher-moderated, district-only space: no strangers, no public feed, no follower counts, no endless scroll.</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>Working with classmates</h3>
+      <p class="sub">Academic collaboration — checked for real understanding afterward.</p>
+      <div class="mini">
+        <div class="m"><div class="n">4</div><div class="l">classmates helped</div></div>
+        <div class="m"><div class="n">12</div><div class="l">contributions</div></div>
+        <div class="m"><div class="n">5/5</div><div class="l">solo checks passed after group work</div></div>
+      </div>
+      <p class="note">The solo checks matter most: after collaborating, Mia showed she could do the work on her own every time.</p>
+    </div>
+
+    <div class="card">
+      <h3>Problem-solving simulations</h3>
+      <p class="sub">Branching scenarios — where revising and recovering is the point.</p>
+      <div class="mini">
+        <div class="m"><div class="n">2</div><div class="l">scenarios completed</div></div>
+        <div class="m"><div class="n">14</div><div class="l">decisions made</div></div>
+        <div class="m"><div class="n">5</div><div class="l">times she revised or recovered a plan</div></div>
+      </div>
+      <p class="note">Changing course when the evidence changes is exactly the skill these scenarios build.</p>
+    </div>
+  </div>
+
+  <h2>Safety</h2>
+  <div class="card">
+    <div class="safe"><span class="badge clear">All clear</span><span>One moderation event was reviewed and resolved by school staff this week. Nothing needs your attention.</span></div>
+  </div>
+
+  <div class="privacy">
+    <span class="k">🔒</span>
+    <span><strong>What you see, and what you don't.</strong> You see how Mia spends her time, how she collaborates, and how she's growing — plus anything that needs your attention. You do <em>not</em> see the messages she and her classmates exchange. That protects every child's privacy; trained staff moderate the spaces and escalate anything unsafe to you and the school.</span>
+  </div>
+
+  <p class="foot">A synthetic example of the ILP family view. Every figure is produced by the real engine (buildParentSummary) — and there is deliberately no message-content field in the parent data model.</p>
+</main>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const apply = t => { if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); };
+  try { const s = localStorage.getItem('ilp-parent-theme'); if (s) apply(s); } catch (e) {}
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const n = dark ? 'light' : 'dark'; apply(n);
+    try { localStorage.setItem('ilp-parent-theme', n); } catch (e) {}
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ILP Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground: #f4f6fb; --surface: #ffffff; --surface-2: #eef1f8;
+    --border: #dde2ee; --border-strong: #c6cee0;
+    --ink: #1a2030; --muted: #5c6577; --faint: #8a92a4;
+    --accent: #3a55c5; --accent-weak: #e6eafb; --accent-ink: #2c43a6;
+    --ok: #157a4a; --ok-weak: #e0f2e8;
+    --warn: #8a5d00; --warn-weak: #f8efd6;
+    --danger: #b02a1f; --danger-weak: #fae3e0;
+    --violet: #6b3fc4; --violet-weak: #efe9fb;
+    --shadow: 0 1px 2px rgba(20,28,50,.05), 0 4px 16px rgba(20,28,50,.06);
+    --r: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0d1120; --surface: #151b2c; --surface-2: #1d2438;
+      --border: #2a3350; --border-strong: #3a466a;
+      --ink: #e8ecf7; --muted: #9aa4bd; --faint: #6b7488;
+      --accent: #8098f0; --accent-weak: #1e2848; --accent-ink: #a9b8f7;
+      --ok: #4cc07f; --ok-weak: #163021;
+      --warn: #e0b25a; --warn-weak: #322810;
+      --danger: #ef8378; --danger-weak: #331612;
+      --violet: #b199f0; --violet-weak: #241c3f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 18px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1120; --surface: #151b2c; --surface-2: #1d2438;
+    --border: #2a3350; --border-strong: #3a466a;
+    --ink: #e8ecf7; --muted: #9aa4bd; --faint: #6b7488;
+    --accent: #8098f0; --accent-weak: #1e2848; --accent-ink: #a9b8f7;
+    --ok: #4cc07f; --ok-weak: #163021;
+    --warn: #e0b25a; --warn-weak: #322810;
+    --danger: #ef8378; --danger-weak: #331612;
+    --violet: #b199f0; --violet-weak: #241c3f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 18px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: "Newsreader", Georgia, serif; font-weight: 600; text-wrap: balance; margin: 0; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top-inner { max-width: 1040px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 10px; margin-right: 6px; }
+  .logo .mark {
+    width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+    background: var(--accent); color: #fff; font-family: "Newsreader", serif; font-weight: 600; font-size: 18px;
+  }
+  .logo .name { font-family: "Newsreader", serif; font-weight: 600; font-size: 1.05rem; letter-spacing: .01em; }
+  .logo .name small { color: var(--muted); font-family: "IBM Plex Sans"; font-weight: 500; font-size: .72rem; display: block; letter-spacing: .04em; text-transform: uppercase; }
+
+  nav.tabs { display: flex; gap: 2px; flex-wrap: wrap; margin-left: auto; }
+  nav.tabs button {
+    font: inherit; font-size: .9rem; font-weight: 500; cursor: pointer;
+    padding: 7px 13px; border-radius: 9px; border: 1px solid transparent;
+    background: transparent; color: var(--muted);
+  }
+  nav.tabs button:hover { background: var(--surface-2); color: var(--ink); }
+  nav.tabs button[aria-selected="true"] { background: var(--accent-weak); color: var(--accent-ink); }
+  nav.tabs button:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .theme-btn {
+    font: inherit; cursor: pointer; border: 1px solid var(--border-strong); background: var(--surface);
+    color: var(--muted); border-radius: 9px; padding: 6px 10px; font-size: .82rem;
+  }
+  .theme-btn:hover { color: var(--ink); }
+
+  main { max-width: 1040px; margin: 0 auto; padding: 26px 20px 80px; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .09em; font-size: .72rem; font-weight: 600; color: var(--accent-ink); margin-bottom: 8px; }
+  h1.page { font-size: 2rem; line-height: 1.1; margin-bottom: 6px; }
+  h2 { font-size: 1.3rem; margin: 34px 0 14px; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0 0 20px; font-size: 1.02rem; }
+
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .g4 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); box-shadow: var(--shadow); padding: 16px 18px; }
+  .card h3 { font-size: 1.05rem; margin-bottom: 3px; }
+  .card .sub { color: var(--muted); font-size: .86rem; margin: 0 0 12px; }
+
+  .stat .n { font-family: "Newsreader", serif; font-size: 2rem; font-weight: 600; line-height: 1; }
+  .stat .l { color: var(--muted); font-size: .84rem; margin-top: 3px; }
+
+  .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+  .pill.ok { background: var(--ok-weak); color: var(--ok); }
+  .pill.warn { background: var(--warn-weak); color: var(--warn); }
+  .pill.danger { background: var(--danger-weak); color: var(--danger); }
+  .pill.brand { background: var(--accent-weak); color: var(--accent-ink); }
+  .pill.muted { background: var(--surface-2); color: var(--muted); }
+
+  .chip { display: inline-block; padding: 2px 9px; border-radius: 7px; font-size: .77rem; font-weight: 600; border: 1px solid transparent; }
+  .chip.core { background: var(--surface-2); color: var(--muted); border-color: var(--border); }
+  .chip.vocabulary_supported { background: var(--accent-weak); color: var(--accent-ink); }
+  .chip.visual_first { background: var(--violet-weak); color: var(--violet); }
+  .chip.guided_practice { background: var(--warn-weak); color: var(--warn); }
+  .chip.advanced_transfer { background: var(--ok-weak); color: var(--ok); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .74rem; text-transform: uppercase; letter-spacing: .05em; }
+  tr:last-child td { border-bottom: none; }
+  .wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); box-shadow: var(--shadow); }
+
+  .locked { background: var(--surface-2); border: 1px dashed var(--border-strong); border-radius: 10px; padding: 13px 15px; font-size: .9rem; }
+  .locked .k { color: var(--muted); font-weight: 600; }
+  .rationale { color: var(--muted); font-size: .85rem; margin: 4px 0 0; padding-left: 16px; }
+  .rationale li { margin: 2px 0; }
+  .evi { color: var(--muted); font-size: .84rem; }
+  .flags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+  .callout { border-radius: var(--r); padding: 15px 18px; display: flex; gap: 14px; align-items: flex-start; box-shadow: var(--shadow); }
+  .callout .stripe { width: 4px; align-self: stretch; border-radius: 3px; flex: none; }
+  .callout.danger { background: var(--danger-weak); }
+  .callout.danger .stripe { background: var(--danger); }
+  .callout.brand { background: var(--accent-weak); }
+  .callout.brand .stripe { background: var(--accent); }
+  .callout h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .callout p { margin: 0; font-size: .92rem; color: var(--ink); }
+
+  .btn { font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer; padding: 5px 11px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--muted); }
+  .btn:hover { color: var(--ink); border-color: var(--muted); }
+  .btn[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: transparent; }
+  .decisions { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 12px; }
+  .outcome { margin-top: 11px; min-height: 26px; }
+
+  /* Cycle stepper */
+  .cycle { display: flex; gap: 8px; flex-wrap: wrap; }
+  .step { flex: 1 1 150px; border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; background: var(--surface); position: relative; }
+  .step.done { border-color: var(--accent); background: var(--accent-weak); }
+  .step.next { border-style: dashed; }
+  .step .s-top { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+  .step .dot { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; flex: none; }
+  .step.done .dot { background: var(--accent); color: #fff; }
+  .step.next .dot { background: var(--surface-2); color: var(--faint); border: 1px solid var(--border-strong); }
+  .step .s-name { font-weight: 600; font-size: .9rem; }
+  .step .s-desc { color: var(--muted); font-size: .78rem; }
+
+  .status-line { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
+  .status-line:last-child { border-bottom: none; }
+  .status-line .tick { color: var(--ok); font-weight: 700; }
+  .status-line .soon { color: var(--faint); font-weight: 700; }
+
+  .foot { color: var(--muted); font-size: .82rem; margin-top: 34px; border-top: 1px solid var(--border); padding-top: 16px; max-width: 72ch; }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: no-preference) { .view { animation: fade .25s ease; } }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<script type="application/json" id="ilp-data">
+{"objective":{"objectiveId":"M3.NF.01","studentOutcome":"Explain and represent a fraction as equal parts of a whole.","essentialKnowledge":["numerator","denominator","equal parts","whole/part relationship"],"requiredReasoning":["represent","explain","transfer"],"mastery":{"threshold":0.8,"minimumEvidenceTypes":2,"transferRequired":true}},"assignment":{"durationMinutes":35,"botMode":"lesson","collaboration":{"enabled":true,"scope":"class"},"handwriting":true},"compile":{"status":"ready_for_teacher_review","integrity":"pass","patternCounts":{"core":1,"vocabulary_supported":1,"visual_first":1,"guided_practice":2,"advanced_transfer":1},"manifests":[{"name":"Ava","pattern":"core","rationale":["No adaptation warranted; delivering the core version of the objective."]},{"name":"Ben","pattern":"vocabulary_supported","rationale":["Applied Read-aloud support (access) — text-to-speech for lesson prose and directions."]},{"name":"Cara","pattern":"visual_first","rationale":["Applied Visual-first models (scaffold) — lead with area/set fraction models before symbolic notation."]},{"name":"Diego","pattern":"guided_practice","rationale":["Applied Worked example with fading (scaffold) — a fully worked parallel example, steps removed across practice."]},{"name":"Ella","pattern":"advanced_transfer","rationale":["Applied Advanced transfer case — readiness 0.92; extending within the objective via transfer (rigor unchanged)."]},{"name":"Finn","pattern":"guided_practice","rationale":["Applied Worked example with fading (scaffold) — a fully worked parallel example, steps removed across practice."]}]},"rubric":{"C-represent":"Represent","C-explain":"Explain","C-transfer":"Transfer","C-mechanics":"Mechanics"},"grading":[{"name":"Ava","response":"The denominator is 4 because the whole has 4 equal parts, and the numerator is 1 because I shaded one part. This shows one fourth. It transfers to a chocolate bar cut into equal parts because the whole is still split into equal parts.","supportsUsed":[],"conf":0.66,"criteria":[{"c":"C-represent","p":1.9,"max":3,"evi":"Matched: represent, fraction, equal, parts, whole.","flags":[]},{"c":"C-explain","p":1,"max":3,"evi":"Matched: numerator, denominator.","flags":["polished_but_shallow","low_confidence"]},{"c":"C-transfer","p":1.1,"max":2,"evi":"Matched: transfers, equal, parts, whole.","flags":[]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":4,"max":9,"fraction":0.444,"masteryMet":false}},{"name":"Ella","response":"The numerator and denominator show equal parts of the whole. I can represent one fourth and explain that the denominator counts the equal parts since the whole is divided evenly. It transfers to any whole split into equal parts.","supportsUsed":["read_aloud"],"conf":0.7,"criteria":[{"c":"C-represent","p":1.5,"max":3,"evi":"Matched: represent, equal, parts, whole.","flags":[]},{"c":"C-explain","p":1.5,"max":3,"evi":"Matched: explain, numerator, denominator.","flags":[]},{"c":"C-transfer","p":1.1,"max":2,"evi":"Matched: transfers, equal, parts, whole.","flags":[]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":4.1,"max":9,"fraction":0.456,"masteryMet":false}},{"name":"Ben","response":"I think it is one fourth. The bigger the number on the bottom the bigger the piece.","supportsUsed":["read_aloud"],"conf":0.43,"criteria":[{"c":"C-represent","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["low_confidence"]},{"c":"C-explain","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-transfer","p":0,"max":2,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":0,"max":9,"fraction":0,"masteryMet":false}},{"name":"Cara","response":"one fourth","supportsUsed":[],"conf":0.43,"criteria":[{"c":"C-represent","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["low_confidence"]},{"c":"C-explain","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-transfer","p":0,"max":2,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":0,"max":9,"fraction":0,"masteryMet":false}},{"name":"Diego","response":"I am not sure how to do this one.","supportsUsed":["worked_example_fade"],"conf":0.43,"criteria":[{"c":"C-represent","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["low_confidence"]},{"c":"C-explain","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-transfer","p":0,"max":2,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":0,"max":9,"fraction":0,"masteryMet":false}},{"name":"Finn","response":"The answer is a quarter I think but I forget why.","supportsUsed":["worked_example_fade"],"conf":0.43,"criteria":[{"c":"C-represent","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["low_confidence"]},{"c":"C-explain","p":0,"max":3,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-transfer","p":0,"max":2,"evi":"No expected evidence terms found.","flags":["unsupported_reasoning","low_confidence"]},{"c":"C-mechanics","p":0,"max":1,"evi":"No expected evidence terms found.","flags":["low_confidence"]}],"grade":{"points":0,"max":9,"fraction":0,"masteryMet":false}}],"outcome":{"missRate":1,"mode":"classwide","rationale":"100% of the class missed this objective (≥ 75%). Presume instructional or assessment failure: grade suspended, integrity audit opened, reteach + equivalent reassessment required before any grade stands."}}
+</script>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="logo">
+      <div class="mark">≡</div>
+      <div class="name">ILP<small>Command Center</small></div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Screens">
+      <button role="tab" data-view="status" aria-selected="true">Where we are</button>
+      <button role="tab" data-view="today" aria-selected="false">Today</button>
+      <button role="tab" data-view="class" aria-selected="false">My class</button>
+      <button role="tab" data-view="assign" aria-selected="false">Assign once</button>
+      <button role="tab" data-view="grading" aria-selected="false">Grading review</button>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark">◐ Theme</button>
+  </div>
+</header>
+
+<main id="main"><div class="view" id="view"></div></main>
+
+<script>
+  const DATA = JSON.parse(document.getElementById('ilp-data').textContent);
+  const pct = f => Math.round(f * 100) + '%';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const PAT = { core:'Core', vocabulary_supported:'Vocabulary-supported', visual_first:'Visual-first', guided_practice:'Guided practice', advanced_transfer:'Advanced transfer' };
+  const chip = p => `<span class="chip ${p}">${PAT[p]}</span>`;
+  const obj = DATA.objective;
+
+  const lockedBlock = () => `
+    <div class="locked">
+      <div><span class="k">Locked for every student</span> — the route varies, the rigor does not.</div>
+      <div style="margin-top:8px"><span class="k">Outcome:</span> ${esc(obj.studentOutcome)}</div>
+      <div style="margin-top:4px"><span class="k">Required reasoning:</span> ${obj.requiredReasoning.join(', ')}</div>
+      <div style="margin-top:4px"><span class="k">Mastery:</span> ≥ ${pct(obj.mastery.threshold)} · ${obj.mastery.minimumEvidenceTypes} evidence types · transfer ${obj.mastery.transferRequired ? 'required' : 'optional'}</div>
+    </div>`;
+
+  function viewStatus() {
+    const steps = [
+      ['done','1','Objective graph','Versioned, rigor-locked targets'],
+      ['done','2','Assign-once compiler','One assignment → individualized per student'],
+      ['done','3','Assessment','Rubrics, items, integrity gate'],
+      ['done','4','Teacher-reviewed grading','AI recommends; teacher releases'],
+      ['done','5','Remediation + 75% rule','Classwide-failure audit, reteach'],
+      ['next','6','Student player','Tablet lesson delivery (next)'],
+      ['next','7','Assignment bot','Mode-governed help (next)'],
+      ['next','8','Simulations','Branching problem-solving (next)'],
+      ['next','9','Collaboration','Verified class threads (next)'],
+    ];
+    const built = [
+      'Assign once → the compiler builds an individualized version for every student while locking the objective, rigor and mastery rule.',
+      'Assessment → a deterministic gate blocks any test item that leaks its answer, embeds a misconception, or drifts from the objective.',
+      'Grading → the AI does a first pass with evidence and flags; only a teacher decision releases a grade.',
+      'Remediation → if ≥75% of a class misses, the grade is suspended and the item/instruction is audited before students are blamed.',
+    ];
+    const next = [
+      'The tablet student experience (the lesson player).',
+      'The assignment-aware help bot, with its lesson/quiz/exam guardrails.',
+      'Branching simulations and the verified class collaboration thread.',
+      'Wiring grading decisions to a saved record, and the ILP-override screen.',
+    ];
+    return `
+      <div class="eyebrow">Individualized Lesson Planning</div>
+      <h1 class="page">Where the build stands</h1>
+      <p class="lede">A teacher-controlled instructional operating system — cheaper and district-customizable, but always inside the learning-objective guardrails. The four tabs above are the working teacher screens; below is what’s built underneath and what’s next.</p>
+
+      <div class="grid g4" style="margin-bottom:8px">
+        <div class="card stat"><div class="n tnum">5 / 9</div><div class="l">cycle stages built</div></div>
+        <div class="card stat"><div class="n tnum">51</div><div class="l">automated tests passing</div></div>
+        <div class="card stat"><div class="n">2</div><div class="l">apps: engine + teacher UI</div></div>
+        <div class="card stat"><div class="n">$0</div><div class="l">AI cost to run the demo</div></div>
+      </div>
+
+      <h2>The connected instructional cycle</h2>
+      <div class="cycle">
+        ${steps.map(([st,n,name,desc]) => `
+          <div class="step ${st}">
+            <div class="s-top"><span class="dot">${st==='done'?'✓':n}</span><span class="s-name">${name}</span></div>
+            <div class="s-desc">${desc}</div>
+          </div>`).join('')}
+      </div>
+
+      <div class="grid g2" style="margin-top:24px">
+        <div class="card">
+          <h3>What works today</h3>
+          <p class="sub">Runs on synthetic (made-up) students. No child’s data anywhere.</p>
+          ${built.map(b => `<div class="status-line"><span class="tick">✓</span><span>${b}</span></div>`).join('')}
+        </div>
+        <div class="card">
+          <h3>What’s next</h3>
+          <p class="sub">The remaining stages of the same cycle.</p>
+          ${next.map(b => `<div class="status-line"><span class="soon">→</span><span>${b}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="callout brand" style="margin-top:22px">
+        <div class="stripe"></div>
+        <div><h3>How ILP differs from Kira / SchoolAI</h3>
+        <p>They give teachers a menu of AI generators. ILP connects the whole cycle — one assignment individualizes for every student, grades run past the teacher, and failure automatically triggers a reteach — while never letting the objective or its rigor change quietly. Click <strong>Assign once</strong> to see that in action.</p></div>
+      </div>
+
+      <p class="foot">This is a clickable preview of the real product on synthetic data. Every number on the other four tabs is produced by the actual engine (the same code that would run in a district), not mocked up for this page.</p>`;
+  }
+
+  function viewToday() {
+    const g = DATA.grading, o = DATA.outcome;
+    const failing = g.filter(r => !r.grade.masteryMet).length;
+    const ready = DATA.compile.manifests.filter(m => m.pattern === 'advanced_transfer').length;
+    return `
+      <div class="eyebrow">Teacher home</div>
+      <h1 class="page">Today</h1>
+      <p class="lede">The smallest set of high-impact actions — discovered from real classroom evidence, not a to-do list the teacher maintains.</p>
+
+      ${o.mode === 'classwide' ? `
+      <div class="callout danger">
+        <div class="stripe"></div>
+        <div>
+          <h3>⚠ Urgent — classwide result on ${obj.objectiveId}</h3>
+          <p>${esc(o.rationale)}</p>
+          <div class="decisions" style="margin-top:10px">
+            <span class="pill danger">Grade suspended</span>
+            <span class="pill warn">Integrity audit opened</span>
+            <span class="pill brand">Reteach + reassessment required</span>
+          </div>
+        </div>
+      </div>` : ''}
+
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card"><h3>Grading review</h3><p class="sub">AI first-pass ready; you release the grades.</p><div class="stat"><span class="n tnum">${g.length}</span><span class="l">submissions awaiting your decision</span></div></div>
+        <div class="card"><h3>Intervention</h3><p class="sub">Below mastery on the current objective.</p><div class="stat"><span class="n tnum">${failing}</span><span class="l">students routed to remediation</span></div></div>
+        <div class="card"><h3>Ready to advance</h3><p class="sub">Mastery evidence in hand; extend within the objective.</p><div class="stat"><span class="n tnum">${ready}</span><span class="l">student ready for advanced transfer</span></div></div>
+        <div class="card"><h3>Objective integrity</h3><p class="sub">Individualization never changed the rigor.</p><div style="margin-top:10px"><span class="pill ok">Integrity: pass</span></div></div>
+      </div>
+      <p class="foot">Every count here is computed live by the engine (compiler, grader, 75%-rule). Grades are proposals until the teacher decides — the system never releases one on its own.</p>`;
+  }
+
+  function viewClass() {
+    const rows = DATA.compile.manifests.map(m => {
+      const gr = DATA.grading.find(r => r.name === m.name);
+      return { ...m, fraction: gr ? gr.grade.fraction : 0, met: gr ? gr.grade.masteryMet : false };
+    });
+    return `
+      <div class="eyebrow">${obj.objectiveId} — ${esc(obj.studentOutcome)}</div>
+      <h1 class="page">My class</h1>
+      <p class="lede">One objective, assigned once. The compiler gave each student a version tuned to their ILP — and the “why” is shown for every one. Groups are temporary and evidence-based, never fixed ability tracks.</p>
+      <div class="wrap">
+        <table>
+          <thead><tr><th>Student</th><th>Delivery version</th><th>Proposed</th><th>Status</th><th>Why this version</th></tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td><strong>${r.name}</strong></td>
+                <td>${chip(r.pattern)}</td>
+                <td class="tnum">${pct(r.fraction)}</td>
+                <td>${r.met ? '<span class="pill ok">Mastery met</span>' : '<span class="pill warn">Not yet</span>'}</td>
+                <td><ul class="rationale">${r.rationale.map(x => `<li>${esc(x)}</li>`).join('')}</ul></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:18px">${lockedBlock()}</div>`;
+  }
+
+  function viewAssign() {
+    const pc = DATA.compile.patternCounts;
+    const a = DATA.assignment;
+    const patterns = Object.keys(PAT).filter(p => pc[p] > 0);
+    return `
+      <div class="eyebrow">Compose &amp; publish</div>
+      <h1 class="page">Assign once</h1>
+      <p class="lede">The teacher sets the objective and a few constraints. The compiler reads each student’s ILP and prepares an individualized version — while locking the objective, rigor and mastery rule. Review the summary, then publish once.</p>
+
+      <div class="grid g2">
+        <div class="card">
+          <h3>Assignment intent</h3><p class="sub">What the teacher set.</p>
+          <table>
+            <tbody>
+              <tr><th>Objective</th><td>${obj.objectiveId}</td></tr>
+              <tr><th>Duration</th><td>${a.durationMinutes} min</td></tr>
+              <tr><th>Bot mode</th><td>${a.botMode}</td></tr>
+              <tr><th>Collaboration</th><td>${a.collaboration.enabled ? a.collaboration.scope : 'off'}</td></tr>
+              <tr><th>Handwriting</th><td>${a.handwriting ? 'required' : 'optional'}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card"><h3>Locked contract</h3><p class="sub">Individualization can never change these.</p>${lockedBlock()}</div>
+      </div>
+
+      <div class="callout brand" style="margin-top:20px">
+        <div class="stripe"></div>
+        <div><h3>Ready for your review — objective integrity: pass</h3>
+        <p>One assignment fanned out into <strong>6 individualized versions</strong> across ${patterns.length} patterns, with <strong>0</strong> objective modifications. Nothing reaches students until the teacher publishes.</p></div>
+      </div>
+
+      <div class="grid g3" style="margin-top:14px">
+        ${patterns.map(p => `<div class="card stat"><span class="n tnum">${pc[p]}</span><span class="l" style="margin-top:6px">${chip(p)}</span></div>`).join('')}
+      </div>`;
+  }
+
+  function viewGrading() {
+    const o = DATA.outcome;
+    return `
+      <div class="eyebrow">AI recommends · teacher decides</div>
+      <h1 class="page">Grading review</h1>
+      <p class="lede">The AI reviews each submission against the rubric and shows its evidence, confidence and flags. It <strong>cannot</strong> release a grade — click a decision to see what happens. Reject or “second review” releases nothing.</p>
+
+      ${o.mode === 'classwide' ? `
+      <div class="callout danger">
+        <div class="stripe"></div>
+        <div><h3>⚠ The 75% rule fired</h3>
+        <p>${esc(o.rationale)} The strong answers below were scored low by the first pass — exactly the assessment-integrity signal this rule exists to surface.</p></div>
+      </div>` : ''}
+
+      <div style="margin:16px 0">${lockedBlock()}</div>
+
+      <div class="grid" id="grading-list">
+        ${DATA.grading.map((r, i) => gradingCard(r, i)).join('')}
+      </div>
+      <p class="foot">The grader here is a deterministic stand-in so the page runs with no AI. Production grading runs behind a swappable model gateway; the “teacher decides” gate is identical either way.</p>`;
+  }
+
+  function gradingCard(r, i) {
+    return `
+      <div class="card" data-card="${i}">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap">
+          <h3>${r.name}</h3>
+          <span class="pill muted">AI confidence ${r.conf}</span>
+        </div>
+        <p class="sub" style="margin-top:5px">“${esc(r.response)}”${r.supportsUsed.length ? ` &nbsp;<span class="pill brand">help: ${r.supportsUsed.join(', ')}</span> <span class="evi">(never lowers the grade)</span>` : ''}</p>
+        <div class="wrap" style="margin:10px 0">
+          <table>
+            <thead><tr><th>Criterion</th><th>AI points</th><th>Evidence</th><th>Flags</th></tr></thead>
+            <tbody>
+              ${r.criteria.map(c => `
+                <tr>
+                  <td>${DATA.rubric[c.c]}</td>
+                  <td class="tnum">${c.p} / ${c.max}</td>
+                  <td class="evi">${esc(c.evi)}</td>
+                  <td><div class="flags">${c.flags.length ? c.flags.map(f => `<span class="pill warn">${f.replace(/_/g,' ')}</span>`).join('') : '<span class="pill muted">none</span>'}</div></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="decisions" role="group" aria-label="Teacher decision for ${r.name}">
+          <button class="btn" data-act="accept" data-i="${i}">Accept</button>
+          <button class="btn" data-act="modify" data-i="${i}">Modify → full marks</button>
+          <button class="btn" data-act="reject" data-i="${i}">Reject</button>
+          <button class="btn" data-act="second" data-i="${i}">Second review</button>
+        </div>
+        <div class="outcome" data-outcome="${i}"><span class="pill muted">No grade yet — awaiting your decision</span></div>
+      </div>`;
+  }
+
+  function decide(i, act) {
+    const r = DATA.grading[i];
+    const box = document.querySelector(`[data-outcome="${i}"]`);
+    document.querySelectorAll(`[data-i="${i}"]`).forEach(b => b.setAttribute('aria-pressed', b.dataset.act === act ? 'true' : 'false'));
+    if (act === 'accept') {
+      const g = r.grade;
+      box.innerHTML = `<span class="pill ${g.masteryMet ? 'ok' : 'warn'}">Grade released: ${pct(g.fraction)} · mastery ${g.masteryMet ? 'met' : 'not met'}</span>`;
+    } else if (act === 'modify') {
+      box.innerHTML = `<span class="pill ok">Grade released: 100% · mastery met <span style="opacity:.8">(teacher override)</span></span>`;
+    } else {
+      box.innerHTML = `<span class="pill danger">No grade released — the AI recommendation stays a recommendation</span>`;
+    }
+  }
+
+  const VIEWS = { status: viewStatus, today: viewToday, class: viewClass, assign: viewAssign, grading: viewGrading };
+  const viewEl = document.getElementById('view');
+  function show(name) {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.view === name ? 'true' : 'false'));
+    viewEl.style.animation = 'none'; void viewEl.offsetWidth; viewEl.style.animation = '';
+    viewEl.innerHTML = VIEWS[name]();
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    try { localStorage.setItem('ilp-view', name); } catch (e) {}
+  }
+  document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
+  viewEl.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-act]');
+    if (btn) decide(Number(btn.dataset.i), btn.dataset.act);
+  });
+
+  // Theme toggle (three-state aware; persists per viewer)
+  const themeBtn = document.getElementById('themeBtn');
+  function applyTheme(t) {
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  let stored = null;
+  try { stored = localStorage.getItem('ilp-theme'); } catch (e) {}
+  if (stored) applyTheme(stored);
+  themeBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('ilp-theme', next); } catch (e) {}
+  });
+
+  let start = 'status';
+  try { start = localStorage.getItem('ilp-view') || 'status'; } catch (e) {}
+  show(VIEWS[start] ? start : 'status');
+</script>
+
+</body>
+</html>

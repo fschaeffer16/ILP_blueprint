@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ILP Demo Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+
+<style>
+  :root {
+    --ground:#f2f4fa; --surface:#ffffff; --surface-2:#eaeef7; --border:#dce1ee; --border-2:#c6cee1;
+    --ink:#141b2b; --sec:#4e5b73; --muted:#7a8598;
+    --accent:#3a4fd0; --accent-2:#2c3ea8; --accent-weak:#e3e7fb;
+    --ok:#12824a; --ok-w:#dcefe4; --amber:#9a6a12; --amber-w:#f6ecd4;
+    --shadow:0 1px 2px rgba(20,30,60,.05), 0 8px 22px rgba(20,30,60,.07);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0c0f17; --surface:#151a26; --surface-2:#1e2431; --border:#28303f; --border-2:#39435a;
+      --ink:#e9edf6; --sec:#a7b2c6; --muted:#79849a;
+      --accent:#8496f5; --accent-2:#a3b1f8; --accent-weak:#1a2444;
+      --ok:#48c07f; --ok-w:#12301f; --amber:#dcb057; --amber-w:#2f2810;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0c0f17; --surface:#151a26; --surface-2:#1e2431; --border:#28303f; --border-2:#39435a;
+    --ink:#e9edf6; --sec:#a7b2c6; --muted:#79849a;
+    --accent:#8496f5; --accent-2:#a3b1f8; --accent-weak:#1a2444;
+    --ok:#48c07f; --ok-w:#12301f; --amber:#dcb057; --amber-w:#2f2810;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.45);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { font-family:"Fraunces", Georgia, serif; font-weight:600; margin:0; text-wrap:balance; line-height:1.12; }
+  a { color:var(--accent-2); }
+  .mono { font-family:"IBM Plex Mono", monospace; }
+
+  header.top { background:var(--surface); border-bottom:1px solid var(--border); }
+  .top-in { max-width:960px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; gap:12px; }
+  .mk { width:34px; height:34px; border-radius:9px; background:var(--accent); color:#fff; display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:700; font-size:1.2rem; }
+  .top b { font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; }
+  .top small { display:block; color:var(--muted); font-size:.72rem; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:8px; padding:6px 10px; }
+
+  main { max-width:960px; margin:0 auto; padding:30px 22px 90px; }
+  .hero h1 { font-size:2.5rem; letter-spacing:-.01em; max-width:18ch; }
+  .hero p { font-size:1.15rem; color:var(--sec); max-width:62ch; margin:14px 0 0; }
+  .stats { display:flex; gap:22px; flex-wrap:wrap; margin-top:22px; }
+  .stat b { font-family:"Fraunces",serif; font-size:1.5rem; font-weight:600; display:block; line-height:1; }
+  .stat span { color:var(--muted); font-size:.8rem; }
+
+  h2.sec { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-family:"IBM Plex Sans"; font-weight:700; margin:38px 0 14px; }
+
+  .cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .cards{ grid-template-columns:1fr; } }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:20px 22px; display:flex; flex-direction:column; }
+  .role { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  .role .n { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--accent-2); font-weight:600; letter-spacing:.06em; }
+  .badge { margin-left:auto; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; }
+  .badge.live { background:var(--ok-w); color:var(--ok); }
+  .badge.part { background:var(--amber-w); color:var(--amber); }
+  .card h3 { font-size:1.3rem; margin:2px 0 8px; }
+  .card p { margin:0 0 14px; font-size:.94rem; color:var(--sec); }
+  .card ul { margin:0 0 16px; padding-left:18px; font-size:.88rem; color:var(--sec); }
+  .card li { margin:3px 0; }
+  .links { display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
+  .btn { font-size:.85rem; font-weight:600; padding:7px 13px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; }
+  .btn:hover { filter:brightness(1.06); text-decoration:none; }
+  .btn.ghost { background:var(--surface-2); color:var(--accent-2); border:1px solid var(--border); }
+
+  .flow { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:16px 20px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:.9rem; }
+  .flow .step { background:var(--accent-weak); color:var(--accent-2); font-weight:600; padding:5px 11px; border-radius:8px; white-space:nowrap; }
+  .flow .arrow { color:var(--muted); }
+
+  .foot { color:var(--muted); font-size:.83rem; margin-top:32px; border-top:1px solid var(--border); padding-top:16px; }
+  .foot a { color:var(--accent-2); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="mk">◆</div>
+    <div><b>ILP — Individualized Lesson Planning</b><small>Demo hub · synthetic data</small></div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>One instructional operating system, four ways in.</h1>
+    <p>A teacher-controlled, AI-powered platform that connects the whole cycle — baseline, objectives, individualized lessons, teacher-reviewed grading, remediation, and growth — with a role-based app for the district, the teacher, the family, and the student. Every screen below runs the real engine on synthetic data. Click a card to open that part of the demo.</p>
+    <div class="stats">
+      <div class="stat"><b>108</b><span>automated tests passing</span></div>
+      <div class="stat"><b>15</b><span>working screens</span></div>
+      <div class="stat"><b>6</b><span>gate-validated objectives</span></div>
+      <div class="stat"><b>$0</b><span>AI cost to run the demo</span></div>
+    </div>
+  </div>
+
+  <h2 class="sec">The four deliverables</h2>
+  <div class="cards">
+
+    <div class="card">
+      <div class="role"><span class="n">DELIVERABLE 1</span><span class="badge live">Live</span></div>
+      <h3>District</h3>
+      <p>The content library and system-wide analytics — grade levels broken down by school and class.</p>
+      <ul>
+        <li>Approved content library (objectives, lessons, items, sources) — every piece gate-validated</li>
+        <li>Mastery dashboard: district → school → grade → class → objective → student</li>
+        <li>Where objectives &amp; content come from, and the credibility guardrails</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="library.html">Content library</a>
+        <a class="btn" href="dashboard.html">Rollup dashboard</a>
+        <a class="btn ghost" href="sourcing.html">Where content comes from</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="role"><span class="n">DELIVERABLE 2</span><span class="badge live">Live</span></div>
+      <h3>Teacher</h3>
+      <p>Lesson plans, grading and remediation — and a demo that shows exactly where any issue lies: a lesson, a quiz, a paper, or an exam.</p>
+      <ul>
+        <li>Assign once → individualized per student, objective locked</li>
+        <li>Grading: AI shows evidence &amp; flags; only the teacher releases a grade</li>
+        <li>The 75% rule: when a class fails, it audits the item/lesson before blaming students</li>
+        <li>Baseline screener + task delivery: catches early processing signals, routes to people</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="command-center.html">Teacher command center</a>
+        <a class="btn ghost" href="help-signals.html">Help signals (what Navi flags)</a>
+        <a class="btn ghost" href="baseline.html">Baseline screener</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="role"><span class="n">DELIVERABLE 3</span><span class="badge live">Live</span></div>
+      <h3>Parent</h3>
+      <p>Real-time academic progress with no surprises — including time in collaboration and simulations, growth, and safety.</p>
+      <ul>
+        <li>Right-now work, time in each part of ILP, growth this year</li>
+        <li>Collaboration &amp; simulation activity, with a clear privacy line</li>
+        <li>Safety status and plain-language alerts — you see patterns, never peers’ messages</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="parent.html">Family view</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="role"><span class="n">DELIVERABLE 4</span><span class="badge live">Live · v1</span></div>
+      <h3>Student</h3>
+      <p>One app for assignments and study guides, plus verified subject collaboration channels — district-first, expandable as ILP grows.</p>
+      <ul>
+        <li>Today board with each student’s individualized assignment version</li>
+        <li>Study guides built from the same approved lesson content</li>
+        <li>Verified, moderated subject channels — answer-dumping is held, safety escalates to a trained adult, no DMs, no follower counts</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="student.html">Student app</a>
+        <a class="btn ghost" href="assignment-bot.html">Assignment bot (Navi)</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="sec">For district leadership</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="role"><span class="n">THE PITCH</span><span class="badge live">Start here</span></div>
+      <h3>One System, Not Three</h3>
+      <p>The flagship case: the IXL + Skyward + Canvas stack collapsing into one integrated system that does all of it and more — baseline for every learner, same-day remediation, cross-school collaboration that beats social media, and scenario sims as real assignments.</p>
+      <ul>
+        <li>Why this isn’t a fourth tool for the pile — it makes the other three unnecessary</li>
+        <li>The six things none of the current tools can do</li>
+        <li>A pilot framed as the first grade of the transition, not an add-on</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="what-comes-next.html">Read the pitch</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="role"><span class="n">BRIEFING</span><span class="badge live">Doc</span></div>
+      <h3>After the Test</h3>
+      <p>Why FAST and i-Ready’s three-times-a-year measurement becomes obsolete once ILP tracks mastery continuously — the honest version, grounded in St. Lucie’s scores and Florida’s grade-3 retention law.</p>
+      <ul>
+        <li>A fair description of what each tool does, then the shared blind spot between test windows</li>
+        <li>What becomes redundant (the standalone diagnostic) and what stays but goes quiet (the state test)</li>
+        <li>Cited to St. Lucie’s first-ever “A”, grade-3 ELA gap, and F.S. 1008.25</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="after-the-test.html">Read the briefing</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="role"><span class="n">ANALYSIS</span><span class="badge live">Doc</span></div>
+      <h3>IXL vs ILP</h3>
+      <p>A fair-minded competitive analysis — what IXL does well, where independent reviewers say it falls short, and how ILP’s teacher-controlled teach-assess-remediate model is a different job, including the accessibility gap for nonverbal and disabled students.</p>
+      <ul>
+        <li>Honest strengths (breadth, analytics, diagnostic) and weaknesses (drills vs. teaches, the “SmartScore crash”, thin evidence)</li>
+        <li>Same B.E.S.T. standards, opposite jobs — a dimension-by-dimension table</li>
+        <li>Accessibility: where IXL stops at standards-mapping, and ILP’s universal-first, then-specialized design order</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="ixl-vs-ilp.html">Read the analysis</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="role"><span class="n">PROPOSAL</span><span class="badge live">Doc</span></div>
+      <h3>Built by Teachers</h3>
+      <p>How ILP grows exponentially from one classroom to a national platform — built from the ground up by teachers and administrators, with St. Lucie County as founding co-developer, not a customer.</p>
+      <ul>
+        <li>The inversion: practitioners author the content; the engine only enforces the district’s guardrails</li>
+        <li>The flywheel — why a shared, gated library compounds without losing rigor</li>
+        <li>The path: St. Lucie → district-wide → every Florida B.E.S.T. district → nationwide</li>
+      </ul>
+      <div class="links">
+        <a class="btn" href="built-by-teachers.html">Read the proposal</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">How the pieces connect</h2>
+  <div class="flow">
+    <span class="step">Baseline</span><span class="arrow">→</span>
+    <span class="step">Objective + sources</span><span class="arrow">→</span>
+    <span class="step">Lesson</span><span class="arrow">→</span>
+    <span class="step">Assign once</span><span class="arrow">→</span>
+    <span class="step">Individualized delivery</span><span class="arrow">→</span>
+    <span class="step">Teacher-reviewed grading</span><span class="arrow">→</span>
+    <span class="step">Remediation / 75% rule</span><span class="arrow">→</span>
+    <span class="step">Rollups + family + student</span>
+  </div>
+
+  <div class="foot">
+    <p><strong>The code:</strong> everything is a real, tested TypeScript system — <a href="https://github.com/fschaeffer16/ILP_blueprint">github.com/fschaeffer16/ILP_blueprint</a> (branch <span class="mono">claude/ilp-blueprint-repo-tv3e48</span>). The pages above are self-contained snapshots of the app’s screens; the full app (<span class="mono">@ilp/web</span>, Next.js) runs locally with <span class="mono">npm run dev</span> or deploys to a host in minutes. All data is synthetic — no real student information anywhere.</p>
+  </div>
+</main>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const apply = t => { if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); };
+  try { const s = localStorage.getItem('ilp-hub-theme'); if (s) apply(s); } catch (e) {}
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const n = dark ? 'light' : 'dark'; apply(n);
+    try { localStorage.setItem('ilp-hub-theme', n); } catch (e) {}
+  });
+</script>
+
+</body>
+</html>

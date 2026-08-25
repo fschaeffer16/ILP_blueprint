@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Navi · Assignment Helper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  --paper:#F6F4EF; --card:#FFFFFF; --ink:#1F2730; --ink-soft:#55606C;
+  --line:#E6E1D7; --line-soft:#EFEBE2;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A; --apricot:#F2A65A; --green:#3FA66A; --amber:#D99400;
+  --tint:#EAF4F4;
+  /* Navi chat widget — deliberate fixed friendly-dark identity, both themes */
+  --nv-bg:#122430; --nv-card:#173040; --nv-line:rgba(120,214,224,.28);
+  --nv-ink:#EAF3F5; --nv-soft:#9DB6BE; --nv-cyan:#38C6D6; --nv-user:#37C0CF;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --paper:#12171E; --card:#1A222B; --ink:#EAEEF2; --ink-soft:#9AA6B2;
+    --line:#2A3540; --line-soft:#222C36;
+    --teal:#3FC3D2; --teal-deep:#2A9AA8; --apricot:#F2B072; --green:#5FBE86; --amber:#EBB13C;
+    --tint:#15282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12171E; --card:#1A222B; --ink:#EAEEF2; --ink-soft:#9AA6B2;
+  --line:#2A3540; --line-soft:#222C36;
+  --teal:#3FC3D2; --teal-deep:#2A9AA8; --apricot:#F2B072; --green:#5FBE86; --amber:#EBB13C;
+  --tint:#15282E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--paper);color:var(--ink);
+  font-family:Nunito,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px 240px}
+
+/* thesis ribbon */
+.ribbon{background:var(--teal-deep);color:#F2FBFC}
+.ribbon .r-in{max-width:900px;margin:0 auto;padding:9px 20px;display:flex;gap:10px;align-items:center;
+  font-size:12.5px;font-weight:700;letter-spacing:.01em}
+.ribbon .tag{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(255,255,255,.16);padding:3px 8px;border-radius:20px;white-space:nowrap}
+.ribbon .r-in span{opacity:.95;font-weight:600}
+
+/* assignment header */
+header.asg{padding:30px 0 14px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:11px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--teal-deep)}
+.eyebrow .obj{font-family:"Nunito";background:var(--tint);border:1px solid var(--line);
+  color:var(--teal-deep);padding:2px 9px;border-radius:20px;letter-spacing:.08em}
+header.asg h1{font-size:clamp(26px,4.4vw,38px);font-weight:600;margin:12px 0 6px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--ink-soft);font-size:13.5px;font-weight:600}
+.meta b{color:var(--ink);font-weight:700}
+.standard{margin-top:14px;font-size:12.5px;color:var(--ink-soft);background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--apricot);border-radius:10px;padding:10px 13px}
+.standard b{color:var(--ink)}
+
+/* worksheet */
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 22px 22px;
+  box-shadow:0 1px 0 var(--line-soft),0 18px 40px -30px rgba(20,30,40,.4)}
+.q{padding:20px 0;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:34px 1fr;gap:16px}
+.q:last-child{border-bottom:0}
+.qn{width:34px;height:34px;border-radius:50%;background:var(--tint);color:var(--teal-deep);
+  font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;
+  border:1px solid var(--line)}
+.q h3{font-family:Nunito;font-size:15.5px;font-weight:800;margin-bottom:3px}
+.q p{margin:0 0 12px;color:var(--ink-soft);font-size:14px}
+.figrow{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.answ{margin-top:6px;display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);font-size:13px;font-weight:700}
+.blank{display:inline-block;min-width:74px;border-bottom:2px solid var(--teal);height:22px;vertical-align:bottom}
+.opt{display:flex;gap:12px;flex-wrap:wrap}
+.opt .choice{border:1.5px solid var(--line);border-radius:12px;padding:10px;background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;gap:6px;cursor:default}
+.opt .choice small{font-weight:800;color:var(--ink-soft);font-size:11px}
+figcaption{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:4px;font-weight:700}
+
+.footnote{margin:22px 4px 0;font-size:12px;color:var(--ink-soft);text-align:center}
+
+/* ============ NAVI widget (ported v17.7 engine, education skin) ============ */
+#ishdock{position:fixed;left:0;bottom:0;width:340px;height:220px;pointer-events:none;z-index:40}
+#ishbot{position:absolute;left:16px;bottom:6px;width:150px;height:170px;cursor:pointer;pointer-events:auto;
+  filter:drop-shadow(0 12px 16px rgba(10,40,50,.28));transition:transform .18s;border:0;background:none;padding:0}
+#ishbot:hover{transform:translateY(-4px) scale(1.02)}
+#ishbot:focus-visible{outline:3px solid var(--teal);outline-offset:4px;border-radius:20px}
+#ishbub{position:absolute;left:120px;bottom:120px;background:var(--nv-card);color:var(--nv-ink);
+  border:1px solid var(--nv-line);border-radius:14px;border-bottom-left-radius:4px;padding:10px 13px;
+  font-size:12.5px;font-weight:700;max-width:172px;cursor:pointer;pointer-events:auto;
+  box-shadow:0 10px 24px rgba(10,30,40,.28)}
+#ishbub b{color:var(--nv-cyan)}
+#ishbub:after{content:"";position:absolute;left:-7px;bottom:16px;border:7px solid transparent;
+  border-right-color:var(--nv-card);border-left:0}
+
+#chat{position:fixed;left:120px;bottom:16px;width:min(430px,calc(100vw - 32px));height:min(70vh,600px);
+  background:var(--nv-bg);border:1px solid var(--nv-line);border-radius:18px;display:none;
+  flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(8,24,32,.5);z-index:41}
+#chat.open{display:flex;animation:rise .22s ease}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#chat.open{animation:none}#ishbot{transition:none}}
+.chd{display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(56,198,214,.10);
+  border-bottom:1px solid rgba(255,255,255,.06)}
+.chd .av{width:30px;height:30px;flex:0 0 30px}
+.chd .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.chd b{font-family:Fraunces,Georgia,serif;font-size:15px;color:var(--nv-ink);font-weight:600}
+.chd small{color:var(--nv-soft);font-size:10.5px;display:block;font-weight:700}
+.chd .hbtn{margin-left:auto;display:flex;gap:6px}
+.chd .hbtn button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#CFE6EA;
+  border-radius:8px;font-size:13px;padding:5px 8px;cursor:pointer;line-height:1}
+.chd .hbtn button.off{opacity:.4}
+#qt{display:flex;flex-wrap:wrap;gap:6px;padding:11px 13px 3px}
+#qt button{background:rgba(56,198,214,.09);border:1px solid var(--nv-line);color:#BFEAF0;font-size:11.5px;
+  font-weight:700;border-radius:16px;padding:5px 11px;cursor:pointer}
+#qt button:hover{background:rgba(56,198,214,.2)}
+#qt .qlbl{width:100%;font-size:9px;letter-spacing:.15em;color:var(--nv-soft);font-weight:800;margin-bottom:2px}
+#msgs{flex:1;overflow-y:auto;padding:13px;display:flex;flex-direction:column;gap:9px}
+.m{max-width:88%;padding:9px 12px;border-radius:13px;font-size:13px;line-height:1.5}
+.m.b{background:#1E3A48;border:1px solid rgba(56,198,214,.16);color:var(--nv-ink);align-self:flex-start;border-bottom-left-radius:3px}
+.m.b b{color:var(--nv-cyan)}
+.m.u{background:var(--nv-user);color:#04202A;align-self:flex-end;border-bottom-right-radius:3px;font-weight:700}
+.m.guard{border-color:rgba(240,180,20,.5);background:#2B3320}
+.m.guard b{color:var(--amber)}
+.mctl{display:flex;gap:6px;margin-top:7px}
+.mctl button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:#9FC2C9;
+  font-size:10px;font-weight:700;border-radius:6px;padding:2px 8px;cursor:pointer}
+.mctl button:hover{color:#fff;border-color:var(--nv-cyan)}
+.chip{display:inline-block;background:rgba(56,198,214,.08);border:1px solid var(--nv-line);color:#BFEAF0;
+  border-radius:14px;padding:5px 11px;font-size:11.5px;font-weight:700;margin:4px 5px 0 0;cursor:pointer}
+.chip:hover{background:rgba(56,198,214,.2)}
+.inrow{display:flex;gap:7px;padding:11px;border-top:1px solid rgba(255,255,255,.06)}
+#mic{background:#102734;border:1px solid rgba(255,255,255,.14);color:#CFE6EA;border-radius:11px;width:40px;font-size:15px;cursor:pointer}
+#mic.live{background:#7E1220;border-color:#E5484D;animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px rgba(229,72,77,.25)}}
+.inrow input{flex:1;background:#102734;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:11px;
+  padding:10px 12px;font-size:13px;outline:none;font-family:inherit}
+.inrow input:focus{border-color:var(--nv-cyan)}
+.inrow .ask{background:var(--apricot);color:#3A2408;border:0;border-radius:11px;padding:0 15px;font-weight:800;cursor:pointer;font-family:inherit}
+#mic:focus-visible,.inrow .ask:focus-visible,#qt button:focus-visible,.chip:focus-visible{outline:2px solid var(--nv-cyan);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="ribbon"><div class="r-in">
+  <span class="tag">ILP · Assignment-aware helper</span>
+  <span>Grounded in <b>this</b> objective &amp; its approved sources. Helps you think — never hands over the graded answer.</span>
+</div></div>
+
+<div class="wrap">
+  <header class="asg">
+    <div class="eyebrow"><span>Mathematics · Grade 3</span> <span class="obj">M3.NF.01</span></div>
+    <h1>Unit Fractions: naming equal parts</h1>
+    <div class="meta">
+      <span>Ms.&nbsp;<b>Alvarez</b> · Room 14</span>
+      <span>Assigned <b>Mon</b> · Due <b>Fri</b></span>
+      <span>3 questions · <b>graded</b></span>
+    </div>
+    <div class="standard"><b>Florida B.E.S.T. MA.3.FR.1.1</b> — Represent and interpret unit fractions in the form 1/<i>b</i>
+      as the quantity formed by one part when a whole is partitioned into <i>b</i> equal parts.
+      <b>Mastery is the student's own work</b>, so Navi coaches the idea and refuses the answer.</div>
+  </header>
+
+  <section class="sheet" aria-label="Fractions worksheet">
+    <div class="q">
+      <div class="qn">1</div>
+      <div>
+        <h3>Shade the pieces and name the fraction</h3>
+        <p>This rectangle is one whole. Shade <b>2</b> of the equal parts, then write the fraction that is shaded.</p>
+        <div class="figrow">
+          <figure style="margin:0">
+            <svg width="220" height="70" viewBox="0 0 220 70" role="img" aria-label="A rectangle divided into six equal parts">
+              <rect x="1" y="1" width="218" height="68" rx="6" fill="none" stroke="#0E8F9E" stroke-width="2"/>
+              <g stroke="#0E8F9E" stroke-width="1.5" opacity=".55">
+                <line x1="37" y1="1" x2="37" y2="69"/><line x1="73" y1="1" x2="73" y2="69"/>
+                <line x1="110" y1="1" x2="110" y2="69"/><line x1="146" y1="1" x2="146" y2="69"/>
+                <line x1="183" y1="1" x2="183" y2="69"/>
+              </g>
+            </svg>
+            <figcaption>one whole, 6 equal parts</figcaption>
+          </figure>
+          <span class="answ">Fraction shaded: <span class="blank"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">2</div>
+      <div>
+        <h3>Point to the fraction on the number line</h3>
+        <p>The line from 0 to 1 is split into equal parts. Write the fraction at the marked point&nbsp;(&#9733;).</p>
+        <div class="figrow">
+          <figure style="margin:0">
+            <svg width="300" height="56" viewBox="0 0 300 56" role="img" aria-label="A number line from 0 to 1 split into four equal parts with a star at the first mark">
+              <line x1="20" y1="34" x2="280" y2="34" stroke="#1F2730" stroke-width="2"/>
+              <g stroke="#1F2730" stroke-width="2">
+                <line x1="20" y1="26" x2="20" y2="42"/><line x1="85" y1="26" x2="85" y2="42"/>
+                <line x1="150" y1="26" x2="150" y2="42"/><line x1="215" y1="26" x2="215" y2="42"/>
+                <line x1="280" y1="26" x2="280" y2="42"/>
+              </g>
+              <text x="20" y="54" text-anchor="middle" font-size="12" font-family="Nunito" fill="#55606C">0</text>
+              <text x="280" y="54" text-anchor="middle" font-size="12" font-family="Nunito" fill="#55606C">1</text>
+              <text x="85" y="20" text-anchor="middle" font-size="16" fill="#F2A65A">&#9733;</text>
+            </svg>
+            <figcaption>0 to 1, 4 equal parts</figcaption>
+          </figure>
+          <span class="answ">Fraction at &#9733;: <span class="blank"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">3</div>
+      <div>
+        <h3>Which shape shows <i>fourths?</i></h3>
+        <p>Circle the shape that is partitioned into fourths (4 equal parts).</p>
+        <div class="opt">
+          <figure class="choice"><svg width="66" height="66" viewBox="0 0 66 66"><circle cx="33" cy="33" r="30" fill="none" stroke="#0E8F9E" stroke-width="2"/><line x1="33" y1="3" x2="33" y2="63" stroke="#0E8F9E" stroke-width="1.5"/></svg><small>A</small></figure>
+          <figure class="choice"><svg width="66" height="66" viewBox="0 0 66 66"><circle cx="33" cy="33" r="30" fill="none" stroke="#0E8F9E" stroke-width="2"/><line x1="33" y1="3" x2="33" y2="63" stroke="#0E8F9E" stroke-width="1.5"/><line x1="3" y1="33" x2="63" y2="33" stroke="#0E8F9E" stroke-width="1.5"/></svg><small>B</small></figure>
+          <figure class="choice"><svg width="66" height="66" viewBox="0 0 66 66"><circle cx="33" cy="33" r="30" fill="none" stroke="#0E8F9E" stroke-width="2"/><line x1="3" y1="24" x2="63" y2="24" stroke="#0E8F9E" stroke-width="1.5"/><line x1="3" y1="44" x2="63" y2="44" stroke="#0E8F9E" stroke-width="1.5"/></svg><small>C</small></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="footnote">Demo worksheet · synthetic assignment. Tap <b>Navi</b> in the corner and try to get the answer out of it.</p>
+</div>
+
+<!-- ===== Navi anchor ===== -->
+<div id="ishdock">
+  <div id="ishbub" onclick="openChat()">Stuck? <b>Ask me</b> anything.</div>
+  <button id="ishbot" onclick="openChat()" aria-label="Open Navi, the assignment helper">
+    <svg width="150" height="170" viewBox="0 0 150 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="75" cy="162" rx="44" ry="7" fill="rgba(10,40,50,.16)"/>
+      <line x1="75" y1="20" x2="75" y2="34" stroke="#0A6E7A" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="75" cy="15" r="7" fill="#F2A65A"/>
+      <rect x="26" y="30" width="98" height="104" rx="30" fill="#173040" stroke="#38C6D6" stroke-width="2.5"/>
+      <rect x="38" y="52" width="74" height="46" rx="20" fill="#0E1F2A"/>
+      <circle cx="60" cy="75" r="8.5" fill="#38C6D6"/><circle cx="90" cy="75" r="8.5" fill="#38C6D6"/>
+      <circle cx="62" cy="73" r="2.6" fill="#04202A"/><circle cx="92" cy="73" r="2.6" fill="#04202A"/>
+      <path d="M64 90 q11 8 22 0" fill="none" stroke="#38C6D6" stroke-width="3" stroke-linecap="round"/>
+      <rect x="46" y="116" width="58" height="30" rx="12" fill="#173040" stroke="#38C6D6" stroke-width="2"/>
+      <text x="75" y="136" text-anchor="middle" font-size="15" font-family="Nunito,sans-serif" font-weight="800" fill="#BFEAF0">&#8531;</text>
+      <circle cx="26" cy="66" r="6" fill="#F2A65A"/><circle cx="124" cy="66" r="6" fill="#F2A65A"/>
+    </svg>
+  </button>
+</div>
+
+<div id="chat" role="dialog" aria-label="Navi assignment helper chat">
+  <div class="chd">
+    <svg class="av" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="8" width="28" height="26" rx="9" fill="#173040" stroke="#38C6D6" stroke-width="2"/><circle cx="15" cy="20" r="3" fill="#38C6D6"/><circle cx="25" cy="20" r="3" fill="#38C6D6"/><line x1="20" y1="3" x2="20" y2="8" stroke="#0A6E7A" stroke-width="2"/><circle cx="20" cy="3" r="2.4" fill="#F2A65A"/></svg>
+    <div><b>Navi</b><small>helps you think it through</small></div>
+    <div class="hbtn">
+      <button id="spk" onclick="toggleVoice()" title="Read answers aloud" aria-label="Toggle read aloud">&#128266;</button>
+      <button onclick="closeChat()" title="Close" aria-label="Close chat">&#10005;</button>
+    </div>
+  </div>
+  <div id="qt"></div>
+  <div id="msgs"></div>
+  <div class="inrow">
+    <button id="mic" onclick="micGo()" title="Speak your question" aria-label="Speak your question">&#127908;</button>
+    <input id="q" placeholder="Ask Navi&hellip;" aria-label="Ask Navi" onkeydown="if(event.key==='Enter')send()">
+    <button class="ask" onclick="send()">Ask</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     DATA LAYER — edit these to load Navi with any assignment.
+     Everything below the DATA LAYER is the engine (v17.7). Same
+     grounded matcher/gate/phonetics that shipped in NAVI; the
+     only new rule is the ANSWER-PROTECTION gate.
+     ============================================================ -->
+<script>
+/* ---- KB_INDEX: the assignment this Navi is bound to ---- */
+window.KB_INDEX = {
+  series:"ILP · Grade 3 Mathematics",
+  current:"M3.NF.01",
+  modules:[
+    { id:"M3.NF.01", title:"Unit Fractions: naming equal parts",
+      sections:[
+        { id:"Q1", title:"Equal parts & the fraction name",
+          items:["what a fraction means","equal parts","numerator and denominator","unit fraction","how to write the fraction"],
+          topics:[
+            {label:"What does a fraction mean?", key:"what is a fraction"},
+            {label:"What is the bottom number?", key:"denominator"},
+            {label:"What is a unit fraction?", key:"unit fraction"},
+            {label:"How do I write it?", key:"how do i write the fraction"} ] },
+        { id:"Q2", title:"Fractions on the number line",
+          items:["equal parts on a line","counting the jumps","reading the mark"],
+          topics:[
+            {label:"Fractions on a number line", key:"number line"},
+            {label:"Why must parts be equal?", key:"equal parts"} ] },
+        { id:"Q3", title:"Fourths, thirds, halves",
+          items:["fourths","thirds","halves","checking equal parts"],
+          topics:[
+            {label:"What are fourths?", key:"fourths"},
+            {label:"Give me a first step", key:"first step"} ] }
+      ] }
+  ]
+};
+
+/* ---- KB_ASSIGNMENT: concept coaching, grounded in THIS objective.
+        Every answer teaches the idea with OTHER numbers than the
+        graded items — it never states Q1/Q2/Q3's answer. ---- */
+window.KB_MODULE = [
+  {keywords:["what is a fraction","what does a fraction mean","meaning of a fraction","fractions"],
+   answer:"A fraction is a way to name <b>equal parts of one whole</b>. First you split the whole into equal parts, then you count how many of those parts you have. Example: cut a sandwich into 2 equal parts and take 1 — that's <b>one half</b>. Look at your picture: how many equal parts is the whole split into?"},
+  {keywords:["denominator","bottom number","number on the bottom","number underneath"],
+   answer:"The <b>bottom number (denominator)</b> tells you how many <b>equal parts the whole is split into</b>. Bigger bottom number = more parts = smaller pieces. If a pizza is cut into 8 equal slices, the bottom number is 8. Count the equal parts in your figure — that's your bottom number."},
+  {keywords:["numerator","top number","number on top"],
+   answer:"The <b>top number (numerator)</b> tells you <b>how many parts you counted or shaded</b>. So in a fraction, top = parts you have, bottom = equal parts in the whole. If you shade 3 of 8 equal parts, the top is 3."},
+  {keywords:["unit fraction","one part","single part","fraction with 1 on top"],
+   answer:"A <b>unit fraction</b> is one single equal part — it always has a <b>1 on top</b>, like 1/2, 1/3, or 1/6. It's the amount of <i>one</i> part when the whole is split into equal parts. The bottom number just says how many equal parts there are."},
+  {keywords:["how do i write the fraction","how do i write it","how to write a fraction","write the fraction","stack the numbers"],
+   answer:"Write the <b>parts you have on top</b> and the <b>equal parts in the whole on the bottom</b>, with a line between them. Steps: (1) count the equal parts in the whole → that's the bottom, (2) count how many are shaded or marked → that's the top. Try counting yours out loud."},
+  {keywords:["number line","on a line","reading the mark","number line fraction"],
+   answer:"On a number line from <b>0 to 1</b>, the whole is the distance from 0 to 1. Count how many <b>equal jumps</b> it's split into — that's your bottom number. Then count how many jumps to reach the mark — that's your top number. Example: 0 to 1 split into 5 equal jumps, land on the 2nd mark → two fifths."},
+  {keywords:["equal parts","equal pieces","same size","why equal","must be equal","fair share"],
+   answer:"The parts have to be <b>exactly the same size</b>, or it isn't a fraction of the whole. If someone cuts a cake into 4 pieces but one is huge and one is tiny, those aren't fourths. Check your figure: do all the parts look the same size?"},
+  {keywords:["fourths","quarters","split into 4","fourth"],
+   answer:"<b>Fourths</b> means the whole is split into <b>4 equal parts</b>. One of those parts is 1/4. A quick check: 4 equal parts should look identical, and 4 of them together make the whole. How many equal parts does each shape have?"},
+  {keywords:["thirds","split into 3","third"],
+   answer:"<b>Thirds</b> means <b>3 equal parts</b>. One part is 1/3. If a shape has 3 same-size parts, it shows thirds."},
+  {keywords:["halves","split into 2","half"],
+   answer:"<b>Halves</b> means <b>2 equal parts</b>. One part is 1/2. Two equal parts that make the whole."},
+  {keywords:["first step","where do i start","how do i start","stuck on this","help me start","hint"],
+   answer:"Good first step for any of these: <b>count the equal parts in the whole first</b> — that gives you the bottom number. Then count how many are shaded or how many jumps to the mark — that's the top number. Try step one on your figure and tell me the number you get."},
+  {keywords:["check my answer","is this right","did i get it right","am i correct","check this"],
+   answer:"I can't grade it — that's Ms. Alvarez's job, and doing your own work is what the grade is for. But I can help you <b>check your thinking</b>: does your bottom number match the count of equal parts, and does your top number match how many you shaded? If both match, you followed the rule."},
+  {keywords:["study tip","how do i study","remember this","tips","help me remember"],
+   answer:"Try this: say it as a sentence — “<b>the bottom is how many equal parts, the top is how many I have.</b>” Draw one of your own: a circle split into 3 equal parts, shade 1, and name it. If you can teach it back to me, you've got it."}
+];
+
+/* ---- KB_BASE: how to use the helper (cross-assignment) ---- */
+window.KB_BASE = [
+  {keywords:["how do you work","how do i use you","what can you do","what do you do","how does this work"],
+   answer:"I'm here for <b>this assignment</b>. Ask me what a word means, how an idea works, or for a first step — by typing or with the microphone. I'll coach you, but I won't give you a graded answer. Tap a topic above to start."},
+  {keywords:["give up","i can't do this","this is too hard","i quit","too hard"],
+   answer:"You're closer than it feels. Let's shrink it: just count the <b>equal parts</b> in one figure and tell me that one number. We'll build from there, one step at a time."},
+  {keywords:["talk to teacher","tell my teacher","ask the teacher","send to teacher","flag for teacher","get help"],
+   answer:"I can flag a question for Ms. Alvarez so she sees exactly where you got stuck — that's part of how she knows what to reteach. Type your question and I'll offer to send it to her."}
+];
+
+/* ---- GLOSSARY: vocabulary lookups (definitional) ---- */
+window.GLOSSARY = [
+  {term:"Fraction", keys:["fraction"], def:"A number that names equal parts of one whole — you split the whole into equal parts, then count the parts you have."},
+  {term:"Numerator", keys:["numerator","top number"], def:"The top number of a fraction. It tells how many equal parts you have or shaded."},
+  {term:"Denominator", keys:["denominator","bottom number"], def:"The bottom number of a fraction. It tells how many equal parts the whole is split into."},
+  {term:"Unit fraction", keys:["unit fraction"], def:"A fraction for one single equal part, with a 1 on top — like 1/2, 1/3, or 1/4."},
+  {term:"Equal parts", keys:["equal parts","equal pieces"], def:"Parts that are exactly the same size. A whole must be split into equal parts before you can name a fraction of it."},
+  {term:"Whole", keys:["whole","one whole"], def:"The complete shape, group, or the distance from 0 to 1 on a number line — the thing you split into equal parts."},
+  {term:"Partition", keys:["partition","partitioned"], def:"To split a whole into equal parts."},
+  {term:"Number line", keys:["number line"], def:"A straight line with numbers marked in order. Between 0 and 1 you can split the whole into equal parts to show fractions."},
+  {term:"Halves", keys:["halves"], def:"Two equal parts of a whole. One part is 1/2."},
+  {term:"Thirds", keys:["thirds"], def:"Three equal parts of a whole. One part is 1/3."},
+  {term:"Fourths", keys:["fourths","quarters"], def:"Four equal parts of a whole. One part is 1/4."}
+];
+
+/* ---- SPEECH_DICT: how Navi says things aloud ---- */
+window.SPEECH_DICT = {
+  "1/2":"one half","1/3":"one third","1/4":"one fourth","1/6":"one sixth","1/5":"one fifth","1/8":"one eighth",
+  "2/3":"two thirds","3/4":"three fourths","3/8":"three eighths","2/5":"two fifths",
+  "⅓":"one third","¼":"one fourth","½":"one half",
+  "numerator":"NEW mer ay ter","denominator":"dee NOM in ay ter","B.E.S.T.":"best","M3.NF.01":"objective M 3 N F oh one"
+};
+window.NAVI_VOICE = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny"];
+
+/* ---- ANSWER-PROTECTION gate: the one ILP-specific rule ----
+   Detects "just tell me the answer" and refuses, offering a
+   scaffold instead. This is what makes the bot assignment-aware
+   rather than a general chatbot. ---- */
+window.ANSWER_SEEKING = ["what is the answer","whats the answer","what's the answer","the answer","just tell me",
+ "just give me","give me the answer","tell me the answer","do it for me","solve it for me","solve this for me",
+ "do my homework","do this for me","what do i write","what should i write","what goes in the blank",
+ "answer to question","answer for question","whats question","what is question 1","what is question 2","what is question 3",
+ "is it 1/2","is it 1/3","is it 1/4","is it 1/6","is it 2/6","is it one","the correct answer","right answer"];
+</script>
+
+<!-- ============================================================
+     ENGINE (v17.7 matcher / gate / phonetics / router) — ported
+     from NAVI standalone. Edit the DATA LAYER above, not this.
+     ============================================================ -->
+<script>
+var KB=[].concat(window.KB_MODULE||[], window.KB_EXTRA||[], window.KB_BASE||[]);
+var IDX=window.KB_INDEX||{modules:[],current:''};
+var curModule=IDX.modules.find(function(m){return m.id===IDX.current;})||{title:'',sections:[]};
+var curSection=0;
+
+function renderTopics(){
+  var qt=document.getElementById('qt');
+  var s=curModule.sections[curSection]||{title:'',topics:[]};
+  var html='<div class="qlbl">'+(s.id+' · '+s.title+' — TOPICS').toUpperCase()+'</div>';
+  (s.topics||[]).forEach(function(t,i){html+='<button onclick="topic('+i+')">'+t.label+'</button>';});
+  qt.innerHTML=html;
+}
+function topic(i){var t=curModule.sections[curSection].topics[i];add('u',t.label);
+  setTimeout(function(){botSay(findAnswer(t.key)||findAnswer(t.label)||FALLBACK)},350);}
+
+/* ---------- v17.7 matcher core ---------- */
+function normalizeQuery(q){return String(q).toLowerCase()
+  .replace(/[‘’]/g,"'").replace(/'s\b/g,"")
+  .replace(/\binto\b/g,"in to").replace(/\bonto\b/g,"on to")
+  .replace(/\s+/g," ").trim();}
+function containsTerm(query,term){var esc=term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return new RegExp("(^|[^a-z0-9])"+esc+"s?([^a-z0-9]|$)","i").test(query);}
+function findAnswer(q){var query=normalizeQuery(q),best=null,bestScore=0;
+  KB.forEach(function(item){var score=0;
+    item.keywords.forEach(function(kw){if(containsTerm(query,kw))score+=kw.length;});
+    if(score>bestScore){bestScore=score;best=item.answer;}});
+  return bestScore>0?best:null;}
+function isDefinitional(q){return /\bwhat('?s| is| are| does)\b/i.test(q)
+  || /\b(define|definition of|meaning of|stand(s)? for)\b/i.test(q);}
+function findDefinition(q){var query=normalizeQuery(q),best=null,bestScore=0;
+  (window.GLOSSARY||[]).forEach(function(item){var score=0;
+    item.keys.forEach(function(k){if(containsTerm(query,k))score+=k.length;});
+    if(score>bestScore){bestScore=score;best=item;}});
+  return bestScore>0?best:null;}
+function exactTerm(q){var t=q.toLowerCase().replace(/[^\w\s-]/g,'').trim();
+  return (window.GLOSSARY||[]).find(function(item){return item.keys.some(function(k){return k.toLowerCase()===t;});})||null;}
+function hasWord(query,word){var re=new RegExp("(^|[^a-z0-9])"+word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+"([^a-z0-9]|$)","i");return re.test(query);}
+function hasAny(query,list){return list.some(function(w){return hasWord(query,w);});}
+function detectSocial(query){
+  if(hasAny(query,["hi","hello","hey","good morning","good afternoon"]))
+    return "Hi! I'm Navi, your helper for this fractions assignment. Ask me what something means or how to start — or tap a topic above.";
+  if(hasAny(query,["thank you","thanks","thank u","appreciate it"]))
+    return "You're welcome! Keep going — you've got this.";
+  if(hasAny(query,["bye","goodbye","see you","that's all","that is all"]))
+    return "Nice work today. I'm right here in the corner whenever you need me.";
+  if(hasAny(query,["who are you","what are you"]))
+    return "I'm Navi. I help you understand your assignment — I explain ideas and give hints, but I never give you the graded answer. Try 'what is a unit fraction?'";
+  if(hasAny(query,["how are you","what's up","whats up"]))
+    return "Ready to help! Ask me anything about fractions and equal parts.";
+  return null;}
+var DOMAIN_EXTRA=["fraction","fractions","equal","parts","part","whole","half","halves","third","thirds",
+ "fourth","fourths","quarter","numerator","denominator","number line","line","shade","shaded","split","partition",
+ "unit","piece","pieces","math","question","objective","assignment","navi"];
+function hasDomainSignal(query){query=normalizeQuery(query);
+  if(DOMAIN_EXTRA.some(function(w){return containsTerm(query,w);}))return true;
+  for(var i=0;i<KB.length;i++){if(KB[i].keywords.some(function(kw){return containsTerm(query,kw);}))return true;}
+  var G=window.GLOSSARY||[];
+  for(var j=0;j<G.length;j++){if(G[j].keys.some(function(k){return containsTerm(query,k);}))return true;}
+  return false;}
+
+/* ---------- ANSWER-PROTECTION gate ---------- */
+function detectAnswerSeeking(q){var query=normalizeQuery(q);
+  return (window.ANSWER_SEEKING||[]).some(function(p){return query.indexOf(p)>=0;});}
+function guardReply(){
+  return {guard:true,
+    text:"I can't give you the graded answer — <b>that answer is how Ms. Alvarez sees what you can do</b>. But I won't leave you stuck. Pick how you'd like to think it through:",
+    chips:[
+      {label:"Explain the idea", say:"Explain the idea", reply:function(){return findAnswer("what is a fraction");}},
+      {label:"Give me a first step", say:"Give me a first step", reply:function(){return findAnswer("first step");}},
+      {label:"Show a worked example", say:"Show a worked example", reply:function(){
+        return "Here's one with <b>different numbers</b> than your worksheet: a ribbon split into <b>5 equal parts</b>, 2 parts colored. Bottom number = 5 equal parts. Top number = 2 colored. So it's <b>two fifths</b>. Now do the same counting on <i>your</i> figure.";}}
+    ]};
+}
+
+/* ---------- router ---------- */
+var FALLBACK="I don't have that one loaded for this assignment yet.";
+var pendingForward=false,lastUnanswered="";
+function route(q){
+  if(pendingForward){
+    if(/\b(yes|yeah|yep|sure|ok|okay|please)\b/i.test(q)){pendingForward=false;forwardQueueAdd(lastUnanswered);
+      return "Done — I've flagged your question for Ms. Alvarez: \""+lastUnanswered+"\". She'll see where you got stuck. Anything else?";}
+    if(/\b(no|nope|nah|no thanks)\b/i.test(q)){pendingForward=false;return "No problem. What else can I help you think through?";}
+    pendingForward=false;
+  }
+  if(detectAnswerSeeking(q))return guardReply();
+  var social=detectSocial(normalizeQuery(q)); if(social)return social;
+  if(detectStuck(normalizeQuery(q)))return offerStuckChips();
+  var ex=exactTerm(q); if(ex)return "<b>"+ex.term+"</b> — "+ex.def;
+  if(isDefinitional(q)){var d=findDefinition(q); if(d)return "<b>"+d.term+"</b> — "+d.def;}
+  var a=findAnswer(q); if(a)return a;
+  var d2=findDefinition(q); if(d2)return "<b>"+d2.term+"</b> — "+d2.def;
+  if(!hasDomainSignal(q))
+    return "That's outside this assignment, so I'll stay in my lane. Ask me about fractions, equal parts, or the number line on this page.";
+  lastUnanswered=q;
+  pendingForward=true;
+  return {text:"I don't have that one loaded yet. Would you like me to <b>flag it for Ms. Alvarez</b> so she can help?",
+    chips:[{label:"Yes, tell my teacher",say:"Yes, tell my teacher",reply:function(){pendingForward=false;forwardQueueAdd(lastUnanswered);
+      return "Done — I've flagged it for Ms. Alvarez: \""+lastUnanswered+"\". Anything else?";}},
+     {label:"No, thanks",say:"No, thanks",reply:function(){pendingForward=false;return "No problem. What else can I help you think through?";}}]};
+}
+function forwardQueueAdd(question){
+  try{var queue=JSON.parse(localStorage.getItem('ilp_navi_forward_queue')||'[]');
+    var sec=curModule.sections[curSection]?curModule.sections[curSection].title:'';
+    queue.push({question:question,module:IDX.current,section:sec});
+    localStorage.setItem('ilp_navi_forward_queue',JSON.stringify(queue));}catch(e){}
+}
+
+/* ---------- speech out ---------- */
+var voiceOn=false;
+function normalizeForSpeech(text){
+  var t=String(text).replace(/<[^>]+>/g,'');
+  var dict=window.SPEECH_DICT||{};
+  var keys=Object.keys(dict).sort(function(a,b){return b.length-a.length;});
+  for(var i=0;i<keys.length;i++){
+    var esc=keys[i].replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    t=t.replace(new RegExp(esc,"gi"),dict[keys[i]]);}
+  t=t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{FE0F}\u{200D}]/gu,'');
+  return t.replace(/\s{2,}/g,' ').trim();}
+var pickedVoice=null;
+function pickVoice(){
+  if(pickedVoice)return pickedVoice;
+  var vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[],prefs=window.NAVI_VOICE||[];
+  for(var i=0;i<prefs.length;i++){var m=vs.find(function(v){return v.name===prefs[i]||v.name.indexOf(prefs[i])===0;});if(m){pickedVoice=m;break;}}
+  return pickedVoice;}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=function(){pickedVoice=null;pickVoice();};
+function speak(text){
+  if(!voiceOn||!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(normalizeForSpeech(text));
+  var v=pickVoice(); if(v)u.voice=v;
+  u.rate=0.96;u.pitch=1.05;speechSynthesis.speak(u);}
+function toggleVoice(){voiceOn=!voiceOn;document.getElementById('spk').classList.toggle('off',!voiceOn);
+  if(!voiceOn&&window.speechSynthesis)speechSynthesis.cancel();
+  else add('b','Voice on — I’ll read my answers aloud.');}
+
+/* ---------- chat UI ---------- */
+var greeted=false;
+function openChat(){document.getElementById('chat').classList.add('open');
+  document.getElementById('ishbub').style.display='none';
+  if(!greeted){botSay("Hi! I'm Navi. I'll help you <b>think through</b> this fractions assignment — I explain ideas and give hints, but I won't hand over the graded answer. Tap a topic, type a question, or press the microphone.");greeted=true;}
+  renderTopics();
+  setTimeout(function(){document.getElementById('q').focus()},60);}
+function closeChat(){document.getElementById('chat').classList.remove('open');
+  document.getElementById('ishbub').style.display='';
+  if(window.speechSynthesis)speechSynthesis.cancel();}
+function add(cls,html){var d=document.createElement('div');d.className='m '+cls;d.innerHTML=html;
+  var m=document.getElementById('msgs');m.appendChild(d);m.scrollTop=m.scrollHeight;}
+var MSGID=0;
+function botSay(html,chips,guard){
+  var id='bm'+(++MSGID);
+  var ctl='<div class="mctl"><button onclick="replayMsg(\''+id+'\')" title="Hear this again">&#10227; Replay</button>'+
+          '<button onclick="muteSpeech()" title="Stop the voice">&#128263; Mute</button></div>';
+  var chipHtml='';
+  if(chips){chipHtml='<div>'+chips.map(function(c,i){
+    return '<span class="chip" tabindex="0" role="button" onclick="chipPick(\''+id+'\','+i+')" onkeydown="if(event.key===\'Enter\')chipPick(\''+id+'\','+i+')">'+c.label+'</span>';}).join('')+'</div>';
+    CHIPSTORE[id]=chips;}
+  var d=document.createElement('div');d.className='m b'+(guard?' guard':'');
+  d.innerHTML='<span id="'+id+'">'+html+'</span>'+chipHtml+ctl;
+  var m=document.getElementById('msgs');m.appendChild(d);m.scrollTop=m.scrollHeight;
+  speak(html);
+}
+var CHIPSTORE={};
+function chipPick(id,i){var c=CHIPSTORE[id]&&CHIPSTORE[id][i];if(!c)return;
+  add('u',c.say||c.label);setTimeout(function(){var r=c.reply();if(typeof r==='string')botSay(r);else botSay(r.text,r.chips,r.guard);},300);}
+function replayMsg(id){var el=document.getElementById(id);if(!el)return;
+  if(!window.speechSynthesis)return;speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(normalizeForSpeech(el.innerHTML));var v=pickVoice();if(v)u.voice=v;u.rate=0.96;speechSynthesis.speak(u);}
+function muteSpeech(){if(window.speechSynthesis)speechSynthesis.cancel();}
+
+/* ---- stuck flow ---- */
+function detectStuck(query){return hasAny(query,["help","help me","i'm stuck","im stuck","i am stuck","stuck","confused",
+ "i'm lost","im lost","lost","don't know what to do","dont know what to do","not working"]);}
+function offerStuckChips(){return {text:"Happy to help — where are you stuck?",chips:[
+ {label:"I don't get the idea",say:"I don't get the idea",reply:function(){return findAnswer("what is a fraction");}},
+ {label:"I don't know how to start",say:"I don't know how to start",reply:function(){return findAnswer("first step");}},
+ {label:"Tell my teacher",say:"Tell my teacher",reply:function(){return findAnswer("flag for teacher");}}]};}
+
+function send(){var q=document.getElementById('q');var v=q.value.trim();if(!v)return;
+  add('u',v);q.value='';setTimeout(function(){var r=route(v);
+    if(typeof r==='string')botSay(r);else botSay(r.text,r.chips,r.guard);},360);}
+
+/* ---------- microphone in ---------- */
+var rec=null;
+function micGo(){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var mic=document.getElementById('mic');
+  if(!SR){botSay('This browser doesn’t offer speech input — typing works everywhere.');return;}
+  if(rec){rec.stop();return;}
+  rec=new SR();rec.lang='en-US';rec.interimResults=true;
+  mic.classList.add('live');
+  rec.onresult=function(e){var s='';for(var i=0;i<e.results.length;i++)s+=e.results[i][0].transcript;
+    document.getElementById('q').value=s;
+    if(e.results[e.results.length-1].isFinal){send();}};
+  rec.onend=function(){mic.classList.remove('live');rec=null;};
+  rec.onerror=function(){mic.classList.remove('live');rec=null;};
+  rec.start();}
+</script>
+
+</body>
+</html>

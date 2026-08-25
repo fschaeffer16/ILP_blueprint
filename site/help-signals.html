@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Help Signals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1F2730; --ink-soft:#55606C; --ink-faint:#8894A2;
+  --line:#E5E0D6; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A; --apricot:#E8843C; --amber:#B9791F; --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#1A222B; --panel:#151C24; --ink:#EAEEF2; --ink-soft:#9AA6B2; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4; --apricot:#F0A25A; --amber:#E0B44A; --red:#E27A65; --green:#5FBE86;
+    --tint:#15282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#1A222B; --panel:#151C24; --ink:#EAEEF2; --ink-soft:#9AA6B2; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4; --apricot:#F0A25A; --amber:#E0B44A; --red:#E27A65; --green:#5FBE86;
+  --tint:#15282E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;font-size:16px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.15}
+.wrap{max-width:760px;margin:0 auto;padding:34px 22px 70px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px}
+h1{font-size:clamp(28px,5vw,40px);font-weight:600;letter-spacing:-.01em}
+.lede{font-size:17px;color:var(--ink-soft);margin:12px 0 24px;max-width:60ch}
+.lede strong{color:var(--ink)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi .n{font-family:Fraunces,serif;font-size:30px;font-weight:600;color:var(--teal-deep);line-height:1}
+.kpi.warn .n{color:var(--apricot)}
+.kpi .l{font-size:12.5px;color:var(--ink-soft);margin-top:6px;font-weight:600}
+.obj{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+.oh{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line-soft)}
+.oh .code{font-family:ui-monospace,monospace;font-weight:800;color:var(--teal-deep)}
+.oh .std{font-family:ui-monospace,monospace;font-size:12px;color:var(--ink-faint)}
+.pill{margin-left:auto;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.pill.reteach{background:rgba(196,80,58,.14);color:var(--red)}
+.pill.quiet{background:var(--tint);color:var(--teal-deep)}
+.ob{padding:13px 16px}
+.outcome{font-weight:700;margin-bottom:11px}
+.themes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px}
+.theme{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid var(--line);
+  background:rgba(14,143,158,.1);color:var(--teal-deep)}
+.theme.other{background:transparent;color:var(--ink-faint)}
+.q{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line-soft);font-size:14.5px}
+.q:first-of-type{border-top:0}
+.q .who{font-weight:800;color:var(--ink-faint);min-width:76px}
+.q .txt{flex:1}
+.q .rsn{font-size:10.5px;font-weight:800;white-space:nowrap;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--ink-faint)}
+.q .rsn.seek{color:var(--amber)}
+.action{margin-top:12px;padding:11px 13px;border-radius:9px;background:rgba(14,143,158,.09);font-size:13.5px}
+.action b{color:var(--teal-deep)}
+.foot{margin-top:18px;font-size:12.5px;color:var(--ink-faint);font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Teacher · Navi help signals</div>
+  <h1>Where students are stuck</h1>
+  <p class="lede">Every time the assignment bot can’t answer a question, refuses to hand over the
+    answer, or sees a student circling the same idea, it flags it here — with the exact question and
+    which student asked. This is an <strong>early</strong> signal: you see the confusion forming
+    <em> before</em> the graded task, so you can reteach in time.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">12</div><div class="l">questions flagged</div></div>
+    <div class="kpi"><div class="n">12</div><div class="l">students needing help</div></div>
+    <div class="kpi"><div class="n">6</div><div class="l">objectives touched</div></div>
+    <div class="kpi warn"><div class="n">1</div><div class="l">reteach signals</div></div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">M3.NF.01</span><span class="std">MA.3.FR.1.1</span>
+      <span class="pill reteach">Reteach signal · 5 students</span></div>
+    <div class="ob">
+      <div class="outcome">Explain and represent a fraction as equal parts of a whole.</div>
+      <div class="themes"><span class="theme">denominator · 3</span><span class="theme">equal parts · 1</span><span class="theme other">other questions · 1</span></div>
+      <div class="q"><span class="who">Student 3</span><span class="txt">“why is the denominator on the bottom”</span><span class="rsn">Couldn’t answer</span></div>
+      <div class="q"><span class="who">Student 7</span><span class="txt">“i dont get the denominator”</span><span class="rsn">Said they were stuck</span></div>
+      <div class="q"><span class="who">Student 11</span><span class="txt">“is the denominator the top or bottom number”</span><span class="rsn">Couldn’t answer</span></div>
+      <div class="q"><span class="who">Student 2</span><span class="txt">“what if the parts are not equal parts”</span><span class="rsn">Couldn’t answer</span></div>
+      <div class="q"><span class="who">Student 9</span><span class="txt">“just tell me the answer to number 2”</span><span class="rsn seek">Wanted the answer</span></div>
+      <div class="action"><b>Suggested action:</b> 5 students are circling <b>denominator</b>. Consider a short reteach before the graded task — or open the lesson to adjust it.</div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">M3.M.22</span><span class="std">MA.3.M.2.2</span>
+      <span class="pill quiet">2 students · 2 questions</span></div>
+    <div class="ob">
+      <div class="outcome">Solve real-world problems involving elapsed time and explain the reasoning.</div>
+      <div class="themes"><span class="theme">elapsed time · 1</span><span class="theme other">other questions · 1</span></div>
+      <div class="q"><span class="who">Student 5</span><span class="txt">“why cant i just subtract the clock numbers”</span><span class="rsn">Couldn’t answer</span></div>
+      <div class="q"><span class="who">Student 12</span><span class="txt">“how do i count the minutes between two times”</span><span class="rsn">Said they were stuck</span></div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">M3.GR.23</span><span class="std">MA.3.GR.2.3</span>
+      <span class="pill quiet">2 students · 2 questions</span></div>
+    <div class="ob">
+      <div class="outcome">Find the perimeter and area of rectangles, and explain how they differ.</div>
+      <div class="themes"><span class="theme">perimeter · 1</span><span class="theme">area · 1</span></div>
+      <div class="q"><span class="who">Student 4</span><span class="txt">“whats the difference between perimeter and area again”</span><span class="rsn">Couldn’t answer</span></div>
+      <div class="q"><span class="who">Student 8</span><span class="txt">“do i add or multiply for the area”</span><span class="rsn">Said they were stuck</span></div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">RW3.01</span><span class="std">ELA.3.R.2.2</span>
+      <span class="pill quiet">1 student · 1 question</span></div>
+    <div class="ob">
+      <div class="outcome">Determine the main idea of a text and explain how key details support it.</div>
+      <div class="themes"><span class="theme">main idea · 1</span></div>
+      <div class="q"><span class="who">Student 6</span><span class="txt">“how is the main idea different from the topic”</span><span class="rsn">Couldn’t answer</span></div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">V3.01</span><span class="std">ELA.3.V.1.2</span>
+      <span class="pill quiet">1 student · 1 question</span></div>
+    <div class="ob">
+      <div class="outcome">Use Greek and Latin roots, base words and affixes to figure out a new word.</div>
+      <div class="themes"><span class="theme other">other questions · 1</span></div>
+      <div class="q"><span class="who">Student 10</span><span class="txt">“can you just do the word parts for me”</span><span class="rsn seek">Wanted the answer</span></div>
+    </div>
+  </div>
+
+  <div class="obj">
+    <div class="oh"><span class="code">WR3.01</span><span class="std">ELA.3.C.1.3</span>
+      <span class="pill quiet">1 student · 1 question</span></div>
+    <div class="ob">
+      <div class="outcome">Write an opinion with reasons supported by details and a conclusion.</div>
+      <div class="themes"><span class="theme">reason · 1</span></div>
+      <div class="q"><span class="who">Student 1</span><span class="txt">“how many reasons do i need for my opinion”</span><span class="rsn">Kept asking</span></div>
+    </div>
+  </div>
+
+  <p class="foot">Signals computed by the ILP engine (<span class="mono">summarizeAssistantFlags</span>).
+    The bot only ever flags a question — it never shares one student’s question with another, and it
+    holds no profile data beyond the question itself. Synthetic data.</p>
+</div>
+
+</body>
+</html>

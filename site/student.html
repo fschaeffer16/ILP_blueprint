@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mia's Student App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --ground:#f4f3fb; --surface:#ffffff; --surface-2:#eeecf9; --border:#e2def2; --border-2:#ccc5e8;
+    --ink:#1f1a33; --sec:#584f74; --muted:#867d9c;
+    --accent:#6b4fd0; --accent-2:#553bb0; --accent-weak:#e7e1fa;
+    --ok:#1a9c6e; --ok-w:#dcf1e8; --warn:#a06a13; --warn-w:#f6ecd4; --danger:#c0392b; --danger-w:#f6e1de;
+    --shadow:0 1px 2px rgba(40,30,80,.05), 0 6px 18px rgba(40,30,80,.07);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#12101c; --surface:#1b1830; --surface-2:#241f3d; --border:#2f2a48; --border-2:#40395f;
+      --ink:#eceaf7; --sec:#b3aacb; --muted:#877ea0;
+      --accent:#a48cf5; --accent-2:#bda9f8; --accent-weak:#241d44;
+      --ok:#4ec596; --ok-w:#123026; --warn:#dcb057; --warn-w:#2f2810; --danger:#e88a7c; --danger-w:#311714;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#12101c; --surface:#1b1830; --surface-2:#241f3d; --border:#2f2a48; --border-2:#40395f;
+    --ink:#eceaf7; --sec:#b3aacb; --muted:#877ea0;
+    --accent:#a48cf5; --accent-2:#bda9f8; --accent-weak:#241d44;
+    --ok:#4ec596; --ok-w:#123026; --warn:#dcb057; --warn-w:#2f2810; --danger:#e88a7c; --danger-w:#311714;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.45);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { font-family:"Fredoka", system-ui, sans-serif; font-weight:600; margin:0; }
+
+  header.top { background:var(--surface); border-bottom:1px solid var(--border); }
+  .top-in { max-width:820px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; gap:12px; }
+  .mk { width:36px; height:36px; border-radius:11px; background:var(--accent); color:#fff; display:grid; place-items:center; font-family:"Fredoka"; font-weight:700; font-size:1.2rem; }
+  .top b { font-family:"Fredoka"; font-weight:600; font-size:1.05rem; }
+  .top small { display:block; color:var(--muted); font-size:.72rem; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:9px; padding:6px 10px; }
+
+  main { max-width:820px; margin:0 auto; padding:24px 22px 80px; }
+  h1.pg { font-size:1.9rem; }
+  .say { color:var(--sec); margin:6px 0 0; }
+  h2 { font-size:1.25rem; margin:28px 0 12px; }
+
+  .assign { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 15px; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:9px; }
+  .assign .t { font-weight:600; }
+  .assign .s { color:var(--muted); font-size:.82rem; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:7px; font-size:.75rem; font-weight:600; }
+  .badge.visual_first { background:#efe9fb; color:#6b3fc4; } .badge.core { background:var(--surface-2); color:var(--muted); }
+  .badge.vocabulary_supported { background:#e7edfb; color:#2f5bd0; } .badge.guided_practice { background:#fff2e6; color:#9a5a00; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .badge.visual_first{background:#241c40;color:#b9a6ff} .badge.vocabulary_supported{background:#1c2740;color:#9db8ff} .badge.guided_practice{background:#33290f;color:#e0b357} }
+  .pill { display:inline-flex; align-items:center; font-size:.76rem; font-weight:700; padding:3px 11px; border-radius:999px; }
+  .pill.brand { background:var(--accent-weak); color:var(--accent-2); } .pill.ok { background:var(--ok-w); color:var(--ok); }
+  .pill.warn { background:var(--warn-w); color:var(--warn); } .pill.muted { background:var(--surface-2); color:var(--muted); } .pill.danger { background:var(--danger-w); color:var(--danger); }
+
+  .guide { border:1px solid var(--border); border-radius:12px; padding:15px 17px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:11px; }
+  .guide h4 { font-family:"Fredoka"; font-size:1.05rem; margin:0 0 6px; }
+  .guide .lbl { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-top:11px; }
+  .guide .we { background:var(--surface-2); border-radius:9px; padding:11px 13px; font-size:.9rem; margin-top:4px; }
+
+  .channel { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow); padding:16px 18px; margin-bottom:13px; }
+  .chead { display:flex; align-items:center; gap:9px; margin-bottom:4px; }
+  .chead h3 { font-family:"Fredoka"; margin:0; }
+  .post { border-top:1px solid var(--border); padding:11px 0; }
+  .pmeta { display:flex; align-items:center; gap:8px; margin-bottom:3px; }
+  .who { font-weight:600; font-size:.9rem; }
+  .ktag { font-size:.7rem; font-weight:700; padding:1px 8px; border-radius:6px; text-transform:uppercase; letter-spacing:.03em; background:var(--surface-2); color:var(--muted); }
+  .ktag.explanation { background:var(--ok-w); color:var(--ok); } .ktag.question { background:var(--accent-weak); color:var(--accent-2); }
+  .ktag.resource { background:var(--accent-weak); color:var(--accent-2); } .ktag.answer_dump { background:var(--warn-w); color:var(--warn); }
+  .txt { font-size:.93rem; }
+  .held { color:var(--warn); font-size:.82rem; margin-top:3px; }
+
+  .box { border:1px solid var(--border); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow); padding:16px 18px; }
+  .box .sub { color:var(--muted); font-size:.86rem; margin:0 0 10px; }
+  .exs { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
+  .ex { font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface-2); color:var(--sec); border-radius:8px; padding:5px 10px; }
+  textarea { width:100%; font:inherit; font-size:.93rem; border:1px solid var(--border-2); border-radius:10px; padding:10px 12px; background:var(--surface); color:var(--ink); resize:vertical; min-height:52px; }
+  .send { font:inherit; font-weight:700; font-size:.9rem; border:none; border-radius:10px; padding:9px 18px; background:var(--accent); color:#fff; cursor:pointer; margin-top:9px; }
+  .rules { color:var(--muted); font-size:.8rem; margin-top:10px; }
+  .foot { color:var(--muted); font-size:.8rem; margin-top:26px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="mk">M</div>
+    <div><b>ILP</b><small>Student app · grade 3</small></div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main>
+  <h1 class="pg">Hi, Mia 👋</h1>
+  <p class="say">Your assignments, your study guides, and your class channels — all in one app. No endless feed, no strangers, just your class and your work.</p>
+
+  <h2>Today</h2>
+  <div class="assign"><span><span class="t">Show fractions as equal parts</span> <span class="s">· Due today</span><div><span class="badge visual_first">visual-first</span> <span class="s">your version</span></div></span><span class="pill brand">Keep going</span></div>
+  <div class="assign"><span><span class="t">Compare two fractions</span> <span class="s">· Due Friday</span><div><span class="badge core">core</span> <span class="s">your version</span></div></span><span class="pill brand">Start</span></div>
+  <div class="assign"><span><span class="t">Find the main idea</span> <span class="s">· Turned in</span><div><span class="badge vocabulary_supported">vocabulary-supported</span> <span class="s">your version</span></div></span><span class="pill muted">Turned in</span></div>
+  <div class="assign"><span><span class="t">The community water decision</span> <span class="s">· Due next week</span><div><span class="badge guided_practice">guided-practice</span> <span class="s">your version</span></div></span><span class="pill brand">Keep going</span></div>
+
+  <h2>Study guides</h2>
+  <div class="guide">
+    <h4>Fractions as equal parts</h4>
+    <div style="font-size:.92rem">Explain and represent a fraction as equal parts of a whole.</div>
+    <div class="lbl">Key ideas</div><div style="font-size:.9rem">numerator · denominator · equal parts · whole/part relationship</div>
+    <div class="lbl">Worked example</div><div class="we">A rectangle is split into 3 equal parts and 1 part is shaded. There are 3 equal parts, so the denominator is 3. One part is shaded, so the numerator is 1. The shaded amount is 1/3.</div>
+    <div class="lbl">Watch out for</div><div style="font-size:.9rem">“larger denominator means larger fraction”</div>
+  </div>
+  <div class="guide">
+    <h4>Comparing fractions</h4>
+    <div style="font-size:.92rem">Compare two fractions with the same numerator or the same denominator, and justify the comparison.</div>
+    <div class="lbl">Key ideas</div><div style="font-size:.9rem">numerator · denominator · same whole</div>
+    <div class="lbl">Watch out for</div><div style="font-size:.9rem">“a bigger bottom number always means a bigger fraction”</div>
+  </div>
+
+  <h2>Class channels</h2>
+  <p class="say" style="margin-bottom:12px">Verified subject channels for your grade — help each other, explain your thinking, share what you find. District-first and safe: trained adults moderate, and answer-dumping gets held so everyone actually learns.</p>
+
+  <div class="channel">
+    <div class="chead"><h3># Math Helpers</h3><span class="pill muted">mathematics</span><span class="pill brand">M3.NF.02</span></div>
+    <div class="post"><div class="pmeta"><span class="who">Ben</span><span class="ktag explanation">explanation</span></div><div class="txt">I think 1/3 is bigger than 1/6 because when there are fewer pieces, each piece is bigger.</div></div>
+    <div class="post"><div class="pmeta"><span class="who">Cara</span><span class="ktag question">question</span></div><div class="txt">How do you compare fractions when the top numbers are the same?</div></div>
+    <div class="post"><div class="pmeta"><span class="who">Diego</span><span class="ktag answer_dump">answer dump</span><span class="pill warn">held</span></div><div class="txt">the answer is 1/3</div><div class="held">· Held — show your thinking, then a quick solo check.</div></div>
+  </div>
+  <div class="channel">
+    <div class="chead"><h3># Community Problem-Solvers</h3><span class="pill muted">history &amp; civics</span><span class="pill brand">CIV3.01</span></div>
+    <div class="post"><div class="pmeta"><span class="who">Ella</span><span class="ktag explanation">explanation</span></div><div class="txt">First we should fix the pipes because clean water keeps everyone healthy. That matters more than the park right now.</div></div>
+  </div>
+
+  <h2>Post to # Math Helpers</h2>
+  <div class="box">
+    <p class="sub">Try it — write something (or tap an example). Your post is checked before it goes live.</p>
+    <div class="exs" id="exs"></div>
+    <textarea id="txt" placeholder="Share your thinking with the class…"></textarea>
+    <div><button class="send" id="send" type="button">Post</button></div>
+    <div id="result" style="margin-top:10px"></div>
+    <p class="rules">Verified classmates only · no direct messages · no follower counts · a trained adult reviews anything flagged.</p>
+  </div>
+
+  <p class="foot">A synthetic example of the ILP student app. Moderation, study guides and the individualized assignment queue are produced by the real engine (<span class="mono">moderatePost</span>, <span class="mono">buildStudyGuide</span>, the assign-once compiler). The data model has no direct-message field and no follower counts.</p>
+</main>
+
+<script>
+  const EXAMPLES = [['A good explanation','I think 1/3 is bigger than 1/6 because there are fewer, bigger pieces.'],['An answer dump','the answer is 1/3'],['Unkind words','you are so stupid'],['Personal info','call me at 555-123-4567']];
+  const MARKERS = ['because','since','so that','first','then','step','means','the reason','this shows','i think','my idea'];
+  const BULLY = ['stupid','loser','idiot','shut up','hate you','dumb','ugly'];
+  const HARM = ['hurt myself','kill myself','want to die','end it all'];
+  const PII = [/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/, /\b[\w.+-]+@[\w-]+\.[\w.-]+\b/];
+
+  function classify(text){ const t=text.toLowerCase().trim();
+    if(/https?:\/\//.test(t)||t.includes('source:')) return 'resource';
+    const reason = MARKERS.some(m=>t.includes(m));
+    const bare = (/\banswer is\b/.test(t)||/=\s*[-\d/.]+\s*$/.test(t)||/^[\d/.]+$/.test(t)) && !reason;
+    if(bare) return 'answer_dump';
+    if(t.includes('?')||/^(how|why|what|when|where|can|does|is)\b/.test(t)) return 'question';
+    return 'explanation';
+  }
+  function moderate(text){ const reasons=[]; const kind=classify(text); const t=text.toLowerCase(); let escalate=false, mastery=false;
+    if(HARM.some(k=>t.includes(k))){ reasons.push('Possible self-harm language — routed to a trusted adult right away.'); escalate=true; }
+    if(BULLY.some(k=>t.includes(k))){ reasons.push('Possible unkind/bullying language — held for a grown-up to review.'); escalate=true; }
+    if(PII.some(re=>re.test(text))){ reasons.push('Looks like personal contact info — held to protect your privacy.'); }
+    if(kind==='answer_dump'){ reasons.push('Looks like a bare answer — held; show your thinking, then a quick solo check.'); mastery=true; }
+    return { status: reasons.length? 'held':'approved', kind, reasons, escalate, mastery };
+  }
+  function render(r){
+    const cls = r.status==='approved'?'ok':'warn';
+    let html = `<span class="pill ${cls}">${r.status==='approved'?'Posted ✓':'Held for review'}</span> <span class="ktag ${r.kind}">${r.kind.replace('_',' ')}</span>`;
+    if(r.escalate) html += ' <span class="pill danger">A trusted adult is notified</span>';
+    if(r.mastery) html += ' <span class="pill warn">Quick solo check first</span>';
+    html += r.reasons.map(x=>`<div class="held">· ${x}</div>`).join('');
+    document.getElementById('result').innerHTML = html;
+  }
+  const exs = document.getElementById('exs');
+  EXAMPLES.forEach(([label,ex])=>{ const b=document.createElement('button'); b.className='ex'; b.textContent=label; b.onclick=()=>{ document.getElementById('txt').value=ex; }; exs.appendChild(b); });
+  document.getElementById('send').addEventListener('click', ()=>{ const t=document.getElementById('txt').value.trim(); if(t) render(moderate(t)); });
+
+  const btn = document.getElementById('themeBtn');
+  const apply = t => { if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme',t); else document.documentElement.removeAttribute('data-theme'); };
+  try { const s = localStorage.getItem('ilp-stu-theme'); if(s) apply(s); } catch(e){}
+  btn.addEventListener('click', ()=>{ const dark=document.documentElement.getAttribute('data-theme')==='dark'||(!document.documentElement.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches); const n=dark?'light':'dark'; apply(n); try{localStorage.setItem('ilp-stu-theme',n);}catch(e){} });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>After the Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1E2731; --ink-soft:#54606D; --ink-faint:#8894A2;
+  --line:#E4DFD4; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A;
+  --apricot:#E8843C; --gold:#C98A16;
+  --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4;
+    --apricot:#F0A25A; --gold:#E0B44A;
+    --red:#E27A65; --green:#5FBE86;
+    --tint:#13282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4;
+  --apricot:#F0A25A; --gold:#E0B44A;
+  --red:#E27A65; --green:#5FBE86;
+  --tint:#13282E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3,.disp{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0 0 1.05em}
+a{color:var(--teal-deep);text-decoration:none;border-bottom:1px solid rgba(14,143,158,.3)}
+sup a{border:0;font-weight:800;font-size:11px;padding:0 1px}
+.wrap{max-width:820px;margin:0 auto;padding:0 26px}
+
+.hero{background:radial-gradient(120% 90% at 88% -10%, rgba(196,80,58,.13), transparent 55%),
+  radial-gradient(110% 90% at 0% 0%, rgba(14,143,158,.15), transparent 52%);border-bottom:1px solid var(--line)}
+.hero .wrap{padding:60px 26px 48px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal-deep);margin-bottom:20px}
+.kicker .mk{width:24px;height:2px;background:var(--apricot)}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:600;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--teal-deep)}
+.hero .sub{font-size:clamp(18px,2.5vw,21px);color:var(--ink-soft);margin-top:20px;max-width:32em;line-height:1.5}
+
+section{padding:46px 0}
+section+section{border-top:1px solid var(--line-soft)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--apricot);margin-bottom:12px}
+h2{font-size:clamp(24px,4vw,33px);font-weight:600;letter-spacing:-.01em;margin-bottom:.55em}
+h3{font-size:18px;font-weight:600;margin:1.3em 0 .25em}
+.lead{font-size:18.5px;color:var(--ink-soft)}
+strong{color:var(--ink)}
+
+.fair{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 24px;margin:22px 0}
+.fair h3{color:var(--teal-deep)}
+.fair p{font-size:15.5px}
+.fair p:last-child{margin-bottom:1em}
+
+/* cadence graphic */
+.cad{margin:24px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 12px;overflow-x:auto}
+.cad svg{display:block;min-width:520px;width:100%}
+.cad .cap{color:var(--ink-faint);font-size:13px;font-weight:700;margin:6px 2px 4px;text-align:center}
+
+/* comparison table */
+.tbl{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:15px}
+thead th{background:var(--panel);text-align:left;padding:13px 16px;font-family:"Nunito Sans";
+  font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+thead th.ilp{color:var(--teal-deep)}
+tbody td{padding:13px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.dim{color:var(--ink);font-weight:700;width:26%}
+td.old{color:var(--ink-soft);width:37%}
+td.ilp{color:var(--ink);width:37%;background:rgba(14,143,158,.05)}
+@media(max-width:640px){table,thead,tbody,tr,td,th{display:block}thead{display:none}
+  td.dim{font-family:Fraunces,serif;font-size:16px;color:var(--teal-deep);padding-bottom:2px;width:auto}
+  td.old:before{content:"Today: ";font-weight:800;color:var(--ink-faint)}
+  td.ilp:before{content:"With ILP: ";font-weight:800;color:var(--teal-deep)}
+  td.old,td.ilp{width:auto}
+  tbody tr{border-bottom:1px solid var(--line);padding:6px 0}}
+
+/* verdict cards */
+.verdict{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 6px}
+@media(max-width:620px){.verdict{grid-template-columns:1fr}}
+.vc{border-radius:16px;padding:22px;border:1px solid var(--line)}
+.vc .tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.vc.gone{background:var(--card)}
+.vc.gone .tag{background:rgba(196,80,58,.14);color:var(--red)}
+.vc.stays{background:var(--tint);border-color:rgba(14,143,158,.3)}
+.vc.stays .tag{background:rgba(14,143,158,.14);color:var(--teal-deep)}
+.vc h3{margin:0 0 8px;font-size:20px}
+.vc p{font-size:14.5px;color:var(--ink-soft);margin-bottom:.8em}
+.vc p:last-child{margin-bottom:0}
+
+/* stat band */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+@media(max-width:620px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px}
+.stat .n{font-family:Fraunces,serif;font-size:30px;font-weight:600;color:var(--teal-deep);line-height:1}
+.stat .l{font-size:13.5px;color:var(--ink-soft);margin-top:8px;font-weight:600}
+.stat.warn .n{color:var(--apricot)}
+
+.pull{margin:30px 0;padding:6px 0 6px 24px;border-left:4px solid var(--apricot);
+  font-family:Fraunces,serif;font-size:clamp(20px,2.8vw,26px);line-height:1.34;font-weight:500}
+.pull span{color:var(--teal-deep)}
+
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout b{color:var(--teal-deep)}
+
+footer{border-top:1px solid var(--line);padding:30px 0 56px;font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:block}
+footer h4{font-family:"Nunito Sans";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px}
+footer ol{margin:0;padding-left:20px;line-height:1.5}
+footer li{margin-bottom:5px}
+footer .disc{margin-top:16px;font-style:italic}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker"><span class="mk"></span> ILP · A briefing for district leadership</div>
+  <h1>The test tells you a child is behind.<br><em>Then what?</em></h1>
+  <p class="sub">St. Lucie already spends on tools that measure students three times a year —
+    FAST and i-Ready. They are good at measuring. The question this paper answers is what happens
+    in the weeks <em>between</em> the tests, and why that gap is where ILP makes the standalone
+    diagnostic obsolete.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">First, in fairness</div>
+  <h2>What these tools actually do</h2>
+  <p class="lead">A credible case starts by describing them accurately — not knocking down a
+    straw man.</p>
+  <div class="fair">
+    <h3>FAST — the state's yardstick</h3>
+    <p>The Florida Assessment of Student Thinking replaced the old FSA in 2022-23. It runs
+      <strong>three times a year</strong> (PM1 fall, PM2 winter, PM3 spring); PM3 is the summative
+      score that feeds school grades. Grades 3–10 take computer-adaptive ELA and math from Cambium;
+      K–2 use Star.<sup><a href="#s1">1</a></sup> It is <strong>required by the state</strong> — it
+      is how accountability works, and it is not going away.</p>
+  </div>
+  <div class="fair">
+    <h3>i-Ready — the district's diagnostic</h3>
+    <p>St. Lucie administers the i-Ready Diagnostic <strong>three times a year</strong> to identify
+      needs and generate personalized-practice pathways.<sup><a href="#s2">2</a></sup> Public list
+      pricing runs about <strong>$6–$30 per student, per subject, per year</strong>.<sup><a href="#s3">3</a></sup>
+      It is a genuinely useful point-in-time picture — and a separate tool students stop and log into.</p>
+  </div>
+  <p>Both are <strong>measurement</strong> instruments. Neither teaches the lesson, adapts it to the
+    child, builds the reteach, or takes a single task off the teacher's plate. That division of labor
+    is the whole point of what follows.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The shared blind spot</div>
+  <h2>Three snapshots, and a lot of dark between them</h2>
+  <p>Both tools sample the year three times. Instruction happens continuously. So a student who
+    slips in week 3 is often invisible until the winter window in week 18 — and in third grade,
+    that lag has a legal cost (more on that below).</p>
+
+  <div class="cad">
+    <svg viewBox="0 0 720 150" role="img" aria-label="Timeline of a school year. FAST and i-Ready sample three points — fall, winter, spring — leaving long unmonitored gaps. ILP produces evidence continuously across the whole year.">
+      <line x1="30" y1="46" x2="690" y2="46" stroke="#8894A2" stroke-width="1.5"/>
+      <g fill="#C4503A">
+        <circle cx="90" cy="46" r="8"/><circle cx="360" cy="46" r="8"/><circle cx="630" cy="46" r="8"/>
+      </g>
+      <g font-family="Nunito Sans" font-size="12" font-weight="700" fill="#54606D" text-anchor="middle">
+        <text x="90" y="26">PM1 · Fall</text><text x="360" y="26">PM2 · Winter</text><text x="630" y="26">PM3 · Spring</text>
+      </g>
+      <g font-family="Nunito Sans" font-size="11" font-weight="700" fill="#C4503A" text-anchor="middle">
+        <text x="225" y="70">↤ weeks unmonitored ↦</text><text x="495" y="70">↤ weeks unmonitored ↦</text>
+      </g>
+      <rect x="30" y="104" width="660" height="16" rx="8" fill="#0E8F9E" opacity=".9"/>
+      <g font-family="Nunito Sans" font-size="12" font-weight="800" fill="#F7F4EE" text-anchor="middle">
+        <text x="360" y="116">ILP · every assignment is evidence — continuous</text>
+      </g>
+      <text x="30" y="140" font-family="Nunito Sans" font-size="11.5" font-weight="700" fill="#8894A2">Testing model: 3 points</text>
+      <text x="690" y="140" font-family="Nunito Sans" font-size="11.5" font-weight="700" fill="#0E8F9E" text-anchor="end">ILP: the whole line</text>
+    </svg>
+    <div class="cap">The same school year, measured two ways.</div>
+  </div>
+
+  <p>ILP doesn't add a fourth test. It reads the work students already do — every assigned objective,
+    item and submission is evidence, scored against the <strong>same B.E.S.T. standards</strong> FAST
+    reports on. The picture is always current because it's a byproduct of teaching, not an interruption
+    of it.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Head to head</div>
+  <h2>Measurement vs. a closed loop</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Dimension</th><th>FAST &amp; i-Ready today</th><th class="ilp">With ILP</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Cadence</td><td class="old">3 windows a year; blind in between</td><td class="ilp">Continuous — updated with every assignment</td></tr>
+      <tr><td class="dim">What it produces</td><td class="old">A score and a level; a canned practice playlist</td><td class="ilp">The individualized lesson, assessment, reteach and a short teacher action plan</td></tr>
+      <tr><td class="dim">Who acts on it</td><td class="old">The teacher — connecting the report to instruction on their own time</td><td class="ilp">The system prepares the action; the teacher approves and teaches</td></tr>
+      <tr><td class="dim">Teacher workload</td><td class="old">Added — proctor the window, then interpret and differentiate</td><td class="ilp">Reduced — assign once, individualized for every child automatically</td></tr>
+      <tr><td class="dim">Effect on teaching</td><td class="old">Pull toward "teaching to the test" and test-prep windows</td><td class="ilp">Teach the standard; the test becomes a confirmation</td></tr>
+      <tr><td class="dim">Rigor &amp; control</td><td class="old">Vendor-defined; a black box you rent</td><td class="ilp">District-authored, teacher-approved, every source visible</td></tr>
+      <tr><td class="dim">Remediation</td><td class="old">Not its job — flags the gap, stops there</td><td class="ilp">Mandatory and built in — a materially different reteach, then equivalent reassessment</td></tr>
+    </tbody>
+  </table></div>
+  <div class="pull">FAST and i-Ready tell you <span>where a child is.</span> ILP is the layer that does
+    something about it — the same day, not at the next window.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The honest verdict</div>
+  <h2>What becomes obsolete — and what doesn't</h2>
+  <p class="lead">Overclaiming would be easy and wrong. Here is the precise version, which is also
+    the more persuasive one.</p>
+  <div class="verdict">
+    <div class="vc gone">
+      <span class="tag">Becomes redundant</span>
+      <h3>The standalone diagnostic (i-Ready's PM role)</h3>
+      <p>Once mastery is tracked continuously against B.E.S.T. from real classwork, a separate tool
+        that stops instruction three times a year to tell you the same thing — later — is doing work
+        ILP already did all semester.</p>
+      <p>That's a line item, and staff-and-student hours, the district can reconsider once ILP is
+        proven.</p>
+    </div>
+    <div class="vc stays">
+      <span class="tag">Stays — and students walk in ready</span>
+      <h3>FAST (the state test)</h3>
+      <p>FAST is required by law; ILP neither removes nor replaces it, and we won't pretend
+        otherwise. ILP's job is to get students <strong>ready to take it</strong>.</p>
+      <p>Because students spend the year mastering the exact B.E.S.T. standards FAST measures — with
+        gaps caught and retaught as they appear — they arrive at each window <strong>better
+        prepared</strong>, and the score confirms learning that already happened instead of
+        revealing a surprise too late to fix.</p>
+    </div>
+  </div>
+  <div class="callout"><b>The category that dies is "bolt-on measurement."</b> The bar chart three
+    times a year, disconnected from the next day's lesson, is what ILP makes obsolete. The state
+    test remains — ILP's job is to send students in prepared for it.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Why this matters in St. Lucie, specifically</div>
+  <h2>The cost of finding out in week 18</h2>
+  <p>St. Lucie just earned its <strong>first-ever "A"</strong> (2025), climbing from a B.<sup><a href="#s4">4</a></sup>
+    This isn't a rescue argument — it's a how-do-we-hold-and-extend-an-A argument. And the clearest
+    pressure point is third-grade reading.</p>
+  <div class="stats">
+    <div class="stat warn"><div class="n">≈49%</div><div class="l">St. Lucie grade-3 ELA at Level 3+ (2024) — below the state's ≈53–55%<sup><a href="#s5">5</a></sup></div></div>
+    <div class="stat"><div class="n">+4 pts</div><div class="l">Year-over-year gain in grade-3 ELA — real momentum to protect<sup><a href="#s5">5</a></sup></div></div>
+    <div class="stat warn"><div class="n">Level&nbsp;2</div><div class="l">Score below it on the grade-3 ELA test and a child faces mandatory retention<sup><a href="#s6">6</a></sup></div></div>
+  </div>
+  <p style="margin-top:20px">Under <strong>Florida F.S. 1008.25</strong>, a third grader who scores
+    below Level 2 must be retained absent a good-cause exemption.<sup><a href="#s6">6</a></sup> When
+    the first clear signal arrives at the winter or spring window, the runway to intervene before that
+    stakes-bearing spring test is already short. A model that surfaces the same risk in
+    <strong>week 3</strong> — and opens the reteach automatically — is worth more here than one more
+    accurate snapshot in week 18.</p>
+  <div class="callout"><b>Grade 3 is also its own line in the state formula.</b> Florida scores
+    Grade-3 ELA as a separate school-grade component, alongside learning gains and the gains of the
+    lowest 25%.<sup><a href="#s7">7</a></sup> Those are exactly the students a continuous,
+    remediation-first model reaches first.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The bottom line</div>
+  <h2>Stop paying to be told. Start getting students ready.</h2>
+  <p>The district is already paying — in dollars and in instructional days — to <em>measure</em>
+    students. ILP proposes to spend the district's effort on <em>acting</em> on what those measures
+    show, continuously, with the teacher in command, so that students are prepared long before the
+    state test. Keep the FAST test it's legally bound to; retire the redundant standalone diagnostic
+    once ILP proves the loop; and give third-grade teachers the weeks back that the three-window
+    model quietly costs them.</p>
+  <p class="lead" style="color:var(--ink);font-family:Fraunces,serif;font-weight:500">ILP doesn't
+    replace the state test. It sends students in ready for it.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <h4>Sources</h4>
+  <ol>
+    <li id="s1">FAST progress-monitoring model &amp; PM1–PM3 (Cambium administration manual; FLDOE intro to FAST). <a href="https://api.dadeschools.net/WMSFiles/171/Assessment%20Administration/FAST%20VPK%20-%2010/2022-2023%20Grades%203-10%20FAST%20Progress%20Monitoring%20Administration%20Manual%20-%20PM1-PM2.pdf">manual</a></li>
+    <li id="s2">St. Lucie Public Schools — Instructional Technology (i-Ready Diagnostic 3×/year). <a href="https://www.stlucie.k12.fl.us/departments/curriculum/instructional-technology/">stlucie.k12.fl.us</a></li>
+    <li id="s3">i-Ready public purchasing/list pricing (Curriculum Associates). <a href="https://www.curriculumassociates.com/programs/i-ready-learning/personalized-instruction/purchasing">curriculumassociates.com</a> — district contract prices are negotiated and not public.</li>
+    <li id="s4">St. Lucie earns first-ever "A" rating, 2025 (climbed from B; no F school since 2017). <a href="https://portstlucietalks.com/florida-school-grades-2025-st-lucie-earns-first-ever-a-rating/">portstlucietalks.com</a>, <a href="https://www.wptv.com/news/education/st-lucie-public-schools-seeing-significant-gains-in-schools-grade-distribution">wptv.com</a></li>
+    <li id="s5">St. Lucie grade-3 ELA ≈49% Level 3+ vs. state ≈53–55%, +4 pts YoY (2024). <a href="https://lucielink.stlucie.k12.fl.us/st-lucie-public-schools-3rd-grade-ela-scores-on-the-rise/">lucielink.stlucie.k12.fl.us</a>, <a href="https://www.wqcs.org/wqcs-news/2024-07-02/latest-tests-scores-show-notable-improvements-for-st-lucie-public-schools">wqcs.org</a></li>
+    <li id="s6">Florida Statute 1008.25 — grade-3 reading retention &amp; good-cause exemptions. <a href="https://www.flsenate.gov/laws/statutes/2022/1008.25">flsenate.gov</a></li>
+    <li id="s7">Florida school-grades formula — Grade-3 ELA as a separate component; learning gains &amp; lowest-25% gains (2024 Overview). <a href="https://www.fldoe.org/core/fileparse.php/18534/urlt/SchoolGradesOverview24.pdf">fldoe.org</a></li>
+  </ol>
+  <p class="disc">Prepared for ILP district discovery. Figures are drawn from public sources and
+    should be re-verified with St. Lucie before any formal presentation; i-Ready contract pricing in
+    particular is negotiated per district and not published. This paper argues a product position; it
+    is not a validated-outcomes study.</p>
+</div></footer>
+
+</body>
+</html>
