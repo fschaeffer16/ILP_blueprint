@@ -25,7 +25,15 @@ Individual views:
 | Student | Student app | https://claude.ai/code/artifact/eeea7b95-7f69-4e5c-8bbb-27ea8301aa69 |
 | Student | Assignment-aware bot (Navi) | https://claude.ai/code/artifact/7c1ec5bf-4179-4ee5-8ae5-abbd040cad3f |
 
-*(These pages are private to the account that published them.)*
+**Leadership documents** (for showing district decision-makers):
+
+| Document | Link |
+| --- | --- |
+| Why FAST & i-Ready become obsolete ("After the Test") | https://claude.ai/code/artifact/044988c8-c651-4a74-835f-31031e4eb969 |
+| Growth & partnership proposal ("Built by Teachers") | https://claude.ai/code/artifact/66e8df4b-8441-41ce-9d03-bb1722df7b5b |
+
+*(These pages are private to the account that published them.)* To put the app itself on a
+permanent live URL, see [`deploy.md`](deploy.md).
 
 ### 2. The full app (the real, wired Next.js app)
 
