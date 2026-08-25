@@ -18,6 +18,7 @@ import {
   buildParentSummary,
   buildBaselineProfile,
   buildCatalog,
+  buildStudyGuide,
   lessonFor,
   SURFACE_LABEL,
   type CompileResult,
@@ -34,6 +35,11 @@ import {
   SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
   CONTENT_LIBRARY,
+  SAMPLE_STUDENT_NAME,
+  SAMPLE_STUDENT_QUEUE,
+  SAMPLE_CHANNELS,
+  SAMPLE_POSTS,
+  SAMPLE_MEMBERS,
   SAMPLE_BASELINE,
   SAMPLE_TASK_BANK,
   SAMPLE_TASK_RESPONSES,
@@ -54,6 +60,22 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** The student home: individualized assignment queue + study guides built from the
+ * library, and the verified subject channels with their posts. */
+export function getStudentHome() {
+  const guideFor = (objectiveId: string) => {
+    const objective = CONTENT_LIBRARY.objectives.find((o) => o.objectiveId === objectiveId);
+    if (!objective) return null;
+    return buildStudyGuide(objective, lessonFor(CONTENT_LIBRARY, objectiveId, objective.version));
+  };
+  const studyGuides = ['M3.NF.01', 'M3.NF.02', 'CIV3.01'].map(guideFor).filter(Boolean);
+  return { name: SAMPLE_STUDENT_NAME, queue: SAMPLE_STUDENT_QUEUE, studyGuides };
+}
+
+export function getStudentChannels() {
+  return { channels: SAMPLE_CHANNELS, posts: SAMPLE_POSTS, members: SAMPLE_MEMBERS };
 }
 
 /** The content-library catalog (every objective validated against every gate). */

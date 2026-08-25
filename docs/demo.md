@@ -22,6 +22,7 @@ Individual views:
 | Teacher | Command center | https://claude.ai/code/artifact/c5b4f470-98a2-49cc-91f1-5874be1a0520 |
 | Teacher | Baseline screener | https://claude.ai/code/artifact/49853175-da08-490f-a0b3-a2299a3a5c4b |
 | Parent | Family view | https://claude.ai/code/artifact/f5cadaed-ade1-4647-a0c1-ee88be345874 |
+| Student | Student app | https://claude.ai/code/artifact/eeea7b95-7f69-4e5c-8bbb-27ea8301aa69 |
 
 *(These pages are private to the account that published them.)*
 
@@ -61,11 +62,15 @@ dependencies for the demo.
    grade → class → student. Point out the school gap.
 6. **Parent — family view** (`/parent`): real-time progress, time in collaboration and
    simulations, growth, safety — with the privacy line.
+7. **Student app** (`/student`): the student's today board and study guides, then post to a
+   channel — try an answer-dump (held + solo check) or an unkind message (a trusted adult is
+   notified). *The safe, verified "social" layer, moderated before anything is shared.*
 
 ## What's built vs. what's next
 
-See [`roadmap.md`](roadmap.md) for the full status. The one deliverable that is only partly
-built is the **student app** (assignment delivery and the assignment-aware helper are modeled;
-the student-facing shell, study guides, and the verified subject collaboration channels are
-not yet built). The other remaining gaps before a live pilot are the **FAST/i-Ready import
-adapters** and the psychometric/curriculum validation the blueprint requires.
+See [`roadmap.md`](roadmap.md) for the full status. All four role apps now have a working
+first version (district, teacher, parent, and student — the student app includes the today
+board, study guides, and verified/moderated subject channels). The remaining gaps before a
+live pilot are the **FAST/i-Ready import adapters**, the **assignment-aware help bot**, and the
+psychometric/curriculum validation the blueprint requires — plus growing the content pack
+beyond the demo's 6 objectives.

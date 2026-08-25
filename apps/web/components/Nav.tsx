@@ -14,6 +14,7 @@ const LINKS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/baseline', label: 'Baseline' },
   { href: '/parent', label: 'Family view' },
+  { href: '/student', label: 'Student app' },
 ];
 
 export function Nav() {

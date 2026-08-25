@@ -298,3 +298,29 @@ tr:last-child td { border-bottom: none; }
 .kindchip { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 6px; background: var(--surface-2); color: var(--muted); }
 .block .bbody { font-size: 0.92rem; color: var(--text); }
 .block .bmeta { color: var(--muted); font-size: 0.78rem; margin-top: 8px; }
+
+/* Student app */
+.assignlist { display: flex; flex-direction: column; gap: 9px; }
+.assign { display: flex; align-items: center; gap: 12px; justify-content: space-between; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.assign .t { font-weight: 600; font-size: 0.94rem; }
+.assign .s { color: var(--muted); font-size: 0.8rem; }
+.guide { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; background: var(--surface); margin-bottom: 10px; }
+.guide h4 { margin: 0 0 8px; font-size: 1rem; }
+.guide .lbl { font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-top: 10px; }
+.guide .we { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; margin-top: 4px; }
+.channel { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); padding: 16px 18px; margin-bottom: 14px; }
+.channel .chead { display: flex; align-items: center; gap: 9px; margin-bottom: 4px; }
+.channel .chead h3 { margin: 0; }
+.post { border-top: 1px solid var(--border); padding: 11px 0; }
+.post .pmeta { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.post .who { font-weight: 600; font-size: 0.88rem; }
+.post .txt { font-size: 0.92rem; }
+.ktag { font-size: 0.7rem; font-weight: 700; padding: 1px 7px; border-radius: 6px; background: var(--surface-2); color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.ktag.explanation { background: var(--ok-weak); color: var(--ok); }
+.ktag.question { background: var(--brand-weak); color: var(--brand); }
+.ktag.resource { background: var(--brand-weak); color: var(--brand); }
+.ktag.answer_dump { background: var(--warn-weak); color: var(--warn); }
+.held { color: var(--warn); font-size: 0.82rem; margin-top: 3px; }
+.postbox textarea { width: 100%; font: inherit; font-size: 0.92rem; border: 1px solid var(--border-strong, var(--border)); border-radius: 9px; padding: 9px 11px; background: var(--surface); color: var(--text); resize: vertical; min-height: 46px; }
+.modresult { margin-top: 10px; }
+.rules { color: var(--muted); font-size: 0.8rem; margin-top: 8px; }

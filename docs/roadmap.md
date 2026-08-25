@@ -43,6 +43,14 @@ teach, assess, cite approved sources, and cover the objective's required reasoni
 **Layer 3** the mastery dashboard (`buildRollups` — student → class → grade → school →
 district). See [`content-governance.md`](content-governance.md) for the two-role model.
 
+**Student app (student role).** `/student` is the student's one app: an individualized
+assignment queue (the compiler's per-student versions), study guides built by
+`buildStudyGuide` from the same approved lesson content, and verified subject collaboration
+channels. The channels are the blueprint's §15 network done right — `moderatePost` enforces
+verified-roster-only, holds answer-dumping (with an independent mastery check), holds
+bullying/PII, and escalates possible self-harm to a trained adult; `computeRecognition` ranks
+helpfulness, not popularity. The data model has no direct-message field and no follower counts.
+
 **Family view (parent role).** `buildParentSummary` produces a plain-language, no-surprises
 summary of one child: time in each surface (including the collaboration lab and simulations),
 collaboration and problem-solving activity, growth, and safety — with flags that surface
