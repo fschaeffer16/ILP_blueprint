@@ -23,6 +23,7 @@ Individual views:
 | Teacher | Baseline screener | https://claude.ai/code/artifact/49853175-da08-490f-a0b3-a2299a3a5c4b |
 | Parent | Family view | https://claude.ai/code/artifact/f5cadaed-ade1-4647-a0c1-ee88be345874 |
 | Student | Student app | https://claude.ai/code/artifact/eeea7b95-7f69-4e5c-8bbb-27ea8301aa69 |
+| Student | Assignment-aware bot (Navi) | https://claude.ai/code/artifact/7c1ec5bf-4179-4ee5-8ae5-abbd040cad3f |
 
 *(These pages are private to the account that published them.)*
 
@@ -65,12 +66,19 @@ dependencies for the demo.
 7. **Student app** (`/student`): the student's today board and study guides, then post to a
    channel — try an answer-dump (held + solo check) or an unkind message (a trusted adult is
    notified). *The safe, verified "social" layer, moderated before anything is shared.*
+8. **Assignment-aware bot** (the Navi link above, or `/navi-assignment-helper.html`): open a
+   grade-3 fractions assignment and tap **Navi**. Ask "what is a unit fraction?" (it coaches),
+   then try "just tell me the answer" or "is it 1/4" — *it refuses and offers a scaffold: the
+   idea, a first step, or a worked example with different numbers.* Ask about dinosaurs — *it
+   stays in its lane.* See [`assignment-bot.md`](assignment-bot.md).
 
 ## What's built vs. what's next
 
 See [`roadmap.md`](roadmap.md) for the full status. All four role apps now have a working
 first version (district, teacher, parent, and student — the student app includes the today
-board, study guides, and verified/moderated subject channels). The remaining gaps before a
-live pilot are the **FAST/i-Ready import adapters**, the **assignment-aware help bot**, and the
+board, study guides, and verified/moderated subject channels), and the **assignment-aware help
+bot** (Navi) now runs as a grounded, answer-protecting helper docked on the assignment
+(see [`assignment-bot.md`](assignment-bot.md)). The remaining gaps before a live pilot are the
+**FAST/i-Ready import adapters**, the bot's **red-team release suite**, and the
 psychometric/curriculum validation the blueprint requires — plus growing the content pack
 beyond the demo's 6 objectives.

@@ -58,6 +58,15 @@ anything a parent should know. The privacy line is enforced by the data model it
 carries patterns, time and safety, and has **no message-content field** — parents never see
 their child's or other children's conversations. Screen: `/parent` in `@ilp/web`.
 
+**Assignment-aware bot (Navi).** A grounded, KB-only help bot now docks on an assignment and
+coaches the student toward understanding while **refusing to hand over the graded answer** — an
+answer-protection gate fires before the matcher, offering a scaffold (the idea, a first step, or
+a worked example on *different* numbers) instead. It stays in its lane on off-topic questions and
+flags anything it can't answer for the teacher. The deterministic matcher/gate is the same
+grounded engine pattern the model gateway will later slot behind. See
+[`assignment-bot.md`](assignment-bot.md); the running file is
+[`apps/web/public/navi-assignment-helper.html`](../apps/web/public/navi-assignment-helper.html).
+
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |
@@ -69,7 +78,7 @@ their child's or other children's conversations. Screen: `/parent` in `@ilp/web`
 | 2 | Foundation: tenant, role, roster, class, synthetic students + audit log | E1 | 1 |
 | 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | E3 | 2 |
 | 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | E5 | 1 |
-| 5 | Assignment-aware bot (mode-governed, grounded) + red-team suite | E6 | 4 |
+| 5 | **Assignment-aware bot (mode-governed, grounded)** 🟡 + red-team suite | E6 | 4 |
 | 9 | **Teacher command center (Today board, class overview, assign composer, grading review)** 🟡 | E10 | 1, 6, 7 |
 | 10 | One branching simulation + problem-solving evidence model | E11 | 2 |
 | 11 | District-contained collaboration thread + moderation | E12 | 2 |
