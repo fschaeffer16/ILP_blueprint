@@ -35,7 +35,7 @@ tested TypeScript kernel.
   - **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate.
   - **Teacher-reviewed grading** — AI recommends with criterion evidence; only a teacher decision releases a grade.
   - **Remediation + the 75% rule** — classwide-failure evaluation, materially-different reteach, equivalent reassessment.
-- **`@ilp/web`** — the teacher command center (Next.js): Today board, **Content library** (6 gate-validated grade-3 objectives with authored lessons, items and sources), My class, Assign-once composer, Grading review, **Objective builder** (district Layer 1), **Lesson builder** (teacher Layer 2), **Baseline screener**, the **Mastery dashboard** (Layer 3 rollups, student → district), the **Family view** (a plain-language, no-surprises parent dashboard of a child's efforts, time, collaboration, simulations, growth and safety), and the **Student app** (individualized assignments, study guides, and verified/moderated subject collaboration channels) — every screen driven by the engine above on synthetic data.
+- **`@ilp/web`** — the teacher command center (Next.js): Today board, **Content library** (15 gate-validated grade-3 objectives with authored lessons, items and sources, mapped to real Florida B.E.S.T. benchmarks and shown against a full-standard coverage view), My class, Assign-once composer, Grading review, **Objective builder** (district Layer 1), **Lesson builder** (teacher Layer 2), **Baseline screener**, the **Mastery dashboard** (Layer 3 rollups, student → district), the **Family view** (a plain-language, no-surprises parent dashboard of a child's efforts, time, collaboration, simulations, growth and safety), the **Student app** (individualized assignments, study guides, and verified/moderated subject collaboration channels), and the **assignment-aware help bot** (grounded, answer-protecting) — every screen driven by the engine above on synthetic data.
 
 ```bash
 npm install
@@ -84,6 +84,8 @@ instructional action.
 | [`docs/instructional-cycle.md`](docs/instructional-cycle.md) | The connected instructional cycle and traceability rules |
 | [`docs/data-model.md`](docs/data-model.md) | Core data entities, field-level rules, and how the schemas fit together |
 | [`docs/content-governance.md`](docs/content-governance.md) | Where objectives come from (standards), where content is mined from (5-tier library), the vetting pipeline, and the evidence-based technique catalog |
+| [`docs/assignment-bot.md`](docs/assignment-bot.md) | The grounded, answer-protecting assignment-aware help bot (Navi) and how to bind it to any objective |
+| [`docs/deploy.md`](docs/deploy.md) | One-click deploy to a permanent live URL (Vercel / any Node host) |
 | [`docs/acceptance-criteria.md`](docs/acceptance-criteria.md) | MVP acceptance criteria (AC-01…AC-14) |
 | [`docs/requirements-catalog.md`](docs/requirements-catalog.md) | Requirement catalog (LRN/OBJ/ASN/…) and non-functional requirements |
 | [`docs/roadmap.md`](docs/roadmap.md) | Build sequence, developer epics, and pilot decision gates |

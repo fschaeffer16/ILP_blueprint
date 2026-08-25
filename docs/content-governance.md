@@ -175,11 +175,33 @@ backlog.*
 ## The library is filled (grade-3 demo pack)
 
 A synthetic-but-real grade-3 content pack now ships in the repo so the product can be driven
-end-to-end: **6 objectives across 4 subjects** (fractions ×3, reading, writing, and a
-history/civics simulation), each with an **authored lesson** (real student-facing content
-blocks), **12 assessment items**, and **9 approved sources** across tiers. `buildCatalog` runs
-the objective-authoring, lesson-coverage, and item-integrity gates over the whole pack — and
-every entry passes. Browse it at `/library` in `@ilp/web`.
+end-to-end: **15 objectives across 4 subjects**, each with an **authored lesson** (real
+student-facing content blocks), **30 assessment items**, and **22 approved sources** across
+tiers. `buildCatalog` runs the objective-authoring, lesson-coverage, and item-integrity gates
+over the whole pack — and every entry passes. Browse it at `/library` in `@ilp/web`.
+
+### Mapped to the real Florida B.E.S.T. spine
+
+The pack is no longer invented codes. Every objective maps to an actual **Florida B.E.S.T.
+grade-3 benchmark**, and the complete grade-3 standard set — **34 mathematics + 26 ELA
+benchmarks** — ships as a structured spine in
+[`packages/core/src/fixtures/standards.ts`](../packages/core/src/fixtures/standards.ts). This
+is the target the library grows toward: `coverageReport` shows how much of each strand is
+authored, and the `/library` screen renders that coverage benchmark-by-benchmark. Current depth:
+
+| Strand (math) | Authored | Strand (ELA) | Authored |
+| --- | --- | --- | --- |
+| Fractions | 3 / 5 | Reading — Prose & Poetry | 1 / 4 |
+| Number Sense & Operations | 2 / 8 | Reading — Informational | 1 / 4 |
+| Algebraic Reasoning | 1 / 8 | Communication — Writing | 2 / 5 |
+| Measurement | 1 / 4 | Vocabulary | 1 / 3 |
+| Geometric Reasoning | 1 / 7 | *(other ELA strands)* | 0 |
+| Data Analysis & Probability | 1 / 2 | | |
+
+The point isn't the current count — it's that the growth path is a **real state standard set**,
+every new objective passes the same gates, and the coverage is measured, not asserted. Source:
+FLDOE B.E.S.T. Standards (Rule 6A-1.09401); verify wording against the official PDFs before any
+student-facing publication.
 
 ## Build status
 

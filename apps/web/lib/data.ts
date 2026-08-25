@@ -35,6 +35,7 @@ import {
   SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
   CONTENT_LIBRARY,
+  coverageReport,
   SAMPLE_STUDENT_NAME,
   SAMPLE_STUDENT_QUEUE,
   SAMPLE_CHANNELS,
@@ -81,6 +82,11 @@ export function getStudentChannels() {
 /** The content-library catalog (every objective validated against every gate). */
 export function getLibrary() {
   return buildCatalog(CONTENT_LIBRARY);
+}
+
+export function getStandardsCoverage() {
+  const refs = CONTENT_LIBRARY.objectives.flatMap((o) => o.standardRefs);
+  return coverageReport(refs);
 }
 
 /** One objective's full content: its catalog entry, authored lesson, items, sources. */

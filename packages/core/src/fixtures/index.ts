@@ -12,4 +12,5 @@ export * from './engagement.js';
 export * from './baseline.js';
 export * from './baselineTasks.js';
 export * from './library.js';
+export * from './standards.js';
 export * from './student.js';

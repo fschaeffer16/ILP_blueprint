@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getLibrary, getLibraryObjective } from '../../lib/data';
+import { getLibrary, getLibraryObjective, getStandardsCoverage } from '../../lib/data';
 
 const SUBJECT_LABEL: Record<string, string> = {
   mathematics: 'Mathematics', reading: 'Reading', writing: 'Writing', science: 'Science', history_civics: 'History & Civics',
@@ -41,6 +41,8 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
         <div className="kpi"><div className="n">{cat.summary.allValid ? '✓ All' : '⚠'}</div><div className="l">pass every gate</div></div>
       </div>
 
+      <BestCoverage />
+
       {[...bySubject.entries()].map(([subject, entries]) => (
         <section key={subject}>
           <div className="subject-head">
@@ -67,6 +69,45 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
         representative candidates confirmed in the vetting pipeline.
       </p>
     </>
+  );
+}
+
+function BestCoverage() {
+  const cov = getStandardsCoverage();
+  const pct = Math.round((cov.totals.authored / cov.totals.total) * 100);
+  return (
+    <section style={{ margin: '10px 0 22px', padding: '16px 18px', border: '1px solid var(--line)', borderRadius: 14, background: 'var(--panel, #fff)' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: 10, marginBottom: 12 }}>
+        <h2 style={{ margin: 0, fontSize: '1.05rem' }}>Florida B.E.S.T. grade-3 coverage</h2>
+        <span style={{ color: 'var(--muted, #667)', fontSize: '.85rem', fontWeight: 600 }}>
+          {cov.totals.authored} of {cov.totals.total} benchmarks authored ({pct}%) — the library grows toward the full standard set
+        </span>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 10 }}>
+        {cov.rows.map((r) => (
+          <div key={r.strand} style={{ border: '1px solid var(--line)', borderRadius: 10, padding: '10px 12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: '.78rem', fontWeight: 700 }}>
+              <span>{r.strand}</span>
+              <span style={{ color: r.authored > 0 ? 'var(--brand)' : 'var(--muted, #99a)' }}>{r.authored}/{r.total}</span>
+            </div>
+            <div style={{ height: 6, borderRadius: 4, background: 'var(--line)', marginTop: 8, overflow: 'hidden' }}>
+              <div style={{ width: `${Math.round((r.authored / r.total) * 100)}%`, height: '100%', background: 'var(--brand)' }} />
+            </div>
+            <div style={{ marginTop: 8, display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+              {r.codes.map((c) => (
+                <span key={c.code} title={c.code} style={{
+                  fontSize: '.62rem', fontWeight: 700, padding: '2px 5px', borderRadius: 5,
+                  fontFamily: 'var(--mono, ui-monospace, monospace)',
+                  background: c.authored ? 'var(--brand)' : 'transparent',
+                  color: c.authored ? '#fff' : 'var(--muted, #99a)',
+                  border: c.authored ? '1px solid var(--brand)' : '1px solid var(--line)',
+                }}>{c.code.replace(/^(MA|ELA)\.3\./, '')}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
