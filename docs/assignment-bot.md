@@ -32,7 +32,7 @@ changing the runtime guardrail.
 | **Grounded** | Answers come only from the loaded KB / glossary. Longer, more specific keyword matches win. | Knowledge before invention |
 | **In its lane** | A `hasDomainSignal` gate detects whether the question is about the assignment at all; if not, the bot declines instead of guessing. | Objective integrity |
 | **Answer-protected** | An `ANSWER_SEEKING` detector fires *before* the matcher. "Just tell me the answer", "is it 1/4", "do it for me" → the bot refuses and offers a scaffold: explain the idea, a first step, or a **worked example with different numbers**. | Teacher authority · assessment is evidence |
-| **Teacher-visible** | When the bot can't answer, it offers to **flag the question for the teacher** (queued in `localStorage` in the demo; a real deployment writes it to the teacher's dashboard). The teacher learns exactly where students got stuck. | Teacher authority · remediation is mandatory |
+| **Teacher-visible** | When the bot can't answer, it offers to **flag the question for the teacher**. The teacher learns exactly where students got stuck — see the **Help signals** screen (`/flags`), which groups flags by objective and idea, counts distinct students, and raises a **reteach signal** before the graded task. | Teacher authority · remediation is mandatory |
 
 The worked-example scaffold deliberately mirrors ILP's *materially-different reassessment* idea:
 the student gets a fully worked model on **other numbers** (a ribbon in 5 parts) and then applies
@@ -80,9 +80,21 @@ from the assignment index; a "where is this covered" locator; a "stuck?" triage 
 forward-to-teacher queue. The look (a friendly SVG mascot, the assignment worksheet it docks
 onto) is a thin skin over that engine and can be redesigned freely.
 
+## The teacher side: Help signals (`/flags`)
+
+The other half of the bot is what the teacher sees. `summarizeAssistantFlags` (in
+[`packages/core/src/navi.ts`](../packages/core/src/navi.ts)) turns the raw stream of flagged
+questions into signal: per objective, it counts distinct students, clusters the questions by the
+objective's essential-knowledge ideas (e.g. a "denominator" cluster), records why the bot
+escalated each one, and raises a **reteach signal** once enough distinct students are stuck on the
+same objective. It's a *leading* indicator — confusion caught while it's still forming, before the
+graded task, complementing the 75%-rule which reacts after an assessment. The `/flags` screen in
+`@ilp/web` renders it; the bot never shares one student's question with another and holds no
+profile data beyond the question itself.
+
 ## What a production version adds
 
-- The forward-to-teacher queue writes to the teacher command center, not `localStorage`.
+- The forward-to-teacher queue writes to the live command center (the `/flags` model), not `localStorage`.
 - The KB is compiled from approved `LessonPlan` + `SourceRecord` content at publish time, so it
   inherits the objective's provenance and can't drift from the vetted curriculum.
 - A **red-team suite** (Slice 5's second half) runs adversarial answer-extraction prompts against

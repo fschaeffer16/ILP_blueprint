@@ -9,6 +9,7 @@ const LINKS = [
   { href: '/class', label: 'My class' },
   { href: '/assign', label: 'Assign once' },
   { href: '/grading', label: 'Grading review' },
+  { href: '/flags', label: 'Help signals' },
   { href: '/author', label: 'Objective builder' },
   { href: '/lesson', label: 'Lesson builder' },
   { href: '/dashboard', label: 'Dashboard' },

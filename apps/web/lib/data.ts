@@ -18,6 +18,7 @@ import {
   buildParentSummary,
   buildBaselineProfile,
   buildCatalog,
+  summarizeAssistantFlags,
   buildStudyGuide,
   lessonFor,
   SURFACE_LABEL,
@@ -36,6 +37,7 @@ import {
   SAMPLE_OBJECTIVES,
   CONTENT_LIBRARY,
   coverageReport,
+  SAMPLE_NAVI_FLAGS,
   SAMPLE_STUDENT_NAME,
   SAMPLE_STUDENT_QUEUE,
   SAMPLE_CHANNELS,
@@ -87,6 +89,10 @@ export function getLibrary() {
 export function getStandardsCoverage() {
   const refs = CONTENT_LIBRARY.objectives.flatMap((o) => o.standardRefs);
   return coverageReport(refs);
+}
+
+export function getNaviFlagReport() {
+  return summarizeAssistantFlags(SAMPLE_NAVI_FLAGS, CONTENT_LIBRARY.objectives);
 }
 
 /** One objective's full content: its catalog entry, authored lesson, items, sources. */

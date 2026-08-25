@@ -21,6 +21,7 @@ Individual views:
 | District | Where objectives & content come from | https://claude.ai/code/artifact/5db49795-76f2-44f4-8c6a-966167db0359 |
 | Teacher | Command center | https://claude.ai/code/artifact/c5b4f470-98a2-49cc-91f1-5874be1a0520 |
 | Teacher | Baseline screener | https://claude.ai/code/artifact/49853175-da08-490f-a0b3-a2299a3a5c4b |
+| Teacher | Help signals (what Navi flags) | https://claude.ai/code/artifact/e3a17c50-6e18-464f-8b55-2eb2bdcc5223 |
 | Parent | Family view | https://claude.ai/code/artifact/f5cadaed-ade1-4647-a0c1-ee88be345874 |
 | Student | Student app | https://claude.ai/code/artifact/eeea7b95-7f69-4e5c-8bbb-27ea8301aa69 |
 | Student | Assignment-aware bot (Navi) | https://claude.ai/code/artifact/7c1ec5bf-4179-4ee5-8ae5-abbd040cad3f |
@@ -47,9 +48,10 @@ npm run dev --workspace @ilp/web       # http://localhost:3000
 ```
 
 Screens: `/` Today · `/library` Content library · `/class` My class · `/assign` Assign once ·
-`/grading` Grading review · `/author` Objective builder · `/lesson` Lesson builder ·
-`/baseline` Baseline screener · `/baseline/take` Take the baseline · `/dashboard` Dashboard ·
-`/parent` Family view.
+`/grading` Grading review · `/flags` Help signals (what Navi flags) · `/author` Objective builder ·
+`/lesson` Lesson builder · `/baseline` Baseline screener · `/baseline/take` Take the baseline ·
+`/dashboard` Dashboard · `/parent` Family view · `/student` Student app · the bot at
+`/navi-assignment-helper.html`.
 
 To host it for others, deploy `apps/web` to any Next.js host (build command should build
 `@ilp/core` first). The app is fully server-renderable and has no external service
