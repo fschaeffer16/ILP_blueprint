@@ -6,6 +6,18 @@
 
 ---
 
+## Try the demo
+
+A role-based demo runs the real engine on synthetic data — district, teacher, parent, and
+student views. See [`docs/demo.md`](docs/demo.md) for the hosted click-through and the
+8-minute walk-through, or run the full app locally:
+
+```bash
+npm install
+npm run build --workspace @ilp/core
+npm run dev --workspace @ilp/web        # http://localhost:3000
+```
+
 ## What this repository is
 
 This repository holds the **ILP product blueprint and pilot build specification** *and* the

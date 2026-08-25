@@ -35,6 +35,8 @@ import {
   SAMPLE_OBJECTIVES,
   CONTENT_LIBRARY,
   SAMPLE_BASELINE,
+  SAMPLE_TASK_BANK,
+  SAMPLE_TASK_RESPONSES,
   SAMPLE_OUTCOMES,
   SAMPLE_PARENT_INPUT,
   SAMPLE_ROSTER,
@@ -69,6 +71,18 @@ export function getLibraryObjective(objectiveId: string) {
   const sourceById = new Map(CONTENT_LIBRARY.sources.map((s) => [s.id, s]));
   const sources = [...new Set(objective.sourceIds)].map((id) => sourceById.get(id)).filter(Boolean);
   return { entry, objective, lesson, items, sources };
+}
+
+/** The baseline task bank for the interactive "take the screening" demo (no answer keys
+ * sent to the client — scoring happens server-side), plus a demo answer set. */
+export function getBaselineTasks() {
+  return {
+    tasks: SAMPLE_TASK_BANK.map((t) => ({
+      id: t.id, domain: t.domain, session: t.session, prompt: t.prompt, format: t.format,
+      choices: t.choices ?? null, scaleHint: t.scaleHint ?? null,
+    })),
+    demoResponses: SAMPLE_TASK_RESPONSES,
+  };
 }
 
 /** The baseline screening profile for one child (screening, never a diagnosis). */

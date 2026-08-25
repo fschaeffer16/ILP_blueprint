@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getBaseline } from '../../lib/data';
 import type { NextStep, ProcessingDomain, SignalStrength } from '@ilp/core';
 
@@ -38,6 +39,10 @@ export default function BaselinePage() {
         A short, age-appropriate baseline across the ways a child receives and processes
         information — spread over several sessions, never a single test. It surfaces subtle,
         early signals so support can start now.
+      </p>
+
+      <p style={{ marginBottom: 16 }}>
+        <Link href="/baseline/take" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-block' }}>▶ Take the baseline (interactive)</Link>
       </p>
 
       <div className="banner">
