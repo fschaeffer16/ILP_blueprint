@@ -86,6 +86,7 @@ instructional action.
 | [`docs/content-governance.md`](docs/content-governance.md) | Where objectives come from (standards), where content is mined from (5-tier library), the vetting pipeline, and the evidence-based technique catalog |
 | [`docs/assignment-bot.md`](docs/assignment-bot.md) | The grounded, answer-protecting assignment-aware help bot (Navi) and how to bind it to any objective |
 | [`docs/deploy.md`](docs/deploy.md) | One-click deploy to a permanent live URL (Vercel / any Node host) |
+| [`docs/competitive-ixl.md`](docs/competitive-ixl.md) | Competitive analysis: IXL's strengths/weaknesses and how ILP's model differs |
 | [`docs/acceptance-criteria.md`](docs/acceptance-criteria.md) | MVP acceptance criteria (AC-01…AC-14) |
 | [`docs/requirements-catalog.md`](docs/requirements-catalog.md) | Requirement catalog (LRN/OBJ/ASN/…) and non-functional requirements |
 | [`docs/roadmap.md`](docs/roadmap.md) | Build sequence, developer epics, and pilot decision gates |
