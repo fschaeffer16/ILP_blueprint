@@ -172,6 +172,15 @@ backlog.*
 
 ---
 
+## The library is filled (grade-3 demo pack)
+
+A synthetic-but-real grade-3 content pack now ships in the repo so the product can be driven
+end-to-end: **6 objectives across 4 subjects** (fractions ×3, reading, writing, and a
+history/civics simulation), each with an **authored lesson** (real student-facing content
+blocks), **12 assessment items**, and **9 approved sources** across tiers. `buildCatalog` runs
+the objective-authoring, lesson-coverage, and item-integrity gates over the whole pack — and
+every entry passes. Browse it at `/library` in `@ilp/web`.
+
 ## Build status
 
 - The `SourceRecord` model, the objective's source references, and the **authoring gate** that

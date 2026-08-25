@@ -17,6 +17,8 @@ import {
   buildRollups,
   buildParentSummary,
   buildBaselineProfile,
+  buildCatalog,
+  lessonFor,
   SURFACE_LABEL,
   type CompileResult,
   type DeliveryManifest,
@@ -31,6 +33,7 @@ import {
   SAMPLE_DISTRICT,
   SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
+  CONTENT_LIBRARY,
   SAMPLE_BASELINE,
   SAMPLE_OUTCOMES,
   SAMPLE_PARENT_INPUT,
@@ -49,6 +52,23 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** The content-library catalog (every objective validated against every gate). */
+export function getLibrary() {
+  return buildCatalog(CONTENT_LIBRARY);
+}
+
+/** One objective's full content: its catalog entry, authored lesson, items, sources. */
+export function getLibraryObjective(objectiveId: string) {
+  const objective = CONTENT_LIBRARY.objectives.find((o) => o.objectiveId === objectiveId);
+  if (!objective) return null;
+  const entry = buildCatalog(CONTENT_LIBRARY).entries.find((e) => e.objectiveId === objectiveId)!;
+  const lesson = lessonFor(CONTENT_LIBRARY, objectiveId, objective.version);
+  const items = CONTENT_LIBRARY.items.filter((i) => i.objectiveId === objectiveId);
+  const sourceById = new Map(CONTENT_LIBRARY.sources.map((s) => [s.id, s]));
+  const sources = [...new Set(objective.sourceIds)].map((id) => sourceById.get(id)).filter(Boolean);
+  return { entry, objective, lesson, items, sources };
 }
 
 /** The baseline screening profile for one child (screening, never a diagnosis). */

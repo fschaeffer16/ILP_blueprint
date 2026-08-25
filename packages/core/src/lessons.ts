@@ -32,6 +32,8 @@ export interface LessonBlock {
   readonly id: string;
   readonly kind: LessonBlockKind;
   readonly title: string;
+  /** The actual student-facing content of this block (the teachable material). */
+  readonly body?: string;
   /** Approved sources this block draws its content from. */
   readonly sourceIds: readonly string[];
   /** The objective elements (essential knowledge / required reasoning) this block builds. */

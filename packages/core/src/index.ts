@@ -18,3 +18,4 @@ export * from './lessons.js';
 export * from './analytics.js';
 export * from './engagement.js';
 export * from './baseline.js';
+export * from './library.js';
