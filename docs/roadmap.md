@@ -29,6 +29,13 @@ guardrails around them are deterministic and tested.
 engine: a Today board, a class overview, the assign-once composer with a live compile preview,
 and an interactive grading review. Every screen renders real engine output on synthetic data.
 
+**Content governance + the objective builder.** The `SourceRecord` model and the authoring
+gate (`validateObjectiveDraft`) enforce that a published objective is mapped to a standard and
+cites only approved, deliverable-licensed sources — nothing unvetted reaches a student. The
+`/author` screen in `@ilp/web` authors against that gate live. The sourcing model (standards
+frameworks, the 5-tier content library, the vetting pipeline, and the evidence-based technique
+catalog) is documented in [`content-governance.md`](content-governance.md).
+
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |

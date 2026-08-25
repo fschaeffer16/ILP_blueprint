@@ -13,6 +13,7 @@ import type {
   Adaptation,
   Assignment,
   ObjectiveVersion,
+  SourceRecord,
   StudentILP,
 } from './types.js';
 
@@ -165,9 +166,34 @@ export const assignmentSchema: z.ZodType<Assignment> = z
   })
   .strict() as z.ZodType<Assignment>;
 
+export const sourceRecordSchema: z.ZodType<SourceRecord> = z
+  .object({
+    id: z.string().min(1),
+    title: z.string().min(1),
+    citation: z.string().min(1),
+    uri: z.string().optional(),
+    tier: z.enum(['standards', 'primary', 'oer', 'licensed', 'pedagogy']),
+    authorityType: z.enum([
+      'standards_body',
+      'government',
+      'museum_library',
+      'peer_reviewed',
+      'open_courseware',
+      'publisher',
+    ]),
+    license: z.enum(['public_domain', 'cc_by', 'cc_by_sa', 'cc_by_nc', 'licensed', 'all_rights_reserved']),
+    reviewStatus: z.enum(['draft', 'in_review', 'approved', 'retired']),
+    reviewedAt: z.string().optional(),
+    reviewBy: z.string().optional(),
+  })
+  .strict() as z.ZodType<SourceRecord>;
+
 /** Parse-or-throw helpers with ILP-branded error context. */
 export function parseObjectiveVersion(input: unknown): ObjectiveVersion {
   return objectiveVersionSchema.parse(input);
+}
+export function parseSourceRecord(input: unknown): SourceRecord {
+  return sourceRecordSchema.parse(input);
 }
 export function parseAdaptation(input: unknown): Adaptation {
   return adaptationSchema.parse(input);

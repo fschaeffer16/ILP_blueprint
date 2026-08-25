@@ -10,6 +10,7 @@ and correspond field-for-field to the runtime `zod` validators and TypeScript ty
 | [`objective.schema.json`](objective.schema.json) | `ObjectiveVersion` | The versioned objective contract. `studentOutcome`, `essentialKnowledge`, `requiredReasoning` and `mastery` are the LOCKED fields the compiler may never vary. |
 | [`adaptation.schema.json`](adaptation.schema.json) | `Adaptation` | A district-customizable unit of individualization. Every adaptation declares what it may and may not change. |
 | [`student-ilp.schema.json`](student-ilp.schema.json) | `StudentILP` | A student's evolving evidence profile of ILP hypotheses. |
+| [`source-record.schema.json`](source-record.schema.json) | `SourceRecord` | A governed content source (tier, license, authority, review status). Only approved, deliverable-licensed sources may be cited by a published objective. |
 
 ## Why both JSON Schema and zod?
 

@@ -69,6 +69,7 @@ instructional action.
 | [`docs/principles.md`](docs/principles.md) | The ten non-negotiable instructional principles (P1–P10) |
 | [`docs/instructional-cycle.md`](docs/instructional-cycle.md) | The connected instructional cycle and traceability rules |
 | [`docs/data-model.md`](docs/data-model.md) | Core data entities, field-level rules, and how the schemas fit together |
+| [`docs/content-governance.md`](docs/content-governance.md) | Where objectives come from (standards), where content is mined from (5-tier library), the vetting pipeline, and the evidence-based technique catalog |
 | [`docs/acceptance-criteria.md`](docs/acceptance-criteria.md) | MVP acceptance criteria (AC-01…AC-14) |
 | [`docs/requirements-catalog.md`](docs/requirements-catalog.md) | Requirement catalog (LRN/OBJ/ASN/…) and non-functional requirements |
 | [`docs/roadmap.md`](docs/roadmap.md) | Build sequence, developer epics, and pilot decision gates |

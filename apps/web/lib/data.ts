@@ -27,6 +27,7 @@ import {
   SAMPLE_OBJECTIVES,
   SAMPLE_ROSTER,
   SAMPLE_RUBRIC,
+  SAMPLE_SOURCES,
   SAMPLE_SUBMISSIONS,
 } from '@ilp/core/fixtures';
 
@@ -39,6 +40,45 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** Everything the objective-builder screen needs: the seed draft, the adaptation
+ * catalog, and the vetted source library (all shape-simplified for the client). */
+export function getAuthoringData() {
+  const o = OBJ_M3_NF_01;
+  return {
+    seed: {
+      objectiveId: o.objectiveId,
+      version: o.version,
+      subject: o.subject as string,
+      gradeBand: o.gradeBand as string,
+      standardRefs: [...o.standardRefs],
+      studentOutcome: o.studentOutcome,
+      essentialKnowledge: [...o.essentialKnowledge],
+      requiredReasoning: [...o.requiredReasoning],
+      prerequisites: [...o.prerequisites],
+      mastery: { ...o.mastery },
+      permittedAdaptations: [...o.permittedAdaptations],
+      prohibitedAdaptations: [...o.prohibitedAdaptations],
+      misconceptions: [...o.misconceptions],
+      sourceIds: [...o.sourceIds],
+      remediationPatternIds: [...o.remediationPatternIds],
+    },
+    catalog: SAMPLE_ADAPTATIONS.map((a) => ({
+      id: a.id,
+      label: a.label,
+      adaptationClass: a.adaptationClass,
+      permittedChange: a.permittedChange,
+    })),
+    sources: SAMPLE_SOURCES.map((s) => ({
+      id: s.id,
+      title: s.title,
+      tier: s.tier,
+      license: s.license,
+      reviewStatus: s.reviewStatus,
+      reviewedAt: s.reviewedAt ?? null,
+    })),
+  };
 }
 
 /** The assign-once compile result for the class (assign preview, class overview, today). */

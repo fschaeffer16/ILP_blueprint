@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ilp.dev/schemas/source-record.schema.json",
+  "title": "SourceRecord",
+  "description": "A governed content source. Nothing reaches a student unless a SourceRecord for it is 'approved', carries a deliverable license, and names its authority and review date. See docs/content-governance.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "citation", "tier", "authorityType", "license", "reviewStatus"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "examples": ["SRC-001"] },
+    "title": { "type": "string", "minLength": 1 },
+    "citation": { "type": "string", "minLength": 1, "description": "Human-readable attribution." },
+    "uri": { "type": "string", "description": "Where the source lives, if online." },
+    "tier": {
+      "type": "string",
+      "enum": ["standards", "primary", "oer", "licensed", "pedagogy"],
+      "description": "Source tier, strongest first. 'standards' defines objectives; 'pedagogy' informs technique; neither is student-facing content."
+    },
+    "authorityType": {
+      "type": "string",
+      "enum": ["standards_body", "government", "museum_library", "peer_reviewed", "open_courseware", "publisher"],
+      "description": "Who produced the source — a proxy for credibility."
+    },
+    "license": {
+      "type": "string",
+      "enum": ["public_domain", "cc_by", "cc_by_sa", "cc_by_nc", "licensed", "all_rights_reserved"],
+      "description": "Usage rights. Student-facing content must not be 'all_rights_reserved'."
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": ["draft", "in_review", "approved", "retired"],
+      "description": "Only 'approved' sources may be cited by a published objective."
+    },
+    "reviewedAt": { "type": "string", "format": "date", "description": "Last editorial review." },
+    "reviewBy": { "type": "string", "format": "date", "description": "Date the source must be re-reviewed by." }
+  }
+}

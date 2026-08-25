@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/class', label: 'My class' },
   { href: '/assign', label: 'Assign once' },
   { href: '/grading', label: 'Grading review' },
+  { href: '/author', label: 'Objective builder' },
 ];
 
 export function Nav() {

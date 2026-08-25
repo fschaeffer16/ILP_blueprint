@@ -278,3 +278,63 @@ export interface CompileResult {
   readonly warnings: readonly CompileWarning[];
   readonly manifests: readonly DeliveryManifest[];
 }
+
+// ---------------------------------------------------------------------------
+// Content sourcing & governance
+// ---------------------------------------------------------------------------
+
+/**
+ * The five source tiers, strongest first (see `docs/content-governance.md`).
+ * `standards` and `pedagogy` are not student-facing content: standards define
+ * objectives, pedagogy informs technique.
+ */
+export type SourceTier = 'standards' | 'primary' | 'oer' | 'licensed' | 'pedagogy';
+
+/** Who produced a source — a proxy for credibility. */
+export type AuthorityType =
+  | 'standards_body'
+  | 'government'
+  | 'museum_library'
+  | 'peer_reviewed'
+  | 'open_courseware'
+  | 'publisher';
+
+/** How a source may be used. Student-facing content must have a usable license. */
+export type SourceLicense =
+  | 'public_domain'
+  | 'cc_by'
+  | 'cc_by_sa'
+  | 'cc_by_nc'
+  | 'licensed' // used under a district/vendor contract
+  | 'all_rights_reserved';
+
+export type ReviewStatus = 'draft' | 'in_review' | 'approved' | 'retired';
+
+/**
+ * A governed source record. Nothing reaches a student unless a SourceRecord for it
+ * is `approved`, carries a usable license, and names its authority and review date.
+ * Mirrors the blueprint's SourceRecord entity and the vetting pipeline.
+ */
+export interface SourceRecord {
+  readonly id: string; // e.g. "SRC-001"
+  readonly title: string;
+  readonly citation: string;
+  readonly uri?: string;
+  readonly tier: SourceTier;
+  readonly authorityType: AuthorityType;
+  readonly license: SourceLicense;
+  readonly reviewStatus: ReviewStatus;
+  /** ISO date the source was last editorially reviewed. */
+  readonly reviewedAt?: string;
+  /** ISO date the source must be re-reviewed by. */
+  readonly reviewBy?: string;
+}
+
+/** Licenses under which student-facing content may be delivered. */
+export const DELIVERABLE_LICENSES: readonly SourceLicense[] = [
+  'public_domain',
+  'cc_by',
+  'cc_by_sa',
+  'cc_by_nc',
+  'licensed',
+];

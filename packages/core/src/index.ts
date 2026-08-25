@@ -13,3 +13,4 @@ export * from './compiler.js';
 export * from './assessment.js';
 export * from './grading.js';
 export * from './remediation.js';
+export * from './authoring.js';
