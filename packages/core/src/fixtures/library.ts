@@ -193,6 +193,52 @@ export const LIBRARY_OBJECTIVES: readonly ObjectiveVersion[] = [
     prerequisites: ['write a complete sentence'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
     misconceptions: ['an opinion does not need reasons'], sourceIds: ['SRC-012', 'SRC-013'],
   }),
+
+  // --- Fractions (completing the strand) ---
+  objective({
+    objectiveId: 'M3.FR.12', version: 1, subject: 'mathematics', standardRefs: ['MA.3.FR.1.2'],
+    studentOutcome: 'Represent a fraction m/b, including fractions greater than one, as the unit fraction 1/b added to itself m times.',
+    essentialKnowledge: ['unit fraction', 'numerator', 'iterate', 'fraction greater than one'],
+    requiredReasoning: ['represent', 'explain'],
+    prerequisites: ['represent fractions'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['a fraction can never be greater than one whole'], sourceIds: ['SRC-001', 'SRC-011'],
+  }),
+  objective({
+    objectiveId: 'M3.FR.13', version: 1, subject: 'mathematics', standardRefs: ['MA.3.FR.1.3'],
+    studentOutcome: 'Read and write fractions, including fractions greater than one, in standard form and word form.',
+    essentialKnowledge: ['standard form', 'word form', 'numerator', 'denominator'],
+    requiredReasoning: ['read', 'write'],
+    prerequisites: ['represent fractions'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you read the top number as a whole number'], sourceIds: ['SRC-010', 'SRC-001'],
+  }),
+
+  // --- Number Sense & Operations (core) ---
+  objective({
+    objectiveId: 'M3.NSO.13', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.1.3'],
+    studentOutcome: 'Plot, order and compare whole numbers up to 10,000, and explain the comparison.',
+    essentialKnowledge: ['place value', 'number line', 'greater than', 'less than'],
+    requiredReasoning: ['plot', 'order', 'compare'],
+    prerequisites: ['read and write numbers'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you compare numbers starting from the ones place'], sourceIds: ['SRC-017', 'SRC-010'],
+  }),
+  objective({
+    objectiveId: 'M3.NSO.21', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.2.1'],
+    studentOutcome: 'Add and subtract multi-digit whole numbers using a standard algorithm, and explain any regrouping.',
+    essentialKnowledge: ['regrouping', 'place value', 'standard algorithm'],
+    requiredReasoning: ['compute', 'explain'],
+    prerequisites: ['place value to thousands'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you always subtract the smaller digit from the larger in each column'], sourceIds: ['SRC-017'],
+  }),
+
+  // --- Algebraic Reasoning (even/odd) ---
+  objective({
+    objectiveId: 'M3.AR.31', version: 1, subject: 'mathematics', standardRefs: ['MA.3.AR.3.1'],
+    studentOutcome: 'Determine whether a whole number from 1 to 1,000 is even or odd, and explain how you know.',
+    essentialKnowledge: ['even', 'odd', 'ones digit', 'equal groups'],
+    requiredReasoning: ['determine', 'explain'],
+    prerequisites: ['skip counting by 2'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you check the first digit to tell even or odd'], sourceIds: ['SRC-017'],
+  }),
 ];
 
 // ---------------------------------------------------------------------------
@@ -375,6 +421,64 @@ export const LIBRARY_LESSONS: readonly LessonPlan[] = [
       { id: 'o5', kind: 'reflection', title: 'Think back', body: 'What turns an opinion into a convincing one?', sourceIds: [], targets: [] },
     ],
   },
+  {
+    id: 'LP-M3.FR.12', objectiveId: 'M3.FR.12', objectiveVersion: 1, authorId: 'T-100',
+    title: 'Building fractions from unit fractions',
+    blocks: [
+      { id: 'p1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will build a fraction by adding the same unit fraction over and over — even past one whole.', sourceIds: [], targets: [] },
+      { id: 'p2', kind: 'instruction', title: 'Count unit fractions', body: 'Every fraction is just a unit fraction counted up. 3/4 means three copies of 1/4: 1/4 + 1/4 + 1/4. Because you can keep adding copies, a fraction can go past one whole — 5/4 is five copies of 1/4, which is one whole and one more fourth.', sourceIds: ['SRC-001'], targets: ['represent', 'explain'], techniqueId: 'visual_first_models' },
+      { id: 'p3', kind: 'worked_example', title: 'Show 5/3 on a number line', body: 'Start at 0 and make jumps of 1/3. After three jumps you are at 1 whole (3/3). Two more jumps of 1/3 lands on 5/3 — that is one whole and two thirds.', sourceIds: ['SRC-011'], targets: ['represent'], techniqueId: 'worked_example_fade' },
+      { id: 'p4', kind: 'practice', title: 'Add the copies', body: 'Show 4/3 as a sum of unit fractions and mark it on a number line from 0 past 1.', sourceIds: ['SRC-001'], targets: ['represent'] },
+      { id: 'p5', kind: 'mastery_task', title: 'Represent and explain', body: 'Show 7/4 as unit fractions on a new number line, and explain why it is more than one whole.', sourceIds: ['SRC-001'], targets: ['represent', 'explain'] },
+      { id: 'p6', kind: 'reflection', title: 'Think back', body: 'How can a fraction be bigger than one whole?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.FR.13', objectiveId: 'M3.FR.13', objectiveVersion: 1, authorId: 'T-100',
+    title: 'Reading and writing fractions',
+    blocks: [
+      { id: 'q1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will read a fraction out loud and write it in words and in numbers.', sourceIds: [], targets: [] },
+      { id: 'q2', kind: 'instruction', title: 'Say the top, then the size', body: 'To read a fraction, say the numerator as a counting number, then the denominator as the size of the parts: 3/5 is “three fifths.” The bottom number names the pieces (fifths), the top number counts them (three). Fractions greater than one work the same way — 7/4 is “seven fourths.”', sourceIds: ['SRC-010'], targets: ['read', 'write'], techniqueId: 'chunked_prompt' },
+      { id: 'q3', kind: 'practice', title: 'Words and numbers', body: 'Write 2/3 in words, and write “five sixths” as a fraction.', sourceIds: ['SRC-001'], targets: ['read', 'write'] },
+      { id: 'q4', kind: 'mastery_task', title: 'Read and write', body: 'Write 7/4 in word form, and write “three eighths” in standard form. Read each one out loud to a partner.', sourceIds: ['SRC-010'], targets: ['read', 'write'] },
+      { id: 'q5', kind: 'reflection', title: 'Think back', body: 'Why is the bottom number said as “fifths” or “fourths”?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.NSO.13', objectiveId: 'M3.NSO.13', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Comparing and ordering whole numbers',
+    blocks: [
+      { id: 'r1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will place numbers in order and tell which is greater, and explain how you know.', sourceIds: [], targets: [] },
+      { id: 'r2', kind: 'instruction', title: 'Start from the biggest place', body: 'To compare whole numbers, line them up by place value and start from the largest place — thousands first, then hundreds, and so on. The first place where the digits differ decides it. Don’t start from the ones; 1,240 beats 1,204 because the tens place differs, not the ones.', sourceIds: ['SRC-017'], targets: ['compare', 'order'], techniqueId: 'visual_first_models' },
+      { id: 'r3', kind: 'worked_example', title: 'Order three numbers', body: '1,024; 1,240; 1,204. All share 1 thousand and 0 hundreds. Compare the tens: 2, 4, 0 → so 1,024 (0 tens) is least, then 1,204 (0… wait compare tens then ones), then 1,240. Least to greatest: 1,024; 1,204; 1,240.', sourceIds: ['SRC-010'], targets: ['order', 'plot'], techniqueId: 'worked_example_fade' },
+      { id: 'r4', kind: 'practice', title: 'Plot and compare', body: 'Plot 3,050 and 3,500 on a number line and circle the greater one.', sourceIds: ['SRC-017'], targets: ['plot', 'compare'] },
+      { id: 'r5', kind: 'mastery_task', title: 'Order and explain', body: 'Order 2,405; 2,045; 2,450 from least to greatest and explain, using place value, how you decided.', sourceIds: ['SRC-017'], targets: ['order', 'compare', 'plot'] },
+      { id: 'r6', kind: 'reflection', title: 'Think back', body: 'Why start comparing from the largest place, not the ones?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.NSO.21', objectiveId: 'M3.NSO.21', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Adding and subtracting with regrouping',
+    blocks: [
+      { id: 's1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will add and subtract big numbers and explain when you regroup.', sourceIds: [], targets: [] },
+      { id: 's2', kind: 'instruction', title: 'Line up the places, regroup when needed', body: 'Add or subtract one place at a time, ones first. When a column makes ten or more, carry a group to the next place; when you don’t have enough to subtract, borrow a group from the next place. You never just take the smaller digit from the larger — the position tells you whether to regroup.', sourceIds: ['SRC-017'], targets: ['compute', 'explain'], techniqueId: 'worked_example_fade' },
+      { id: 's3', kind: 'worked_example', title: 'Subtract 405 − 128', body: 'Ones: 5 − 8 needs a borrow → borrow a ten (but tens is 0, so borrow from hundreds first). After regrouping: 405 becomes 3 hundreds, 9 tens, 15 ones. 15 − 8 = 7, 9 − 2 = 7, 3 − 1 = 2. Answer: 277.', sourceIds: ['SRC-017'], targets: ['compute'], techniqueId: 'worked_example_fade' },
+      { id: 's4', kind: 'practice', title: 'Where did you regroup?', body: 'Find 367 + 285. Circle the columns where you had to carry a group.', sourceIds: ['SRC-017'], targets: ['compute'] },
+      { id: 's5', kind: 'mastery_task', title: 'Compute and explain', body: 'Solve 502 − 246. Show your work and explain where and why you had to borrow.', sourceIds: ['SRC-017'], targets: ['compute', 'explain'] },
+      { id: 's6', kind: 'reflection', title: 'Think back', body: 'Why can’t you just subtract the smaller digit from the larger in each column?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.AR.31', objectiveId: 'M3.AR.31', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Even and odd numbers',
+    blocks: [
+      { id: 't1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will tell whether a number is even or odd, and explain how you know.', sourceIds: [], targets: [] },
+      { id: 't2', kind: 'instruction', title: 'Look at the ones digit', body: 'A number is even if it can be split into two equal groups with none left over. The quick check is the ones digit: a number ending in 0, 2, 4, 6, or 8 is even; ending in 1, 3, 5, 7, or 9 is odd. It’s the last digit that decides, not the first — 634 is even because it ends in 4.', sourceIds: ['SRC-017'], targets: ['determine', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 't3', kind: 'practice', title: 'Sort them', body: 'Sort 128, 275, 640 and 903 into even and odd. Underline the digit you used to decide.', sourceIds: ['SRC-017'], targets: ['determine'] },
+      { id: 't4', kind: 'mastery_task', title: 'Determine and explain', body: 'Is 570 even or odd? Explain how you know, using the ones digit or equal groups.', sourceIds: ['SRC-017'], targets: ['determine', 'explain'] },
+      { id: 't5', kind: 'reflection', title: 'Think back', body: 'Why does only the ones digit matter for even or odd?', sourceIds: [], targets: [] },
+    ],
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -420,6 +524,17 @@ export const LIBRARY_ITEMS: readonly AssessmentItem[] = [
   cr('IT-V3.01-2', 'V3.01', 'apply', 'Use the parts of the word "unbreakable" to explain what it means.', ['SRC-022'], ['you can only learn a word by memorizing it whole']),
   cr('IT-WR3.01-1', 'WR3.01', 'state', 'Write your opinion about the topic in one clear sentence.', ['SRC-012'], ['an opinion does not need reasons']),
   cr('IT-WR3.01-2', 'WR3.01', 'support', 'Give two reasons for your opinion, and add one detail under each reason.', ['SRC-013'], ['an opinion does not need reasons']),
+
+  cr('IT-M3.FR.12-1', 'M3.FR.12', 'represent', 'Show 3/4 as a sum of unit fractions and mark it on a number line.', ['SRC-001'], ['a fraction can never be greater than one whole']),
+  cr('IT-M3.FR.12-2', 'M3.FR.12', 'explain', 'Explain why 5/3 is greater than one whole, using unit fractions.', ['SRC-011'], ['a fraction can never be greater than one whole']),
+  mc('IT-M3.FR.13-1', 'M3.FR.13', 'read', 'Which is 3/5 written in word form?', ['three fifths'], ['five thirds', 'three fives', 'thirty-five'], ['SRC-010'], ['you read the top number as a whole number']),
+  cr('IT-M3.FR.13-2', 'M3.FR.13', 'write', 'Write “seven fourths” in standard form as a fraction.', ['SRC-001'], ['you read the top number as a whole number']),
+  cr('IT-M3.NSO.13-1', 'M3.NSO.13', 'order', 'Order 2,405; 2,045; 2,450 from least to greatest.', ['SRC-017'], ['you compare numbers starting from the ones place']),
+  cr('IT-M3.NSO.13-2', 'M3.NSO.13', 'compare', 'Compare 3,050 and 3,500 and explain which is greater using place value.', ['SRC-017'], ['you compare numbers starting from the ones place']),
+  mc('IT-M3.NSO.21-1', 'M3.NSO.21', 'compute', 'What is 405 − 128?', ['277'], ['323', '283', '387'], ['SRC-017'], ['you always subtract the smaller digit from the larger in each column']),
+  cr('IT-M3.NSO.21-2', 'M3.NSO.21', 'explain', 'Add 367 + 285. Explain where you had to regroup.', ['SRC-017'], ['you always subtract the smaller digit from the larger in each column']),
+  mc('IT-M3.AR.31-1', 'M3.AR.31', 'determine', 'Which of these numbers is odd?', ['457'], ['312', '628', '940'], ['SRC-017'], ['you check the first digit to tell even or odd']),
+  cr('IT-M3.AR.31-2', 'M3.AR.31', 'explain', 'Explain how you know 570 is even, using the ones digit or equal groups.', ['SRC-017'], ['you check the first digit to tell even or odd']),
 ];
 
 // ---------------------------------------------------------------------------
@@ -449,6 +564,11 @@ export const LIBRARY_RUBRICS: readonly Rubric[] = [
   rubric('RD3.01', [{ trace: 'identify', desc: 'Identifies how the character develops.', max: 3 }, { trace: 'explain', desc: 'Explains the change.', max: 3 }, { trace: 'cite', desc: 'Cites text evidence.', max: 2 }]),
   rubric('V3.01', [{ trace: 'identify', desc: 'Identifies roots, prefixes and suffixes.', max: 3 }, { trace: 'apply', desc: 'Applies parts to determine meaning.', max: 3 }, { trace: 'explain', desc: 'Explains how parts build the meaning.', max: 2 }]),
   rubric('WR3.01', [{ trace: 'state', desc: 'States a clear opinion.', max: 3 }, { trace: 'support', desc: 'Supports it with reasons and details.', max: 3 }, { trace: 'conclude', desc: 'Ends with a conclusion.', max: 2 }]),
+  rubric('M3.FR.12', [{ trace: 'represent', desc: 'Represents m/b as iterated unit fractions.', max: 3 }, { trace: 'explain', desc: 'Explains fractions greater than one.', max: 3 }]),
+  rubric('M3.FR.13', [{ trace: 'read', desc: 'Reads fractions correctly.', max: 3 }, { trace: 'write', desc: 'Writes fractions in standard and word form.', max: 3 }]),
+  rubric('M3.NSO.13', [{ trace: 'plot', desc: 'Plots numbers on a number line.', max: 2 }, { trace: 'order', desc: 'Orders whole numbers correctly.', max: 3 }, { trace: 'compare', desc: 'Compares using place value.', max: 3 }]),
+  rubric('M3.NSO.21', [{ trace: 'compute', desc: 'Adds and subtracts accurately with regrouping.', max: 4 }, { trace: 'explain', desc: 'Explains the regrouping.', max: 2 }]),
+  rubric('M3.AR.31', [{ trace: 'determine', desc: 'Determines even or odd correctly.', max: 3 }, { trace: 'explain', desc: 'Explains using the ones digit or equal groups.', max: 3 }]),
 ];
 
 // ---------------------------------------------------------------------------
