@@ -9,14 +9,16 @@
 ## Try the demo
 
 A role-based demo runs the real engine on synthetic data — district, teacher, parent, and
-student views. See [`docs/demo.md`](docs/demo.md) for the hosted click-through and the
-8-minute walk-through, or run the full app locally:
+student views, plus the grounded assignment bot. See [`docs/demo.md`](docs/demo.md) for the
+hosted click-through and the 8-minute walk-through, or run the full app locally:
 
 ```bash
-npm install
-npm run build --workspace @ilp/core
+npm install                             # compiles @ilp/core automatically (prepare script)
 npm run dev --workspace @ilp/web        # http://localhost:3000
 ```
+
+**Put it on a permanent live URL** (no database, no keys — hosts anywhere): see
+[`docs/deploy.md`](docs/deploy.md) for the one-click Vercel path.
 
 ## What this repository is
 
