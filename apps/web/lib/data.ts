@@ -14,6 +14,7 @@ import {
   evaluateClasswideFailure,
   referenceGrader,
   releaseFinalGrade,
+  buildRollups,
   type CompileResult,
   type DeliveryManifest,
   type FinalGrade,
@@ -24,7 +25,10 @@ import {
   OBJ_M3_NF_01,
   SAMPLE_ADAPTATIONS,
   SAMPLE_ASSIGNMENT,
+  SAMPLE_DISTRICT,
+  SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
+  SAMPLE_OUTCOMES,
   SAMPLE_ROSTER,
   SAMPLE_RUBRIC,
   SAMPLE_SOURCES,
@@ -40,6 +44,28 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** The full set of rollups for the analytics dashboard (student → district). */
+export function getDashboard() {
+  return { district: SAMPLE_DISTRICT, total: SAMPLE_OUTCOMES.length, rollups: buildRollups(SAMPLE_OUTCOMES) };
+}
+
+/** Everything the lesson-builder screen needs: the sample plan, the objective's
+ * required reasoning (for coverage), and the vetted source options. */
+export function getLessonData() {
+  return {
+    objective: { objectiveId: OBJ_M3_NF_01.objectiveId, version: OBJ_M3_NF_01.version, requiredReasoning: [...OBJ_M3_NF_01.requiredReasoning], studentOutcome: OBJ_M3_NF_01.studentOutcome },
+    plan: {
+      id: SAMPLE_LESSON_PLAN.id,
+      objectiveId: SAMPLE_LESSON_PLAN.objectiveId,
+      objectiveVersion: SAMPLE_LESSON_PLAN.objectiveVersion,
+      title: SAMPLE_LESSON_PLAN.title,
+      authorId: SAMPLE_LESSON_PLAN.authorId,
+      blocks: SAMPLE_LESSON_PLAN.blocks.map((b) => ({ id: b.id, kind: b.kind, title: b.title, sourceIds: [...b.sourceIds], targets: [...b.targets] })),
+    },
+    sources: SAMPLE_SOURCES.map((s) => ({ id: s.id, title: s.title, reviewStatus: s.reviewStatus })),
+  };
 }
 
 /** Everything the objective-builder screen needs: the seed draft, the adaptation

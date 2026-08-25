@@ -12,6 +12,21 @@ unvetted corner of the web.** Objectives are mapped from official standards; con
 from a governed, tiered library where every item carries a license, an authority, and a
 review date; and every teaching technique is grounded in named, modern learning science.
 
+## Three authoring layers, two roles
+
+Authoring is deliberately split so a district controls the guardrails while teachers keep
+their professional freedom inside them.
+
+| Layer | What it is | Who owns it | In the build |
+| --- | --- | --- | --- |
+| **1 · Objective + sources** | The standards-mapped target, its mastery rule, and the approved source library | **District** (curriculum office) — approves objectives *and* where content comes from | `/author` + `validateObjectiveDraft` + `SourceRecord` ✅ |
+| **2 · Lesson plan** | The actual year-long lessons a class experiences, assembled from approved objectives + sources | **Teacher** — builds their own lessons, but only from Layer-1-approved pieces | `/lesson` + `validateLessonPlan` ✅ |
+| **3 · Analytics** | Objectives, assignments and scores rolled up for oversight | **Everyone at their level** — teacher → principal → superintendent | `/dashboard` + `buildRollups` ✅ |
+
+The gates enforce the boundary: a teacher's Layer-2 lesson can only cite **district-approved**
+sources and must cover the **district-approved** objective's reasoning. Freedom inside the
+guardrails, not instead of them.
+
 ---
 
 ## 1. Where learning objectives come from

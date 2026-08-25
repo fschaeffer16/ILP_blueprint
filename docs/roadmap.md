@@ -36,6 +36,13 @@ cites only approved, deliverable-licensed sources — nothing unvetted reaches a
 frameworks, the 5-tier content library, the vetting pipeline, and the evidence-based technique
 catalog) is documented in [`content-governance.md`](content-governance.md).
 
+**The three authoring layers + rollup analytics.** The full authoring stack now exists as
+gated, tested engine functions with real screens: **Layer 1** objective + source approval
+(district), **Layer 2** the teacher's lesson builder (`validateLessonPlan` — a lesson must
+teach, assess, cite approved sources, and cover the objective's required reasoning), and
+**Layer 3** the mastery dashboard (`buildRollups` — student → class → grade → school →
+district). See [`content-governance.md`](content-governance.md) for the two-role model.
+
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |

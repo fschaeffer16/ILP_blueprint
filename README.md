@@ -21,7 +21,7 @@ tested TypeScript kernel.
   - **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate.
   - **Teacher-reviewed grading** — AI recommends with criterion evidence; only a teacher decision releases a grade.
   - **Remediation + the 75% rule** — classwide-failure evaluation, materially-different reteach, equivalent reassessment.
-- **`@ilp/web`** — the teacher command center (Next.js): Today board, My class, Assign-once composer, Grading review — every screen driven by the engine above on synthetic data.
+- **`@ilp/web`** — the teacher command center (Next.js): Today board, My class, Assign-once composer, Grading review, **Objective builder** (district Layer 1), **Lesson builder** (teacher Layer 2), and the **Mastery dashboard** (Layer 3 rollups, student → district) — every screen driven by the engine above on synthetic data.
 
 ```bash
 npm install
