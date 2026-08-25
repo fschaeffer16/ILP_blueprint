@@ -11,6 +11,7 @@ const LINKS = [
   { href: '/author', label: 'Objective builder' },
   { href: '/lesson', label: 'Lesson builder' },
   { href: '/dashboard', label: 'Dashboard' },
+  { href: '/baseline', label: 'Baseline' },
   { href: '/parent', label: 'Family view' },
 ];
 

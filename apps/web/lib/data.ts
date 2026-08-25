@@ -16,6 +16,7 @@ import {
   releaseFinalGrade,
   buildRollups,
   buildParentSummary,
+  buildBaselineProfile,
   SURFACE_LABEL,
   type CompileResult,
   type DeliveryManifest,
@@ -30,6 +31,7 @@ import {
   SAMPLE_DISTRICT,
   SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
+  SAMPLE_BASELINE,
   SAMPLE_OUTCOMES,
   SAMPLE_PARENT_INPUT,
   SAMPLE_ROSTER,
@@ -47,6 +49,11 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** The baseline screening profile for one child (screening, never a diagnosis). */
+export function getBaseline() {
+  return buildBaselineProfile(SAMPLE_BASELINE, { gradeBand: '3', today: new Date('2026-09-06') });
 }
 
 /** The plain-language parent summary for one child, plus surface labels. */
