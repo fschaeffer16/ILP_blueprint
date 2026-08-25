@@ -16,3 +16,4 @@ export * from './remediation.js';
 export * from './authoring.js';
 export * from './lessons.js';
 export * from './analytics.js';
+export * from './engagement.js';

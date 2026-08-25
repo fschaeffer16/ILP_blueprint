@@ -43,6 +43,13 @@ teach, assess, cite approved sources, and cover the objective's required reasoni
 **Layer 3** the mastery dashboard (`buildRollups` — student → class → grade → school →
 district). See [`content-governance.md`](content-governance.md) for the two-role model.
 
+**Family view (parent role).** `buildParentSummary` produces a plain-language, no-surprises
+summary of one child: time in each surface (including the collaboration lab and simulations),
+collaboration and problem-solving activity, growth, and safety — with flags that surface
+anything a parent should know. The privacy line is enforced by the data model itself: it
+carries patterns, time and safety, and has **no message-content field** — parents never see
+their child's or other children's conversations. Screen: `/parent` in `@ilp/web`.
+
 ## Slice order
 
 | # | Slice | Epic (spec §44) | Depends on |

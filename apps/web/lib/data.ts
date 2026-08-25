@@ -15,6 +15,8 @@ import {
   referenceGrader,
   releaseFinalGrade,
   buildRollups,
+  buildParentSummary,
+  SURFACE_LABEL,
   type CompileResult,
   type DeliveryManifest,
   type FinalGrade,
@@ -29,6 +31,7 @@ import {
   SAMPLE_LESSON_PLAN,
   SAMPLE_OBJECTIVES,
   SAMPLE_OUTCOMES,
+  SAMPLE_PARENT_INPUT,
   SAMPLE_ROSTER,
   SAMPLE_RUBRIC,
   SAMPLE_SOURCES,
@@ -44,6 +47,11 @@ export const assignment = SAMPLE_ASSIGNMENT;
 
 export function nameFor(studentId: string): string {
   return SAMPLE_ROSTER.find((s) => s.studentId === studentId)?.displayName ?? studentId;
+}
+
+/** The plain-language parent summary for one child, plus surface labels. */
+export function getParentSummary() {
+  return { summary: buildParentSummary(SAMPLE_PARENT_INPUT), surfaceLabel: SURFACE_LABEL };
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */
