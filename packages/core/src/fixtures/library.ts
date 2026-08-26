@@ -36,6 +36,10 @@ export const LIBRARY_SOURCES: readonly SourceRecord[] = [
   { id: 'SRC-020', title: 'Data and graphing tasks (grade 3)', citation: 'Illustrative Mathematics — scaled bar graphs, pictographs and line plots.', uri: 'https://www.illustrativemathematics.org/', tier: 'oer', authorityType: 'open_courseware', license: 'cc_by', reviewStatus: 'approved', reviewedAt: '2026-08-12', reviewBy: '2027-08-12' },
   { id: 'SRC-021', title: 'Grade-3 literary anthology', citation: 'Project Gutenberg / Library of Congress — public-domain short stories and fables.', uri: 'https://www.gutenberg.org/', tier: 'primary', authorityType: 'museum_library', license: 'public_domain', reviewStatus: 'approved', reviewedAt: '2026-08-13', reviewBy: '2027-08-13' },
   { id: 'SRC-022', title: 'Morphology reference: Greek and Latin roots', citation: 'Openly-licensed word-study reference for common roots, base words and affixes.', uri: 'https://openstax.org/', tier: 'oer', authorityType: 'open_courseware', license: 'cc_by', reviewStatus: 'approved', reviewedAt: '2026-08-13', reviewBy: '2027-08-13' },
+  { id: 'SRC-023', title: 'Decodable texts and phonics (grade 3)', citation: 'Openly-licensed decodable passages and word-analysis practice, incl. common affixes.', uri: 'https://www.ckla.org/', tier: 'oer', authorityType: 'open_courseware', license: 'cc_by', reviewStatus: 'approved', reviewedAt: '2026-08-14', reviewBy: '2027-08-14' },
+  { id: 'SRC-024', title: 'Informational text set (grade 3)', citation: 'Leveled informational passages with text features (headings, captions, diagrams).', uri: 'https://www.readworks.org/', tier: 'licensed', authorityType: 'publisher', license: 'licensed', reviewStatus: 'approved', reviewedAt: '2026-08-14', reviewBy: '2027-02-14' },
+  { id: 'SRC-025', title: 'Speaking and listening reference', citation: 'Openly-licensed guidance for oral presentation — sequence, volume, clarity, nonverbal cues.', uri: 'https://openstax.org/', tier: 'oer', authorityType: 'open_courseware', license: 'cc_by', reviewStatus: 'approved', reviewedAt: '2026-08-15', reviewBy: '2027-08-15' },
+  { id: 'SRC-026', title: 'Research and multimedia reference (grade 3)', citation: 'Openly-licensed guide to gathering information from sources and using multimedia and digital tools.', uri: 'https://openstax.org/', tier: 'oer', authorityType: 'open_courseware', license: 'cc_by', reviewStatus: 'approved', reviewedAt: '2026-08-15', reviewBy: '2027-08-15' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -408,6 +412,76 @@ export const LIBRARY_OBJECTIVES: readonly ObjectiveVersion[] = [
     requiredReasoning: ['decompose', 'compute'],
     prerequisites: ['area of a rectangle'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
     misconceptions: ['you can find the area of an L-shape with one multiplication'], sourceIds: ['SRC-019'],
+  }),
+
+  // --- ELA Foundations ---
+  objective({
+    objectiveId: 'F3.13', version: 1, subject: 'reading', standardRefs: ['ELA.3.F.1.3'],
+    studentOutcome: 'Decode grade-level words using phonics and word parts, including common roots and affixes.',
+    essentialKnowledge: ['decode', 'root', 'prefix', 'suffix', 'syllable'],
+    requiredReasoning: ['decode', 'explain'],
+    prerequisites: ['letter sounds', 'blend sounds'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['you sound out every word one letter at a time'], sourceIds: ['SRC-023', 'SRC-022'],
+  }),
+  objective({
+    objectiveId: 'F3.14', version: 1, subject: 'reading', standardRefs: ['ELA.3.F.1.4'],
+    studentOutcome: 'Read a grade-level text with accuracy, an even pace, and expression that fits the meaning.',
+    essentialKnowledge: ['accuracy', 'automaticity', 'prosody', 'phrasing'],
+    requiredReasoning: ['read', 'self-correct'],
+    prerequisites: ['decode grade-level words'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['reading fast is the same as reading well'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+
+  // --- ELA Reading: Prose & Poetry ---
+  objective({
+    objectiveId: 'RD3.02', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.1.2'],
+    studentOutcome: 'Explain a theme of a story and how details across the text develop it.',
+    essentialKnowledge: ['theme', 'message', 'lesson', 'detail'],
+    requiredReasoning: ['identify', 'explain'],
+    prerequisites: ['retell a story'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['the theme is the same as the topic'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+  objective({
+    objectiveId: 'RD3.03', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.1.3'],
+    studentOutcome: 'Explain how different characters see the same event differently, using text details.',
+    essentialKnowledge: ['perspective', 'point of view', 'character', 'feelings'],
+    requiredReasoning: ['compare', 'explain'],
+    prerequisites: ['identify characters'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['every character feels the same way about what happens'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+  objective({
+    objectiveId: 'RD3.04', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.1.4'],
+    studentOutcome: 'Identify types of poems — free verse, rhymed verse, haiku and limerick — by their features.',
+    essentialKnowledge: ['free verse', 'rhymed verse', 'haiku', 'limerick'],
+    requiredReasoning: ['identify', 'distinguish'],
+    prerequisites: ['read a poem'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['all poems have to rhyme'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+
+  // --- ELA Reading: Informational ---
+  objective({
+    objectiveId: 'RI3.01', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.2.1'],
+    studentOutcome: 'Explain how text features — headings, captions, bold words, diagrams — add to the meaning of a text.',
+    essentialKnowledge: ['heading', 'caption', 'bold word', 'text feature'],
+    requiredReasoning: ['identify', 'explain'],
+    prerequisites: ['read informational text'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['text features are just decoration you can skip'], sourceIds: ['SRC-024', 'SRC-013'],
+  }),
+  objective({
+    objectiveId: 'RI3.03', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.2.3'],
+    studentOutcome: 'Explain the author’s purpose in an informational text and how it develops.',
+    essentialKnowledge: ['author purpose', 'inform', 'persuade', 'entertain'],
+    requiredReasoning: ['identify', 'explain'],
+    prerequisites: ['central idea'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['an author only ever writes to tell facts'], sourceIds: ['SRC-013', 'SRC-024'],
+  }),
+  objective({
+    objectiveId: 'RI3.04', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.2.4'],
+    studentOutcome: 'Identify an author’s claim and explain how the author uses evidence to support it.',
+    essentialKnowledge: ['claim', 'evidence', 'support', 'reason'],
+    requiredReasoning: ['identify', 'explain'],
+    prerequisites: ['central idea', 'key details'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['a claim is true just because the author wrote it'], sourceIds: ['SRC-013', 'SRC-024'],
   }),
 ];
 
@@ -877,6 +951,95 @@ export const LIBRARY_LESSONS: readonly LessonPlan[] = [
       { id: 'nn6', kind: 'reflection', title: 'Think back', body: 'Why can’t you find an L-shape’s area with just one multiplication?', sourceIds: [], targets: [] },
     ],
   },
+  {
+    id: 'LP-F3.13', objectiveId: 'F3.13', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Decoding with word parts',
+    blocks: [
+      { id: 'fa1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will read tricky words by breaking them into parts instead of one letter at a time.', sourceIds: [], targets: [] },
+      { id: 'fa2', kind: 'instruction', title: 'Chunk it, don’t crawl it', body: 'Good readers don’t sound out every single letter — they read in chunks: syllables, and word parts like prefixes and suffixes. Spotting a known part (re-, -ing, -able, a root like “port”) lets you read a long word quickly and often figure out its meaning.', sourceIds: ['SRC-023'], targets: ['decode', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'fa3', kind: 'worked_example', title: 'Read “unhelpful”', body: 'Break it into un + help + ful. Blend the chunks: un-help-ful. You read it fast, and the parts even tell you it means “not full of help.”', sourceIds: ['SRC-022'], targets: ['decode'], techniqueId: 'worked_example_fade' },
+      { id: 'fa4', kind: 'practice', title: 'Break and blend', body: 'Break “replaying” into parts and read it. Underline the prefix and the suffix.', sourceIds: ['SRC-023'], targets: ['decode'] },
+      { id: 'fa5', kind: 'mastery_task', title: 'Decode and explain', body: 'Read the word “disagreement” by breaking it into parts, then explain which chunks helped you read it.', sourceIds: ['SRC-023'], targets: ['decode', 'explain'] },
+      { id: 'fa6', kind: 'reflection', title: 'Think back', body: 'Why is breaking a word into chunks faster than letter by letter?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-F3.14', objectiveId: 'F3.14', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Reading smoothly and with expression',
+    blocks: [
+      { id: 'fb1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will read a passage smoothly, at a steady pace, with expression that fits the meaning.', sourceIds: [], targets: [] },
+      { id: 'fb2', kind: 'instruction', title: 'Accuracy, pace, expression', body: 'Fluent reading is three things at once: accuracy (right words), automaticity (a steady, comfortable pace — not racing), and prosody (expression — pausing at punctuation, changing your voice to match the meaning). Fast is not the goal; smooth and clear is. Good readers also notice a mistake and fix it.', sourceIds: ['SRC-021'], targets: ['read', 'self-correct'], techniqueId: 'chunked_prompt' },
+      { id: 'fb3', kind: 'practice', title: 'Read it twice', body: 'Read the short paragraph once, then again — slow down at commas and stop at periods.', sourceIds: ['SRC-012'], targets: ['read'] },
+      { id: 'fb4', kind: 'mastery_task', title: 'Read and self-correct', body: 'Read the passage aloud with expression. If a word comes out wrong, go back and fix it, and tell how you knew it was wrong.', sourceIds: ['SRC-021'], targets: ['read', 'self-correct'] },
+      { id: 'fb5', kind: 'reflection', title: 'Think back', body: 'Why is reading smoothly more helpful than reading fast?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RD3.02', objectiveId: 'RD3.02', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Finding the theme',
+    blocks: [
+      { id: 'ra1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will find the theme — the big message — of a story and show how it grows.', sourceIds: [], targets: [] },
+      { id: 'ra2', kind: 'instruction', title: 'Message, not topic', body: 'The topic is what a story is about in a word (friendship). The theme is the lesson or message the story teaches about it (“real friends help even when it’s hard”). Find it by asking what the characters learn or how they change, and track the details that build toward it.', sourceIds: ['SRC-021'], targets: ['identify', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'ra3', kind: 'practice', title: 'Topic vs. theme', body: 'For the story, write the one-word topic, then write the theme as a full sentence.', sourceIds: ['SRC-012'], targets: ['identify'] },
+      { id: 'ra4', kind: 'mastery_task', title: 'Explain the theme', body: 'State the theme of the story in a sentence, and explain how two details across the story develop it.', sourceIds: ['SRC-021'], targets: ['identify', 'explain'] },
+      { id: 'ra5', kind: 'reflection', title: 'Think back', body: 'How is a theme different from just the topic?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RD3.03', objectiveId: 'RD3.03', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Different characters, different views',
+    blocks: [
+      { id: 'rb1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will show how two characters can see the same event in different ways.', sourceIds: [], targets: [] },
+      { id: 'rb2', kind: 'instruction', title: 'Same event, different eyes', body: 'A perspective is how a character sees things, based on what they want and feel. The same event can look great to one character and terrible to another. To find a character’s perspective, notice what they say, do, and feel about the event — and remember other characters may feel the opposite.', sourceIds: ['SRC-021'], targets: ['compare', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'rb3', kind: 'practice', title: 'Two reactions', body: 'For one event in the story, write how two different characters feel about it.', sourceIds: ['SRC-012'], targets: ['compare'] },
+      { id: 'rb4', kind: 'mastery_task', title: 'Compare and explain', body: 'Explain how two characters see the same event differently, using a detail from the text for each one.', sourceIds: ['SRC-021'], targets: ['compare', 'explain'] },
+      { id: 'rb5', kind: 'reflection', title: 'Think back', body: 'Why might two characters feel so differently about the same thing?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RD3.04', objectiveId: 'RD3.04', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Kinds of poems',
+    blocks: [
+      { id: 'rc1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will tell different kinds of poems apart by their features.', sourceIds: [], targets: [] },
+      { id: 'rc2', kind: 'instruction', title: 'Poems come in types', body: 'Not all poems rhyme. Free verse has no set rhyme or rhythm. Rhymed verse has lines that rhyme. A haiku is three lines about nature with a 5-7-5 syllable pattern. A limerick is a funny five-line poem with a bouncy rhythm. Look at rhyme, line count and syllables to tell them apart.', sourceIds: ['SRC-021'], targets: ['identify', 'distinguish'], techniqueId: 'chunked_prompt' },
+      { id: 'rc3', kind: 'practice', title: 'Name that poem', body: 'Read the two short poems and label each one’s type, with the feature that tells you.', sourceIds: ['SRC-012'], targets: ['identify'] },
+      { id: 'rc4', kind: 'mastery_task', title: 'Identify and distinguish', body: 'Given a haiku and a free-verse poem, identify each type and explain the feature that distinguishes them.', sourceIds: ['SRC-021'], targets: ['identify', 'distinguish'] },
+      { id: 'rc5', kind: 'reflection', title: 'Think back', body: 'Does a poem have to rhyme to be a poem? Explain.', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RI3.01', objectiveId: 'RI3.01', objectiveVersion: 1, authorId: 'T-102',
+    title: 'How text features help',
+    blocks: [
+      { id: 'ia1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will explain how headings, captions and pictures help you understand a text.', sourceIds: [], targets: [] },
+      { id: 'ia2', kind: 'instruction', title: 'Features do a job', body: 'Text features are not decoration. A heading tells what a section is about; a caption explains a picture; bold words flag important vocabulary; a diagram shows how something works. Each one helps you find and understand information faster.', sourceIds: ['SRC-024'], targets: ['identify', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'ia3', kind: 'practice', title: 'Spot the feature', body: 'Find one heading and one caption in the passage. Write what each one tells you.', sourceIds: ['SRC-024'], targets: ['identify'] },
+      { id: 'ia4', kind: 'mastery_task', title: 'Identify and explain', body: 'Choose two text features in the article and explain how each one adds to the meaning of the text.', sourceIds: ['SRC-013'], targets: ['identify', 'explain'] },
+      { id: 'ia5', kind: 'reflection', title: 'Think back', body: 'Why is it a mistake to skip the headings and captions?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RI3.03', objectiveId: 'RI3.03', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Why the author wrote it',
+    blocks: [
+      { id: 'ib1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will figure out why an author wrote a text and how you can tell.', sourceIds: [], targets: [] },
+      { id: 'ib2', kind: 'instruction', title: 'Inform, persuade, entertain', body: 'Authors write for a purpose: to inform (teach facts), to persuade (get you to agree or act), or to entertain (tell a fun story). One text can lean one way. Look at the words and details — lots of facts and headings means inform; opinion words and reasons means persuade.', sourceIds: ['SRC-013'], targets: ['identify', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'ib3', kind: 'practice', title: 'Purpose clues', body: 'Read the passage. Decide the author’s purpose and underline one clue that shows it.', sourceIds: ['SRC-024'], targets: ['identify'] },
+      { id: 'ib4', kind: 'mastery_task', title: 'Identify and explain', body: 'State the author’s purpose in the text and explain how the details develop it.', sourceIds: ['SRC-013'], targets: ['identify', 'explain'] },
+      { id: 'ib5', kind: 'reflection', title: 'Think back', body: 'How can the same topic be written to inform or to persuade?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RI3.04', objectiveId: 'RI3.04', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Claim and evidence',
+    blocks: [
+      { id: 'ic1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will find an author’s claim and show how they back it up.', sourceIds: [], targets: [] },
+      { id: 'ic2', kind: 'instruction', title: 'A claim needs proof', body: 'A claim is what the author wants you to believe (“recess helps kids learn”). A claim is not true just because it is written — a good author supports it with evidence: facts, examples and reasons. To judge a text, find the claim, then find the evidence that backs it.', sourceIds: ['SRC-013'], targets: ['identify', 'explain'], techniqueId: 'worked_example_fade' },
+      { id: 'ic3', kind: 'practice', title: 'Find the proof', body: 'Write the author’s claim, then copy one piece of evidence that supports it.', sourceIds: ['SRC-024'], targets: ['identify'] },
+      { id: 'ic4', kind: 'mastery_task', title: 'Identify and explain', body: 'Identify the author’s claim and explain how two pieces of evidence support it.', sourceIds: ['SRC-013'], targets: ['identify', 'explain'] },
+      { id: 'ic5', kind: 'reflection', title: 'Think back', body: 'Why isn’t a claim true just because the author wrote it?', sourceIds: [], targets: [] },
+    ],
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -975,6 +1138,23 @@ export const LIBRARY_ITEMS: readonly AssessmentItem[] = [
   cr('IT-M3.GR.22-2', 'M3.GR.22', 'explain', 'Explain why length × width gives the number of unit squares in a rectangle.', ['SRC-019'], ['area is length plus width']),
   cr('IT-M3.GR.24-1', 'M3.GR.24', 'decompose', 'An L-shape is made of two rectangles. Show how you would split it to find the area.', ['SRC-019'], ['you can find the area of an L-shape with one multiplication']),
   cr('IT-M3.GR.24-2', 'M3.GR.24', 'compute', 'Find the total area of the L-shape by adding the two rectangles’ areas.', ['SRC-019'], ['you can find the area of an L-shape with one multiplication']),
+
+  cr('IT-F3.13-1', 'F3.13', 'decode', 'Read the word “disagreement” by breaking it into parts, and write the parts you used.', ['SRC-023'], ['you sound out every word one letter at a time']),
+  cr('IT-F3.13-2', 'F3.13', 'explain', 'Explain which word parts helped you read “unhelpful” quickly.', ['SRC-022'], ['you sound out every word one letter at a time']),
+  cr('IT-F3.14-1', 'F3.14', 'read', 'Read the passage aloud. Mark where you pause for commas and stop for periods.', ['SRC-021'], ['reading fast is the same as reading well']),
+  cr('IT-F3.14-2', 'F3.14', 'self-correct', 'You read the word “house” as “horse.” Explain how you would notice and fix that mistake.', ['SRC-012'], ['reading fast is the same as reading well']),
+  cr('IT-RD3.02-1', 'RD3.02', 'identify', 'Write the theme of the story in one sentence.', ['SRC-021'], ['the theme is the same as the topic']),
+  cr('IT-RD3.02-2', 'RD3.02', 'explain', 'Explain how two details in the story develop that theme.', ['SRC-012'], ['the theme is the same as the topic']),
+  cr('IT-RD3.03-1', 'RD3.03', 'compare', 'For one event in the story, write how two different characters feel about it.', ['SRC-021'], ['every character feels the same way about what happens']),
+  cr('IT-RD3.03-2', 'RD3.03', 'explain', 'Explain why the two characters see the event differently, using a detail for each.', ['SRC-012'], ['every character feels the same way about what happens']),
+  mc('IT-RD3.04-1', 'RD3.04', 'identify', 'Which poem type is always three lines about nature with a 5-7-5 syllable pattern?', ['haiku'], ['limerick', 'free verse', 'rhymed verse'], ['SRC-021'], ['all poems have to rhyme']),
+  cr('IT-RD3.04-2', 'RD3.04', 'distinguish', 'Given a haiku and a free-verse poem, explain the feature that tells them apart.', ['SRC-012'], ['all poems have to rhyme']),
+  cr('IT-RI3.01-1', 'RI3.01', 'identify', 'Find one heading and one caption in the article and write what each one tells you.', ['SRC-024'], ['text features are just decoration you can skip']),
+  cr('IT-RI3.01-2', 'RI3.01', 'explain', 'Explain how a diagram in the text helps you understand the information.', ['SRC-013'], ['text features are just decoration you can skip']),
+  mc('IT-RI3.03-1', 'RI3.03', 'identify', 'An author fills a text with facts, headings and diagrams. What is the most likely purpose?', ['to inform'], ['to persuade', 'to entertain', 'to rhyme'], ['SRC-013'], ['an author only ever writes to tell facts']),
+  cr('IT-RI3.03-2', 'RI3.03', 'explain', 'Explain how the details in the text show the author’s purpose.', ['SRC-024'], ['an author only ever writes to tell facts']),
+  cr('IT-RI3.04-1', 'RI3.04', 'identify', 'Write the author’s claim and copy one piece of evidence that supports it.', ['SRC-013'], ['a claim is true just because the author wrote it']),
+  cr('IT-RI3.04-2', 'RI3.04', 'explain', 'Explain how the evidence supports the author’s claim.', ['SRC-024'], ['a claim is true just because the author wrote it']),
 ];
 
 // ---------------------------------------------------------------------------
@@ -1029,6 +1209,14 @@ export const LIBRARY_RUBRICS: readonly Rubric[] = [
   rubric('M3.GR.21', [{ trace: 'measure', desc: 'Finds area by counting unit squares.', max: 3 }, { trace: 'explain', desc: 'Distinguishes area from perimeter.', max: 3 }]),
   rubric('M3.GR.22', [{ trace: 'compute', desc: 'Uses length × width for area.', max: 3 }, { trace: 'explain', desc: 'Explains why the formula counts squares.', max: 3 }]),
   rubric('M3.GR.24', [{ trace: 'decompose', desc: 'Decomposes into non-overlapping rectangles.', max: 3 }, { trace: 'compute', desc: 'Adds the rectangle areas correctly.', max: 3 }]),
+  rubric('F3.13', [{ trace: 'decode', desc: 'Decodes by breaking words into parts.', max: 3 }, { trace: 'explain', desc: 'Explains which parts helped.', max: 3 }]),
+  rubric('F3.14', [{ trace: 'read', desc: 'Reads accurately with pace and expression.', max: 3 }, { trace: 'self-correct', desc: 'Notices and fixes miscues.', max: 3 }]),
+  rubric('RD3.02', [{ trace: 'identify', desc: 'Identifies the theme (not the topic).', max: 3 }, { trace: 'explain', desc: 'Explains how details develop it.', max: 3 }]),
+  rubric('RD3.03', [{ trace: 'compare', desc: 'Compares two characters’ perspectives.', max: 3 }, { trace: 'explain', desc: 'Explains the difference with text detail.', max: 3 }]),
+  rubric('RD3.04', [{ trace: 'identify', desc: 'Identifies the poem type.', max: 3 }, { trace: 'distinguish', desc: 'Distinguishes by features.', max: 3 }]),
+  rubric('RI3.01', [{ trace: 'identify', desc: 'Identifies text features.', max: 3 }, { trace: 'explain', desc: 'Explains how they add meaning.', max: 3 }]),
+  rubric('RI3.03', [{ trace: 'identify', desc: 'Identifies the author’s purpose.', max: 3 }, { trace: 'explain', desc: 'Explains how details develop it.', max: 3 }]),
+  rubric('RI3.04', [{ trace: 'identify', desc: 'Identifies claim and evidence.', max: 3 }, { trace: 'explain', desc: 'Explains how evidence supports the claim.', max: 3 }]),
 ];
 
 // ---------------------------------------------------------------------------
