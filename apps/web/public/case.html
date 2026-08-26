@@ -46,6 +46,10 @@ button{font-family:inherit}
 .dot{width:26px;height:5px;border-radius:3px;background:var(--line);border:0;padding:0;cursor:pointer;transition:background .2s}
 .dot.on{background:var(--teal)}
 .dot.done{background:var(--teal-deep);opacity:.5}
+.tbtn{margin-left:8px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--line);
+  background:var(--card);color:var(--ink-soft);border-radius:8px;padding:5px 10px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.tbtn:hover{color:var(--ink);border-color:var(--dim)}
+.tbtn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 
 /* step area */
 .steps{flex:1;display:flex;align-items:center;padding:14px 0 8px}
@@ -140,6 +144,7 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
   <div class="rail">
     <div class="brand"><span class="d">◆</span> ILP</div>
     <div class="dots" id="dots"></div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light or dark mode">☾ Dark</button>
   </div>
 
   <div class="steps" id="steps">
@@ -315,6 +320,27 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
   // step 5 — head-to-head flip
   Array.prototype.forEach.call(document.querySelectorAll('#vs .row'), function(r){
     r.addEventListener('click', function(){ r.classList.toggle('flip'); });
+  });
+
+  // theme toggle (persisted; respects OS default until the viewer chooses)
+  var tb = document.getElementById('themeBtn');
+  function effectiveDark(){
+    var a = document.documentElement.getAttribute('data-theme');
+    if(a==='dark') return true; if(a==='light') return false;
+    try{ return matchMedia('(prefers-color-scheme: dark)').matches; }catch(e){ return false; }
+  }
+  function label(){ tb.textContent = effectiveDark() ? '☀ Light' : '☾ Dark'; }
+  function applyTheme(t){
+    if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme', t);
+    else document.documentElement.removeAttribute('data-theme');
+    label();
+  }
+  try{ var saved = localStorage.getItem('ilp-case-theme'); if(saved) applyTheme(saved); }catch(e){}
+  label();
+  tb.addEventListener('click', function(){
+    var n = effectiveDark() ? 'light' : 'dark';
+    applyTheme(n);
+    try{ localStorage.setItem('ilp-case-theme', n); }catch(e){}
   });
 })();
 </script>
