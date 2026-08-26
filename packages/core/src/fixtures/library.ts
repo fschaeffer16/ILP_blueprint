@@ -483,6 +483,118 @@ export const LIBRARY_OBJECTIVES: readonly ObjectiveVersion[] = [
     prerequisites: ['central idea', 'key details'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
     misconceptions: ['a claim is true just because the author wrote it'], sourceIds: ['SRC-013', 'SRC-024'],
   }),
+
+  // --- ELA Reading: Across Genres ---
+  objective({
+    objectiveId: 'RG3.01', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.3.1'],
+    studentOutcome: 'Identify and explain metaphors, personification and hyperbole in a text.',
+    essentialKnowledge: ['metaphor', 'personification', 'hyperbole', 'figurative language'],
+    requiredReasoning: ['identify', 'explain'],
+    prerequisites: ['read grade-level text'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['figurative language means the words are literally true'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+  objective({
+    objectiveId: 'RG3.02', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.3.2'],
+    studentOutcome: 'Summarize a text in your own words, keeping the most important ideas.',
+    essentialKnowledge: ['summary', 'main events', 'central idea', 'in your own words'],
+    requiredReasoning: ['summarize', 'explain'],
+    prerequisites: ['identify key details'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['a summary should include every detail'], sourceIds: ['SRC-013', 'SRC-021'],
+  }),
+  objective({
+    objectiveId: 'RG3.03', version: 1, subject: 'reading', standardRefs: ['ELA.3.R.3.3'],
+    studentOutcome: 'Compare and contrast how two authors present information on the same topic.',
+    essentialKnowledge: ['compare', 'contrast', 'same topic', 'point of view'],
+    requiredReasoning: ['compare', 'explain'],
+    prerequisites: ['central idea'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['two texts on the same topic always say the same thing'], sourceIds: ['SRC-013', 'SRC-024'],
+  }),
+
+  // --- ELA Communication: Writing ---
+  objective({
+    objectiveId: 'WC3.11', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.1.1'],
+    studentOutcome: 'Write upper- and lowercase letters in cursive with correct, connected letter formation.',
+    essentialKnowledge: ['cursive', 'uppercase', 'lowercase', 'letter formation'],
+    requiredReasoning: ['form', 'write'],
+    prerequisites: ['print letters'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['cursive letters do not connect to each other'], sourceIds: ['SRC-023'],
+  }),
+  objective({
+    objectiveId: 'WC3.12', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.1.2'],
+    studentOutcome: 'Write a narrative with a logical sequence of events, description, dialogue and an ending.',
+    essentialKnowledge: ['narrative', 'sequence', 'dialogue', 'description', 'ending'],
+    requiredReasoning: ['plan', 'write'],
+    prerequisites: ['write complete sentences'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['a story just lists what happened with no details'], sourceIds: ['SRC-021', 'SRC-012'],
+  }),
+  objective({
+    objectiveId: 'WC3.15', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.1.5'],
+    studentOutcome: 'Improve a piece of writing by planning, revising and editing with feedback.',
+    essentialKnowledge: ['plan', 'revise', 'edit', 'feedback'],
+    requiredReasoning: ['revise', 'edit'],
+    prerequisites: ['write a draft'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['revising just means fixing the spelling'], sourceIds: ['SRC-026', 'SRC-013'],
+  }),
+
+  // --- ELA Communication: Oral, Conventions, Research, Multimedia ---
+  objective({
+    objectiveId: 'WC3.21', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.2.1'],
+    studentOutcome: 'Present information orally in a logical order with clear volume, pronunciation and nonverbal cues.',
+    essentialKnowledge: ['sequence', 'volume', 'pronunciation', 'nonverbal cues'],
+    requiredReasoning: ['organize', 'present'],
+    prerequisites: ['speak in complete sentences'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['as long as you know it, how you say it does not matter'], sourceIds: ['SRC-025'],
+  }),
+  objective({
+    objectiveId: 'WC3.31', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.3.1'],
+    studentOutcome: 'Apply grade-level grammar, punctuation, capitalization and spelling when editing writing.',
+    essentialKnowledge: ['grammar', 'punctuation', 'capitalization', 'spelling'],
+    requiredReasoning: ['apply', 'edit'],
+    prerequisites: ['write complete sentences'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['capital letters are only for the first word of a sentence'], sourceIds: ['SRC-026', 'SRC-013'],
+  }),
+  objective({
+    objectiveId: 'WC3.41', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.4.1'],
+    studentOutcome: 'Conduct research to answer a question, organizing information from more than one source.',
+    essentialKnowledge: ['research question', 'source', 'gather', 'organize'],
+    requiredReasoning: ['gather', 'organize'],
+    prerequisites: ['read informational text'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['one source is always enough to answer a question'], sourceIds: ['SRC-026', 'SRC-024'],
+  }),
+  objective({
+    objectiveId: 'WC3.51', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.5.1'],
+    studentOutcome: 'Use two or more multimedia elements to strengthen an oral or written task.',
+    essentialKnowledge: ['multimedia', 'image', 'audio', 'enhance'],
+    requiredReasoning: ['select', 'explain'],
+    prerequisites: ['write or present a task'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['more media always makes a project better'], sourceIds: ['SRC-026'],
+  }),
+  objective({
+    objectiveId: 'WC3.52', version: 1, subject: 'writing', standardRefs: ['ELA.3.C.5.2'],
+    studentOutcome: 'Use digital writing tools to plan, draft and revise, alone or with a partner.',
+    essentialKnowledge: ['digital tool', 'draft', 'revise', 'collaborate'],
+    requiredReasoning: ['use', 'revise'],
+    prerequisites: ['type simple text'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['a digital draft cannot be changed once you type it'], sourceIds: ['SRC-026'],
+  }),
+
+  // --- ELA Vocabulary ---
+  objective({
+    objectiveId: 'V3.11', version: 1, subject: 'reading', standardRefs: ['ELA.3.V.1.1'],
+    studentOutcome: 'Use grade-level academic vocabulary accurately in speaking and writing.',
+    essentialKnowledge: ['academic vocabulary', 'precise word', 'context'],
+    requiredReasoning: ['apply', 'explain'],
+    prerequisites: ['grade-level vocabulary'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['any everyday word works as well as a precise one'], sourceIds: ['SRC-013', 'SRC-022'],
+  }),
+  objective({
+    objectiveId: 'V3.13', version: 1, subject: 'reading', standardRefs: ['ELA.3.V.1.3'],
+    studentOutcome: 'Use context clues, references and word relationships to find the meaning of an unknown word.',
+    essentialKnowledge: ['context clue', 'multiple-meaning word', 'reference', 'figurative language'],
+    requiredReasoning: ['determine', 'explain'],
+    prerequisites: ['read grade-level text'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['if you do not know a word you must skip it'], sourceIds: ['SRC-024', 'SRC-022'],
+  }),
 ];
 
 // ---------------------------------------------------------------------------
@@ -1040,6 +1152,149 @@ export const LIBRARY_LESSONS: readonly LessonPlan[] = [
       { id: 'ic5', kind: 'reflection', title: 'Think back', body: 'Why isn’t a claim true just because the author wrote it?', sourceIds: [], targets: [] },
     ],
   },
+  {
+    id: 'LP-RG3.01', objectiveId: 'RG3.01', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Figurative language',
+    blocks: [
+      { id: 'g1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will spot metaphors, personification and hyperbole and explain what they really mean.', sourceIds: [], targets: [] },
+      { id: 'g1b', kind: 'instruction', title: 'Not meant literally', body: 'Figurative language paints a picture instead of stating a fact. A metaphor calls one thing another (“the classroom was a zoo”). Personification gives a thing human actions (“the wind whispered”). Hyperbole is a huge exaggeration (“I’ve told you a million times”). None of these are literally true — that is the point.', sourceIds: ['SRC-021'], targets: ['identify', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'g1c', kind: 'practice', title: 'Name the type', body: 'For each phrase in the passage, label it metaphor, personification or hyperbole.', sourceIds: ['SRC-012'], targets: ['identify'] },
+      { id: 'g1d', kind: 'mastery_task', title: 'Identify and explain', body: 'Find one example of figurative language in the text, name its type, and explain what it actually means.', sourceIds: ['SRC-021'], targets: ['identify', 'explain'] },
+      { id: 'g1e', kind: 'reflection', title: 'Think back', body: 'Why would a writer say something that isn’t literally true?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RG3.02', objectiveId: 'RG3.02', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Writing a summary',
+    blocks: [
+      { id: 'g2a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will shrink a text down to its most important ideas in your own words.', sourceIds: [], targets: [] },
+      { id: 'g2b', kind: 'instruction', title: 'The big ideas only', body: 'A summary retells the most important ideas briefly, in your own words — not every detail. For a story, tell the main events and the theme; for an informational text, the central idea and the key details. Leave out small examples and repeats.', sourceIds: ['SRC-013'], targets: ['summarize', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'g2c', kind: 'practice', title: 'Keep or cut', body: 'From the list of details, circle the few that belong in a summary and cross out the rest.', sourceIds: ['SRC-021'], targets: ['summarize'] },
+      { id: 'g2d', kind: 'mastery_task', title: 'Summarize and explain', body: 'Write a short summary of the text in your own words, and explain why you left some details out.', sourceIds: ['SRC-013'], targets: ['summarize', 'explain'] },
+      { id: 'g2e', kind: 'reflection', title: 'Think back', body: 'Why is a summary better without every detail?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-RG3.03', objectiveId: 'RG3.03', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Two authors, one topic',
+    blocks: [
+      { id: 'g3a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will compare how two authors write about the same topic.', sourceIds: [], targets: [] },
+      { id: 'g3b', kind: 'instruction', title: 'Same topic, different takes', body: 'Two texts can cover the same topic but present it differently — different facts, different focus, or a different point of view. To compare, find what both say (compare) and where they differ (contrast). They do not always agree.', sourceIds: ['SRC-013'], targets: ['compare', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'g3c', kind: 'practice', title: 'Same and different', body: 'For the two short texts, write one thing they both say and one way they differ.', sourceIds: ['SRC-024'], targets: ['compare'] },
+      { id: 'g3d', kind: 'mastery_task', title: 'Compare and explain', body: 'Compare how the two authors present the topic, and explain one important difference between them.', sourceIds: ['SRC-013'], targets: ['compare', 'explain'] },
+      { id: 'g3e', kind: 'reflection', title: 'Think back', body: 'Why might two authors write about the same topic so differently?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.11', objectiveId: 'WC3.11', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Writing in cursive',
+    blocks: [
+      { id: 'w1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will form cursive letters and join them into words.', sourceIds: [], targets: [] },
+      { id: 'w1b', kind: 'instruction', title: 'Connected letters', body: 'In cursive, letters are formed with flowing strokes and joined together, so your pencil rarely lifts within a word. Start each lowercase letter on the line, and use connecting strokes to link one letter to the next. Cursive letters do connect — that is what makes writing faster and smoother.', sourceIds: ['SRC-023'], targets: ['form', 'write'], techniqueId: 'worked_example_fade' },
+      { id: 'w1c', kind: 'practice', title: 'Trace and join', body: 'Form the cursive letters c, a and t, then join them to write the word “cat.”', sourceIds: ['SRC-023'], targets: ['form'] },
+      { id: 'w1d', kind: 'mastery_task', title: 'Form and write', body: 'Write your first name in cursive, forming each letter correctly and connecting them.', sourceIds: ['SRC-023'], targets: ['form', 'write'] },
+      { id: 'w1e', kind: 'reflection', title: 'Think back', body: 'How does joining letters make writing faster?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.12', objectiveId: 'WC3.12', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Writing a narrative',
+    blocks: [
+      { id: 'w2a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will write a story with events in order, some dialogue, and an ending.', sourceIds: [], targets: [] },
+      { id: 'w2b', kind: 'instruction', title: 'A story has a shape', body: 'A narrative tells events in a logical order — a beginning, middle and end. Good stories add description so the reader can picture it, dialogue so characters talk, and transition words (first, then, later) to connect events, and they finish with a real ending. A story is more than a list of what happened.', sourceIds: ['SRC-021'], targets: ['plan', 'write'], techniqueId: 'chunked_prompt' },
+      { id: 'w2c', kind: 'practice', title: 'Plan the order', body: 'List three events for your story in order, and write one line of dialogue a character might say.', sourceIds: ['SRC-012'], targets: ['plan'] },
+      { id: 'w2d', kind: 'mastery_task', title: 'Plan and write', body: 'Write a short narrative with events in order, one piece of dialogue, some description, and a clear ending.', sourceIds: ['SRC-021'], targets: ['plan', 'write'] },
+      { id: 'w2e', kind: 'reflection', title: 'Think back', body: 'What makes a story more than a list of events?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.15', objectiveId: 'WC3.15', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Revising and editing',
+    blocks: [
+      { id: 'w5a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will make a piece of writing better by revising the ideas and editing the mistakes.', sourceIds: [], targets: [] },
+      { id: 'w5b', kind: 'instruction', title: 'Revise, then edit', body: 'Revising and editing are two different jobs. Revising improves the ideas: add a detail, reorder a sentence, make it clearer — often using a partner’s feedback. Editing fixes the mistakes: spelling, punctuation, capital letters. Revising is not just fixing spelling; that is only editing.', sourceIds: ['SRC-026'], targets: ['revise', 'edit'], techniqueId: 'chunked_prompt' },
+      { id: 'w5c', kind: 'practice', title: 'One of each', body: 'On the draft, make one revision that improves an idea, and one edit that fixes a mistake.', sourceIds: ['SRC-013'], targets: ['revise', 'edit'] },
+      { id: 'w5d', kind: 'mastery_task', title: 'Revise and edit', body: 'Improve the draft: revise it to make one idea clearer using the feedback, then edit it for spelling and punctuation.', sourceIds: ['SRC-026'], targets: ['revise', 'edit'] },
+      { id: 'w5e', kind: 'reflection', title: 'Think back', body: 'How is revising different from editing?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.21', objectiveId: 'WC3.21', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Presenting out loud',
+    blocks: [
+      { id: 'o1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will present information clearly, in order, so listeners can follow.', sourceIds: [], targets: [] },
+      { id: 'o1b', kind: 'instruction', title: 'How you say it matters', body: 'A good presentation is organized in a logical order and delivered clearly: speak at a volume everyone can hear, pronounce words clearly, and use nonverbal cues like eye contact. Knowing your facts is not enough — how you say it decides whether people understand.', sourceIds: ['SRC-025'], targets: ['organize', 'present'], techniqueId: 'chunked_prompt' },
+      { id: 'o1c', kind: 'practice', title: 'Put it in order', body: 'Number your three points in the order you will say them, and mark where to pause.', sourceIds: ['SRC-025'], targets: ['organize'] },
+      { id: 'o1d', kind: 'mastery_task', title: 'Organize and present', body: 'Give a short spoken report in a logical order, with clear volume and pronunciation, and explain the order you chose.', sourceIds: ['SRC-025'], targets: ['organize', 'present'] },
+      { id: 'o1e', kind: 'reflection', title: 'Think back', body: 'Why isn’t knowing the facts enough for a good presentation?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.31', objectiveId: 'WC3.31', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Editing for conventions',
+    blocks: [
+      { id: 'c1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will fix grammar, punctuation, capital letters and spelling in writing.', sourceIds: [], targets: [] },
+      { id: 'c1b', kind: 'instruction', title: 'The rules of clear writing', body: 'Conventions help a reader understand you: complete sentences, end punctuation, commas where needed, correct spelling, and capital letters for the first word of a sentence and for proper nouns like names, days and places — not only the first word. Editing means checking each of these.', sourceIds: ['SRC-026'], targets: ['apply', 'edit'], techniqueId: 'chunked_prompt' },
+      { id: 'c1c', kind: 'practice', title: 'Fix the sentence', body: 'Rewrite “my friend maria lives in miami” with correct capital letters and punctuation.', sourceIds: ['SRC-013'], targets: ['edit'] },
+      { id: 'c1d', kind: 'mastery_task', title: 'Apply and edit', body: 'Edit the short paragraph, fixing capitalization, punctuation and spelling, and name one rule you applied.', sourceIds: ['SRC-026'], targets: ['apply', 'edit'] },
+      { id: 'c1e', kind: 'reflection', title: 'Think back', body: 'Besides the first word, when else do you use a capital letter?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.41', objectiveId: 'WC3.41', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Researching a question',
+    blocks: [
+      { id: 'r1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will answer a question by gathering information from more than one source.', sourceIds: [], targets: [] },
+      { id: 'r1b', kind: 'instruction', title: 'Ask, gather, organize', body: 'Research starts with a clear question. Then gather information from more than one source, because one source can be incomplete or one-sided. Organize what you find by the question you are answering, in your own words. One source is usually not enough.', sourceIds: ['SRC-026'], targets: ['gather', 'organize'], techniqueId: 'chunked_prompt' },
+      { id: 'r1c', kind: 'practice', title: 'Two sources', body: 'For the research question, write one fact from each of two different sources.', sourceIds: ['SRC-024'], targets: ['gather'] },
+      { id: 'r1d', kind: 'mastery_task', title: 'Gather and organize', body: 'Answer the research question using facts from two sources, and organize the facts under the question.', sourceIds: ['SRC-026'], targets: ['gather', 'organize'] },
+      { id: 'r1e', kind: 'reflection', title: 'Think back', body: 'Why use more than one source to answer a question?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.51', objectiveId: 'WC3.51', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Adding multimedia',
+    blocks: [
+      { id: 'm1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will choose multimedia that makes a project clearer, not just busier.', sourceIds: [], targets: [] },
+      { id: 'm1b', kind: 'instruction', title: 'Media with a purpose', body: 'Multimedia elements — an image, a sound clip, a chart — can make a task clearer by showing what words alone cannot. But more is not always better: each element should have a purpose and help the audience understand. Pick media that adds meaning.', sourceIds: ['SRC-026'], targets: ['select', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'm1c', kind: 'practice', title: 'Pick two', body: 'For your topic, choose two multimedia elements and write what each one adds.', sourceIds: ['SRC-026'], targets: ['select'] },
+      { id: 'm1d', kind: 'mastery_task', title: 'Select and explain', body: 'Choose two multimedia elements for a task and explain how each one helps the audience understand.', sourceIds: ['SRC-026'], targets: ['select', 'explain'] },
+      { id: 'm1e', kind: 'reflection', title: 'Think back', body: 'Why isn’t adding more pictures always better?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-WC3.52', objectiveId: 'WC3.52', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Writing with digital tools',
+    blocks: [
+      { id: 'm2a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will use a digital tool to plan, draft and revise your writing.', sourceIds: [], targets: [] },
+      { id: 'm2b', kind: 'instruction', title: 'Draft, then change it', body: 'Digital writing tools make it easy to plan, type a draft, and then revise — you can add, delete, and move text without starting over, alone or with a partner. A digital draft is never stuck; changing it is the whole point.', sourceIds: ['SRC-026'], targets: ['use', 'revise'], techniqueId: 'worked_example_fade' },
+      { id: 'm2c', kind: 'practice', title: 'Type and change', body: 'Type two sentences in the tool, then move one sentence and change one word.', sourceIds: ['SRC-026'], targets: ['use'] },
+      { id: 'm2d', kind: 'mastery_task', title: 'Use and revise', body: 'Draft a short paragraph in the digital tool, then revise it by adding a detail and fixing a sentence.', sourceIds: ['SRC-026'], targets: ['use', 'revise'] },
+      { id: 'm2e', kind: 'reflection', title: 'Think back', body: 'How does a digital tool make revising easier?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-V3.11', objectiveId: 'V3.11', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Using precise words',
+    blocks: [
+      { id: 'v1a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will use precise academic words to say exactly what you mean.', sourceIds: [], targets: [] },
+      { id: 'v1b', kind: 'instruction', title: 'The right word matters', body: 'Academic vocabulary is the more precise words used in school and books. Using the exact word (“observe” instead of “see,” “compare” instead of “look at”) makes your meaning clearer. An everyday word does not always work as well as a precise one.', sourceIds: ['SRC-013'], targets: ['apply', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'v1c', kind: 'practice', title: 'Swap it up', body: 'Replace the underlined everyday word in each sentence with a more precise academic word.', sourceIds: ['SRC-022'], targets: ['apply'] },
+      { id: 'v1d', kind: 'mastery_task', title: 'Apply and explain', body: 'Use two academic vocabulary words correctly in sentences, and explain why each is more precise than an everyday word.', sourceIds: ['SRC-013'], targets: ['apply', 'explain'] },
+      { id: 'v1e', kind: 'reflection', title: 'Think back', body: 'Why does the exact word make your meaning clearer?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-V3.13', objectiveId: 'V3.13', objectiveVersion: 1, authorId: 'T-102',
+    title: 'Figuring out new words',
+    blocks: [
+      { id: 'v3a', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will use clues around a word to figure out what it means.', sourceIds: [], targets: [] },
+      { id: 'v3b', kind: 'instruction', title: 'Clues are everywhere', body: 'When you meet an unknown or multiple-meaning word, you do not have to skip it. Use context clues — the words and sentences around it — plus word relationships and, if needed, a reference like a dictionary. The sentence usually points you to the right meaning.', sourceIds: ['SRC-024'], targets: ['determine', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'v3c', kind: 'practice', title: 'Use the clues', body: 'Use the sentence to figure out the meaning of the underlined word, and underline the clue.', sourceIds: ['SRC-024'], targets: ['determine'] },
+      { id: 'v3d', kind: 'mastery_task', title: 'Determine and explain', body: 'Figure out the meaning of an unknown word from its sentence, and explain which context clues told you.', sourceIds: ['SRC-022'], targets: ['determine', 'explain'] },
+      { id: 'v3e', kind: 'reflection', title: 'Think back', body: 'Why is it better to use clues than to skip an unknown word?', sourceIds: [], targets: [] },
+    ],
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -1155,6 +1410,33 @@ export const LIBRARY_ITEMS: readonly AssessmentItem[] = [
   cr('IT-RI3.03-2', 'RI3.03', 'explain', 'Explain how the details in the text show the author’s purpose.', ['SRC-024'], ['an author only ever writes to tell facts']),
   cr('IT-RI3.04-1', 'RI3.04', 'identify', 'Write the author’s claim and copy one piece of evidence that supports it.', ['SRC-013'], ['a claim is true just because the author wrote it']),
   cr('IT-RI3.04-2', 'RI3.04', 'explain', 'Explain how the evidence supports the author’s claim.', ['SRC-024'], ['a claim is true just because the author wrote it']),
+
+  cr('IT-RG3.01-1', 'RG3.01', 'identify', 'Find one example of figurative language in the text and name its type (metaphor, personification or hyperbole).', ['SRC-021'], ['figurative language means the words are literally true']),
+  cr('IT-RG3.01-2', 'RG3.01', 'explain', 'Explain what the phrase “the wind whispered” actually means.', ['SRC-012'], ['figurative language means the words are literally true']),
+  cr('IT-RG3.02-1', 'RG3.02', 'summarize', 'Write a short summary of the text in your own words.', ['SRC-013'], ['a summary should include every detail']),
+  cr('IT-RG3.02-2', 'RG3.02', 'explain', 'Explain why you left some details out of your summary.', ['SRC-021'], ['a summary should include every detail']),
+  cr('IT-RG3.03-1', 'RG3.03', 'compare', 'Write one thing both texts say about the topic and one way they differ.', ['SRC-013'], ['two texts on the same topic always say the same thing']),
+  cr('IT-RG3.03-2', 'RG3.03', 'explain', 'Explain one important difference in how the two authors present the topic.', ['SRC-024'], ['two texts on the same topic always say the same thing']),
+  cr('IT-WC3.11-1', 'WC3.11', 'form', 'Write the cursive letters c, a and t, then join them to write “cat.”', ['SRC-023'], ['cursive letters do not connect to each other']),
+  cr('IT-WC3.11-2', 'WC3.11', 'write', 'Write your first name in cursive with the letters connected.', ['SRC-023'], ['cursive letters do not connect to each other']),
+  cr('IT-WC3.12-1', 'WC3.12', 'plan', 'List three events for a story in order, and write one line of dialogue a character might say.', ['SRC-021'], ['a story just lists what happened with no details']),
+  cr('IT-WC3.12-2', 'WC3.12', 'write', 'Write a short narrative with events in order, one piece of dialogue, description and a clear ending.', ['SRC-012'], ['a story just lists what happened with no details']),
+  cr('IT-WC3.15-1', 'WC3.15', 'revise', 'On the draft, make one revision that improves an idea (not a spelling fix).', ['SRC-026'], ['revising just means fixing the spelling']),
+  cr('IT-WC3.15-2', 'WC3.15', 'edit', 'On the draft, make one edit that fixes a spelling or punctuation mistake.', ['SRC-013'], ['revising just means fixing the spelling']),
+  cr('IT-WC3.21-1', 'WC3.21', 'organize', 'Number your three points in the order you will present them, and mark where to pause.', ['SRC-025'], ['as long as you know it, how you say it does not matter']),
+  cr('IT-WC3.21-2', 'WC3.21', 'present', 'Give a short spoken report, and describe how you used volume and clear pronunciation.', ['SRC-025'], ['as long as you know it, how you say it does not matter']),
+  cr('IT-WC3.31-1', 'WC3.31', 'edit', 'Rewrite “my friend maria lives in miami” with correct capital letters and punctuation.', ['SRC-013'], ['capital letters are only for the first word of a sentence']),
+  cr('IT-WC3.31-2', 'WC3.31', 'apply', 'Edit the paragraph for capitalization, punctuation and spelling, and name one rule you applied.', ['SRC-026'], ['capital letters are only for the first word of a sentence']),
+  cr('IT-WC3.41-1', 'WC3.41', 'gather', 'Write one fact from each of two different sources about the research question.', ['SRC-024'], ['one source is always enough to answer a question']),
+  cr('IT-WC3.41-2', 'WC3.41', 'organize', 'Organize the facts you found under the research question they answer.', ['SRC-026'], ['one source is always enough to answer a question']),
+  cr('IT-WC3.51-1', 'WC3.51', 'select', 'Choose two multimedia elements for your project.', ['SRC-026'], ['more media always makes a project better']),
+  cr('IT-WC3.51-2', 'WC3.51', 'explain', 'Explain how each multimedia element helps the audience understand.', ['SRC-026'], ['more media always makes a project better']),
+  cr('IT-WC3.52-1', 'WC3.52', 'use', 'Type two sentences in the digital tool, then move one sentence and change a word.', ['SRC-026'], ['a digital draft cannot be changed once you type it']),
+  cr('IT-WC3.52-2', 'WC3.52', 'revise', 'Revise your digital draft by adding a detail and fixing a sentence.', ['SRC-026'], ['a digital draft cannot be changed once you type it']),
+  cr('IT-V3.11-1', 'V3.11', 'apply', 'Use two academic vocabulary words correctly in sentences.', ['SRC-013'], ['any everyday word works as well as a precise one']),
+  cr('IT-V3.11-2', 'V3.11', 'explain', 'Explain why a precise academic word is clearer than an everyday word.', ['SRC-022'], ['any everyday word works as well as a precise one']),
+  cr('IT-V3.13-1', 'V3.13', 'determine', 'Use the sentence to figure out the meaning of the underlined word, and underline the clue.', ['SRC-024'], ['if you do not know a word you must skip it']),
+  cr('IT-V3.13-2', 'V3.13', 'explain', 'Explain which context clues told you the word’s meaning.', ['SRC-022'], ['if you do not know a word you must skip it']),
 ];
 
 // ---------------------------------------------------------------------------
@@ -1217,6 +1499,19 @@ export const LIBRARY_RUBRICS: readonly Rubric[] = [
   rubric('RI3.01', [{ trace: 'identify', desc: 'Identifies text features.', max: 3 }, { trace: 'explain', desc: 'Explains how they add meaning.', max: 3 }]),
   rubric('RI3.03', [{ trace: 'identify', desc: 'Identifies the author’s purpose.', max: 3 }, { trace: 'explain', desc: 'Explains how details develop it.', max: 3 }]),
   rubric('RI3.04', [{ trace: 'identify', desc: 'Identifies claim and evidence.', max: 3 }, { trace: 'explain', desc: 'Explains how evidence supports the claim.', max: 3 }]),
+  rubric('RG3.01', [{ trace: 'identify', desc: 'Identifies figurative language and its type.', max: 3 }, { trace: 'explain', desc: 'Explains the intended meaning.', max: 3 }]),
+  rubric('RG3.02', [{ trace: 'summarize', desc: 'Summarizes the key ideas in own words.', max: 3 }, { trace: 'explain', desc: 'Explains what to leave out.', max: 3 }]),
+  rubric('RG3.03', [{ trace: 'compare', desc: 'Compares two authors on a topic.', max: 3 }, { trace: 'explain', desc: 'Explains a key difference.', max: 3 }]),
+  rubric('WC3.11', [{ trace: 'form', desc: 'Forms cursive letters correctly.', max: 3 }, { trace: 'write', desc: 'Connects letters into words.', max: 3 }]),
+  rubric('WC3.12', [{ trace: 'plan', desc: 'Plans events in a logical sequence.', max: 3 }, { trace: 'write', desc: 'Writes with dialogue, description and an ending.', max: 3 }]),
+  rubric('WC3.15', [{ trace: 'revise', desc: 'Revises to improve ideas.', max: 3 }, { trace: 'edit', desc: 'Edits mechanics.', max: 3 }]),
+  rubric('WC3.21', [{ trace: 'organize', desc: 'Organizes points logically.', max: 3 }, { trace: 'present', desc: 'Delivers with clear volume and pronunciation.', max: 3 }]),
+  rubric('WC3.31', [{ trace: 'apply', desc: 'Applies grammar and spelling rules.', max: 3 }, { trace: 'edit', desc: 'Edits capitalization and punctuation.', max: 3 }]),
+  rubric('WC3.41', [{ trace: 'gather', desc: 'Gathers facts from multiple sources.', max: 3 }, { trace: 'organize', desc: 'Organizes information by the question.', max: 3 }]),
+  rubric('WC3.51', [{ trace: 'select', desc: 'Selects purposeful multimedia.', max: 3 }, { trace: 'explain', desc: 'Explains how each element helps.', max: 3 }]),
+  rubric('WC3.52', [{ trace: 'use', desc: 'Uses a digital tool to draft.', max: 3 }, { trace: 'revise', desc: 'Revises the digital draft.', max: 3 }]),
+  rubric('V3.11', [{ trace: 'apply', desc: 'Uses academic vocabulary accurately.', max: 3 }, { trace: 'explain', desc: 'Explains why the precise word is clearer.', max: 3 }]),
+  rubric('V3.13', [{ trace: 'determine', desc: 'Determines meaning from context.', max: 3 }, { trace: 'explain', desc: 'Explains the clues used.', max: 3 }]),
 ];
 
 // ---------------------------------------------------------------------------

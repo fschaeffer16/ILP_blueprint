@@ -14,7 +14,7 @@ describe('content library catalog', () => {
 
   it('covers multiple subjects and has a lesson + items per objective', () => {
     expect(catalog.summary.subjects).toBeGreaterThanOrEqual(3); // math, reading/writing, civics
-    expect(catalog.summary.objectives).toBe(48);
+    expect(catalog.summary.objectives).toBe(61);
     for (const e of catalog.entries) {
       expect(e.lessonId).not.toBeNull();
       expect(e.blockCount).toBeGreaterThanOrEqual(4);
