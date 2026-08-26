@@ -15,41 +15,39 @@ The full app is deployed and public — anyone can click through it, no account:
 - Leadership pages on the same domain: `/what-comes-next.html` (the pitch) · `/ixl-vs-ilp.html` ·
   `/after-the-test.html` · `/built-by-teachers.html` · `/sourcing.html`.
 
-Every push to the repo auto-redeploys it. The static GitHub Pages snapshots below still work as a
-no-Vercel fallback.
+Every push to the repo auto-redeploys it.
 
 ## Two ways to run the demo
 
-### 1. The hosted snapshots (nothing to install)
+### 1. The live pages (nothing to install)
 
-Self-contained snapshots of each screen, published as private pages on the owner's account.
-Start at the hub and click through:
+The real app screens and the leadership pages, all public on the Vercel domain — no account,
+nothing to install. Start at the hub and click through:
 
-- **Demo hub** — https://claude.ai/code/artifact/a9bcd571-45dd-4b04-8cb3-7ea6f69a4ab5
+- **Demo hub** — https://ilp-blueprint-web.vercel.app/demo.html
 
 Individual views:
 
 | Role | View | Link |
 | --- | --- | --- |
-| District | Content library | https://claude.ai/code/artifact/e18eb03b-a05c-4cf2-957f-01bbb75c13bc |
-| District | Mastery rollup dashboard | https://claude.ai/code/artifact/673b68ba-301a-4c92-92ed-3e44fde90f06 |
-| District | Where objectives & content come from | https://claude.ai/code/artifact/5db49795-76f2-44f4-8c6a-966167db0359 |
-| Teacher | Command center | https://claude.ai/code/artifact/c5b4f470-98a2-49cc-91f1-5874be1a0520 |
-| Teacher | Baseline screener | https://claude.ai/code/artifact/49853175-da08-490f-a0b3-a2299a3a5c4b |
-| Teacher | Help signals (what Navi flags) | https://claude.ai/code/artifact/e3a17c50-6e18-464f-8b55-2eb2bdcc5223 |
-| Parent | Family view | https://claude.ai/code/artifact/f5cadaed-ade1-4647-a0c1-ee88be345874 |
-| Student | Student app | https://claude.ai/code/artifact/eeea7b95-7f69-4e5c-8bbb-27ea8301aa69 |
-| Student | Assignment-aware bot (Navi) | https://claude.ai/code/artifact/7c1ec5bf-4179-4ee5-8ae5-abbd040cad3f |
+| District | Content library | https://ilp-blueprint-web.vercel.app/library |
+| District | Mastery rollup dashboard | https://ilp-blueprint-web.vercel.app/dashboard |
+| District | Where objectives & content come from | https://ilp-blueprint-web.vercel.app/sourcing.html |
+| Teacher | Command center | https://ilp-blueprint-web.vercel.app/ |
+| Teacher | Baseline screener | https://ilp-blueprint-web.vercel.app/baseline |
+| Teacher | Help signals (what Navi flags) | https://ilp-blueprint-web.vercel.app/flags |
+| Parent | Family view | https://ilp-blueprint-web.vercel.app/parent |
+| Student | Student app | https://ilp-blueprint-web.vercel.app/student |
+| Student | Assignment-aware bot (Navi) | https://ilp-blueprint-web.vercel.app/navi-assignment-helper.html |
 
 **Leadership documents** (for showing district decision-makers):
 
 | Document | Link |
 | --- | --- |
-| Why FAST & i-Ready become obsolete ("After the Test") | https://claude.ai/code/artifact/044988c8-c651-4a74-835f-31031e4eb969 |
-| Growth & partnership proposal ("Built by Teachers") | https://claude.ai/code/artifact/66e8df4b-8441-41ce-9d03-bb1722df7b5b |
+| Why FAST & i-Ready become obsolete ("After the Test") | https://ilp-blueprint-web.vercel.app/after-the-test.html |
+| Growth & partnership proposal ("Built by Teachers") | https://ilp-blueprint-web.vercel.app/built-by-teachers.html |
 
-*(These pages are private to the account that published them.)* To put the app itself on a
-permanent live URL, see [`deploy.md`](deploy.md).
+*(All public — anyone with the link can open them, no account.)*
 
 ### 2. The full app (the real, wired Next.js app)
 
@@ -105,5 +103,5 @@ board, study guides, and verified/moderated subject channels), and the **assignm
 bot** (Navi) now runs as a grounded, answer-protecting helper docked on the assignment
 (see [`assignment-bot.md`](assignment-bot.md)). The remaining gaps before a live pilot are the
 **FAST/i-Ready import adapters**, the bot's **red-team release suite**, and the
-psychometric/curriculum validation the blueprint requires — plus growing the content pack
-beyond the demo's 6 objectives.
+psychometric/curriculum validation the blueprint requires. The content pack is **complete for
+grade 3** — all 60 Florida B.E.S.T. benchmarks (34 math + 26 ELA) authored and gate-validated.

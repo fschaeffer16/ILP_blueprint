@@ -3,7 +3,7 @@
 A fair-minded look at **IXL** — what it does well, where independent reviewers say it falls
 short, and where ILP is built on a different model. Not a takedown; a clear picture of two tools
 that do different jobs. Visual version:
-<https://claude.ai/code/artifact/b3b4275b-a7d0-4e69-84cd-f65c5d3036f2>.
+<https://ilp-blueprint-web.vercel.app/ixl-vs-ilp.html>.
 
 > **Sourcing caveat.** IXL's own domain (`ixl.com`) was unreachable during research, so IXL's
 > feature and efficacy claims here are drawn from secondary sources (Common Sense, Tech &
