@@ -239,6 +239,76 @@ export const LIBRARY_OBJECTIVES: readonly ObjectiveVersion[] = [
     prerequisites: ['skip counting by 2'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
     misconceptions: ['you check the first digit to tell even or odd'], sourceIds: ['SRC-017'],
   }),
+
+  // --- Number Sense & Operations (completing the strand) ---
+  objective({
+    objectiveId: 'M3.NSO.11', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.1.1'],
+    studentOutcome: 'Read and write numbers from 0 to 10,000 in standard, expanded and word form.',
+    essentialKnowledge: ['standard form', 'expanded form', 'word form', 'place value'],
+    requiredReasoning: ['read', 'write'],
+    prerequisites: ['place value to hundreds'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you write a number exactly the way you say it, word for word'], sourceIds: ['SRC-017', 'SRC-010'],
+  }),
+  objective({
+    objectiveId: 'M3.NSO.12', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.1.2'],
+    studentOutcome: 'Compose and decompose four-digit numbers in more than one way using thousands, hundreds, tens and ones.',
+    essentialKnowledge: ['thousands', 'hundreds', 'tens', 'ones', 'regroup'],
+    requiredReasoning: ['compose', 'decompose'],
+    prerequisites: ['place value to thousands'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['a number can only be broken apart one way'], sourceIds: ['SRC-017'],
+  }),
+  objective({
+    objectiveId: 'M3.NSO.22', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.2.2'],
+    studentOutcome: 'Represent multiplication with equal groups and arrays (products to 144) and relate it to division.',
+    essentialKnowledge: ['equal groups', 'array', 'repeated addition', 'division'],
+    requiredReasoning: ['represent', 'explain'],
+    prerequisites: ['skip counting'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['multiplication is just counting by ones quickly'], sourceIds: ['SRC-017'],
+  }),
+  objective({
+    objectiveId: 'M3.NSO.23', version: 1, subject: 'mathematics', standardRefs: ['MA.3.NSO.2.3'],
+    studentOutcome: 'Multiply a one-digit number by a multiple of 10 or 100, and explain using place value.',
+    essentialKnowledge: ['multiple of ten', 'multiple of hundred', 'basic fact', 'place value'],
+    requiredReasoning: ['compute', 'explain'],
+    prerequisites: ['multiplication facts'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['6 times 30 is the same as 6 times 3'], sourceIds: ['SRC-017'],
+  }),
+
+  // --- Measurement (completing the strand) ---
+  objective({
+    objectiveId: 'M3.M.11', version: 1, subject: 'mathematics', standardRefs: ['MA.3.M.1.1'],
+    studentOutcome: 'Select and use the right tool to measure length, liquid volume or temperature, reading it correctly.',
+    essentialKnowledge: ['ruler', 'beaker', 'thermometer', 'unit'],
+    requiredReasoning: ['select', 'measure'],
+    prerequisites: ['count by ones and fives'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['you can start measuring from any point on the ruler'], sourceIds: ['SRC-018'],
+  }),
+  objective({
+    objectiveId: 'M3.M.12', version: 1, subject: 'mathematics', standardRefs: ['MA.3.M.1.2'],
+    studentOutcome: 'Solve real-world problems with the four operations using measurements in the same unit.',
+    essentialKnowledge: ['length', 'mass', 'liquid volume', 'operation choice'],
+    requiredReasoning: ['model', 'solve'],
+    prerequisites: ['add and subtract'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: true },
+    misconceptions: ['the numbers in a measurement problem are always added'], sourceIds: ['SRC-018'],
+  }),
+  objective({
+    objectiveId: 'M3.M.21', version: 1, subject: 'mathematics', standardRefs: ['MA.3.M.2.1'],
+    studentOutcome: 'Tell and write time to the nearest minute on analog and digital clocks, using a.m. and p.m.',
+    essentialKnowledge: ['hour', 'minute', 'a.m.', 'p.m.'],
+    requiredReasoning: ['read', 'write'],
+    prerequisites: ['count by fives'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['the short hand tells the minutes'], sourceIds: ['SRC-018'],
+  }),
+
+  // --- Data Analysis & Probability (completing the strand) ---
+  objective({
+    objectiveId: 'M3.DP.11', version: 1, subject: 'mathematics', standardRefs: ['MA.3.DP.1.1'],
+    studentOutcome: 'Collect data and represent it in a scaled pictograph or bar graph with a title, labels and a key.',
+    essentialKnowledge: ['table', 'scaled pictograph', 'scaled bar graph', 'key'],
+    requiredReasoning: ['represent', 'explain'],
+    prerequisites: ['count and tally'], mastery: { threshold: 0.8, minimumEvidenceTypes: 2, transferRequired: false },
+    misconceptions: ['every square or picture on a graph must stand for one'], sourceIds: ['SRC-020'],
+  }),
 ];
 
 // ---------------------------------------------------------------------------
@@ -479,6 +549,99 @@ export const LIBRARY_LESSONS: readonly LessonPlan[] = [
       { id: 't5', kind: 'reflection', title: 'Think back', body: 'Why does only the ones digit matter for even or odd?', sourceIds: [], targets: [] },
     ],
   },
+  {
+    id: 'LP-M3.NSO.11', objectiveId: 'M3.NSO.11', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Standard, expanded and word form',
+    blocks: [
+      { id: 'u1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will read a number and write it three ways: as digits, in expanded form, and in words.', sourceIds: [], targets: [] },
+      { id: 'u2', kind: 'instruction', title: 'Three ways to show a number', body: 'Standard form is the digits: 3,024. Expanded form breaks it into the value of each place: 3,000 + 20 + 4. Word form spells it: “three thousand, twenty-four.” A zero holds a place — you do not write it as an extra word, so 3,024 is not “three thousand, two hundred, twenty-four.”', sourceIds: ['SRC-017'], targets: ['read', 'write'], techniqueId: 'chunked_prompt' },
+      { id: 'u3', kind: 'worked_example', title: 'Write 4,007 three ways', body: 'Standard: 4,007. Expanded: 4,000 + 7 (the hundreds and tens are zero, so they add nothing). Word form: “four thousand, seven.”', sourceIds: ['SRC-010'], targets: ['read', 'write'], techniqueId: 'worked_example_fade' },
+      { id: 'u4', kind: 'practice', title: 'Match the forms', body: 'Write 2,530 in expanded form and in word form.', sourceIds: ['SRC-017'], targets: ['read', 'write'] },
+      { id: 'u5', kind: 'mastery_task', title: 'Read and write', body: 'Write “six thousand, forty” in standard form, then show it in expanded form. Explain what the zero is doing.', sourceIds: ['SRC-017'], targets: ['read', 'write'] },
+      { id: 'u6', kind: 'reflection', title: 'Think back', body: 'Why does a zero still matter even though it adds nothing?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.NSO.12', objectiveId: 'M3.NSO.12', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Breaking numbers apart more than one way',
+    blocks: [
+      { id: 'v1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will build a four-digit number and break it apart in more than one way.', sourceIds: [], targets: [] },
+      { id: 'v2', kind: 'instruction', title: 'Many ways to make one number', body: 'A number is a total made of place-value parts, and there is more than one way to make it. 1,250 is 1 thousand + 2 hundreds + 5 tens, but it is also 12 hundreds + 5 tens, or 1,000 + 250. Regrouping ten of one place into one of the next lets you rename the same amount.', sourceIds: ['SRC-017'], targets: ['compose', 'decompose'], techniqueId: 'visual_first_models' },
+      { id: 'v3', kind: 'worked_example', title: 'Compose 13 hundreds', body: '2 thousands + 13 hundreds + 5 ones: the 13 hundreds regroup into 1 thousand and 3 hundreds, so the total is 3 thousands, 3 hundreds, 5 ones = 3,305.', sourceIds: ['SRC-017'], targets: ['compose'], techniqueId: 'worked_example_fade' },
+      { id: 'v4', kind: 'practice', title: 'Two ways', body: 'Show 1,420 broken apart in two different place-value ways.', sourceIds: ['SRC-017'], targets: ['decompose'] },
+      { id: 'v5', kind: 'mastery_task', title: 'Compose and decompose', body: 'Break 2,060 apart in two different ways, then combine 1 thousand, 11 hundreds and 6 tens and name the number. Show your regrouping.', sourceIds: ['SRC-017'], targets: ['compose', 'decompose'] },
+      { id: 'v6', kind: 'reflection', title: 'Think back', body: 'How can the same number be written in more than one place-value way?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.NSO.22', objectiveId: 'M3.NSO.22', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Multiplication as equal groups and arrays',
+    blocks: [
+      { id: 'w1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will show multiplication with equal groups and arrays, and connect it to division.', sourceIds: [], targets: [] },
+      { id: 'w2', kind: 'instruction', title: 'Equal groups, not one-by-one', body: 'Multiplication is counting equal groups fast: 4 × 7 is 4 groups of 7, which you can draw as an array of 4 rows and 7 columns. It is not the same as counting by ones. Division undoes it: the same array shows 28 ÷ 4 = 7.', sourceIds: ['SRC-017'], targets: ['represent', 'explain'], techniqueId: 'visual_first_models' },
+      { id: 'w3', kind: 'practice', title: 'Draw the array', body: 'Draw an array for 6 × 5 and write the product.', sourceIds: ['SRC-017'], targets: ['represent'] },
+      { id: 'w4', kind: 'mastery_task', title: 'Represent and explain', body: 'Draw 4 × 8 as an array, write the product, and explain how the same picture shows a division fact.', sourceIds: ['SRC-017'], targets: ['represent', 'explain'] },
+      { id: 'w5', kind: 'reflection', title: 'Think back', body: 'Why is multiplication faster than counting by ones?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.NSO.23', objectiveId: 'M3.NSO.23', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Multiplying by tens and hundreds',
+    blocks: [
+      { id: 'x1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will use a basic fact to multiply by a multiple of ten or a hundred.', sourceIds: [], targets: [] },
+      { id: 'x2', kind: 'instruction', title: 'Use the fact, then the place value', body: 'To find 6 × 30, first use the fact 6 × 3 = 18, then scale by the place value: 30 is 3 tens, so the answer is 18 tens = 180. 6 × 30 is not the same as 6 × 3 — the ten makes the product ten times bigger.', sourceIds: ['SRC-017'], targets: ['compute', 'explain'], techniqueId: 'worked_example_fade' },
+      { id: 'x3', kind: 'worked_example', title: 'Find 4 × 200', body: '4 × 2 = 8. The 200 is 2 hundreds, so 4 × 200 = 8 hundreds = 800.', sourceIds: ['SRC-017'], targets: ['compute'], techniqueId: 'worked_example_fade' },
+      { id: 'x4', kind: 'practice', title: 'Fact then scale', body: 'Find 7 × 40. Write the basic fact you used first.', sourceIds: ['SRC-017'], targets: ['compute'] },
+      { id: 'x5', kind: 'mastery_task', title: 'Compute and explain', body: 'Find 8 × 300. Explain how the basic fact 8 × 3 and place value give the answer.', sourceIds: ['SRC-017'], targets: ['compute', 'explain'] },
+      { id: 'x6', kind: 'reflection', title: 'Think back', body: 'Why isn’t 6 × 30 the same as 6 × 3?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.M.11', objectiveId: 'M3.M.11', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Choosing and reading measuring tools',
+    blocks: [
+      { id: 'y1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will pick the right tool to measure something and read it the right way.', sourceIds: [], targets: [] },
+      { id: 'y2', kind: 'instruction', title: 'Right tool, read from zero', body: 'Match the tool to what you measure: a ruler for length, a beaker for liquid volume, a thermometer for temperature. However you measure, start at the zero mark and read the number where the object ends — starting anywhere else gives the wrong length.', sourceIds: ['SRC-018'], targets: ['select', 'measure'], techniqueId: 'visual_first_models' },
+      { id: 'y3', kind: 'practice', title: 'Pick the tool', body: 'Name the tool you would use to measure how cold the water is, and one to measure how long the desk is.', sourceIds: ['SRC-018'], targets: ['select'] },
+      { id: 'y4', kind: 'mastery_task', title: 'Select and measure', body: 'You need to measure how much juice is in a cup. Choose the tool and explain why, then explain how to read it correctly starting from zero.', sourceIds: ['SRC-018'], targets: ['select', 'measure'] },
+      { id: 'y5', kind: 'reflection', title: 'Think back', body: 'Why does it matter where you start reading on a ruler?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.M.12', objectiveId: 'M3.M.12', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Measurement word problems',
+    blocks: [
+      { id: 'z1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will solve a word problem about measurements and choose the right operation.', sourceIds: [], targets: [] },
+      { id: 'z2', kind: 'instruction', title: 'Same units, right operation', body: 'A measurement problem is still a story problem — decide what is happening (joining, taking away, equal groups) and pick the operation. Keep the units the same and label your answer. The numbers are not automatically added just because they are measurements.', sourceIds: ['SRC-018'], targets: ['model', 'explain'], techniqueId: 'chunked_prompt' },
+      { id: 'z3', kind: 'worked_example', title: 'A jug of water', body: 'A jug holds 8 liters. You pour out 3 liters, then add 2 liters. Step 1: 8 − 3 = 5. Step 2: 5 + 2 = 7 liters.', sourceIds: ['SRC-018'], targets: ['model', 'solve'], techniqueId: 'worked_example_fade' },
+      { id: 'z4', kind: 'practice', title: 'Name the operation', body: 'A rope is 12 meters. You cut off 5 meters. Write the operation and the answer with its unit.', sourceIds: ['SRC-018'], targets: ['model', 'solve'] },
+      { id: 'z5', kind: 'mastery_task', title: 'Model and solve', body: 'Two bags weigh 9 kilograms and 6 kilograms; you take 4 kilograms out of the total. Model the two steps, solve, and label the units.', sourceIds: ['SRC-018'], targets: ['model', 'solve'] },
+      { id: 'z6', kind: 'reflection', title: 'Think back', body: 'How do you decide whether to add or subtract in a measurement problem?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.M.21', objectiveId: 'M3.M.21', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Telling time to the minute',
+    blocks: [
+      { id: 'aa1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will read a clock to the exact minute and write the time with a.m. or p.m.', sourceIds: [], targets: [] },
+      { id: 'aa2', kind: 'instruction', title: 'Two hands, two jobs', body: 'The short hand shows the hour; the long hand shows the minutes. Count minutes by fives around the clock, then by ones. Write it hour:minutes. Use a.m. for morning and p.m. for afternoon and evening. The short hand never tells the minutes.', sourceIds: ['SRC-018'], targets: ['read', 'write'], techniqueId: 'chunked_prompt' },
+      { id: 'aa3', kind: 'worked_example', title: 'Read 2:35', body: 'The short hand is just past 2, so the hour is 2. The long hand is on the 7, which is 35 minutes (7 × 5). The time is 2:35.', sourceIds: ['SRC-018'], targets: ['read'], techniqueId: 'worked_example_fade' },
+      { id: 'aa4', kind: 'practice', title: 'Write the time', body: 'The clock shows the hour hand past 9 and the minute hand on the 3. Write the digital time.', sourceIds: ['SRC-018'], targets: ['read', 'write'] },
+      { id: 'aa5', kind: 'mastery_task', title: 'Read and write', body: 'Write “quarter past nine in the morning” as a digital time with a.m. or p.m., and explain which hand told you the minutes.', sourceIds: ['SRC-018'], targets: ['read', 'write'] },
+      { id: 'aa6', kind: 'reflection', title: 'Think back', body: 'How do you know whether a time is a.m. or p.m.?', sourceIds: [], targets: [] },
+    ],
+  },
+  {
+    id: 'LP-M3.DP.11', objectiveId: 'M3.DP.11', objectiveVersion: 1, authorId: 'T-101',
+    title: 'Making a scaled graph',
+    blocks: [
+      { id: 'bb1', kind: 'objective_preview', title: 'Today you will…', body: 'Today you will turn a set of counts into a scaled bar graph or pictograph.', sourceIds: [], targets: [] },
+      { id: 'bb2', kind: 'instruction', title: 'Title, labels, and a key', body: 'A good graph needs a title, labels on both sides, and — for a scaled graph — a key or scale that tells how much each step or picture is worth. When counts are large, let each grid line be 2 or 5 so the graph fits; a picture or square does not have to stand for just one.', sourceIds: ['SRC-020'], targets: ['represent', 'explain'], techniqueId: 'visual_first_models' },
+      { id: 'bb3', kind: 'practice', title: 'Choose a scale', body: 'For counts of 10, 15 and 25, choose a scale for a bar graph and draw the first bar.', sourceIds: ['SRC-020'], targets: ['represent'] },
+      { id: 'bb4', kind: 'mastery_task', title: 'Represent and explain', body: 'Make a scaled pictograph for this data with a key of 1 picture = 2, and explain why you chose your key and what your title and labels say.', sourceIds: ['SRC-020'], targets: ['represent', 'explain'] },
+      { id: 'bb5', kind: 'reflection', title: 'Think back', body: 'Why might one picture stand for more than one?', sourceIds: [], targets: [] },
+    ],
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -535,6 +698,23 @@ export const LIBRARY_ITEMS: readonly AssessmentItem[] = [
   cr('IT-M3.NSO.21-2', 'M3.NSO.21', 'explain', 'Add 367 + 285. Explain where you had to regroup.', ['SRC-017'], ['you always subtract the smaller digit from the larger in each column']),
   mc('IT-M3.AR.31-1', 'M3.AR.31', 'determine', 'Which of these numbers is odd?', ['457'], ['312', '628', '940'], ['SRC-017'], ['you check the first digit to tell even or odd']),
   cr('IT-M3.AR.31-2', 'M3.AR.31', 'explain', 'Explain how you know 570 is even, using the ones digit or equal groups.', ['SRC-017'], ['you check the first digit to tell even or odd']),
+
+  mc('IT-M3.NSO.11-1', 'M3.NSO.11', 'read', 'Which is 3,024 written in expanded form?', ['3,000 + 20 + 4'], ['3,000 + 200 + 4', '300 + 24', '3,000 + 24'], ['SRC-017'], ['you write a number exactly the way you say it, word for word']),
+  cr('IT-M3.NSO.11-2', 'M3.NSO.11', 'write', 'Write “four thousand, seven” in standard form and in expanded form.', ['SRC-010'], ['you write a number exactly the way you say it, word for word']),
+  cr('IT-M3.NSO.12-1', 'M3.NSO.12', 'decompose', 'Show the number 1,420 broken apart in two different place-value ways.', ['SRC-017'], ['a number can only be broken apart one way']),
+  cr('IT-M3.NSO.12-2', 'M3.NSO.12', 'compose', 'Combine 1 thousand, 11 hundreds and 6 tens. What number is it?', ['SRC-017'], ['a number can only be broken apart one way']),
+  cr('IT-M3.NSO.22-1', 'M3.NSO.22', 'represent', 'Draw an array for 4 × 7 and write the product.', ['SRC-017'], ['multiplication is just counting by ones quickly']),
+  cr('IT-M3.NSO.22-2', 'M3.NSO.22', 'explain', 'Explain how the array for 6 × 8 also shows a division fact.', ['SRC-017'], ['multiplication is just counting by ones quickly']),
+  mc('IT-M3.NSO.23-1', 'M3.NSO.23', 'compute', 'What is 6 × 30?', ['180'], ['18', '90', '63'], ['SRC-017'], ['6 times 30 is the same as 6 times 3']),
+  cr('IT-M3.NSO.23-2', 'M3.NSO.23', 'explain', 'Explain how the fact 8 × 3 helps you find 8 × 300.', ['SRC-017'], ['6 times 30 is the same as 6 times 3']),
+  cr('IT-M3.M.11-1', 'M3.M.11', 'select', 'Which tool would you use to measure how much juice is in a cup, and why?', ['SRC-018'], ['you can start measuring from any point on the ruler']),
+  cr('IT-M3.M.11-2', 'M3.M.11', 'measure', 'A crayon lines up from 0 to the 8 mark on a centimeter ruler. How long is it, and how do you know you read it correctly?', ['SRC-018'], ['you can start measuring from any point on the ruler']),
+  cr('IT-M3.M.12-1', 'M3.M.12', 'model', 'A rope is 12 meters. You cut off 5 meters, then tie on 3 meters. Write the two steps you would use.', ['SRC-018'], ['the numbers in a measurement problem are always added']),
+  cr('IT-M3.M.12-2', 'M3.M.12', 'solve', 'Solve the rope problem and label your answer with its unit.', ['SRC-018'], ['the numbers in a measurement problem are always added']),
+  mc('IT-M3.M.21-1', 'M3.M.21', 'read', 'The hour hand is just past 2 and the minute hand is on the 7. What time is it?', ['2:35'], ['7:10', '2:07', '35 past 7'], ['SRC-018'], ['the short hand tells the minutes']),
+  cr('IT-M3.M.21-2', 'M3.M.21', 'write', 'Write “quarter past nine in the morning” as a digital time with a.m. or p.m.', ['SRC-018'], ['the short hand tells the minutes']),
+  cr('IT-M3.DP.11-1', 'M3.DP.11', 'represent', 'Make a scaled bar graph for the counts 10, 15 and 25. Choose a scale and label it.', ['SRC-020'], ['every square or picture on a graph must stand for one']),
+  cr('IT-M3.DP.11-2', 'M3.DP.11', 'explain', 'Explain what key or scale your graph uses and why you chose it.', ['SRC-020'], ['every square or picture on a graph must stand for one']),
 ];
 
 // ---------------------------------------------------------------------------
@@ -569,6 +749,14 @@ export const LIBRARY_RUBRICS: readonly Rubric[] = [
   rubric('M3.NSO.13', [{ trace: 'plot', desc: 'Plots numbers on a number line.', max: 2 }, { trace: 'order', desc: 'Orders whole numbers correctly.', max: 3 }, { trace: 'compare', desc: 'Compares using place value.', max: 3 }]),
   rubric('M3.NSO.21', [{ trace: 'compute', desc: 'Adds and subtracts accurately with regrouping.', max: 4 }, { trace: 'explain', desc: 'Explains the regrouping.', max: 2 }]),
   rubric('M3.AR.31', [{ trace: 'determine', desc: 'Determines even or odd correctly.', max: 3 }, { trace: 'explain', desc: 'Explains using the ones digit or equal groups.', max: 3 }]),
+  rubric('M3.NSO.11', [{ trace: 'read', desc: 'Reads numbers across forms.', max: 3 }, { trace: 'write', desc: 'Writes standard, expanded and word form.', max: 3 }]),
+  rubric('M3.NSO.12', [{ trace: 'compose', desc: 'Composes four-digit numbers, regrouping.', max: 3 }, { trace: 'decompose', desc: 'Decomposes in more than one way.', max: 3 }]),
+  rubric('M3.NSO.22', [{ trace: 'represent', desc: 'Represents multiplication with an array.', max: 3 }, { trace: 'explain', desc: 'Connects multiplication and division.', max: 3 }]),
+  rubric('M3.NSO.23', [{ trace: 'compute', desc: 'Multiplies by multiples of 10/100.', max: 3 }, { trace: 'explain', desc: 'Explains using place value.', max: 3 }]),
+  rubric('M3.M.11', [{ trace: 'select', desc: 'Selects the correct tool.', max: 3 }, { trace: 'measure', desc: 'Reads the measurement from zero.', max: 3 }]),
+  rubric('M3.M.12', [{ trace: 'model', desc: 'Models the problem with the right operations.', max: 3 }, { trace: 'solve', desc: 'Solves and labels the units.', max: 3 }]),
+  rubric('M3.M.21', [{ trace: 'read', desc: 'Reads time to the minute.', max: 3 }, { trace: 'write', desc: 'Writes time with a.m./p.m.', max: 3 }]),
+  rubric('M3.DP.11', [{ trace: 'represent', desc: 'Represents data on a scaled graph.', max: 3 }, { trace: 'explain', desc: 'Explains the scale/key, title and labels.', max: 3 }]),
 ];
 
 // ---------------------------------------------------------------------------
