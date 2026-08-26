@@ -26,6 +26,19 @@ export default function ParentPage() {
         right now, how her time is spent, how she’s collaborating, and how she’s growing.
       </p>
 
+      <div className="kpis" style={{ marginBottom: 20 }}>
+        <div className="kpi"><div className="n">{s.growth.mastered}</div><div className="l">objectives mastered</div></div>
+        <div className="kpi"><div className="n">{s.growth.inProgress}</div><div className="l">in progress now</div></div>
+        <div className="kpi"><div className="n">+{growthGain}</div><div className="l">points since fall</div></div>
+        <div className="kpi"><div className="n">{mins(s.totalMinutes)}</div><div className="l">learning time this week</div></div>
+        <div className="kpi">
+          <div className="n" style={{ color: s.wellbeing.unresolvedFlags === 0 ? 'var(--ok)' : 'var(--danger)', fontSize: '1.2rem', paddingTop: 6 }}>
+            {s.wellbeing.unresolvedFlags === 0 ? '✓ All clear' : 'Review'}
+          </div>
+          <div className="l">safety this week</div>
+        </div>
+      </div>
+
       {s.flags.length > 0 && (
         <div style={{ marginBottom: 20 }}>
           {s.flags.map((f, i) => (

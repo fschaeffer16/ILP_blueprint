@@ -40,6 +40,8 @@ import {
   SAMPLE_NAVI_FLAGS,
   SAMPLE_STUDENT_NAME,
   SAMPLE_STUDENT_QUEUE,
+  SAMPLE_STUDENT_UPCOMING,
+  SAMPLE_IMPORTANT_DATES,
   SAMPLE_CHANNELS,
   SAMPLE_POSTS,
   SAMPLE_MEMBERS,
@@ -74,7 +76,13 @@ export function getStudentHome() {
     return buildStudyGuide(objective, lessonFor(CONTENT_LIBRARY, objectiveId, objective.version));
   };
   const studyGuides = ['M3.NF.01', 'M3.NF.02', 'CIV3.01'].map(guideFor).filter(Boolean);
-  return { name: SAMPLE_STUDENT_NAME, queue: SAMPLE_STUDENT_QUEUE, studyGuides };
+  return {
+    name: SAMPLE_STUDENT_NAME,
+    queue: SAMPLE_STUDENT_QUEUE,
+    upcoming: SAMPLE_STUDENT_UPCOMING,
+    importantDates: SAMPLE_IMPORTANT_DATES,
+    studyGuides,
+  };
 }
 
 export function getStudentChannels() {

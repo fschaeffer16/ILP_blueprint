@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Nav } from '../components/Nav';
-import { ThemeToggle } from '../components/ThemeToggle';
+import { AppChrome } from '../components/AppChrome';
 
 export const metadata: Metadata = {
   title: 'ILP — Teacher Command Center',
@@ -19,15 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
       </head>
       <body>
-        <header className="topbar">
-          <div className="topbar-inner">
-            <div className="brand">
-              ILP <span>·</span> Teacher Command Center
-            </div>
-            <Nav />
-            <ThemeToggle />
-          </div>
-        </header>
+        <AppChrome />
         <main className="app">{children}</main>
       </body>
     </html>

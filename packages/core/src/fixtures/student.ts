@@ -17,6 +17,29 @@ export const SAMPLE_STUDENT_QUEUE: readonly StudentAssignment[] = [
   { assignmentId: 'A-4', objectiveId: 'CIV3.01', title: 'The community water decision', subject: 'history_civics', pattern: 'guided_practice', status: 'in_progress', dueLabel: 'Due next week' },
 ];
 
+/** Assignments coming up later — the "what's ahead" view a student and family plan around. */
+export const SAMPLE_STUDENT_UPCOMING: readonly StudentAssignment[] = [
+  { assignmentId: 'A-5', objectiveId: 'M3.FR.1.3', title: 'Fractions on a number line', subject: 'mathematics', pattern: 'core', status: 'not_started', dueLabel: 'Mon, Sep 15' },
+  { assignmentId: 'A-6', objectiveId: 'ELA.3.R.2.2', title: 'Explain how key details support the main idea', subject: 'reading', pattern: 'vocabulary_supported', status: 'not_started', dueLabel: 'Tue, Sep 16' },
+  { assignmentId: 'A-7', objectiveId: 'ELA.3.C.1.3', title: 'Write an opinion with reasons', subject: 'writing', pattern: 'guided_practice', status: 'not_started', dueLabel: 'Thu, Sep 18' },
+  { assignmentId: 'A-8', objectiveId: 'M3.AR.1.1', title: 'Multiplication & division fact families', subject: 'mathematics', pattern: 'advanced_transfer', status: 'not_started', dueLabel: 'Mon, Sep 22' },
+];
+
+export type StudentDateKind = 'quiz' | 'project' | 'event' | 'report';
+export interface StudentImportantDate {
+  readonly date: string;
+  readonly label: string;
+  readonly kind: StudentDateKind;
+}
+
+/** Important dates the student app surfaces so nothing sneaks up on a family. */
+export const SAMPLE_IMPORTANT_DATES: readonly StudentImportantDate[] = [
+  { date: 'Fri · Sep 12', label: 'Fractions quiz', kind: 'quiz' },
+  { date: 'Wed · Sep 17', label: 'Community water project — final decision due', kind: 'project' },
+  { date: 'Fri · Sep 19', label: 'Reading celebration — bring your favorite book', kind: 'event' },
+  { date: 'Fri · Sep 26', label: 'Progress reports go home', kind: 'report' },
+];
+
 /** The verified roster for this grade-3 space. Membership is what gates collaboration. */
 export const SAMPLE_MEMBERS: readonly { id: string; name: string }[] = [
   { id: 'S-777', name: 'Mia' },
