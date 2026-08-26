@@ -17,8 +17,10 @@
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.1);
 }
 
+/* Dark palette as reusable custom props so both OS-preference and the manual
+   toggle share one source of truth. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f131a;
     --surface: #171c26;
     --surface-2: #1f2531;
@@ -34,6 +36,22 @@
     --danger: #f0857c;
     --danger-weak: #331714;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #0f131a;
+  --surface: #171c26;
+  --surface-2: #1f2531;
+  --border: #2c333f;
+  --text: #e8ecf3;
+  --muted: #9aa4b2;
+  --brand: #6d95f2;
+  --brand-weak: #1c2740;
+  --ok: #4ac37e;
+  --ok-weak: #16301f;
+  --warn: #e0b357;
+  --warn-weak: #33290f;
+  --danger: #f0857c;
+  --danger-weak: #331714;
 }
 
 * { box-sizing: border-box; }
@@ -92,6 +110,22 @@ a:hover { text-decoration: underline; }
 .nav a:hover { background: var(--surface-2); text-decoration: none; }
 .nav a.active { background: var(--brand-weak); color: var(--brand); }
 
+.theme-toggle {
+  margin-left: auto;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--brand); }
+.theme-toggle:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+
 h1 { font-size: 1.5rem; margin: 8px 0 4px; }
 h2 { font-size: 1.15rem; margin: 28px 0 12px; }
 .lede { color: var(--muted); margin: 0 0 20px; max-width: 68ch; }
@@ -147,11 +181,15 @@ h2 { font-size: 1.15rem; margin: 28px 0 12px; }
 .badge.guided_practice { background: #fff2e6; color: #9a5a00; }
 .badge.advanced_transfer { background: #e6f7ee; color: #1c7c4a; }
 @media (prefers-color-scheme: dark) {
-  .badge.vocabulary_supported { background: #1c2740; color: #9db8ff; }
-  .badge.visual_first { background: #241c40; color: #b9a6ff; }
-  .badge.guided_practice { background: #33290f; color: #e0b357; }
-  .badge.advanced_transfer { background: #16301f; color: #6fd39b; }
+  :root:not([data-theme="light"]) .badge.vocabulary_supported { background: #1c2740; color: #9db8ff; }
+  :root:not([data-theme="light"]) .badge.visual_first { background: #241c40; color: #b9a6ff; }
+  :root:not([data-theme="light"]) .badge.guided_practice { background: #33290f; color: #e0b357; }
+  :root:not([data-theme="light"]) .badge.advanced_transfer { background: #16301f; color: #6fd39b; }
 }
+:root[data-theme="dark"] .badge.vocabulary_supported { background: #1c2740; color: #9db8ff; }
+:root[data-theme="dark"] .badge.visual_first { background: #241c40; color: #b9a6ff; }
+:root[data-theme="dark"] .badge.guided_practice { background: #33290f; color: #e0b357; }
+:root[data-theme="dark"] .badge.advanced_transfer { background: #16301f; color: #6fd39b; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }

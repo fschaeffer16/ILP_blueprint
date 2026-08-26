@@ -335,12 +335,12 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
     else document.documentElement.removeAttribute('data-theme');
     label();
   }
-  try{ var saved = localStorage.getItem('ilp-case-theme'); if(saved) applyTheme(saved); }catch(e){}
+  try{ var saved = localStorage.getItem('ilp-theme'); if(saved) applyTheme(saved); }catch(e){}
   label();
   tb.addEventListener('click', function(){
     var n = effectiveDark() ? 'light' : 'dark';
     applyTheme(n);
-    try{ localStorage.setItem('ilp-case-theme', n); }catch(e){}
+    try{ localStorage.setItem('ilp-theme', n); }catch(e){}
   });
 })();
 </script>

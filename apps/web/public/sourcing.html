@@ -469,12 +469,12 @@
 
   const btn = document.getElementById('themeBtn');
   function apply(t){ if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme',t); else document.documentElement.removeAttribute('data-theme'); }
-  try { const s = localStorage.getItem('ilp-src-theme'); if(s) apply(s); } catch(e){}
+  try { const s = localStorage.getItem('ilp-theme'); if(s) apply(s); } catch(e){}
   btn.addEventListener('click', () => {
     const dark = document.documentElement.getAttribute('data-theme')==='dark' ||
       (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
     const next = dark ? 'light' : 'dark'; apply(next);
-    try { localStorage.setItem('ilp-src-theme', next); } catch(e){}
+    try { localStorage.setItem('ilp-theme', next); } catch(e){}
   });
 </script>
 
