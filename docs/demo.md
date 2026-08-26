@@ -3,6 +3,21 @@
 How to show ILP end-to-end. Everything runs the real `@ilp/core` engine on **synthetic
 data** — no real student information anywhere.
 
+## ▶ The live system (share this)
+
+The full app is deployed and public — anyone can click through it, no account:
+
+- **App:** <https://ilp-blueprint-web.vercel.app>
+- **Guided front door** (all role apps + the pitch pages in one place): <https://ilp-blueprint-web.vercel.app/demo.html>
+- Direct routes: `/` Today · `/library` · `/dashboard` · `/class` · `/assign` · `/grading` ·
+  `/flags` Help signals · `/author` · `/lesson` · `/baseline` (+ `/baseline/take`) · `/parent` ·
+  `/student` · `/navi-assignment-helper.html` the assignment bot.
+- Leadership pages on the same domain: `/what-comes-next.html` (the pitch) · `/ixl-vs-ilp.html` ·
+  `/after-the-test.html` · `/built-by-teachers.html` · `/sourcing.html`.
+
+Every push to the repo auto-redeploys it. The static GitHub Pages snapshots below still work as a
+no-Vercel fallback.
+
 ## Two ways to run the demo
 
 ### 1. The hosted snapshots (nothing to install)

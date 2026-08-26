@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Objective &amp; Content Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:#f4f7f7; --surface:#ffffff; --surface-2:#e9f0f0;
+    --border:#d7e2e2; --border-strong:#bcd0d0;
+    --ink:#152528; --muted:#4f6469; --faint:#7f9297;
+    --accent:#0d7c86; --accent-weak:#d7ecee; --accent-ink:#0a565e;
+    --trust:#1f7a4d; --trust-weak:#dbeee3;
+    --warn:#8a5d00; --warn-weak:#f5ecd5;
+    --danger:#b0392a; --danger-weak:#f6e2de;
+    --t1:#0a565e; --t1w:#d3e9ea;
+    --t2:#265fa6; --t2w:#dde8f6;
+    --t3:#1f7a4d; --t3w:#dbeee3;
+    --t4:#8a5d00; --t4w:#f5ecd5;
+    --t5:#6b3fc4; --t5w:#eae2fa;
+    --shadow:0 1px 2px rgba(18,40,42,.05), 0 6px 20px rgba(18,40,42,.06);
+    --r:12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0b1417; --surface:#121e21; --surface-2:#182629;
+      --border:#243539; --border-strong:#33484d;
+      --ink:#e7eef0; --muted:#9db0b4; --faint:#6d8388;
+      --accent:#3fb2bd; --accent-weak:#123034; --accent-ink:#7fd4dc;
+      --trust:#54c187; --trust-weak:#12301f;
+      --warn:#dcb057; --warn-weak:#2f2610;
+      --danger:#e88a7c; --danger-weak:#301412;
+      --t1:#5cc2cc; --t1w:#0f2c30;
+      --t2:#7aa8e6; --t2w:#15243c;
+      --t3:#5fc78d; --t3w:#12301f;
+      --t4:#dcb057; --t4w:#2f2610;
+      --t5:#b79cf0; --t5w:#221a3a;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 22px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0b1417; --surface:#121e21; --surface-2:#182629;
+    --border:#243539; --border-strong:#33484d;
+    --ink:#e7eef0; --muted:#9db0b4; --faint:#6d8388;
+    --accent:#3fb2bd; --accent-weak:#123034; --accent-ink:#7fd4dc;
+    --trust:#54c187; --trust-weak:#12301f;
+    --warn:#dcb057; --warn-weak:#2f2610;
+    --danger:#e88a7c; --danger-weak:#301412;
+    --t1:#5cc2cc; --t1w:#0f2c30; --t2:#7aa8e6; --t2w:#15243c;
+    --t3:#5fc78d; --t3w:#12301f; --t4:#dcb057; --t4w:#2f2610;
+    --t5:#b79cf0; --t5w:#221a3a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 22px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Public Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:"Fraunces", Georgia, serif; font-weight:600; text-wrap:balance; margin:0; line-height:1.15; }
+  .mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+  .tnum { font-variant-numeric:tabular-nums; }
+  a { color:var(--accent-ink); }
+
+  header.top { position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--surface) 90%, transparent);
+    backdrop-filter:saturate(1.3) blur(8px); border-bottom:1px solid var(--border); }
+  .top-in { max-width:1000px; margin:0 auto; padding:11px 22px; display:flex; align-items:center; gap:12px; }
+  .brand { display:flex; align-items:center; gap:10px; }
+  .brand .mk { width:30px; height:30px; border-radius:8px; background:var(--accent); color:#fff; display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:600; }
+  .brand b { font-family:"Fraunces",serif; font-weight:600; font-size:1.02rem; }
+  .brand small { display:block; color:var(--muted); font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; }
+  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-strong);
+    background:var(--surface); color:var(--muted); border-radius:8px; padding:6px 10px; }
+  .theme:hover { color:var(--ink); }
+
+  main { max-width:1000px; margin:0 auto; padding:0 22px 90px; }
+  section { padding:38px 0; border-bottom:1px solid var(--border); }
+  section:last-of-type { border-bottom:none; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.11em; font-size:.72rem; font-weight:700; color:var(--accent-ink); margin-bottom:10px; }
+  .num { font-family:"IBM Plex Mono",monospace; color:var(--faint); font-size:.8rem; }
+
+  .hero { padding:52px 0 40px; }
+  .hero h1 { font-size:2.7rem; letter-spacing:-.01em; max-width:16ch; }
+  .hero .opsz { font-optical-sizing:auto; }
+  .hero p { font-size:1.15rem; color:var(--muted); max-width:60ch; margin:16px 0 0; }
+  h2 { font-size:1.7rem; margin-bottom:6px; }
+  .say { color:var(--muted); max-width:66ch; margin:0 0 22px; font-size:1.03rem; }
+  h3 { font-size:1.15rem; }
+
+  .grid { display:grid; gap:14px; }
+  .g2 { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  .g3 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:16px 18px; }
+  .card h3 { margin-bottom:8px; }
+  .lead { font-size:.9rem; color:var(--muted); }
+
+  .tier { display:flex; gap:14px; align-items:flex-start; padding:15px 16px; border:1px solid var(--border);
+    border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow); }
+  .tier + .tier { margin-top:10px; }
+  .tier .rail { width:5px; align-self:stretch; border-radius:3px; flex:none; }
+  .tier .body { flex:1; min-width:0; }
+  .tier h3 { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .tier .src { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
+  .src .s { font-size:.79rem; padding:3px 9px; border-radius:7px; background:var(--surface-2); color:var(--ink); border:1px solid var(--border); }
+
+  .lic { font-size:.72rem; font-weight:700; letter-spacing:.03em; padding:2px 7px; border-radius:6px; text-transform:uppercase; }
+  .tag { font-size:.72rem; font-weight:700; letter-spacing:.03em; padding:2px 8px; border-radius:999px; }
+  .t1 .rail{background:var(--t1)} .t1 .tag{background:var(--t1w);color:var(--t1)}
+  .t2 .rail{background:var(--t2)} .t2 .tag{background:var(--t2w);color:var(--t2)}
+  .t3 .rail{background:var(--t3)} .t3 .tag{background:var(--t3w);color:var(--t3)}
+  .t4 .rail{background:var(--t4)} .t4 .tag{background:var(--t4w);color:var(--t4)}
+  .t5 .rail{background:var(--t5)} .t5 .tag{background:var(--t5w);color:var(--t5)}
+  .lic.pd{background:var(--t3w);color:var(--t3)} .lic.cc{background:var(--t2w);color:var(--t2)} .lic.lend{background:var(--t4w);color:var(--t4)}
+
+  .flow { display:flex; align-items:stretch; gap:0; flex-wrap:wrap; margin-top:4px; }
+  .flow .st { flex:1 1 150px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 13px; position:relative; }
+  .flow .st + .st { margin-left:10px; }
+  .flow .st .k { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--accent-ink); }
+  .flow .st .t { font-weight:600; font-size:.92rem; margin:2px 0; }
+  .flow .st .d { font-size:.8rem; color:var(--muted); }
+  .arrow { align-self:center; color:var(--faint); padding:0 2px; font-size:1.1rem; }
+
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th,td { text-align:left; padding:11px 13px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:var(--muted); font-size:.73rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700; }
+  tr:last-child td { border-bottom:none; }
+  .wrap { overflow-x:auto; border:1px solid var(--border); border-radius:var(--r); background:var(--surface); box-shadow:var(--shadow); }
+  td .impl { color:var(--muted); font-size:.85rem; }
+  .yr { font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:var(--faint); }
+
+  .callout { display:flex; gap:14px; padding:16px 18px; border-radius:var(--r); box-shadow:var(--shadow); }
+  .callout .rail { width:4px; border-radius:3px; flex:none; align-self:stretch; }
+  .callout.trust { background:var(--trust-weak); } .callout.trust .rail{ background:var(--trust); }
+  .callout.warn { background:var(--warn-weak); } .callout.warn .rail{ background:var(--warn); }
+  .callout h3 { margin-bottom:4px; } .callout p { margin:0; font-size:.94rem; }
+
+  /* builder mockup */
+  .builder { border:1px solid var(--border-strong); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); background:var(--surface); }
+  .builder .bar { display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border); font-size:.85rem; }
+  .builder .bar .dot { width:10px; height:10px; border-radius:50%; background:var(--border-strong); }
+  .builder .bar b { font-family:"Fraunces",serif; }
+  .builder .form { padding:16px 18px; display:grid; gap:14px; }
+  .field { display:grid; gap:5px; }
+  .field label { font-size:.76rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); display:flex; gap:8px; align-items:baseline; flex-wrap:wrap; }
+  .field label .from { text-transform:none; letter-spacing:0; font-weight:500; color:var(--accent-ink); font-size:.76rem; }
+  .field .val { border:1px solid var(--border); border-radius:9px; padding:9px 11px; background:var(--ground); font-size:.92rem; }
+  .field .val.locked { border-style:dashed; background:var(--surface-2); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:560px){ .two{grid-template-columns:1fr} }
+  .kv { display:flex; gap:6px; flex-wrap:wrap; }
+  .kv .p { font-size:.78rem; padding:3px 9px; border-radius:7px; background:var(--surface-2); border:1px solid var(--border); }
+  .srccard { border:1px solid var(--border); border-radius:9px; padding:10px 12px; background:var(--ground); }
+  .srccard .h { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .srccard .m { font-size:.78rem; color:var(--muted); margin-top:3px; }
+  .verified { display:inline-flex; align-items:center; gap:5px; font-size:.76rem; font-weight:700; color:var(--trust); }
+  .gate { display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:12px 14px; background:var(--trust-weak); border-top:1px solid var(--border); }
+  .gate .ok { display:inline-flex; align-items:center; gap:5px; font-size:.82rem; color:var(--trust); font-weight:600; }
+  .btn { font:inherit; font-weight:700; font-size:.85rem; border:none; border-radius:9px; padding:8px 16px; background:var(--accent); color:#fff; cursor:default; }
+  .optlist { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:7px; }
+  .optrow { display:flex; gap:9px; align-items:flex-start; padding:8px 11px; border:1px solid var(--border); border-radius:9px; background:var(--ground); font-size:.9rem; cursor:pointer; }
+  .optrow.rigor { border-color:var(--warn); background:var(--warn-weak); }
+  .optrow input { margin-top:3px; flex:none; }
+  .optrow .sm { display:block; color:var(--muted); font-size:.78rem; }
+  .verdict { font-weight:700; font-size:.9rem; }
+  .verdict.ok { color:var(--trust); } .verdict.bad { color:var(--danger); }
+  .iss { display:flex; gap:8px; align-items:baseline; font-size:.88rem; margin:7px 0; }
+  .iss .code { font-family:"IBM Plex Mono",monospace; font-size:.76rem; }
+  .iss .b { font-size:.7rem; font-weight:700; padding:2px 7px; border-radius:999px; background:var(--danger-weak); color:var(--danger); }
+  .iss .w { font-size:.7rem; font-weight:700; padding:2px 7px; border-radius:999px; background:var(--warn-weak); color:var(--warn); }
+
+  .contrast { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); }
+  @media (max-width:560px){ .contrast{grid-template-columns:1fr} }
+  .contrast .col { padding:16px 18px; }
+  .contrast .no { background:var(--danger-weak); }
+  .contrast .yes { background:var(--trust-weak); border-left:1px solid var(--border); }
+  .contrast h4 { font-size:.95rem; margin-bottom:8px; display:flex; gap:7px; align-items:center; }
+  .contrast .no h4 { color:var(--danger); } .contrast .yes h4 { color:var(--trust); }
+  .contrast ul { margin:0; padding-left:18px; font-size:.9rem; } .contrast li { margin:4px 0; }
+
+  .foot { color:var(--muted); font-size:.82rem; padding-top:24px; }
+  .foot a { color:var(--accent-ink); }
+  .foot h4 { font-size:.9rem; margin:0 0 6px; color:var(--ink); }
+  ul.refs { margin:0; padding-left:18px; } ul.refs li { margin:3px 0; }
+  [hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <div class="mk">✦</div>
+      <div><b>ILP</b><small>Objective &amp; Content Studio</small></div>
+    </div>
+    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="eyebrow">How the curriculum is built</div>
+    <h1 class="opsz">Objectives come from standards. Content comes from vetted, current sources.</h1>
+    <p>Nothing a child sees is invented free-hand or pulled from an unvetted corner of the web. Learning targets are mapped from official standards; teaching materials are drawn from a governed library of credible, openly-licensed or licensed sources — each with provenance, a license, and a review date. The teaching techniques are evidence-based cognitive science from the last two decades, not mid-century rote.</p>
+  </div>
+
+  <section>
+    <div class="eyebrow"><span class="num">01</span> &nbsp;Where learning objectives come from</div>
+    <h2>Standards bodies define the target; ILP versions and governs it.</h2>
+    <p class="say">An objective is never a teacher’s guess about what matters. It is authored from an official standards framework, reviewed by a curriculum specialist, then published as a versioned, immutable record. That chain is what makes the objective auditable and reusable across every classroom.</p>
+
+    <div class="flow">
+      <div class="st"><div class="k">SOURCE</div><div class="t">Standards framework</div><div class="d">e.g. Florida B.E.S.T. benchmark MA.3.FR.1.1</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">AUTHOR</div><div class="t">Objective drafted</div><div class="d">outcome, essential knowledge, mastery rule, prerequisites</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">REVIEW</div><div class="t">Curriculum specialist</div><div class="d">alignment, sources &amp; misconceptions approved</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">PUBLISH</div><div class="t">Versioned &amp; locked</div><div class="d">immutable; rigor can never drift after this</div></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card">
+        <h3>Standards frameworks feeding the objective graph</h3>
+        <div class="src" style="margin-top:2px">
+          <span class="s">Florida B.E.S.T. — ELA &amp; Math <span class="yr">(current, full accountability 2024–25)</span></span>
+          <span class="s">NGSS — science <span class="yr">(2013)</span></span>
+          <span class="s">C3 Framework — social studies / civics <span class="yr">(NCSS, 2013)</span></span>
+          <span class="s">WIDA — English language development</span>
+          <span class="s">National Core Arts Standards</span>
+        </div>
+        <p class="lead" style="margin-top:12px">The state framework is the legal anchor (it’s what FAST reports against). Others fill subjects B.E.S.T. doesn’t cover. ILP maps to them — it never lets the state test dictate the day-to-day instruction.</p>
+      </div>
+      <div class="card">
+        <h3>What a published objective carries</h3>
+        <div class="kv">
+          <span class="p">standard ref</span><span class="p">student outcome</span><span class="p">essential knowledge</span>
+          <span class="p">required reasoning</span><span class="p">prerequisites</span><span class="p">mastery rule</span>
+          <span class="p">common misconceptions</span><span class="p">approved sources</span><span class="p">permitted / prohibited adaptations</span>
+          <span class="p">version + review date</span>
+        </div>
+        <p class="lead" style="margin-top:12px">Everything downstream — lessons, test items, remediation, analytics — traces back to this one record.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">02</span> &nbsp;Where the content is mined from</div>
+    <h2>A tiered, licensed library — provenance on every item.</h2>
+    <p class="say">Content is drawn from five tiers, strongest first. Each source carries a license and a review status before anything can reach a student. The system prefers primary sources and openly-licensed materials; district-licensed publisher content is used only where the contract permits.</p>
+
+    <div class="t1 tier">
+      <div class="rail"></div>
+      <div class="body">
+        <h3>Standards &amp; frameworks <span class="tag">tier 1 · defines objectives</span></h3>
+        <p class="lead">The learning targets themselves (see section 01). Not student-facing content — the scaffolding everything else hangs on.</p>
+        <div class="src"><span class="s">Florida B.E.S.T.</span><span class="s">NGSS</span><span class="s">C3 Framework</span><span class="s">WIDA</span></div>
+      </div>
+    </div>
+
+    <div class="t2 tier">
+      <div class="rail"></div>
+      <div class="body">
+        <h3>Primary sources &amp; authoritative reference <span class="tag">tier 2</span> <span class="lic pd">public domain</span></h3>
+        <p class="lead">Original documents, images, data and texts from national institutions — the gold standard for accuracy and for teaching students to reason from evidence.</p>
+        <div class="src">
+          <span class="s">Library of Congress</span><span class="s">National Archives — DocsTeach</span><span class="s">Smithsonian Open Access</span>
+          <span class="s">NASA</span><span class="s">NOAA</span><span class="s">USGS</span><span class="s">Our World in Data <span class="yr">(CC&nbsp;BY)</span></span><span class="s">Project Gutenberg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="t3 tier">
+      <div class="rail"></div>
+      <div class="body">
+        <h3>Open Educational Resources <span class="tag">tier 3</span> <span class="lic cc">openly licensed</span></h3>
+        <p class="lead">Peer-reviewed or editorially-vetted teaching materials under Creative Commons or open licenses — free to adapt, with attribution tracked automatically.</p>
+        <div class="src">
+          <span class="s">OpenStax <span class="yr">(Rice Univ., peer-reviewed)</span></span><span class="s">CK-12</span><span class="s">Illustrative Mathematics</span>
+          <span class="s">Khan Academy</span><span class="s">PBS LearningMedia</span><span class="s">OER Commons</span><span class="s">Newsela <span class="yr">(leveled current events)</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="t4 tier">
+      <div class="rail"></div>
+      <div class="body">
+        <h3>District-licensed publisher content <span class="tag">tier 4</span> <span class="lic lend">under license</span></h3>
+        <p class="lead">The programs a district already pays for — used only where the license permits, and only with provenance recorded. ILP wraps them, it doesn’t pirate them.</p>
+        <div class="src"><span class="s">District-adopted core programs</span><span class="s">Nearpod / Discovery (St. Lucie)</span><span class="s">IXL evidence</span><span class="s">Publisher media under contract</span></div>
+      </div>
+    </div>
+
+    <div class="t5 tier">
+      <div class="rail"></div>
+      <div class="body">
+        <h3>Learning science &amp; pedagogy <span class="tag">tier 5 · informs technique</span></h3>
+        <p class="lead">Not student-facing facts — the research that decides <em>how</em> a lesson is built and adapted (see section 04).</p>
+        <div class="src"><span class="s">What Works Clearinghouse <span class="yr">(IES / ed.gov)</span></span><span class="s">Education Endowment Foundation</span><span class="s">Deans for Impact — Science of Learning <span class="yr">(2015)</span></span><span class="s">Peer-reviewed journals</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">03</span> &nbsp;How a source becomes usable</div>
+    <h2>The vetting pipeline.</h2>
+    <p class="say">No source reaches a student on discovery. Each passes a fixed gate and is stored as a record with its citation, license, authority and review date — then re-checked on a schedule. This is the editorial governance the blueprint requires, made concrete.</p>
+    <div class="flow">
+      <div class="st"><div class="k">1 · DISCOVER</div><div class="t">Candidate found</div><div class="d">from an approved tier</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">2 · LICENSE</div><div class="t">Rights checked</div><div class="d">public domain, CC, or licensed</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">3 · AUTHORITY</div><div class="t">Provenance verified</div><div class="d">who made it, when, credibility</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">4 · REVIEW</div><div class="t">Editorial sign-off</div><div class="d">fact vs. interpretation marked</div></div>
+      <div class="arrow">→</div>
+      <div class="st"><div class="k">5 · APPROVE</div><div class="t">Dated &amp; scheduled</div><div class="d">re-review date set</div></div>
+    </div>
+    <div class="callout trust" style="margin-top:18px">
+      <div class="rail"></div>
+      <div>
+        <h3>Editorial standard (built into every source record)</h3>
+        <p>Statements are marked as documented fact, inference, interpretation, or disputed. Sources, revision history and editorial decisions are exposed to reviewers. Verified errors are corrected immediately with the audit trail preserved. The platform teaches the full documented record — it does not advocate a contemporary partisan or identity position.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">04</span> &nbsp;Teaching techniques — evidence-based, not mid-century</div>
+    <h2>How lessons are built and adapted.</h2>
+    <p class="say">Every adaptation the compiler can apply is grounded in a named, modern body of research. These are the methods that replace one-size worksheets, rote recall and fixed ability tracking.</p>
+    <div class="wrap">
+      <table>
+        <thead><tr><th>Technique</th><th>Origin</th><th>How ILP uses it</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rosenshine’s Principles of Instruction</strong></td><td class="yr">2012 · cognitive science</td><td class="impl">Small steps, guided practice, high success rate → the <em>guided-practice</em> and <em>worked-example-with-fading</em> patterns.</td></tr>
+          <tr><td><strong>Universal Design for Learning (UDL) 3.0</strong></td><td class="yr">CAST · July 2024</td><td class="impl">Multiple means of representation, engagement &amp; action → read-aloud, visual-first, and choice of response method — access without changing the target.</td></tr>
+          <tr><td><strong>Worked-example effect &amp; fading</strong></td><td class="yr">cognitive-load research</td><td class="impl">A fully worked parallel example, steps removed across practice → the <em>worked-example-fade</em> adaptation, faded before the mastery task.</td></tr>
+          <tr><td><strong>Retrieval &amp; spaced practice</strong></td><td class="yr">Dunlosky et&nbsp;al. 2013</td><td class="impl">Spacing and low-stakes recall → practice scheduling and delayed retention checks in the growth model.</td></tr>
+          <tr><td><strong>Formative assessment (assessment for learning)</strong></td><td class="yr">Black &amp; Wiliam</td><td class="impl">Evidence used to adjust teaching → the entire teacher-reviewed grading + remediation loop.</td></tr>
+          <tr><td><strong>Concrete–Representational–Abstract (CRA)</strong></td><td class="yr">math methods research</td><td class="impl">Models before symbols → the <em>visual-first</em> fraction adaptation.</td></tr>
+          <tr><td><strong>Structured literacy / science of reading</strong></td><td class="yr">Scarborough’s Reading Rope</td><td class="impl">Decoding + language comprehension → vocabulary preview and read-aloud supports that never mask the reading objective itself.</td></tr>
+          <tr><td><strong>Feedback that moves learning forward</strong></td><td class="yr">Hattie; Wiliam</td><td class="impl">Criterion-level evidence and specific next steps → the grading rubric output and reflection prompts.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="contrast" style="margin-top:18px">
+      <div class="col no">
+        <h4>✕ What ILP is not (the 1950s model)</h4>
+        <ul>
+          <li>One worksheet for thirty different children</li>
+          <li>Rote memorization as the goal, not a foundation</li>
+          <li>Fixed ability tracks and permanent labels</li>
+          <li>A textbook chapter as the whole curriculum</li>
+          <li>Grades with no evidence and no next step</li>
+        </ul>
+      </div>
+      <div class="col yes">
+        <h4>✓ What ILP uses instead</h4>
+        <ul>
+          <li>One objective → an individualized version per child</li>
+          <li>Knowledge in service of reasoning and transfer</li>
+          <li>Temporary, evidence-based groups that dissolve</li>
+          <li>Primary sources and current, licensed materials</li>
+          <li>Evidence, teacher judgment, and mandatory remediation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span class="num">05</span> &nbsp;The objective builder</div>
+    <h2>Where an objective is authored — and where each field comes from.</h2>
+    <p class="say">This is the authoring screen (mocked with a real grade-3 example). A curriculum specialist fills it once; every teacher then reuses it. The blue notes show the credible source each field draws from.</p>
+
+    <div class="builder">
+      <div class="bar"><span class="dot"></span><b>New objective</b> &nbsp;<span class="mono" style="color:var(--muted);font-size:.8rem">draft → review → publish</span></div>
+      <div class="form">
+        <div class="two">
+          <div class="field"><label>Standard reference <span class="from">↳ from Florida B.E.S.T. · try clearing it</span></label><input id="stdref" class="val mono" style="font:inherit;font-family:'IBM Plex Mono',monospace;width:100%;color:var(--ink);background:var(--ground);border:1px solid var(--border);border-radius:8px;padding:9px 11px" value="MA.3.FR.1.1"></div>
+          <div class="field"><label>Objective ID · version</label><div class="val mono">M3.NF.01 · v1</div></div>
+        </div>
+        <div class="field"><label>Student outcome <span class="from">↳ written from the benchmark</span></label><div class="val">Explain and represent a fraction as equal parts of a whole.</div></div>
+        <div class="two">
+          <div class="field"><label>Essential knowledge <span class="from">locked</span></label><div class="val locked"><div class="kv"><span class="p">numerator</span><span class="p">denominator</span><span class="p">equal parts</span><span class="p">whole/part relationship</span></div></div></div>
+          <div class="field"><label>Required reasoning <span class="from">locked</span></label><div class="val locked"><div class="kv"><span class="p">represent</span><span class="p">explain</span><span class="p">transfer</span></div></div></div>
+        </div>
+        <div class="two">
+          <div class="field"><label>Mastery rule <span class="from">locked · identical for every child</span></label><div class="val locked mono">≥ 80% · 2 evidence types · transfer required</div></div>
+          <div class="field"><label>Common misconceptions <span class="from">↳ from learning-science tier</span></label><div class="val">“larger denominator means larger fraction”</div></div>
+        </div>
+        <div class="field"><label>Permitted teaching techniques <span class="from">↳ evidence-based, section 04 · a rigor-changing one is refused</span></label>
+          <div class="optlist" id="techlist">
+            <label class="optrow"><input type="checkbox" checked data-tech="read_aloud"> Read-aloud <span class="sm">(UDL access)</span></label>
+            <label class="optrow"><input type="checkbox" checked data-tech="visual_first"> Visual-first / CRA</label>
+            <label class="optrow"><input type="checkbox" checked data-tech="worked_example"> Worked example + fading</label>
+            <label class="optrow"><input type="checkbox" data-tech="advanced_transfer"> Advanced transfer</label>
+            <label class="optrow rigor"><input type="checkbox" data-tech="reduce_recognition" data-rigor="1"> Reduce to recognition only <span class="sm" style="color:var(--warn)">⚠ changes rigor</span></label>
+          </div>
+        </div>
+        <div class="field"><label>Approved sources <span class="from">↳ from the vetted library · only approved may publish</span></label>
+          <div class="optlist" id="srclist">
+            <label class="optrow"><input type="checkbox" checked data-src data-ok="1"> <span><strong>Fraction models &amp; tasks</strong> <span class="sm">Illustrative Mathematics · CC BY · <span style="color:var(--trust)">✓ approved</span></span></span></label>
+            <label class="optrow"><input type="checkbox" checked data-src data-ok="1"> <span><strong>Real-world fractions media</strong> <span class="sm">Smithsonian Open Access · public domain · <span style="color:var(--trust)">✓ approved</span></span></span></label>
+            <label class="optrow"><input type="checkbox" data-src data-ok="0"> <span><strong>Community lesson</strong> <span class="sm" style="color:var(--warn)">unreviewed · not yet approved</span></span></label>
+          </div>
+        </div>
+      </div>
+      <div class="gate" style="flex-wrap:wrap">
+        <button class="btn" id="validateBtn" type="button" style="cursor:pointer;margin-right:8px">Validate &amp; publish v1</button>
+        <span id="gateResult"></span>
+      </div>
+      <div id="issues" style="padding:0 16px 14px"></div>
+    </div>
+    <p class="lead" style="margin-top:12px">Publish validation refuses to release an objective that isn’t mapped to a standard, lacks approved sources, or contains a technique that would change what the child is expected to learn. Edit the fields above and validate — these are the same rules the engine enforces (<span class="mono">validateObjectiveDraft</span>).</p>
+  </section>
+
+  <section>
+    <div class="callout warn">
+      <div class="rail"></div>
+      <div>
+        <h3>Where this is in the build — honest status</h3>
+        <p>The objective record and its source/provenance fields already exist in the engine’s data model, and the vetting rules are specified. What’s <em>not</em> built yet is the authoring screen above (this is a faithful mockup) and the connected content library itself — those are the next things to construct. The sourcing model shown here is the design we’d build against, using real, current, credibly-licensed sources.</p>
+      </div>
+    </div>
+
+    <div class="foot" style="margin-top:26px">
+      <h4>Verified references</h4>
+      <ul class="refs">
+        <li><a href="https://udlguidelines.cast.org/">CAST — UDL Guidelines 3.0</a> (released July 2024)</li>
+        <li><a href="https://www.fldoe.org/academics/standards/subject-areas/math-science/mathematics/">Florida DOE — B.E.S.T. Standards for Mathematics</a> (current, full accountability 2024–25)</li>
+        <li><a href="https://www.fldoe.org/accountability/assessments/k-12-student-assessment/best/">Florida DOE — FAST Assessments</a></li>
+        <li>Rosenshine, <em>Principles of Instruction</em> (2012); Dunlosky et al., <em>Improving Students’ Learning</em> (2013); Deans for Impact, <em>The Science of Learning</em> (2015)</li>
+      </ul>
+      <p style="margin-top:12px">Source names in section 02 are representative candidate sources by tier, not a claim of existing partnerships. Licensing and access are confirmed per source during the vetting pipeline (section 03).</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Objective authoring gate — mirrors @ilp/core validateObjectiveDraft.
+  const vBtn = document.getElementById('validateBtn');
+  if (vBtn) vBtn.addEventListener('click', () => {
+    const issues = [];
+    const std = document.getElementById('stdref').value.trim();
+    if (!std) issues.push(['blocking','STANDARD_UNMAPPED','Map the objective to at least one standard benchmark before publishing.']);
+
+    const srcs = [...document.querySelectorAll('#srclist input[data-src]')];
+    const checked = srcs.filter(s => s.checked);
+    if (checked.length === 0) issues.push(['blocking','NO_SOURCE','Cite at least one approved source before publishing.']);
+    checked.filter(s => s.dataset.ok === '0').forEach(() =>
+      issues.push(['blocking','SOURCE_NOT_APPROVED','A cited source is still in review, not approved. It cannot reach students yet.']));
+
+    const rigor = [...document.querySelectorAll('#techlist input[data-rigor="1"]')].some(t => t.checked);
+    if (rigor) issues.push(['blocking','RIGOR_ADAPTATION_PERMITTED','A permitted technique changes the expected learning. Objective modifications are teacher-authorized per student, never baked into the objective.']);
+
+    const anyTech = [...document.querySelectorAll('#techlist input[data-tech]')].some(t => t.checked && t.dataset.rigor !== '1');
+    if (!anyTech) issues.push(['warning','NO_ADAPTATIONS','No permitted techniques — the objective can only be delivered as the core version.']);
+
+    const blocking = issues.filter(i => i[0] === 'blocking');
+    const gate = document.getElementById('gateResult');
+    gate.innerHTML = blocking.length === 0
+      ? '<span class="verdict ok">✓ Ready to publish v1 — standard mapped, sources approved, rigor intact.</span>'
+      : `<span class="verdict bad">✕ Blocked — ${blocking.length} issue${blocking.length===1?'':'s'} to fix.</span>`;
+    document.getElementById('issues').innerHTML = issues.map(([sev,code,msg]) =>
+      `<div class="iss"><span class="${sev==='blocking'?'b':'w'}">${sev==='blocking'?'blocking':'advisory'}</span><span class="code">${code}</span><span>${msg}</span></div>`).join('');
+  });
+
+  const btn = document.getElementById('themeBtn');
+  function apply(t){ if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme',t); else document.documentElement.removeAttribute('data-theme'); }
+  try { const s = localStorage.getItem('ilp-src-theme'); if(s) apply(s); } catch(e){}
+  btn.addEventListener('click', () => {
+    const dark = document.documentElement.getAttribute('data-theme')==='dark' ||
+      (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    const next = dark ? 'light' : 'dark'; apply(next);
+    try { localStorage.setItem('ilp-src-theme', next); } catch(e){}
+  });
+</script>
+
+</body>
+</html>

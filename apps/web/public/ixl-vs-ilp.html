@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IXL vs ILP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1E2731; --ink-soft:#54606D; --ink-faint:#8894A2;
+  --line:#E4DFD4; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A; --apricot:#E8843C; --gold:#C98A16; --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3; --tint-warm:#FBF0E4;
+  --ixl:#6E8B3D; /* IXL's green, muted for reference */
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4; --apricot:#F0A25A; --gold:#E0B44A; --red:#E27A65; --green:#5FBE86;
+    --tint:#13282E; --tint-warm:#241C12; --ixl:#9DBB63;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4; --apricot:#F0A25A; --gold:#E0B44A; --red:#E27A65; --green:#5FBE86;
+  --tint:#13282E; --tint-warm:#241C12; --ixl:#9DBB63;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3,.disp{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.13}
+p{margin:0 0 1.05em}
+a{color:var(--teal-deep)}
+sup a{font-weight:800;font-size:11px}
+.wrap{max-width:860px;margin:0 auto;padding:0 26px}
+strong{color:var(--ink)}
+
+.hero{background:radial-gradient(120% 90% at 88% -10%, rgba(232,132,60,.14), transparent 55%),
+  radial-gradient(110% 90% at 0% 0%, rgba(14,143,158,.16), transparent 52%);border-bottom:1px solid var(--line)}
+.hero .wrap{padding:58px 26px 46px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal-deep);margin-bottom:20px}
+.kicker .mk{width:24px;height:2px;background:var(--apricot)}
+.hero h1{font-size:clamp(32px,6vw,56px);font-weight:600;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--teal-deep)}
+.hero .sub{font-size:clamp(18px,2.5vw,21px);color:var(--ink-soft);margin-top:20px;max-width:34em;line-height:1.5}
+
+section{padding:46px 0}
+section+section{border-top:1px solid var(--line-soft)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--apricot);margin-bottom:12px}
+h2{font-size:clamp(24px,4vw,33px);font-weight:600;letter-spacing:-.01em;margin-bottom:.55em}
+h3{font-size:18px;font-weight:600;margin:1.2em 0 .3em}
+.lead{font-size:18.5px;color:var(--ink-soft)}
+
+/* strengths / weaknesses */
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 6px}
+@media(max-width:640px){.sw{grid-template-columns:1fr}}
+.swcol{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:var(--card)}
+.swcol h3{margin:0 0 12px;font-family:"Nunito Sans";font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.swcol.up h3{color:var(--green)}
+.swcol.down h3{color:var(--red)}
+.swcol ul{margin:0;padding:0;list-style:none}
+.swcol li{font-size:14.5px;padding:9px 0 9px 24px;position:relative;border-top:1px solid var(--line-soft);color:var(--ink-soft)}
+.swcol li:first-child{border-top:0}
+.swcol li b{color:var(--ink)}
+.swcol.up li:before{content:"+";position:absolute;left:2px;color:var(--green);font-weight:800}
+.swcol.down li:before{content:"–";position:absolute;left:4px;color:var(--red);font-weight:800}
+
+/* comparison table */
+.tbl{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+thead th{background:var(--panel);text-align:left;padding:13px 16px;font-family:"Nunito Sans";
+  font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+thead th.ixl{color:var(--ixl)}
+thead th.ilp{color:var(--teal-deep)}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.dim{color:var(--ink);font-weight:700;width:20%}
+td.ixl{color:var(--ink-soft);width:40%}
+td.ilp{color:var(--ink);width:40%;background:rgba(14,143,158,.05)}
+
+.pull{margin:30px 0;padding:6px 0 6px 24px;border-left:4px solid var(--apricot);
+  font-family:Fraunces,serif;font-size:clamp(20px,2.8vw,26px);line-height:1.34;font-weight:500}
+.pull span{color:var(--teal-deep)}
+
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout.warn{border-left-color:var(--apricot)}
+.callout b{color:var(--teal-deep)}
+.callout.warn b{color:var(--gold)}
+
+.access{background:var(--tint-warm);border:1px solid var(--line);border-radius:18px;padding:28px 26px}
+.access h2{margin-bottom:.4em}
+.access .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+@media(max-width:600px){.access .two{grid-template-columns:1fr}}
+.access .two div{border-top:2px solid var(--apricot);padding-top:10px}
+.access .two h3{margin:0 0 4px;font-family:Fraunces,serif;font-size:16px}
+.access .two p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+
+footer{border-top:1px solid var(--line);padding:28px 0 56px;font-size:13px;color:var(--ink-faint)}
+footer h4{font-family:"Nunito Sans";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px}
+footer ol{margin:0;padding-left:20px;line-height:1.5}
+footer li{margin-bottom:5px}
+footer .disc{margin-top:14px;font-style:italic}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker"><span class="mk"></span> ILP · competitive analysis</div>
+  <h1>IXL is good at practice.<br>ILP is the <em>teaching loop</em> around it.</h1>
+  <p class="sub">A fair look at IXL — what it genuinely does well, where independent reviewers say
+    it falls short — and where ILP is built on a different model. Not a takedown; a clear picture of
+    two tools that do different jobs.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">In fairness first</div>
+  <h2>What IXL is</h2>
+  <p class="lead">IXL Learning is a mature, standards-aligned K-12 <strong>practice</strong>
+    platform — <strong>20,000+ granular skills</strong> across math, ELA, science, social studies and
+    Spanish, each a stream of auto-generated questions scored by a per-skill <strong>SmartScore</strong>,
+    with an adaptive Diagnostic that places students on a grade-level scale.<sup><a href="#s1">1</a></sup>
+    It's used at scale, it's tightly mapped to state standards, and — this matters — its teacher
+    analytics are widely considered best-in-class.<sup><a href="#s2">2</a></sup></p>
+  <p>It is fundamentally a <strong>practice-and-measure</strong> engine. That's the frame for
+    everything below: IXL is very good at what it is, and what it is is not the same job ILP does.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The honest scorecard</div>
+  <h2>Strengths and weaknesses</h2>
+  <div class="sw">
+    <div class="swcol up">
+      <h3>Where IXL is strong</h3>
+      <ul>
+        <li><b>Breadth.</b> 20,000+ skills across five subjects, K-12 — there's practice for almost anything.<sup><a href="#s1">1</a></sup></li>
+        <li><b>Standards alignment.</b> Every skill mapped to state standards, including Florida B.E.S.T. and B.E.S.T. Access Points.<sup><a href="#s3">3</a></sup></li>
+        <li><b>Teacher analytics.</b> Granular "trouble spots" and item-level data — reviewers' most-cited strength.<sup><a href="#s2">2</a></sup></li>
+        <li><b>Adaptive diagnostic.</b> Per-strand, grade-mapped placement that updates in real time.<sup><a href="#s4">4</a></sup></li>
+        <li><b>Immediate worked explanations</b> after a miss, and strong <b>multilingual audio &amp; translation</b> for English learners.<sup><a href="#s5">5</a></sup></li>
+      </ul>
+    </div>
+    <div class="swcol down">
+      <h3>Where reviewers say it falls short</h3>
+      <ul>
+        <li><b>It drills; it doesn't teach.</b> The most consistent independent critique: IXL quizzes and practices but doesn't introduce concepts well.<sup><a href="#s2">2</a></sup></li>
+        <li><b>The SmartScore crash.</b> Points climb slowly, then a single miss erases a large chunk — widely reported as demoralizing.<sup><a href="#s6">6</a></sup></li>
+        <li><b>Rote over reasoning.</b> Heavy multiple-choice; light on extended writing and applied reasoning.<sup><a href="#s2">2</a></sup></li>
+        <li><b>Evidence is thin.</b> One small, vendor-sponsored RCT; the rest is correlational. No independent What Works Clearinghouse rating.<sup><a href="#s7">7</a></sup></li>
+        <li><b>Accessibility is self-attested,</b> with no documented support for nonverbal / AAC learners (see below).<sup><a href="#s8">8</a></sup></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout warn"><b>A note on the scores above:</b> IXL's own site was unreachable during
+    research, so its feature and efficacy claims are drawn from secondary sources and should be
+    re-verified against the live product before any formal presentation. The independent critiques are
+    corroborated across multiple reviewers.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The core difference</div>
+  <h2>Same standards. Different job.</h2>
+  <p>Point IXL and ILP at the same Florida B.E.S.T. benchmark and they do opposite things. IXL hands
+    the student a stream of questions and a score. ILP wraps that standard in a <strong>taught lesson,
+    a teacher-assigned task, evidence the teacher reviews, and a mandatory reteach if it's missed</strong> —
+    with the teacher in command the whole way.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Dimension</th><th class="ixl">IXL</th><th class="ilp">ILP</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Core job</td><td class="ixl">Practice &amp; measure a skill</td><td class="ilp">Teach → assess → remediate, connected as one loop</td></tr>
+      <tr><td class="dim">Instruction</td><td class="ixl">Light — drills, some videos; learn by trial and error</td><td class="ilp">Lesson-first — teacher-authored, grounded in vetted sources</td></tr>
+      <tr><td class="dim">Who's in command</td><td class="ixl">The algorithm routes the student to skills</td><td class="ilp">The teacher assigns once and holds the grade; AI only recommends</td></tr>
+      <tr><td class="dim">When a student misses</td><td class="ixl">SmartScore drops; keep trying the same skill</td><td class="ilp">A materially-different reteach, then equivalent reassessment — no dead-end grade</td></tr>
+      <tr><td class="dim">Help while working</td><td class="ixl">A worked explanation of that item</td><td class="ilp">A grounded bot that coaches the idea and never hands over the graded answer</td></tr>
+      <tr><td class="dim">Content ownership</td><td class="ixl">Vendor's black box you rent</td><td class="ilp">District-owned, teacher-authored; every source vetted and visible</td></tr>
+      <tr><td class="dim">Motivation</td><td class="ixl">Awards, streaks, chasing SmartScore 100</td><td class="ilp">Rewards mastery &amp; helpfulness; no manipulative engagement</td></tr>
+      <tr><td class="dim">Parent view</td><td class="ixl">Usage &amp; trouble spots</td><td class="ilp">Plain-language, no-surprises effort &amp; safety — never a child's private messages</td></tr>
+      <tr><td class="dim">Rigor</td><td class="ixl">Set by the vendor's item bank</td><td class="ilp">Locked to the objective in code; the route adapts, the rigor never silently drops</td></tr>
+    </tbody>
+  </table></div>
+  <div class="pull">IXL tells a student <span>where they are.</span> ILP is the teacher-run system
+    that <span>moves them forward</span> — and proves it with evidence, not a score.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="access">
+    <div class="eyebrow">The part that matters most for every student</div>
+    <h2>Accessibility &amp; students with disabilities</h2>
+    <p class="lead">This is where the gap is widest — and where ILP's design order is deliberate:
+      build one strong system for <em>every</em> student, then extend it for nonverbal kids and other
+      disabilities, with specialists.</p>
+    <div class="two">
+      <div>
+        <h3>IXL today</h3>
+        <p>Strong English-learner audio and translation, and basic self-attested screen-reader support.
+          But for students with significant cognitive disabilities it <strong>maps skills to Access
+          Points and stops there</strong> — no documented AAC, switch, or symbol support was found. The
+          penalty-weighted, timed-feeling model is a poor fit for these learners.<sup><a href="#s8">8</a></sup></p>
+      </div>
+      <div>
+        <h3>ILP's approach</h3>
+        <p>Universal design first — access must never hide subject knowledge, and the route can adapt
+          without lowering rigor (Principle 4). Then a dedicated track for nonverbal / AAC input,
+          switch access, and errorless, no-punitive-scoring paths — <strong>designed with special-education
+          specialists, not bolted on.</strong> A planned build, stated honestly.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Said plainly</div>
+  <h2>The honest bottom line</h2>
+  <p>IXL is a capable, shipping product with real breadth and the best analytics in its class. If a
+    district only wants standards-aligned practice and a diagnostic, it delivers that.</p>
+  <p><strong>ILP is not another practice tool — it's the connected, teacher-controlled instruction
+    layer that practice tools leave out.</strong> Same B.E.S.T. standards; a fundamentally different
+    job. And unlike IXL, ILP is <strong>early</strong>: it's a working engine and a demo, not a
+    validated product with efficacy studies yet — which is exactly why the model insists on expert
+    review and a pilot before it goes near real students. We're telling you what it <em>is</em>, not
+    overselling what it's proven.</p>
+  <div class="callout"><b>Where they can coexist:</b> nothing here requires ripping IXL out. ILP can
+    consume useful signal from tools a district already licenses while providing the lesson-to-mastery
+    loop they don't — the enhancement-not-replacement path in the St. Lucie entry plan.</div>
+</div></section>
+
+<footer><div class="wrap">
+  <h4>Sources &amp; notes</h4>
+  <ol>
+    <li id="s1">IXL product model, 20,000+ skills, subjects and grade span — IXL marketing (ixl.com), corroborated by Tech &amp; Learning, "What is IXL." Skill count is a vendor figure.</li>
+    <li id="s2">Independent reviews — Common Sense Education teacher reviews; thelearningstandard.org; smarterlearningguide.com. Analytics cited as top strength; "drills, doesn't teach" and "rote multiple-choice" cited as top weaknesses.</li>
+    <li id="s3">IXL Florida B.E.S.T. and B.E.S.T. Access Points skill-plan pages (ixl.com/standards/florida; skill-plans/floridas-best-access-points-*). Alignment exists; alignment rigor not independently verified.</li>
+    <li id="s4">IXL Diagnostic / Real-Time Diagnostic (0–1300 per-strand scale) — IXL blog &amp; help center (marketing).</li>
+    <li id="s5">IXL immediate explanations and English-learner audio/translation (80–100+ languages) — IXL help center (feature-confirmed across pages).</li>
+    <li id="s6">SmartScore asymmetry ("crash") — mechanic per IXL help/blog; the demoralizing experience corroborated by Boddle Learning, Common Sense reviews, Trustpilot.</li>
+    <li id="s7">Efficacy — Johns Hopkins CRRE RCT (ERIC ED641940, 2023): causal but small, single-district, IXL-sponsored; SRI validated an ESSA Tier 2 quasi-experimental study; no official What Works Clearinghouse intervention rating found; EdReports rates only the separate "Takeoff by IXL" product, with weak marks on teacher/student supports.</li>
+    <li id="s8">Accessibility — IXL VPAT is self-authored and not an independent audit; strong EL supports and basic screen-reader use documented; no AAC/switch/symbol/nonverbal support found. Access-Points alignment is standards-mapping, not an accessible experience.</li>
+  </ol>
+  <p class="disc">Prepared for ILP district discovery, 2026. IXL's own domain was unreachable during
+    research, so vendor claims here are drawn from secondary sources and should be re-verified against
+    the live product before any formal presentation. This is a product-positioning analysis, not an
+    independent audit of either tool.</p>
+</div></footer>
+
+</body>
+</html>

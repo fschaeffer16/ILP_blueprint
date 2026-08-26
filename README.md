@@ -8,9 +8,12 @@
 
 ## Try the demo
 
-A role-based demo runs the real engine on synthetic data — district, teacher, parent, and
-student views, plus the grounded assignment bot. See [`docs/demo.md`](docs/demo.md) for the
-hosted click-through and the 8-minute walk-through, or run the full app locally:
+**▶ Live, interactive system (no login):** **https://ilp-blueprint-web.vercel.app**
+· guided front door: **https://ilp-blueprint-web.vercel.app/demo.html**
+
+The full app runs the real engine on synthetic data — district, teacher, parent and student
+views, the grounded assignment bot, and the leadership pitch pages, all on one domain. See
+[`docs/demo.md`](docs/demo.md) for the 8-minute walk-through, or run it locally:
 
 ```bash
 npm install                             # compiles @ilp/core automatically (prepare script)
