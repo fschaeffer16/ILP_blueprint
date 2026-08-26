@@ -175,10 +175,12 @@ backlog.*
 ## The library is filled (grade-3 demo pack)
 
 A synthetic-but-real grade-3 content pack now ships in the repo so the product can be driven
-end-to-end: **15 objectives across 4 subjects**, each with an **authored lesson** (real
-student-facing content blocks), **30 assessment items**, and **22 approved sources** across
+end-to-end: **40 objectives across 4 subjects**, each with an **authored lesson** (real
+student-facing content blocks), **80 assessment items**, and **22 approved sources** across
 tiers. `buildCatalog` runs the objective-authoring, lesson-coverage, and item-integrity gates
-over the whole pack — and every entry passes. Browse it at `/library` in `@ilp/web`.
+over the whole pack — and every entry passes. **All 34 grade-3 B.E.S.T. mathematics benchmarks
+are now authored** (Number Sense, Fractions, Algebraic Reasoning, Measurement, Geometry, Data —
+100%); ELA is next. Browse it at `/library` in `@ilp/web`.
 
 ### Mapped to the real Florida B.E.S.T. spine
 
