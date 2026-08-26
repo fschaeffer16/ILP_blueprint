@@ -6,8 +6,22 @@ developer epics (§44).
 
 ## Current state
 
-**Most of the connected cycle's engine is built** ([`@ilp/core`](../packages/core)) — runnable
-on synthetic data, no AI keys, **51 passing tests**, two demos (`npm run demo`, `npm run demo:cycle`).
+**The connected cycle's engine is built** ([`@ilp/core`](../packages/core)) — runnable
+on synthetic data, no AI keys, **117 passing tests**, two demos (`npm run demo`, `npm run demo:cycle`).
+
+**All four role apps are demo-complete and deployed.** The real Next.js app ([`@ilp/web`](../apps/web))
+runs the engine live and is public — no login, nothing to install — at
+<https://ilp-blueprint-web.vercel.app>. Every push auto-redeploys it. The district, teacher,
+parent and student experiences all render real engine output on synthetic data, plus the
+assignment-aware bot, the baseline screener, and a light/dark toggle across every page.
+
+**The grade-3 content pack is complete.** All **60 Florida B.E.S.T. grade-3 benchmarks**
+(34 mathematics + 26 ELA) are authored and gate-validated, plus one history/civics simulation —
+**61 objectives, 122 assessment items, 26 approved sources**. `buildCatalog` runs the objective,
+lesson-coverage, and item-integrity gates over the whole pack and every entry passes. The real
+B.E.S.T. spine ships as structured data in
+[`standards.ts`](../packages/core/src/fixtures/standards.ts) and `/library` renders coverage
+benchmark-by-benchmark.
 
 - **Assign-once compiler** — one teacher assignment → a reproducible, individualized delivery
   manifest per student, with the objective, rigor and mastery rule locked identically.
@@ -69,22 +83,31 @@ grounded engine pattern the model gateway will later slot behind. See
 
 ## Slice order
 
-| # | Slice | Epic (spec §44) | Depends on |
-| --- | --- | --- | --- |
-| 1 | **Objective graph + assign-once compiler** ✅ | E2, E4 | — |
-| 6 | **Assessment specs, items, item-integrity gate, grading recommendations** ✅ | E7, E8 | 1 |
-| 7 | **Teacher final-grade workflow + audit trail** ✅ | E8 | 6 |
-| 8 | **Remediation, reassessment, and the 75% classwide-failure workflow** ✅ | E9 | 6 |
-| 2 | Foundation: tenant, role, roster, class, synthetic students + audit log | E1 | 1 |
-| 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | E3 | 2 |
-| 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | E5 | 1 |
-| 5 | **Assignment-aware bot (mode-governed, grounded)** 🟡 + red-team suite | E6 | 4 |
-| 9 | **Teacher command center (Today board, class overview, assign composer, grading review)** 🟡 | E10 | 1, 6, 7 |
-| 10 | One branching simulation + problem-solving evidence model | E11 | 2 |
-| 11 | District-contained collaboration thread + moderation | E12 | 2 |
-| 12 | Roster/SSO integration path; Canvas/Skyward discovery adapters | E13 | 2 |
-| 13 | Pilot analytics export (mastery, growth, workload, safety) | E14 | 3, 7 |
-| 14 | Validation gates: content, psychometric, accessibility, security, privacy, usability | — | all |
+Legend: ✅ demo-complete on synthetic data · 🟡 partial · ⬜ not started.
+"Demo-complete" means the slice runs end-to-end in the app on synthetic data with tests — **not**
+that it is pilot-hardened. The pilot-readiness work (real data adapters, the bot's red-team
+release suite, and the validation gates in slice 14) is tracked separately below.
+
+| # | Slice | Status | Epic (spec §44) | Depends on |
+| --- | --- | --- | --- | --- |
+| 1 | Objective graph + assign-once compiler | ✅ | E2, E4 | — |
+| 6 | Assessment specs, items, item-integrity gate, grading recommendations | ✅ | E7, E8 | 1 |
+| 7 | Teacher final-grade workflow + audit trail | ✅ | E8 | 6 |
+| 8 | Remediation, reassessment, and the 75% classwide-failure workflow | ✅ | E9 | 6 |
+| 9 | Teacher command center (Today board, class overview, assign composer, grading review, help signals) | ✅ | E10 | 1, 6, 7 |
+| — | Content library + governance (SourceRecord, objective builder, lesson builder, coverage report) | ✅ | E2 | 1 |
+| — | Rollup analytics dashboard (student → class → grade → school → district) | ✅ | E14 | 7 |
+| — | Baseline screener (intake, delivery, scoring, referral/notify routing) | ✅ | E3 | 1 |
+| — | Family view (parent role: progress, time, growth, safety; no message content) | ✅ | E10 | 7 |
+| 11 | Student app + district-contained collaboration channels + moderation | ✅ | E12 | 2 |
+| 5 | Assignment-aware bot (mode-governed, grounded, answer-protecting) | 🟡 needs red-team suite | E6 | 4 |
+| 2 | Foundation: tenant, role, roster, class, synthetic students + audit log | 🟡 modeled in fixtures | E1 | 1 |
+| 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | ⬜ | E3 | 2 |
+| 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | ⬜ | E5 | 1 |
+| 10 | One branching simulation + problem-solving evidence model | ⬜ | E11 | 2 |
+| 12 | Roster/SSO integration path; Canvas/Skyward discovery adapters | ⬜ | E13 | 2 |
+| 13 | Pilot analytics export (mastery, growth, workload, safety) | ⬜ | E14 | 3, 7 |
+| 14 | Validation gates: content, psychometric, accessibility, security, privacy, usability | ⬜ | — | all |
 
 ## Product architecture (MVP shape)
 
@@ -128,5 +151,10 @@ The build does not go near real students until these gates pass, in order:
 | Data during build | Synthetic students only |
 | First demo | Teacher assigns one objective; system produces five adaptation patterns; two sample students complete lesson, bot help, assessment and remediation; teacher reviews one grade and one 75% alert |
 
-Slice 1 already delivers the first half of that "first demo" line: assign once → five
-adaptation patterns. Run it with `npm run demo`.
+The "first demo" line above is now deliverable end-to-end in the app: assign once → individualized
+per student, the bot help loop, assessment and remediation, a teacher-reviewed grade, and the 75%
+alert — all live at <https://ilp-blueprint-web.vercel.app> and reproducible headless with
+`npm run demo` / `npm run demo:cycle`. What remains before a real pilot is not more demo surface
+but the pilot-readiness work: the bot's red-team release suite, real-data import adapters
+(FAST / i-Ready / roster / SSO), the student tablet lesson player, and the slice-14 validation
+gates (content, psychometric, accessibility, security, privacy, usability).
