@@ -2,171 +2,318 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Case for ILP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
 <style>
-  :root {
-    --ground:#f2f4fa; --surface:#ffffff; --surface-2:#eaeef7; --border:#dce1ee; --border-2:#c6cee1;
-    --ink:#141b2b; --sec:#4e5b73; --muted:#7a8598;
-    --accent:#3a4fd0; --accent-2:#2c3ea8; --accent-weak:#e3e7fb;
-    --ok:#12824a; --ok-w:#dcefe4; --amber:#9a6a12; --amber-w:#f6ecd4;
-    --shadow:0 1px 2px rgba(20,30,60,.05), 0 8px 22px rgba(20,30,60,.07);
-    --r:14px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground:#0c0f17; --surface:#151a26; --surface-2:#1e2431; --border:#28303f; --border-2:#39435a;
-      --ink:#e9edf6; --sec:#a7b2c6; --muted:#79849a;
-      --accent:#8496f5; --accent-2:#a3b1f8; --accent-weak:#1a2444;
-      --ok:#48c07f; --ok-w:#12301f; --amber:#dcb057; --amber-w:#2f2810;
-      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.45);
-    }
-  }
-  :root[data-theme="dark"] {
-    --ground:#0c0f17; --surface:#151a26; --surface-2:#1e2431; --border:#28303f; --border-2:#39435a;
-    --ink:#e9edf6; --sec:#a7b2c6; --muted:#79849a;
-    --accent:#8496f5; --accent-2:#a3b1f8; --accent-weak:#1a2444;
-    --ok:#48c07f; --ok-w:#12301f; --amber:#dcb057; --amber-w:#2f2810;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.45);
-  }
+:root{
+  --paper:#F5F2EC; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1B232C; --ink-soft:#54606D; --ink-faint:#8A94A2;
+  --line:#E3DED3; --line-soft:#EEEAE0;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A; --teal-ink:#074E58;
+  --apricot:#E8843C; --gold:#C98A16; --green:#3E9A6B; --red:#C4503A;
+  --tint:#E7F2F2; --tint-warm:#FBEEE1; --dim:#B7AFA1;
+}
+:root:not([data-theme="light"]){ @media (prefers-color-scheme:dark){
+  --paper:#0E141A; --card:#171F27; --panel:#131A21; --ink:#EAEEF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#27313C; --line-soft:#1F2932;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4; --teal-ink:#8BDCE6;
+  --apricot:#F0A25A; --gold:#E0B44A; --green:#5FBE86; --red:#E27A65;
+  --tint:#122731; --tint-warm:#241B12; --dim:#3A444F;
+}}
+:root[data-theme="dark"]{
+  --paper:#0E141A; --card:#171F27; --panel:#131A21; --ink:#EAEEF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#27313C; --line-soft:#1F2932;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4; --teal-ink:#8BDCE6;
+  --apricot:#F0A25A; --gold:#E0B44A; --green:#5FBE86; --red:#E27A65;
+  --tint:#122731; --tint-warm:#241B12; --dim:#3A444F;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;font-size:17px}
+h1,h2,h3,.disp{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.1}
+button{font-family:inherit}
+.stage{max-width:760px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding:0 22px}
 
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--ground); color:var(--ink); font-family:"IBM Plex Sans", system-ui, sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
-  h1,h2,h3 { font-family:"Fraunces", Georgia, serif; font-weight:600; margin:0; text-wrap:balance; line-height:1.12; }
-  a { color:var(--accent-2); }
-  .mono { font-family:"IBM Plex Mono", monospace; }
+/* progress rail */
+.rail{display:flex;gap:6px;align-items:center;padding:20px 0 6px;flex-wrap:wrap}
+.rail .brand{font-family:Fraunces,serif;font-weight:600;font-size:15px;color:var(--teal-deep);margin-right:8px;display:flex;align-items:center;gap:7px}
+.rail .brand .d{width:20px;height:20px;border-radius:6px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:12px}
+.dots{display:flex;gap:6px;margin-left:auto}
+.dot{width:26px;height:5px;border-radius:3px;background:var(--line);border:0;padding:0;cursor:pointer;transition:background .2s}
+.dot.on{background:var(--teal)}
+.dot.done{background:var(--teal-deep);opacity:.5}
 
-  header.top { background:var(--surface); border-bottom:1px solid var(--border); }
-  .top-in { max-width:960px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; gap:12px; }
-  .mk { width:34px; height:34px; border-radius:9px; background:var(--accent); color:#fff; display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:700; font-size:1.2rem; }
-  .top b { font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; }
-  .top small { display:block; color:var(--muted); font-size:.72rem; }
-  .theme { margin-left:auto; font:inherit; font-size:.8rem; cursor:pointer; border:1px solid var(--border-2); background:var(--surface); color:var(--sec); border-radius:8px; padding:6px 10px; }
+/* step area */
+.steps{flex:1;display:flex;align-items:center;padding:14px 0 8px}
+.step{display:none;width:100%;animation:fade .35s ease}
+.step.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.step.on{animation:none}}
+.ey{font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--apricot);margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.ey .n{font-family:Fraunces,serif;color:var(--ink-faint);font-weight:600;letter-spacing:0}
+h2.q{font-size:clamp(27px,5.2vw,44px);font-weight:600;letter-spacing:-.02em}
+h2.q em{font-style:italic;color:var(--teal-deep)}
+.sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);margin-top:16px;max-width:34em;line-height:1.5}
+.sub b{color:var(--ink)}
 
-  main { max-width:960px; margin:0 auto; padding:30px 22px 90px; }
-  .hero h1 { font-size:2.5rem; letter-spacing:-.01em; max-width:18ch; }
-  .hero p { font-size:1.15rem; color:var(--sec); max-width:62ch; margin:14px 0 0; }
-  .stats { display:flex; gap:22px; flex-wrap:wrap; margin-top:22px; }
-  .stat b { font-family:"Fraunces",serif; font-size:1.5rem; font-weight:600; display:block; line-height:1; }
-  .stat span { color:var(--muted); font-size:.8rem; }
+/* nav */
+.nav{display:flex;align-items:center;gap:12px;padding:14px 0 26px;border-top:1px solid var(--line-soft)}
+.nav .hint{color:var(--ink-faint);font-size:12.5px;font-weight:600}
+.btn{border:0;border-radius:11px;padding:11px 18px;font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.primary{background:var(--teal);color:#fff}
+.btn.primary:hover{background:var(--teal-deep)}
+.btn.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+.btn.ghost:hover{color:var(--ink);border-color:var(--dim)}
+.btn:disabled{opacity:.35;cursor:default}
+.nav .spacer{margin-left:auto}
 
-  h2.sec { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-family:"IBM Plex Sans"; font-weight:700; margin:38px 0 14px; }
+/* interactive: tool chips (step 2) */
+.tools{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:11px 15px;cursor:pointer;text-align:left;transition:border-color .15s, background .15s}
+.chip:hover{border-color:var(--teal)}
+.chip.on{border-color:var(--teal);background:var(--tint)}
+.chip .nm{font-weight:800;font-size:15px}
+.chip .ds{font-size:12px;color:var(--ink-faint);font-weight:700}
+.reveal{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:15px 18px;font-size:15.5px;min-height:64px}
+.reveal .does{color:var(--ink)}
+.reveal .cant{color:var(--red);font-weight:700}
+.reveal b{color:var(--teal-deep)}
+.glue{margin-top:14px;font-family:Fraunces,serif;font-size:19px;color:var(--ink);font-weight:500}
+.glue span{color:var(--apricot)}
 
-  .cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  @media (max-width:680px){ .cards{ grid-template-columns:1fr; } }
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:20px 22px; display:flex; flex-direction:column; }
-  .role { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
-  .role .n { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--accent-2); font-weight:600; letter-spacing:.06em; }
-  .badge { margin-left:auto; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; }
-  .badge.live { background:var(--ok-w); color:var(--ok); }
-  .badge.part { background:var(--amber-w); color:var(--amber); }
-  .card h3 { font-size:1.3rem; margin:2px 0 8px; }
-  .card p { margin:0 0 14px; font-size:.94rem; color:var(--sec); }
-  .card ul { margin:0 0 16px; padding-left:18px; font-size:.88rem; color:var(--sec); }
-  .card li { margin:3px 0; }
-  .links { display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
-  .btn { font-size:.85rem; font-weight:600; padding:7px 13px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; }
-  .btn:hover { filter:brightness(1.06); text-decoration:none; }
-  .btn.ghost { background:var(--surface-2); color:var(--accent-2); border:1px solid var(--border); }
+/* gap visual (step 3) */
+.gap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:20px 0 6px;overflow-x:auto}
+.gap svg{display:block;min-width:460px;width:100%}
 
-  .flow { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:16px 20px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:.9rem; }
-  .flow .step { background:var(--accent-weak); color:var(--accent-2); font-weight:600; padding:5px 11px; border-radius:8px; white-space:nowrap; }
-  .flow .arrow { color:var(--muted); }
+/* pillars (step 4) */
+.pill-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 6px}
+@media(max-width:560px){.pill-wrap{grid-template-columns:1fr}}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:13px 15px;cursor:pointer;transition:.15s}
+.pill:hover{border-color:var(--teal)}
+.pill.on{background:var(--tint);border-color:var(--teal)}
+.pill .h{font-family:Fraunces,serif;font-weight:600;font-size:16px;display:flex;gap:9px;align-items:center}
+.pill .h .i{color:var(--teal-deep)}
+.pill .b{font-size:13.5px;color:var(--ink-soft);margin-top:6px;display:none}
+.pill.on .b{display:block}
 
-  .foot { color:var(--muted); font-size:.83rem; margin-top:32px; border-top:1px solid var(--border); padding-top:16px; }
-  .foot a { color:var(--accent-2); }
+/* head-to-head (step 5) */
+.vs{margin:20px 0 6px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.vs .row{display:grid;grid-template-columns:34% 1fr;border-top:1px solid var(--line-soft);cursor:pointer}
+.vs .row:first-child{border-top:0}
+.vs .row:hover{background:var(--panel)}
+.vs .dim{padding:13px 15px;font-weight:800;font-size:14.5px;border-right:1px solid var(--line-soft)}
+.vs .val{padding:13px 15px;font-size:14.5px;position:relative}
+.vs .val .ixl{color:var(--ink-faint)}
+.vs .val .ilp{color:var(--ink);display:none}
+.vs .val .ilp b{color:var(--teal-deep)}
+.vs .row.flip .val .ixl{display:none}
+.vs .row.flip .val .ilp{display:block}
+.vs .row.flip{background:var(--tint)}
+.vs .tag{position:absolute;right:12px;top:12px;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.vs .row.flip .tag{color:var(--teal-deep)}
+.vshint{font-size:12.5px;color:var(--ink-faint);margin-top:8px;font-weight:600}
+
+/* stakes (step 6) */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0 6px}
+@media(max-width:560px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px}
+.stat .n{font-family:Fraunces,serif;font-size:26px;font-weight:600;color:var(--teal-deep);line-height:1}
+.stat.warn .n{color:var(--apricot)}
+.stat .l{font-size:12.5px;color:var(--ink-soft);margin-top:7px;font-weight:600}
+.note{margin-top:14px;background:var(--tint-warm);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px}
+.note b{color:var(--gold)}
+
+/* ask (step 7) */
+.ask .disp{font-size:clamp(26px,4.6vw,40px);font-weight:500;letter-spacing:-.01em}
+.ask .disp em{font-style:italic;color:var(--teal-deep)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.ctas .btn.primary{padding:14px 22px;font-size:16px}
+.footnote{margin-top:18px;font-size:12px;color:var(--ink-faint);font-style:italic}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="top-in">
-    <div class="mk">◆</div>
-    <div><b>The case for ILP</b><small>For decision-makers · the argument, not the product</small></div>
-    <button class="theme" id="themeBtn" type="button">◐ Theme</button>
-  </div>
-</header>
-<main>
-  <div class="hero">
-    <h1>Why ILP — and why now.</h1>
-    <p>This is the argument, kept deliberately separate from the product: how ILP differs from what St. Lucie runs today, an honest look at the competition, and the partnership vision. Want to click through the actual working system instead? <a href="/demo.html">▸ Open the live system</a>.</p>
+<div class="stage">
+  <div class="rail">
+    <div class="brand"><span class="d">◆</span> ILP</div>
+    <div class="dots" id="dots"></div>
   </div>
 
-  <h2 class="sec">Reports &amp; proposals</h2>
-  
-  <div class="cards">
-    <div class="card">
-      <div class="role"><span class="n">THE PITCH</span><span class="badge live">Start here</span></div>
-      <h3>One System, Not Three</h3>
-      <p>The flagship case: the IXL + Skyward + Canvas stack collapsing into one integrated system that does all of it and more — baseline for every learner, same-day remediation, cross-school collaboration that beats social media, and scenario sims as real assignments.</p>
-      <ul>
-        <li>Why this isn’t a fourth tool for the pile — it makes the other three unnecessary</li>
-        <li>The six things none of the current tools can do</li>
-        <li>A pilot framed as the first grade of the transition, not an add-on</li>
-      </ul>
-      <div class="links">
-        <a class="btn" href="/what-comes-next.html">Read the pitch</a>
+  <div class="steps" id="steps">
+
+    <!-- 1 -->
+    <section class="step on">
+      <div class="ey"><span class="n">01</span> The moment</div>
+      <h2 class="q">You just earned your <em>first A.</em><br>Here's how to keep it.</h2>
+      <p class="sub">St. Lucie's climb is real — and third-grade reading is where it's most fragile.
+        This is a two-minute look at a system, <b>built by teachers</b>, that could hold that A and
+        put your district in front of the state. Click through — it's fast.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="step">
+      <div class="ey"><span class="n">02</span> What you run today</div>
+      <h2 class="q">Five tools. None of them talk.</h2>
+      <p class="sub">Tap each one — see what it does, and where it stops.</p>
+      <div class="tools" id="tools">
+        <button class="chip on" data-k="ixl"><div class="nm">IXL</div><div class="ds">practice</div></button>
+        <button class="chip" data-k="sky"><div class="nm">Skyward</div><div class="ds">grades</div></button>
+        <button class="chip" data-k="can"><div class="nm">Canvas</div><div class="ds">assignments</div></button>
+        <button class="chip" data-k="fast"><div class="nm">FAST / i-Ready</div><div class="ds">testing</div></button>
       </div>
-    </div>
-    <div class="card">
-      <div class="role"><span class="n">BRIEFING</span><span class="badge live">Doc</span></div>
-      <h3>After the Test</h3>
-      <p>Why FAST and i-Ready’s three-times-a-year measurement becomes obsolete once ILP tracks mastery continuously — the honest version, grounded in St. Lucie’s scores and Florida’s grade-3 retention law.</p>
-      <ul>
-        <li>A fair description of what each tool does, then the shared blind spot between test windows</li>
-        <li>What becomes redundant (the standalone diagnostic) and what stays but goes quiet (the state test)</li>
-        <li>Cited to St. Lucie’s first-ever “A”, grade-3 ELA gap, and F.S. 1008.25</li>
-      </ul>
-      <div class="links">
-        <a class="btn" href="/after-the-test.html">Read the briefing</a>
+      <div class="reveal" id="toolReveal"></div>
+      <div class="glue">Between them all, the <span>teacher is the glue</span> — on their own time.</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step">
+      <div class="ey"><span class="n">03</span> The gap</div>
+      <h2 class="q">They measure. They don't <em>teach or fix.</em></h2>
+      <p class="sub">The tools sample the year three times and store the results. Learning happens in
+        the weeks <b>between</b> — where nothing connects the score to the next day's lesson.</p>
+      <div class="gap">
+        <svg viewBox="0 0 620 150" role="img" aria-label="A school year: FAST and i-Ready sample three points, leaving long unmonitored gaps, while ILP is continuous.">
+          <line x1="24" y1="46" x2="596" y2="46" stroke="#8A94A2" stroke-width="1.5"/>
+          <g fill="#C4503A"><circle cx="80" cy="46" r="8"/><circle cx="310" cy="46" r="8"/><circle cx="540" cy="46" r="8"/></g>
+          <g font-family="Nunito Sans" font-size="12" font-weight="700" fill="#54606D" text-anchor="middle">
+            <text x="80" y="26">Fall test</text><text x="310" y="26">Winter test</text><text x="540" y="26">Spring test</text>
+          </g>
+          <g font-family="Nunito Sans" font-size="11" font-weight="700" fill="#C4503A" text-anchor="middle">
+            <text x="195" y="70">↤ weeks unseen ↦</text><text x="425" y="70">↤ weeks unseen ↦</text>
+          </g>
+          <rect x="24" y="104" width="572" height="16" rx="8" fill="#0E8F9E"/>
+          <text x="310" y="116" font-family="Nunito Sans" font-size="12" font-weight="800" fill="#F5F2EC" text-anchor="middle">ILP · every assignment is evidence — continuous</text>
+        </svg>
       </div>
-    </div>
-    <div class="card">
-      <div class="role"><span class="n">ANALYSIS</span><span class="badge live">Doc</span></div>
-      <h3>IXL vs ILP</h3>
-      <p>A fair-minded competitive analysis — what IXL does well, where independent reviewers say it falls short, and how ILP’s teacher-controlled teach-assess-remediate model is a different job, including the accessibility gap for nonverbal and disabled students.</p>
-      <ul>
-        <li>Honest strengths (breadth, analytics, diagnostic) and weaknesses (drills vs. teaches, the “SmartScore crash”, thin evidence)</li>
-        <li>Same B.E.S.T. standards, opposite jobs — a dimension-by-dimension table</li>
-        <li>Accessibility: where IXL stops at standards-mapping, and ILP’s universal-first, then-specialized design order</li>
-      </ul>
-      <div class="links">
-        <a class="btn" href="/ixl-vs-ilp.html">Read the analysis</a>
+      <div class="glue">A test tells you a child is behind. <span>Then what?</span></div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step">
+      <div class="ey"><span class="n">04</span> What ILP is</div>
+      <h2 class="q">One system. Not three.</h2>
+      <p class="sub">Everything the current tools do — plus what none of them can. Tap to expand.</p>
+      <div class="pill-wrap" id="pills">
+        <button class="pill on"><div class="h"><span class="i">◇</span> One connected flow</div><div class="b">In-class work, homework and individualized study guides — assigned once, tailored to every student.</div></button>
+        <button class="pill"><div class="h"><span class="i">◎</span> Meets every learner</div><div class="b">A baseline for every child, not a bolt-on diagnostic — instruction starts from the truth about each student.</div></button>
+        <button class="pill"><div class="h"><span class="i">↻</span> Fixes it the same day</div><div class="b">Miss an objective and remediation opens immediately — a reteach, then equivalent reassessment. No waiting for the next test.</div></button>
+        <button class="pill"><div class="h"><span class="i">◆</span> Collaboration, not doom-scroll</div><div class="b">A safe, verified space — even across schools — for real problem-solving projects. Moderated, no DMs.</div></button>
+        <button class="pill"><div class="h"><span class="i">▷</span> Simulations that count</div><div class="b">Branching, scenario-based sims are graded assignments producing evidence of reasoning — not optional games.</div></button>
+        <button class="pill"><div class="h"><span class="i">✦</span> Teacher leads · parents in</div><div class="b">The teacher assigns, reviews and releases every grade. Parents get a real-time, plain-language window.</div></button>
       </div>
-    </div>
-    <div class="card">
-      <div class="role"><span class="n">PROPOSAL</span><span class="badge live">Doc</span></div>
-      <h3>Built by Teachers</h3>
-      <p>How ILP grows exponentially from one classroom to a national platform — built from the ground up by teachers and administrators, with St. Lucie County as founding co-developer, not a customer.</p>
-      <ul>
-        <li>The inversion: practitioners author the content; the engine only enforces the district’s guardrails</li>
-        <li>The flywheel — why a shared, gated library compounds without losing rigor</li>
-        <li>The path: St. Lucie → district-wide → every Florida B.E.S.T. district → nationwide</li>
-      </ul>
-      <div class="links">
-        <a class="btn" href="/built-by-teachers.html">Read the proposal</a>
+    </section>
+
+    <!-- 5 -->
+    <section class="step">
+      <div class="ey"><span class="n">05</span> Head to head</div>
+      <h2 class="q">Same standards. <em>Opposite job.</em></h2>
+      <p class="sub">Tap any row to flip it from what a practice tool does → to what ILP does.</p>
+      <div class="vs" id="vs">
+        <div class="row"><div class="dim">On a miss</div><div class="val"><span class="ixl">The score drops; try the skill again.</span><span class="ilp"><b>A different reteach opens, then equivalent reassessment.</b></span><span class="tag">tap</span></div></div>
+        <div class="row"><div class="dim">Instruction</div><div class="val"><span class="ixl">Drills; learn by trial and error.</span><span class="ilp"><b>A taught lesson first, authored by teachers.</b></span><span class="tag">tap</span></div></div>
+        <div class="row"><div class="dim">In command</div><div class="val"><span class="ixl">The algorithm routes the student.</span><span class="ilp"><b>The teacher assigns once and holds the grade.</b></span><span class="tag">tap</span></div></div>
+        <div class="row"><div class="dim">The content</div><div class="val"><span class="ixl">A vendor's black box you rent.</span><span class="ilp"><b>District-owned, teacher-authored, sources visible.</b></span><span class="tag">tap</span></div></div>
+        <div class="row"><div class="dim">Parents</div><div class="val"><span class="ixl">A gradebook they check.</span><span class="ilp"><b>Real-time effort &amp; safety — no surprises.</b></span><span class="tag">tap</span></div></div>
       </div>
-    </div>
+      <div class="vshint">Every "ILP" side is already written into a working, tested system.</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step">
+      <div class="ey"><span class="n">06</span> Why it matters here</div>
+      <h2 class="q">The cost of finding out in <em>week 18.</em></h2>
+      <div class="stats">
+        <div class="stat warn"><div class="n">≈49%</div><div class="l">St. Lucie grade-3 ELA at Level 3+, below the state's ≈53–55%</div></div>
+        <div class="stat"><div class="n">+4 pts</div><div class="l">Year-over-year gain in grade-3 ELA — momentum to protect</div></div>
+        <div class="stat warn"><div class="n">Level 2</div><div class="l">Score below it in grade-3 reading and a child faces retention</div></div>
+      </div>
+      <p class="sub" style="margin-top:16px">Under Florida law, the clock on a struggling third grader is real. A model that surfaces the risk in <b>week 3</b> — and opens the reteach that day — is worth more than one more accurate snapshot in week 18.</p>
+      <div class="note"><b>And the students the current tools serve worst</b> — nonverbal kids, those on Access Points — are exactly who ILP is designed to reach next: universal system first, then a real accessibility track, built with your specialists.</div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step ask">
+      <div class="ey"><span class="n">07</span> The ask</div>
+      <p class="disp">Not a district-wide purchase.<br>One grade. <em>Built by your teachers.</em></p>
+      <p class="sub">A contained pilot on synthetic data, teachers in full control — the first grade of the transition, not another tool bolted next to the others. When it works, it starts replacing the reasons you needed them.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://ilp-blueprint-web.vercel.app/demo.html">▶ See the live system</a>
+        <a class="btn ghost" href="https://ilp-blueprint-web.vercel.app/what-comes-next.html">Read the full case →</a>
+      </div>
+      <p class="footnote">Grade-3 demo runs on synthetic data — no real student information. Figures from public sources; verify before formal use.</p>
+    </section>
+
   </div>
 
-  
-
-  <div class="foot">
-    <p><strong>This page is the case, not the product.</strong> To try the real, clickable system — the district, teacher, parent and student apps — go to <a href="/demo.html">▸ The live system</a>.</p>
-    <p style="margin-top:10px">All figures are drawn from public sources and should be re-verified before any formal presentation; competitor claims in particular. Synthetic data only.</p>
+  <div class="nav">
+    <button class="btn ghost" id="prev">← Back</button>
+    <span class="hint" id="hint">1 / 7</span>
+    <span class="spacer"></span>
+    <button class="btn primary" id="next">Next →</button>
   </div>
-</main>
+</div>
+
 <script>
-  const btn = document.getElementById('themeBtn');
-  const apply = t => { if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); };
-  try { const s = localStorage.getItem('ilp-hub-theme'); if (s) apply(s); } catch (e) {}
-  btn.addEventListener('click', () => {
-    const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-    const n = dark ? 'light' : 'dark'; apply(n);
-    try { localStorage.setItem('ilp-hub-theme', n); } catch (e) {}
+(function(){
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var dotsWrap = document.getElementById('dots');
+  var prev = document.getElementById('prev'), next = document.getElementById('next'), hint = document.getElementById('hint');
+  var i = 0;
+  var labels = ['Moment','Today','The gap','ILP','Head to head','Why here','The ask'];
+  steps.forEach(function(s,idx){
+    var b=document.createElement('button'); b.className='dot'+(idx===0?' on':''); b.title=labels[idx]||('Step '+(idx+1));
+    b.setAttribute('aria-label',b.title); b.addEventListener('click',function(){go(idx);}); dotsWrap.appendChild(b);
   });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+  function go(n){
+    n = Math.max(0, Math.min(steps.length-1, n));
+    steps[i].classList.remove('on'); steps[n].classList.add('on');
+    dots.forEach(function(d,idx){ d.classList.toggle('on', idx===n); d.classList.toggle('done', idx<n); });
+    i = n;
+    prev.disabled = (i===0);
+    next.textContent = (i===steps.length-1) ? 'Start over ↺' : 'Next →';
+    hint.textContent = (i+1)+' / '+steps.length;
+    try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+  }
+  prev.addEventListener('click',function(){ go(i-1); });
+  next.addEventListener('click',function(){ i===steps.length-1 ? go(0) : go(i+1); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight') go(i+1);
+    else if(e.key==='ArrowLeft') go(i-1);
+  });
+  go(0);
+
+  // step 2 — tool reveal
+  var toolData = {
+    ixl:{does:'Generates endless practice questions and a score.', cant:'Doesn\'t teach the lesson or fix a gap.'},
+    sky:{does:'Stores grades and attendance for families.', cant:'It\'s a record book — it doesn\'t instruct.'},
+    can:{does:'Posts assignments and resources.', cant:'A folder — no adaptation, no remediation.'},
+    fast:{does:'Measures students three times a year.', cant:'Tells you a child is behind — after the fact.'}
+  };
+  var reveal = document.getElementById('toolReveal');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#tools .chip'));
+  function showTool(k, el){
+    chips.forEach(function(c){ c.classList.toggle('on', c===el); });
+    var d = toolData[k];
+    reveal.innerHTML = '<div class="does"><b>Does:</b> '+d.does+'</div><div class="cant" style="margin-top:6px">Can\'t: '+d.cant+'</div>';
+  }
+  chips.forEach(function(c){ c.addEventListener('click',function(){ showTool(c.getAttribute('data-k'), c); }); });
+  showTool('ixl', chips[0]);
+
+  // step 4 — pillars accordion (multi-open)
+  Array.prototype.forEach.call(document.querySelectorAll('#pills .pill'), function(p){
+    p.addEventListener('click', function(){ p.classList.toggle('on'); });
+  });
+
+  // step 5 — head-to-head flip
+  Array.prototype.forEach.call(document.querySelectorAll('#vs .row'), function(r){
+    r.addEventListener('click', function(){ r.classList.toggle('flip'); });
+  });
+})();
 </script>
+
 </body>
 </html>
