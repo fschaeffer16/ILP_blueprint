@@ -146,11 +146,11 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
 
     <!-- 1 -->
     <section class="step on">
-      <div class="ey"><span class="n">01</span> The moment</div>
-      <h2 class="q">You just earned your <em>first A.</em><br>Here's how to keep it.</h2>
-      <p class="sub">St. Lucie's climb is real — and third-grade reading is where it's most fragile.
-        This is a two-minute look at a system, <b>built by teachers</b>, that could hold that A and
-        put your district in front of the state. Click through — it's fast.</p>
+      <div class="ey"><span class="n">01</span> The invitation</div>
+      <h2 class="q">Reimagine the classroom.<br>Make learning <em>exciting</em> again.</h2>
+      <p class="sub">Modern tools, used right, can meet every student exactly where they are —
+        turning screen time into real problem-solving and discovery, and putting <b>teachers back in
+        command</b>. This is a two-minute look at a system built to do that. Click through — it's fast.</p>
     </section>
 
     <!-- 2 -->
@@ -262,7 +262,7 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
   var dotsWrap = document.getElementById('dots');
   var prev = document.getElementById('prev'), next = document.getElementById('next'), hint = document.getElementById('hint');
   var i = 0;
-  var labels = ['Moment','Today','The gap','ILP','Head to head','Why here','The ask'];
+  var labels = ['Vision','Today','The gap','ILP','Head to head','Why here','The ask'];
   steps.forEach(function(s,idx){
     var b=document.createElement('button'); b.className='dot'+(idx===0?' on':''); b.title=labels[idx]||('Step '+(idx+1));
     b.setAttribute('aria-label',b.title); b.addEventListener('click',function(){go(idx);}); dotsWrap.appendChild(b);
