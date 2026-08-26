@@ -8,12 +8,14 @@
 
 ## Try the demo
 
-**▶ Live, interactive system (no login):** **https://ilp-blueprint-web.vercel.app**
-· guided front door: **https://ilp-blueprint-web.vercel.app/demo.html**
+Two separate things, deliberately kept apart:
+
+- **▶ The live system** (the product — try it, no login): **https://ilp-blueprint-web.vercel.app/demo.html**
+- **📄 The case for ILP** (the argument — comparison, pitch, partnership, for decision-makers): **https://ilp-blueprint-web.vercel.app/case.html**
 
 The full app runs the real engine on synthetic data — district, teacher, parent and student
-views, the grounded assignment bot, and the leadership pitch pages, all on one domain. See
-[`docs/demo.md`](docs/demo.md) for the 8-minute walk-through, or run it locally:
+views plus the grounded assignment bot. See [`docs/demo.md`](docs/demo.md) for the 8-minute
+walk-through, or run it locally:
 
 ```bash
 npm install                             # compiles @ilp/core automatically (prepare script)
