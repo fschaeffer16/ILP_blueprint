@@ -28,13 +28,13 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
       </div>
       <h1>Content library</h1>
       <p className="lede">
-        The approved curriculum content a teacher builds from — objectives, authored lessons,
+        The approved curriculum content a teacher builds from — Learning Objectives, authored lessons,
         assessment items, and vetted sources. Every item below has passed every guardrail
         (standard-mapped, approved sources, lesson covers the reasoning, items trace and don’t leak).
       </p>
 
       <div className="kpis" style={{ marginBottom: 12 }}>
-        <div className="kpi"><div className="n">{cat.summary.objectives}</div><div className="l">objectives</div></div>
+        <div className="kpi"><div className="n">{cat.summary.objectives}</div><div className="l">Learning Objectives</div></div>
         <div className="kpi"><div className="n">{cat.summary.lessons}</div><div className="l">authored lessons</div></div>
         <div className="kpi"><div className="n">{cat.summary.items}</div><div className="l">assessment items</div></div>
         <div className="kpi"><div className="n">{cat.summary.sources}</div><div className="l">approved sources</div></div>
@@ -47,7 +47,7 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
         <section key={subject}>
           <div className="subject-head">
             <h2>{SUBJECT_LABEL[subject] ?? subject}</h2>
-            <span className="count">{entries.length} objective{entries.length === 1 ? '' : 's'}</span>
+            <span className="count">{entries.length} Learning Objective{entries.length === 1 ? '' : 's'}</span>
           </div>
           <div className="libgrid">
             {entries.map((e) => (
@@ -64,8 +64,8 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
       ))}
 
       <p className="footnote">
-        Computed by <span className="mono">@ilp/core</span> (<span className="mono">buildCatalog</span>): every objective is
-        run through the objective-authoring, lesson-coverage, and item-integrity gates. Synthetic content; sources are
+        Computed by <span className="mono">@ilp/core</span> (<span className="mono">buildCatalog</span>): every Learning Objective is
+        run through the Learning-Objective authoring, lesson-coverage, and item-integrity gates. Synthetic content; sources are
         representative candidates confirmed in the vetting pipeline.
       </p>
     </>
@@ -181,7 +181,7 @@ function ObjectiveDetail({ id }: { id: string }) {
 
       <p className="footnote">
         This is what a teacher assigns and a student sees. Assigning it runs the compiler
-        (<Link href="/assign">Assign once</Link>) to individualize it per student while keeping this objective locked.
+        (<Link href="/assign">Assign once</Link>) to individualize it per student while keeping this Learning Objective locked.
       </p>
     </>
   );

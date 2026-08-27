@@ -9,7 +9,7 @@ const LEVELS = [
   { key: 'subject', label: 'Subject' },
   { key: 'teacher', label: 'Teacher' },
   { key: 'class', label: 'Class' },
-  { key: 'objective', label: 'Objective' },
+  { key: 'objective', label: 'Learning Objective' },
   { key: 'student', label: 'Student' },
 ] as const;
 
@@ -43,9 +43,9 @@ export default function DashboardPage({ searchParams }: { searchParams: { by?: s
     <>
       <h1>District dashboard</h1>
       <p className="lede">
-        The same objective evidence for <strong>{district}</strong>, in real time — cut by
-        school, grade, <strong>subject</strong>, <strong>teacher</strong>, class, objective, or
-        student. Mastery is the locked bar (≥ 80%, with transfer); the average score shows how
+        The same Learning Objective evidence for <strong>{district}</strong>, in real time — cut by
+        school, grade, <strong>subject</strong>, <strong>teacher</strong>, class, Learning Objective,
+        or student. Mastery is the locked bar (≥ 80%, with transfer); the average score shows how
         close the rest are. Sorted worst-first, so what needs attention is on top.
       </p>
 

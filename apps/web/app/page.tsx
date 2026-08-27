@@ -59,7 +59,7 @@ export default function TodayPage() {
 
         <div className="card">
           <h3>Intervention</h3>
-          <p className="sub">Students below mastery on the current objective.</p>
+          <p className="sub">Students below mastery on the current Learning Objective.</p>
           <Stat num={inRemediation} label="students routed to remediation" />
           <p style={{ marginTop: 12 }}>
             <Link href="/class" className="btnish">See class status</Link>
@@ -68,13 +68,13 @@ export default function TodayPage() {
 
         <div className="card">
           <h3>Ready to advance</h3>
-          <p className="sub">Mastery evidence in hand; extend within the objective.</p>
+          <p className="sub">Mastery evidence in hand; extend within the Learning Objective.</p>
           <Stat num={readyToAdvance.length} label="students ready for advanced transfer" />
         </div>
 
         <div className="card">
           <h3>Assign once</h3>
-          <p className="sub">One objective → an individualized version for every student.</p>
+          <p className="sub">One Learning Objective → an individualized version for every student.</p>
           <Stat num={`${outcome.mode === 'classwide' ? 'Reteach' : 'Ready'}`} label="compose the next assignment" />
           <p style={{ marginTop: 12 }}>
             <Link href="/assign" className="btnish">Open composer</Link>

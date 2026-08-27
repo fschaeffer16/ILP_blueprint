@@ -17,8 +17,8 @@ export default function AssignPage() {
     <>
       <h1>Assign once</h1>
       <p className="lede">
-        You choose the class, the objective and a few constraints. The compiler reads each
-        student&apos;s ILP and prepares an individualized version — while locking the objective,
+        You choose the class, the Learning Objective and a few constraints. The compiler reads each
+        student&apos;s ILP and prepares an individualized version — while locking the Learning Objective,
         rigor and mastery rule. Review the summary, then publish once.
       </p>
 

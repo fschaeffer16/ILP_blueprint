@@ -9,10 +9,10 @@ export default function AuthorPage() {
       <div className="eyebrow" style={{ color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '.08em', fontSize: '.72rem', fontWeight: 700, marginBottom: 8 }}>
         Curriculum authoring
       </div>
-      <h1>Objective builder</h1>
+      <h1>Learning Objective builder</h1>
       <p className="lede">
-        Author an objective once; every teacher reuses it. Publishing runs the real authoring
-        gate — an objective must be mapped to a standard and cite only approved,
+        Author a Learning Objective once; every teacher reuses it. Publishing runs the real authoring
+        gate — a Learning Objective must be mapped to a standard and cite only approved,
         deliverable-licensed sources, and no permitted technique may change the rigor. Edit the
         fields below and press <strong>Validate &amp; publish</strong> to see the gate decide.
       </p>
@@ -27,7 +27,7 @@ export default function AuthorPage() {
 
       <p className="footnote">
         Backed by <span className="mono">POST /v1/objectives</span> (create draft) and the authoring
-        gate. Objective and source records live in <span className="mono">@ilp/core</span>; the
+        gate. Learning Objective and source records live in <span className="mono">@ilp/core</span>; the
         connected content library that ingests real sources is the next slice.
       </p>
     </>

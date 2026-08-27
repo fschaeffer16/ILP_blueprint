@@ -14,7 +14,7 @@ export default function LessonPage() {
         A teacher assembles a lesson for <strong>{objective.objectiveId}</strong> — {objective.studentOutcome}
         {' '}— from district-approved sources. The gate checks that the lesson actually teaches and
         assesses, that every block is grounded in an approved source, and that it <em>covers every
-        piece of reasoning the objective will be graded on</em>. Freedom inside the guardrails.
+        piece of reasoning the Learning Objective will be graded on</em>. Freedom inside the guardrails.
       </p>
 
       <div className="callout" style={{ marginBottom: 18 }}>
@@ -26,7 +26,7 @@ export default function LessonPage() {
       <LessonBuilder objective={objective} plan={plan} sources={sources} />
 
       <p className="footnote">
-        This is Layer 2. Layer 1 (the objective + approved sources) is district-governed on the
+        This is Layer 2. Layer 1 (the Learning Objective + approved sources) is district-governed on the
         <span className="mono"> /author</span> screen; Layer 3 (the rollup dashboard) is on
         <span className="mono"> /dashboard</span>.
       </p>

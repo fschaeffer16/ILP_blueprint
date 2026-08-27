@@ -31,7 +31,7 @@ export default function ParentPage() {
       </p>
 
       <div className="kpis" style={{ marginBottom: 20 }}>
-        <div className="kpi"><div className="n">{s.growth.mastered}</div><div className="l">objectives mastered</div></div>
+        <div className="kpi"><div className="n">{s.growth.mastered}</div><div className="l">Learning Objectives mastered</div></div>
         <div className="kpi"><div className="n">{s.growth.inProgress}</div><div className="l">in progress now</div></div>
         <div className="kpi"><div className="n">+{growthGain}</div><div className="l">points since fall</div></div>
         <div className="kpi"><div className="n">{mins(s.totalMinutes)}</div><div className="l">learning time this week</div></div>
@@ -77,7 +77,7 @@ export default function ParentPage() {
           <h3>Growth this year</h3>
           <p className="sub">Where she started, where she is now.</p>
           <div className="mini">
-            <div className="m"><div className="n">{s.growth.mastered}</div><div className="l">objectives mastered</div></div>
+            <div className="m"><div className="n">{s.growth.mastered}</div><div className="l">Learning Objectives mastered</div></div>
             <div className="m"><div className="n">{s.growth.inProgress}</div><div className="l">in progress</div></div>
             <div className="m"><div className="n">+{growthGain}</div><div className="l">points since fall</div></div>
           </div>

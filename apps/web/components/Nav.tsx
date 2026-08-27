@@ -10,7 +10,7 @@ const LINKS = [
   { href: '/assign', label: 'Assign once' },
   { href: '/grading', label: 'Grading review' },
   { href: '/flags', label: 'Help signals' },
-  { href: '/author', label: 'Objective builder' },
+  { href: '/author', label: 'Learning Objective builder' },
   { href: '/lesson', label: 'Lesson builder' },
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/baseline', label: 'Baseline' },

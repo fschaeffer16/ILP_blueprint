@@ -10,7 +10,7 @@ type Coverage = { target: string; covered: boolean };
 type Result = { ok: boolean; issues: Issue[]; coverage: Coverage[] } | null;
 
 const KIND_LABEL: Record<string, string> = {
-  objective_preview: 'Objective preview', instruction: 'Instruction', worked_example: 'Worked example',
+  objective_preview: 'Learning Objective preview', instruction: 'Instruction', worked_example: 'Worked example',
   practice: 'Practice', collaboration: 'Collaboration', mastery_task: 'Mastery task', reflection: 'Reflection',
 };
 const SOURCED_KINDS = new Set(['instruction', 'worked_example', 'mastery_task', 'practice']);

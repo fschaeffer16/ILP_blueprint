@@ -79,7 +79,7 @@ export default function FlagsPage() {
             {o.reteachSignal && (
               <div style={{ marginTop: 12, padding: '10px 12px', borderRadius: 8, background: 'color-mix(in srgb, var(--brand) 8%, transparent)', fontSize: '.85rem' }}>
                 <strong>Suggested action:</strong> {o.studentCount} students are circling{' '}
-                <strong>{o.themes[0]?.idea !== 'other' ? o.themes[0]?.idea : 'this objective'}</strong>. Consider a short
+                <strong>{o.themes[0]?.idea !== 'other' ? o.themes[0]?.idea : 'this Learning Objective'}</strong>. Consider a short
                 reteach before the graded task — or open the lesson to adjust it.{' '}
                 <Link href={`/library?o=${o.objectiveId}`}>Open objective →</Link>
               </div>

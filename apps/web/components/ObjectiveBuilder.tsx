@@ -130,7 +130,7 @@ export function ObjectiveBuilder({ seed, catalog, sources }: { seed: Seed; catal
           <input type="text" value={standardRef} onChange={(e) => setStandardRef(e.target.value)} placeholder="e.g. MA.3.FR.1.1" />
         </div>
         <div className="field">
-          <label>Objective</label>
+          <label>Learning Objective</label>
           <input type="text" value={`${seed.objectiveId} · v${seed.version} · grade ${seed.gradeBand}`} readOnly />
         </div>
       </div>

@@ -18,9 +18,9 @@ export function MasteryPill({ met }: { met: boolean }) {
 
 export function IntegrityPill({ pass }: { pass: boolean }) {
   return pass ? (
-    <span className="pill ok">Objective integrity: pass</span>
+    <span className="pill ok">Learning Objective integrity: pass</span>
   ) : (
-    <span className="pill danger">Objective integrity: fail</span>
+    <span className="pill danger">Learning Objective integrity: fail</span>
   );
 }
 
