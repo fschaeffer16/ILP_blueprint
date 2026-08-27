@@ -50,6 +50,7 @@ import {
   SAMPLE_TASK_RESPONSES,
   SAMPLE_OUTCOMES,
   SAMPLE_PARENT_INPUT,
+  SAMPLE_PARENT_NOTIFICATIONS,
   SAMPLE_ROSTER,
   SAMPLE_RUBRIC,
   SAMPLE_SOURCES,
@@ -134,7 +135,11 @@ export function getBaseline() {
 
 /** The plain-language parent summary for one child, plus surface labels. */
 export function getParentSummary() {
-  return { summary: buildParentSummary(SAMPLE_PARENT_INPUT), surfaceLabel: SURFACE_LABEL };
+  return {
+    summary: buildParentSummary(SAMPLE_PARENT_INPUT),
+    surfaceLabel: SURFACE_LABEL,
+    notifications: SAMPLE_PARENT_NOTIFICATIONS,
+  };
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */

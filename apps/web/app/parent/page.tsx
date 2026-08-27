@@ -1,4 +1,5 @@
 import { getParentSummary } from '../../lib/data';
+import { ParentNotifications, type ParentNotice } from '../../components/ParentNotifications';
 import type { ActivitySurface, WorkStatus } from '@ilp/core';
 
 const WORK_LABEL: Record<WorkStatus, { text: string; cls: string }> = {
@@ -11,9 +12,12 @@ const FLAG_ICON = { celebrate: '🎉', watch: '👀', attention: '⚠️' } as c
 const mins = (m: number) => (m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`);
 
 export default function ParentPage() {
-  const { summary: s, surfaceLabel } = getParentSummary();
+  const { summary: s, surfaceLabel, notifications } = getParentSummary();
   const maxTime = Math.max(...s.timeBySurface.map((t) => t.minutes), 1);
   const growthGain = Math.round((s.growth.currentAvg - s.growth.baselineAvg) * 100);
+  const notices: ParentNotice[] = notifications.map((n) => ({
+    id: n.id, kind: n.kind, from: n.from, title: n.title, body: n.body, sentAt: n.sentAt,
+  }));
 
   return (
     <>
@@ -38,6 +42,8 @@ export default function ParentPage() {
           <div className="l">safety this week</div>
         </div>
       </div>
+
+      <ParentNotifications notices={notices} />
 
       {s.flags.length > 0 && (
         <div style={{ marginBottom: 20 }}>

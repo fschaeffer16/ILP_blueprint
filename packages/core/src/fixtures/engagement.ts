@@ -60,3 +60,64 @@ export const SAMPLE_PARENT_INPUT: ParentSummaryInput = {
     currentAvg: 0.79,
   },
 };
+
+/**
+ * Real-time parent notifications — the teacher↔student↔parent loop.
+ * Each carries a receipt requirement: the parent app surfaces these as pop-ups that
+ * cannot be dismissed silently; a parent clears each one with an explicit
+ * acknowledgement, which sends a read-receipt back to the teacher. No gaps.
+ * (Notification metadata only — never another child's message content.)
+ */
+export type ParentNotificationKind = 'assignment' | 'turned_in' | 'grade' | 'message';
+
+export interface ParentNotification {
+  readonly id: string;
+  readonly kind: ParentNotificationKind;
+  /** Who/what it is from, in plain language. */
+  readonly from: string;
+  readonly title: string;
+  readonly body: string;
+  /** When the school sent it (ISO). */
+  readonly sentAt: string;
+  /** Requires an explicit parent acknowledgement to clear (always true in this build). */
+  readonly requiresAck: true;
+}
+
+export const SAMPLE_PARENT_NOTIFICATIONS: readonly ParentNotification[] = [
+  {
+    id: 'N-1',
+    kind: 'grade',
+    from: 'Ms. Alvarez · Grade 3',
+    title: 'Quiz graded: Compare fractions',
+    body: 'Mia scored 5/6 (83%) on the fractions quiz. One to revisit: comparing fractions with the same numerator. A short reteach is already queued for tomorrow.',
+    sentAt: '2026-09-12T14:05:00Z',
+    requiresAck: true,
+  },
+  {
+    id: 'N-2',
+    kind: 'turned_in',
+    from: 'ILP · automatic',
+    title: 'Work turned in: “Explain your answer with evidence”',
+    body: 'Mia submitted her reading response at 1:12 PM. It’s with Ms. Alvarez for review — you’ll get the grade here the moment it’s released.',
+    sentAt: '2026-09-12T13:12:00Z',
+    requiresAck: true,
+  },
+  {
+    id: 'N-3',
+    kind: 'assignment',
+    from: 'ILP · automatic',
+    title: 'New assignment: Fractions on a number line',
+    body: 'Assigned today, due Monday, Sep 15. Mia’s version uses visual models first. You can see it any time under “Coming up.”',
+    sentAt: '2026-09-12T09:30:00Z',
+    requiresAck: true,
+  },
+  {
+    id: 'N-4',
+    kind: 'message',
+    from: 'Ms. Alvarez · Grade 3',
+    title: 'A quick note from your teacher',
+    body: 'Mia has been a huge help to classmates in the Math channel this week — explaining her thinking, not just giving answers. Wanted you to hear the good news. Reply any time.',
+    sentAt: '2026-09-11T16:40:00Z',
+    requiresAck: true,
+  },
+];
