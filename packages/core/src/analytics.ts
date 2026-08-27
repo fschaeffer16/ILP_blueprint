@@ -13,9 +13,11 @@ export interface OutcomeRecord {
   readonly studentId: string;
   readonly studentName: string;
   readonly className: string;
+  readonly teacher: string;
   readonly grade: string;
   readonly school: string;
   readonly district: string;
+  readonly subject: string;
   readonly objectiveId: string;
   readonly masteryMet: boolean;
   readonly fraction: number; // 0..1 score
@@ -36,9 +38,11 @@ export interface Aggregate {
 export type RollupDimension =
   | 'studentId'
   | 'className'
+  | 'teacher'
   | 'grade'
   | 'school'
   | 'district'
+  | 'subject'
   | 'objectiveId';
 
 export interface RollupRow {
@@ -98,6 +102,8 @@ export function buildRollups(records: readonly OutcomeRecord[]): {
   byDistrict: RollupRow[];
   bySchool: RollupRow[];
   byGrade: RollupRow[];
+  bySubject: RollupRow[];
+  byTeacher: RollupRow[];
   byClass: RollupRow[];
   byStudent: RollupRow[];
   byObjective: RollupRow[];
@@ -107,6 +113,8 @@ export function buildRollups(records: readonly OutcomeRecord[]): {
     byDistrict: rollupBy(records, 'district'),
     bySchool: rollupBy(records, 'school'),
     byGrade: rollupBy(records, 'grade', (k) => `Grade ${k}`),
+    bySubject: rollupBy(records, 'subject'),
+    byTeacher: rollupBy(records, 'teacher'),
     byClass: rollupBy(records, 'className'),
     byStudent: rollupBy(records, 'studentId', (_k, rows) => rows[0]?.studentName ?? _k),
     byObjective: rollupBy(records, 'objectiveId'),

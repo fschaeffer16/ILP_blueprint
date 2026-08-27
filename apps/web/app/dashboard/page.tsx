@@ -6,6 +6,8 @@ const LEVELS = [
   { key: 'district', label: 'District' },
   { key: 'school', label: 'School' },
   { key: 'grade', label: 'Grade' },
+  { key: 'subject', label: 'Subject' },
+  { key: 'teacher', label: 'Teacher' },
   { key: 'class', label: 'Class' },
   { key: 'objective', label: 'Objective' },
   { key: 'student', label: 'Student' },
@@ -28,6 +30,8 @@ export default function DashboardPage({ searchParams }: { searchParams: { by?: s
     district: rollups.byDistrict,
     school: rollups.bySchool,
     grade: rollups.byGrade,
+    subject: rollups.bySubject,
+    teacher: rollups.byTeacher,
     class: rollups.byClass,
     objective: rollups.byObjective,
     student: rollups.byStudent,
@@ -37,11 +41,12 @@ export default function DashboardPage({ searchParams }: { searchParams: { by?: s
 
   return (
     <>
-      <h1>Dashboard</h1>
+      <h1>District dashboard</h1>
       <p className="lede">
-        The same objective evidence for <strong>{district}</strong>, rolled up at every level.
-        Mastery is the locked bar (≥ 80%, with transfer); the average score shows how close the
-        rest are. Sorted worst-first so what needs attention is on top.
+        The same objective evidence for <strong>{district}</strong>, in real time — cut by
+        school, grade, <strong>subject</strong>, <strong>teacher</strong>, class, objective, or
+        student. Mastery is the locked bar (≥ 80%, with transfer); the average score shows how
+        close the rest are. Sorted worst-first, so what needs attention is on top.
       </p>
 
       <div className="kpis" style={{ marginBottom: 20 }}>

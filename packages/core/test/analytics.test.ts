@@ -4,8 +4,8 @@ import type { OutcomeRecord } from '../src/index.js';
 import { SAMPLE_OUTCOMES } from '../src/fixtures/index.js';
 
 const rec = (o: Partial<OutcomeRecord>): OutcomeRecord => ({
-  studentId: 'S', studentName: 'S', className: 'C', grade: '3', school: 'Sch', district: 'D',
-  objectiveId: 'O', masteryMet: false, fraction: 0.5, ...o,
+  studentId: 'S', studentName: 'S', className: 'C', teacher: 'T', grade: '3', school: 'Sch', district: 'D',
+  subject: 'Mathematics', objectiveId: 'O', masteryMet: false, fraction: 0.5, ...o,
 });
 
 describe('aggregate', () => {
@@ -55,7 +55,7 @@ describe('buildRollups over the synthetic district', () => {
   it('rolls the same records up through every level consistently', () => {
     expect(r.overall.n).toBe(SAMPLE_OUTCOMES.length);
     // Every level partitions the same records → same total n.
-    for (const level of [r.byDistrict, r.bySchool, r.byGrade, r.byClass, r.byStudent, r.byObjective]) {
+    for (const level of [r.byDistrict, r.bySchool, r.byGrade, r.bySubject, r.byTeacher, r.byClass, r.byStudent, r.byObjective]) {
       expect(level.reduce((s, row) => s + row.agg.n, 0)).toBe(SAMPLE_OUTCOMES.length);
     }
   });
