@@ -18,6 +18,7 @@ import {
   buildParentSummary,
   buildBaselineProfile,
   buildCatalog,
+  analyzeExam,
   summarizeAssistantFlags,
   buildStudyGuide,
   lessonFor,
@@ -42,6 +43,9 @@ import {
   SAMPLE_STUDENT_QUEUE,
   SAMPLE_STUDENT_UPCOMING,
   SAMPLE_IMPORTANT_DATES,
+  SAMPLE_EXAM,
+  SAMPLE_EXAM_RESPONSES,
+  SAMPLE_EXAM_ROSTER,
   SAMPLE_CHANNELS,
   SAMPLE_POSTS,
   SAMPLE_MEMBERS,
@@ -140,6 +144,11 @@ export function getParentSummary() {
     surfaceLabel: SURFACE_LABEL,
     notifications: SAMPLE_PARENT_NOTIFICATIONS,
   };
+}
+
+/** Exam results rolled up by Learning Objective, at grade / class / student scope. */
+export function getExamAnalysis() {
+  return analyzeExam(SAMPLE_EXAM, SAMPLE_EXAM_RESPONSES, SAMPLE_EXAM_ROSTER);
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */

@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/author', label: 'Learning Objective builder' },
   { href: '/lesson', label: 'Lesson builder' },
   { href: '/dashboard', label: 'Dashboard' },
+  { href: '/exam', label: 'Exam analysis' },
   { href: '/baseline', label: 'Baseline' },
   { href: '/messages', label: 'Parent messages' },
   { href: '/parent', label: 'Parent app' },

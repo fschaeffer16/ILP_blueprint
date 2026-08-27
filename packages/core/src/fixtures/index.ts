@@ -15,3 +15,4 @@ export * from './library.js';
 export * from './standards.js';
 export * from './naviFlags.js';
 export * from './student.js';
+export * from './exam.js';
