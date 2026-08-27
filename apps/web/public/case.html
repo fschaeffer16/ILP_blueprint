@@ -204,7 +204,7 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
       <div class="pill-wrap" id="pills">
         <button class="pill on"><div class="h"><span class="i">◇</span> One connected flow</div><div class="b">In-class work, homework and individualized study guides — assigned once, tailored to every student.</div></button>
         <button class="pill"><div class="h"><span class="i">◎</span> Meets every learner</div><div class="b">A baseline for every child, not a bolt-on diagnostic — instruction starts from the truth about each student.</div></button>
-        <button class="pill"><div class="h"><span class="i">↻</span> Fixes it the same day</div><div class="b">Miss an Learning Objective and remediation opens immediately — a reteach, then equivalent reassessment. No waiting for the next test.</div></button>
+        <button class="pill"><div class="h"><span class="i">↻</span> Fixes it the same day</div><div class="b">Miss a Learning Objective and remediation opens immediately — a reteach, then equivalent reassessment. No waiting for the next test.</div></button>
         <button class="pill"><div class="h"><span class="i">◆</span> Collaboration, not doom-scroll</div><div class="b">A safe, verified space — even across schools — for real problem-solving projects. Moderated, no DMs.</div></button>
         <button class="pill"><div class="h"><span class="i">▷</span> Simulations that count</div><div class="b">Branching, scenario-based sims are graded assignments producing evidence of reasoning — not optional games.</div></button>
         <button class="pill"><div class="h"><span class="i">✦</span> Teacher leads · parents in</div><div class="b">The teacher assigns, reviews and releases every grade. Parents get a real-time, plain-language window.</div></button>
@@ -228,7 +228,43 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
 
     <!-- 6 -->
     <section class="step">
-      <div class="ey"><span class="n">06</span> The test that counts</div>
+      <div class="ey"><span class="n">06</span> Traceable</div>
+      <h2 class="q">Every question traces to a <em>Learning Objective.</em></h2>
+      <p class="sub">This is the part a data-driven district feels immediately. Everything hangs off one
+        anchor — the <b>Learning Objective</b>. A module is a Learning Objective; the 3–10 lessons that
+        teach it live under it, and <b>every quiz, project and exam question is tagged to it</b>.</p>
+      <div class="gap" style="padding:18px">
+        <div style="border:1px solid var(--teal);background:var(--tint);border-radius:12px;padding:12px 14px;text-align:center;font-family:Fraunces,serif;font-weight:600;font-size:16px;color:var(--teal-deep)">
+          ★ Learning Objective
+          <div style="font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:12px;color:var(--ink-soft);margin-top:2px">Compare two fractions · MA.3.FR.1.2</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <div style="border:1px solid var(--line);border-radius:10px;padding:11px 13px">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)">Lessons that teach it</div>
+            <div style="font-weight:700;font-size:14px;margin-top:3px">4 lessons — visual, guided, on-level, transfer</div>
+          </div>
+          <div style="border:1px solid var(--line);border-radius:10px;padding:11px 13px">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)">Exam questions tagged to it</div>
+            <div style="font-weight:700;font-size:14px;margin-top:3px">6 questions — each one tied back to this LO</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;text-align:center;font-size:12.5px;font-weight:700;color:var(--teal-deep)">↑ every result rolls up by Learning Objective → class · teacher · school · district</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">3–10</div><div class="l">Lessons can live under one Learning Objective — however many it takes</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">Of questions tagged to a Learning Objective — the system won't let one exist untagged</div></div>
+        <div class="stat"><div class="n">Real-time</div><div class="l">Per-Learning-Objective mastery, by student, teacher, and school</div></div>
+      </div>
+      <div class="note"><b>Give the lesson or the exam on their tablets, and it scores itself.</b> When
+        e-lessons and exams are taken on the students' devices, every answer is captured automatically and
+        sorted by Learning Objective — no bubble sheets, no hand-scoring, no lag. You can see, question by
+        question, <em>which Learning Objective</em> a class missed, and reteach exactly that — the next day.</div>
+      <div class="glue">Not "the class got a 71." <span>"They're missing Learning Objective 4 — here's the fix."</span></div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step">
+      <div class="ey"><span class="n">07</span> The test that counts</div>
       <h2 class="q">The state test is real.<br><em>Every child</em> walks in ready.</h2>
       <p class="sub">FAST isn't going anywhere — and ILP doesn't fight it. It makes every student
         <b>ready</b> for it: the same B.E.S.T. standards taught deeply, each child met where they are,
@@ -243,9 +279,9 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
         universal system first, then a real accessibility track, built with your specialists.</div>
     </section>
 
-    <!-- 7 -->
+    <!-- 8 -->
     <section class="step ask">
-      <div class="ey"><span class="n">07</span> The ask</div>
+      <div class="ey"><span class="n">08</span> The ask</div>
       <p class="disp">Not a district-wide purchase.<br>One grade. <em>Built by your teachers.</em></p>
       <p class="sub">A contained pilot on synthetic data, teachers in full control — the first grade of the transition, not another tool bolted next to the others. When it works, it starts replacing the reasons you needed them.</p>
       <div class="ctas">
@@ -271,7 +307,7 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
   var dotsWrap = document.getElementById('dots');
   var prev = document.getElementById('prev'), next = document.getElementById('next'), hint = document.getElementById('hint');
   var i = 0;
-  var labels = ['Vision','Today','The gap','ILP','Head to head','Why here','The ask'];
+  var labels = ['Vision','Today','The gap','ILP','Head to head','Traceable','Why here','The ask'];
   steps.forEach(function(s,idx){
     var b=document.createElement('button'); b.className='dot'+(idx===0?' on':''); b.title=labels[idx]||('Step '+(idx+1));
     b.setAttribute('aria-label',b.title); b.addEventListener('click',function(){go(idx);}); dotsWrap.appendChild(b);
