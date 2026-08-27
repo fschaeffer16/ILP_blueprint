@@ -1,31 +1,36 @@
 /**
- * A synthetic grade-3 unit exam, tagged question-by-question to real Learning
- * Objectives from the content library, plus a deterministic set of student
- * responses across two classes. Drives the exam-analysis-by-objective demo.
- * No real student data; correctness is a fixed hash so the results never drift.
+ * A synthetic grade-3 unit exam under the locked module system:
+ *   • Every question id carries a module tag (…_M1, _M2, …).
+ *   • Each module maps to a real content-library Learning Objective and ships with
+ *     built-in remediation (a reteach + a pass mark).
+ *   • Responses span two schools so results roll up student → class → school →
+ *     district. Correctness is a fixed hash, so the numbers never drift.
  */
 
-import type { Exam, ExamResponse, ExamRosterEntry } from '../examAnalysis.js';
+import type { Exam, ExamResponse, ExamRosterEntry, ModuleDef } from '../examAnalysis.js';
 
-// Learning Objectives on this exam (all exist in the content library, so remediation
-// can deep-link to the reteach), each with a baseline difficulty for the synthetic data.
-const OBJECTIVES: { id: string; title: string; base: number }[] = [
-  { id: 'M3.NF.01', title: 'Represent a fraction as equal parts', base: 0.86 },
-  { id: 'M3.NF.02', title: 'Compare two fractions', base: 0.44 }, // grade-wide weak spot
-  { id: 'M3.NSO.04', title: 'Round to the nearest 10 or 100', base: 0.82 },
-  { id: 'M3.NSO.24', title: 'Multiply and divide within 12', base: 0.73 },
-  { id: 'M3.AR.12', title: 'One- and two-step word problems', base: 0.61 },
+// M# → Learning Objective (must exist in the content library so remediation deep-links),
+// with the module's built-in reteach and pass mark. base = synthetic difficulty.
+const MODULES: (ModuleDef & { base: number })[] = [
+  { moduleId: 'M1', objectiveId: 'M3.NF.01', title: 'Represent a fraction as equal parts', lessonIds: ['LP-M3.NF.01'], reteachLessonId: 'LP-M3.NF.01-reteach', passThreshold: 0.7, base: 0.86 },
+  { moduleId: 'M2', objectiveId: 'M3.NF.02', title: 'Compare two fractions', lessonIds: ['LP-M3.NF.02'], reteachLessonId: 'LP-M3.NF.02-reteach', passThreshold: 0.7, base: 0.44 },
+  { moduleId: 'M3', objectiveId: 'M3.NSO.04', title: 'Round to the nearest 10 or 100', lessonIds: ['LP-M3.NSO.04'], reteachLessonId: 'LP-M3.NSO.04-reteach', passThreshold: 0.7, base: 0.82 },
+  { moduleId: 'M4', objectiveId: 'M3.NSO.24', title: 'Multiply and divide within 12', lessonIds: ['LP-M3.NSO.24'], reteachLessonId: 'LP-M3.NSO.24-reteach', passThreshold: 0.7, base: 0.73 },
+  { moduleId: 'M5', objectiveId: 'M3.AR.12', title: 'One- and two-step word problems', lessonIds: ['LP-M3.AR.12'], reteachLessonId: 'LP-M3.AR.12-reteach', passThreshold: 0.7, base: 0.61 },
 ];
-const QUESTIONS_PER_OBJECTIVE = 3;
+const QUESTIONS_PER_MODULE = 3;
 
-const CLASSES = ['3A · Riverbend', '3B · Riverbend'] as const;
-const STUDENT_NAMES = ['Mia', 'Ben', 'Cara', 'Diego', 'Ella'];
-// 3B is weaker on word problems (M3.AR.12); everything else is comparable.
-const CLASS_ADJ: Record<string, Record<string, number>> = {
-  '3B · Riverbend': { 'M3.AR.12': -0.18 },
-};
+export const SAMPLE_MODULES: readonly ModuleDef[] = MODULES.map(({ base: _b, ...m }) => m);
 
-/** Deterministic FNV-1a hash → [0,1). */
+// Two schools, two classes each, five students each → 20 students, one district.
+const DISTRICT = 'Palmetto USD (synthetic)';
+const SCHOOLS: { school: string; classes: string[]; adj: Record<string, number> }[] = [
+  { school: 'Riverbend Elementary', classes: ['3A · Riverbend', '3B · Riverbend'], adj: {} },
+  // Cypress Grove runs a bit lower overall, and notably weaker on word problems (M5).
+  { school: 'Cypress Grove Elementary', classes: ['3A · Cypress', '3B · Cypress'], adj: { all: -0.06, M5: -0.14 } },
+];
+const NAMES = ['Mia', 'Ben', 'Cara', 'Diego', 'Ella'];
+
 function h(seed: string): number {
   let x = 2166136261 >>> 0;
   for (let i = 0; i < seed.length; i++) {
@@ -36,41 +41,44 @@ function h(seed: string): number {
 }
 const clamp = (n: number) => Math.max(0.03, Math.min(0.98, n));
 
+// Question ids embed the module tag — the whole tracking convention: "U1-Q07_M3".
 export const SAMPLE_EXAM: Exam = {
   examId: 'EX-G3-U1',
   title: 'Grade 3 · Unit 1 exam (Number & Fractions)',
   grade: '3',
-  questions: OBJECTIVES.flatMap((o) =>
-    Array.from({ length: QUESTIONS_PER_OBJECTIVE }, (_, i) => ({
-      questionId: `${o.id}-q${i + 1}`,
-      objectiveId: o.id,
-      objectiveTitle: o.title,
+  questions: MODULES.flatMap((m) =>
+    Array.from({ length: QUESTIONS_PER_MODULE }, (_, i) => ({
+      questionId: `EX-G3-U1-Q${m.moduleId}${i + 1}_${m.moduleId}`,
+      moduleId: m.moduleId,
+      prompt: `${m.title} — item ${i + 1}`,
     })),
   ),
 };
 
-export const SAMPLE_EXAM_ROSTER: readonly ExamRosterEntry[] = CLASSES.flatMap((className) =>
-  STUDENT_NAMES.map((name, s) => ({
-    studentId: `${className[1]}-${name}`,
-    name,
-    className,
-  })),
+export const SAMPLE_EXAM_ROSTER: readonly ExamRosterEntry[] = SCHOOLS.flatMap((sc) =>
+  sc.classes.flatMap((className) =>
+    NAMES.map((name) => ({
+      studentId: `${className.replace(/[^0-9A-Za-z]/g, '')}-${name}`,
+      name,
+      className,
+      school: sc.school,
+      district: DISTRICT,
+    })),
+  ),
 );
 
 function generate(): ExamResponse[] {
   const out: ExamResponse[] = [];
-  for (const entry of SAMPLE_EXAM_ROSTER) {
-    const studentAdj = (h(entry.studentId) - 0.5) * 0.24; // ±0.12 personal skill
-    for (const o of OBJECTIVES) {
-      const classAdj = CLASS_ADJ[entry.className]?.[o.id] ?? 0;
-      const p = clamp(o.base + studentAdj + classAdj);
-      for (let i = 1; i <= QUESTIONS_PER_OBJECTIVE; i++) {
-        const questionId = `${o.id}-q${i}`;
-        out.push({
-          studentId: entry.studentId,
-          questionId,
-          correct: h(`${entry.studentId}:${questionId}`) < p,
-        });
+  for (const sc of SCHOOLS) {
+    for (const entry of SAMPLE_EXAM_ROSTER.filter((e) => e.school === sc.school)) {
+      const studentAdj = (h(entry.studentId) - 0.5) * 0.24;
+      for (const m of MODULES) {
+        const schoolAdj = (sc.adj.all ?? 0) + (sc.adj[m.moduleId] ?? 0);
+        const p = clamp(m.base + studentAdj + schoolAdj);
+        for (let i = 1; i <= QUESTIONS_PER_MODULE; i++) {
+          const questionId = `EX-G3-U1-Q${m.moduleId}${i}_${m.moduleId}`;
+          out.push({ studentId: entry.studentId, questionId, correct: h(`${entry.studentId}:${questionId}`) < p });
+        }
       }
     }
   }

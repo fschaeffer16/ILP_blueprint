@@ -1,20 +1,43 @@
 /**
- * Exam analysis by Learning Objective.
+ * Exam / quiz analysis by MODULE.
  *
- * Every exam question is tagged to exactly one Learning Objective (the same LO its
- * lessons teach). Given the students' responses, this rolls the results back up by
- * Learning Objective — for one student, one class, or the whole grade — so you can
- * see *which Learning Objective* was missed and open remediation on exactly that.
+ * The module system, locked down:
+ *   • A module IS a Learning Objective. Every lesson lives inside a module.
+ *   • Every quiz/exam question ID must carry a module tag — `_M1`, `_M2`, … —
+ *     somewhere in its name. That tag is how a result is tracked student-wide,
+ *     class-wide, school-wide and district-wide, purely from the question id.
+ *   • Each module ships with remediation already programmed in: fall below the
+ *     module's pass mark and the reteach auto-triggers, followed by a retake of
+ *     *only that module's* questions.
  *
- * No AI: deterministic aggregation over tagged responses. This is the reporting side
- * of the same objective-anchored model the item-integrity gate already enforces.
+ * No AI: deterministic aggregation + a fixed remediation rule. This is the
+ * reporting/remediation side of the same module-anchored model the content gates
+ * enforce at authoring time.
  */
 
+/** Pull the module tag (`M1`, `M2`, …) out of a question id. Null if absent. */
+export function moduleTag(id: string): string | null {
+  const m = /_(M\d+)\b/i.exec(id) ?? /_(M\d+)/i.exec(id);
+  return m ? m[1]!.toUpperCase() : null;
+}
+export const hasModuleTag = (id: string): boolean => moduleTag(id) !== null;
+
+/** A module: one Learning Objective, its lessons, and its built-in remediation. */
+export interface ModuleDef {
+  readonly moduleId: string; // 'M1'
+  readonly objectiveId: string; // the Learning Objective it is
+  readonly title: string;
+  readonly lessonIds: readonly string[]; // every lesson lives inside the module
+  /** Built-in remediation: the reteach that auto-assigns below the pass mark. */
+  readonly reteachLessonId: string;
+  /** Below this fraction correct on the module, remediation triggers. */
+  readonly passThreshold: number;
+}
+
 export interface ExamQuestion {
-  readonly questionId: string;
-  /** The Learning Objective this question measures. */
-  readonly objectiveId: string;
-  readonly objectiveTitle: string;
+  readonly questionId: string; // must contain a module tag, e.g. "U1-Q07_M2"
+  readonly moduleId: string; // derived tag, kept explicit for convenience
+  readonly prompt?: string;
 }
 
 export interface Exam {
@@ -34,79 +57,123 @@ export interface ExamRosterEntry {
   readonly studentId: string;
   readonly name: string;
   readonly className: string;
+  readonly school: string;
+  readonly district: string;
 }
 
-/** One Learning Objective's result within a scope (a student, a class, or the grade). */
-export interface ExamObjectiveResult {
+/** One module's result within a scope (a student, class, school, or the district). */
+export interface ModuleResult {
+  readonly moduleId: string;
   readonly objectiveId: string;
-  readonly objectiveTitle: string;
-  readonly questions: number; // distinct exam questions tagged to this LO
-  readonly answered: number; // responses counted in this scope
+  readonly title: string;
+  readonly questions: number; // distinct questions tagged to this module
+  readonly answered: number;
   readonly correct: number;
   readonly correctPct: number; // 0..1
-  readonly struggling: boolean; // below the mastery threshold → remediation offered
+  readonly passThreshold: number;
+  readonly struggling: boolean; // below the module's pass mark
+}
+
+/** An auto-triggered remediation: reteach + retake of just that module's portion. */
+export interface RemediationTask {
+  readonly moduleId: string;
+  readonly objectiveId: string;
+  readonly title: string;
+  readonly reteachLessonId: string;
+  readonly retakeQuestionIds: readonly string[]; // the module's questions to retake
+  readonly correctPct: number;
+  readonly status: 'auto_assigned';
 }
 
 export interface ScopeResult {
   readonly label: string;
   readonly overallPct: number;
-  readonly byObjective: readonly ExamObjectiveResult[];
-  /** Learning Objectives below threshold, worst-first — the remediation queue. */
-  readonly strugglingObjectives: readonly ExamObjectiveResult[];
+  readonly byModule: readonly ModuleResult[];
+  readonly strugglingModules: readonly ModuleResult[];
+}
+
+export interface StudentScopeResult extends ScopeResult {
+  readonly studentId: string;
+  readonly className: string;
+  readonly school: string;
+  /** The retakes this student has been auto-assigned by the module rules. */
+  readonly remediation: readonly RemediationTask[];
+}
+
+export interface ModuleTagCheck {
+  readonly allTagged: boolean;
+  readonly untagged: readonly string[]; // question ids missing a _M# tag
 }
 
 export interface ExamAnalysis {
   readonly examId: string;
   readonly title: string;
   readonly grade: string;
-  readonly threshold: number;
   readonly questionCount: number;
-  readonly objectiveCount: number;
+  readonly moduleCount: number;
   readonly studentCount: number;
-  /** The whole grade, per Learning Objective. */
-  readonly gradeScope: ScopeResult;
-  /** Each class, per Learning Objective. */
+  readonly tagCheck: ModuleTagCheck;
+  readonly districtScope: ScopeResult;
+  readonly schoolScopes: readonly ScopeResult[];
   readonly classScopes: readonly ScopeResult[];
-  /** Each student, per Learning Objective. */
-  readonly studentScopes: readonly (ScopeResult & { studentId: string; className: string })[];
+  readonly studentScopes: readonly StudentScopeResult[];
+  /** Every auto-assigned retake across the grade — the remediation worklist. */
+  readonly remediationQueue: readonly (RemediationTask & { studentId: string; studentName: string; className: string })[];
 }
 
 const DEFAULT_THRESHOLD = 0.7;
 const round = (n: number) => Math.round(n * 1000) / 1000;
 
-/** Aggregate a set of responses by Learning Objective, given the exam's question map. */
+/**
+ * The integrity gate for the module naming convention: every question id must
+ * carry a `_M#` tag, or it cannot be tracked by module. Mirrors the item-integrity
+ * gate — a question that can't be traced to a module shouldn't ship.
+ */
+export function checkModuleTags(exam: Exam): ModuleTagCheck {
+  const untagged = exam.questions.filter((q) => !hasModuleTag(q.questionId)).map((q) => q.questionId);
+  return { allTagged: untagged.length === 0, untagged };
+}
+
+function moduleMap(modules: readonly ModuleDef[]): Map<string, ModuleDef> {
+  return new Map(modules.map((m) => [m.moduleId, m]));
+}
+
+/** Aggregate a set of responses by module tag (read from the question id). */
 function breakdown(
   exam: Exam,
   responses: readonly ExamResponse[],
-  threshold: number,
-): readonly ExamObjectiveResult[] {
-  const qToObjective = new Map(exam.questions.map((q) => [q.questionId, q]));
-  // Distinct questions per objective (from the exam definition, not the responses).
-  const questionsPerObjective = new Map<string, Set<string>>();
+  modules: Map<string, ModuleDef>,
+): readonly ModuleResult[] {
+  // distinct questions per module, from the exam definition
+  const qPerModule = new Map<string, Set<string>>();
   for (const q of exam.questions) {
-    const set = questionsPerObjective.get(q.objectiveId) ?? new Set<string>();
-    set.add(q.questionId);
-    questionsPerObjective.set(q.objectiveId, set);
+    const tag = moduleTag(q.questionId);
+    if (!tag) continue;
+    (qPerModule.get(tag) ?? qPerModule.set(tag, new Set()).get(tag)!).add(q.questionId);
   }
-  const acc = new Map<string, { title: string; answered: number; correct: number }>();
+  const acc = new Map<string, { answered: number; correct: number }>();
   for (const r of responses) {
-    const q = qToObjective.get(r.questionId);
-    if (!q) continue; // response to a question not on this exam → ignore
-    const a = acc.get(q.objectiveId) ?? { title: q.objectiveTitle, answered: 0, correct: 0 };
+    const tag = moduleTag(r.questionId);
+    if (!tag) continue;
+    const a = acc.get(tag) ?? { answered: 0, correct: 0 };
     a.answered += 1;
     if (r.correct) a.correct += 1;
-    acc.set(q.objectiveId, a);
+    acc.set(tag, a);
   }
   return [...acc.entries()]
-    .map(([objectiveId, a]) => {
+    .map(([moduleId, a]) => {
+      const def = modules.get(moduleId);
+      const threshold = def?.passThreshold ?? DEFAULT_THRESHOLD;
       const correctPct = a.answered ? round(a.correct / a.answered) : 0;
       return {
-        objectiveId,
-        objectiveTitle: a.title,
-        questions: questionsPerObjective.get(objectiveId)?.size ?? 0,
+        moduleId,
+        objectiveId: def?.objectiveId ?? moduleId,
+        title: def?.title ?? moduleId,
+        questions: qPerModule.get(moduleId)?.size ?? 0,
         answered: a.answered,
         correct: a.correct,
         correctPct,
+        passThreshold: threshold,
         struggling: correctPct < threshold,
       };
     })
@@ -117,58 +184,89 @@ function scope(
   label: string,
   exam: Exam,
   responses: readonly ExamResponse[],
-  threshold: number,
+  modules: Map<string, ModuleDef>,
 ): ScopeResult {
-  const byObjective = breakdown(exam, responses, threshold);
+  const byModule = breakdown(exam, responses, modules);
   const answered = responses.length;
   const correct = responses.filter((r) => r.correct).length;
   return {
     label,
     overallPct: answered ? round(correct / answered) : 0,
-    byObjective,
-    strugglingObjectives: byObjective.filter((o) => o.struggling),
+    byModule,
+    strugglingModules: byModule.filter((m) => m.struggling),
   };
 }
 
-/** Analyze an exam by Learning Objective at grade, class, and student scope. */
+/** All question ids on the exam that belong to a module. */
+function questionsForModule(exam: Exam, moduleId: string): string[] {
+  return exam.questions.filter((q) => moduleTag(q.questionId) === moduleId).map((q) => q.questionId);
+}
+
+/**
+ * Analyze an exam by module at district / school / class / student scope, and
+ * auto-assign remediation (reteach + retake of that module's portion) to any
+ * student who falls below a module's pass mark.
+ */
 export function analyzeExam(
   exam: Exam,
   responses: readonly ExamResponse[],
   roster: readonly ExamRosterEntry[],
-  threshold: number = DEFAULT_THRESHOLD,
+  modules: readonly ModuleDef[],
 ): ExamAnalysis {
-  const byStudent = new Map<string, ExamResponse[]>();
-  for (const r of responses) {
-    const g = byStudent.get(r.studentId) ?? [];
-    g.push(r);
-    byStudent.set(r.studentId, g);
-  }
+  const mods = moduleMap(modules);
   const rosterById = new Map(roster.map((e) => [e.studentId, e]));
+  const respByStudent = new Map<string, ExamResponse[]>();
+  for (const r of responses) {
+    (respByStudent.get(r.studentId) ?? respByStudent.set(r.studentId, []).get(r.studentId)!).push(r);
+  }
 
-  const classes = [...new Set(roster.map((e) => e.className))].sort((a, b) => a.localeCompare(b));
-  const classScopes = classes.map((className) => {
-    const ids = new Set(roster.filter((e) => e.className === className).map((e) => e.studentId));
-    return scope(className, exam, responses.filter((r) => ids.has(r.studentId)), threshold);
-  });
+  const groupScopes = (key: (e: ExamRosterEntry) => string): ScopeResult[] => {
+    const groups = [...new Set(roster.map(key))].sort((a, b) => a.localeCompare(b));
+    return groups.map((g) => {
+      const ids = new Set(roster.filter((e) => key(e) === g).map((e) => e.studentId));
+      return scope(g, exam, responses.filter((r) => ids.has(r.studentId)), mods);
+    });
+  };
 
-  const studentScopes = [...byStudent.entries()]
+  const studentScopes: StudentScopeResult[] = [...respByStudent.entries()]
     .map(([studentId, rs]) => {
       const entry = rosterById.get(studentId);
-      const s = scope(entry?.name ?? studentId, exam, rs, threshold);
-      return { ...s, studentId, className: entry?.className ?? '—' };
+      const s = scope(entry?.name ?? studentId, exam, rs, mods);
+      const remediation: RemediationTask[] = s.strugglingModules.map((m) => ({
+        moduleId: m.moduleId,
+        objectiveId: m.objectiveId,
+        title: m.title,
+        reteachLessonId: mods.get(m.moduleId)?.reteachLessonId ?? `reteach-${m.moduleId}`,
+        retakeQuestionIds: questionsForModule(exam, m.moduleId),
+        correctPct: m.correctPct,
+        status: 'auto_assigned' as const,
+      }));
+      return {
+        ...s,
+        studentId,
+        className: entry?.className ?? '—',
+        school: entry?.school ?? '—',
+        remediation,
+      };
     })
     .sort((a, b) => a.overallPct - b.overallPct);
+
+  const remediationQueue = studentScopes.flatMap((s) =>
+    s.remediation.map((t) => ({ ...t, studentId: s.studentId, studentName: s.label, className: s.className })),
+  );
 
   return {
     examId: exam.examId,
     title: exam.title,
     grade: exam.grade,
-    threshold,
     questionCount: exam.questions.length,
-    objectiveCount: new Set(exam.questions.map((q) => q.objectiveId)).size,
-    studentCount: byStudent.size,
-    gradeScope: scope(`Grade ${exam.grade}`, exam, responses, threshold),
-    classScopes,
+    moduleCount: new Set(exam.questions.map((q) => moduleTag(q.questionId)).filter(Boolean)).size,
+    studentCount: respByStudent.size,
+    tagCheck: checkModuleTags(exam),
+    districtScope: scope(roster[0]?.district ?? 'District', exam, responses, mods),
+    schoolScopes: groupScopes((e) => e.school),
+    classScopes: groupScopes((e) => e.className),
     studentScopes,
+    remediationQueue,
   };
 }

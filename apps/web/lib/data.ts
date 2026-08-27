@@ -46,6 +46,7 @@ import {
   SAMPLE_EXAM,
   SAMPLE_EXAM_RESPONSES,
   SAMPLE_EXAM_ROSTER,
+  SAMPLE_MODULES,
   SAMPLE_CHANNELS,
   SAMPLE_POSTS,
   SAMPLE_MEMBERS,
@@ -146,9 +147,10 @@ export function getParentSummary() {
   };
 }
 
-/** Exam results rolled up by Learning Objective, at grade / class / student scope. */
+/** Exam results rolled up by module (Learning Objective), at district / school /
+ * class / student scope, with auto-triggered reteach-and-retake remediation. */
 export function getExamAnalysis() {
-  return analyzeExam(SAMPLE_EXAM, SAMPLE_EXAM_RESPONSES, SAMPLE_EXAM_ROSTER);
+  return analyzeExam(SAMPLE_EXAM, SAMPLE_EXAM_RESPONSES, SAMPLE_EXAM_ROSTER, SAMPLE_MODULES);
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */
