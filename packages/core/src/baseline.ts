@@ -22,7 +22,7 @@
  *     and the type has no field in which a diagnosis could be stored.
  */
 
-import type { EvidenceDomain, GradeBand, ILPHypothesis } from './types.js';
+import type { EvidenceDomain, GradeBand, ILPHypothesis, StudentILP } from './types.js';
 
 /** How a child receives and processes information — the screening domains. */
 export type ProcessingDomain =
@@ -251,4 +251,20 @@ function stdev(xs: readonly number[]): number {
 function addDays(d: Date, days: number): string {
   const t = new Date(d.getTime() + days * 86400000);
   return t.toISOString().slice(0, 10);
+}
+
+/**
+ * Bridge: turn a completed baseline screening into the learner model the assign-once
+ * compiler reads. The baseline's `ilpHypotheses` ARE the compiler's `StudentILP.hypotheses`,
+ * so a screening result flows straight into individualized delivery — no re-keying, no
+ * separate profile. Supports are seeded as access first (rigor unchanged); the compiler
+ * then selects the matching adaptation per objective.
+ */
+export function studentILPFromBaseline(profile: BaselineProfile, displayName?: string): StudentILP {
+  return {
+    studentId: profile.studentId,
+    displayName: displayName ?? profile.studentId,
+    gradeBand: profile.gradeBand,
+    hypotheses: profile.ilpHypotheses,
+  };
 }

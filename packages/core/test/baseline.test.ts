@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildBaselineProfile } from '../src/index.js';
-import { SAMPLE_BASELINE } from '../src/fixtures/index.js';
+import { buildBaselineProfile, studentILPFromBaseline, compileAssignment } from '../src/index.js';
+import { SAMPLE_BASELINE, SAMPLE_ASSIGNMENT, SAMPLE_OBJECTIVES, SAMPLE_ADAPTATIONS } from '../src/fixtures/index.js';
 
 const build = (obs = SAMPLE_BASELINE) => buildBaselineProfile(obs, { gradeBand: '3', today: new Date('2026-09-06') });
 
@@ -70,5 +70,27 @@ describe('baseline processing screener', () => {
 
   it('always carries the screening-not-diagnosis disclaimer', () => {
     expect(build().disclaimer.toLowerCase()).toContain('not a diagnosis');
+  });
+
+  it('wires straight into the compiler: baseline result drives auto-adapted delivery', () => {
+    const profile = build();
+    const student = studentILPFromBaseline(profile, 'Noah');
+    // The bridge preserves the profile as the compiler's learner model.
+    expect(student.hypotheses).toBe(profile.ilpHypotheses);
+    expect(student.gradeBand).toBe(profile.gradeBand);
+
+    const result = compileAssignment({
+      assignment: SAMPLE_ASSIGNMENT,
+      objectives: SAMPLE_OBJECTIVES,
+      roster: [student],
+      adaptationCatalog: SAMPLE_ADAPTATIONS,
+      today: new Date('2026-09-06'),
+    });
+    const manifest = result.manifests[0]!;
+    // A student with low baseline readiness must receive a support pattern, not bare 'core',
+    // and the objective is never modified (rigor unchanged).
+    expect(manifest.pattern).not.toBe('core');
+    expect(manifest.appliedAdaptationIds.length).toBeGreaterThan(0);
+    expect(manifest.objectiveModified).toBe(false);
   });
 });

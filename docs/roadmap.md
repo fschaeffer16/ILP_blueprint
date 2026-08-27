@@ -102,7 +102,7 @@ release suite, and the validation gates in slice 14) is tracked separately below
 | 11 | Student app + district-contained collaboration channels + moderation | ✅ | E12 | 2 |
 | 5 | Assignment-aware bot (mode-governed, grounded, answer-protecting) | 🟡 needs red-team suite | E6 | 4 |
 | 2 | Foundation: tenant, role, roster, class, synthetic students + audit log | 🟡 modeled in fixtures | E1 | 1 |
-| 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | ⬜ | E3 | 2 |
+| 3 | Learner-evidence events + ILP hypothesis lifecycle (create/correct/expire) | 🟡 baseline→profile→compiler wired (`studentILPFromBaseline`); event lifecycle next | E3 | 2 |
 | 4 | Student lesson player (tablet PWA: touch, handwriting, speech, offline queue) | ⬜ | E5 | 1 |
 | 10 | One branching simulation + problem-solving evidence model | ⬜ | E11 | 2 |
 | 12 | Roster/SSO integration path; Canvas/Skyward discovery adapters | ⬜ | E13 | 2 |

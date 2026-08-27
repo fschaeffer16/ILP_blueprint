@@ -17,6 +17,7 @@ import {
   buildRollups,
   buildParentSummary,
   buildBaselineProfile,
+  studentILPFromBaseline,
   buildCatalog,
   analyzeExam,
   summarizeAssistantFlags,
@@ -144,6 +145,28 @@ export function getBaselineTasks() {
 /** The baseline screening profile for one child (screening, never a diagnosis). */
 export function getBaseline() {
   return buildBaselineProfile(SAMPLE_BASELINE, { gradeBand: '3', today: new Date('2026-09-06') });
+}
+
+/** Prove the wire: feed the baseline result straight into the assign-once compiler and
+ * return the delivery the compiler auto-selects for THIS baselined student — the pattern,
+ * the rationale, and which objective it was compiled against. Screening → individualized
+ * delivery, no re-keying. */
+export function getBaselineToInstruction() {
+  const profile = getBaseline();
+  const displayName = profile.studentId === 'S-311' ? 'Noah' : profile.studentId;
+  const student = studentILPFromBaseline(profile, displayName);
+  const result = compileAssignment({
+    assignment: SAMPLE_ASSIGNMENT,
+    objectives: SAMPLE_OBJECTIVES,
+    roster: [student],
+    adaptationCatalog: SAMPLE_ADAPTATIONS,
+    today: new Date('2026-09-06'),
+  });
+  const manifest = result.manifests[0] ?? null;
+  const objective = SAMPLE_OBJECTIVES.find(
+    (o) => o.objectiveId === SAMPLE_ASSIGNMENT.objectiveVersionRefs[0]?.objectiveId,
+  );
+  return { displayName, manifest, objectiveTitle: objective?.studentOutcome ?? 'the objective' };
 }
 
 /** The plain-language parent summary for one child, plus surface labels. */

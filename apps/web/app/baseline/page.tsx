@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { getBaseline } from '../../lib/data';
-import type { NextStep, ProcessingDomain, SignalStrength } from '@ilp/core';
+import { getBaseline, getBaselineToInstruction } from '../../lib/data';
+import { PatternBadge } from '../../components/ui';
+import type { DeliveryPattern, NextStep, ProcessingDomain, SignalStrength } from '@ilp/core';
 
 const DOMAIN_LABEL: Record<ProcessingDomain, string> = {
   phonological_awareness: 'Phonological awareness',
@@ -27,7 +28,7 @@ const pctS = (f: number) => `${Math.round(f * 100)}%`;
 
 export default function BaselinePage() {
   const p = getBaseline();
-  const maxLen = Math.max(...p.domains.map((d) => 1), 1);
+  const wire = getBaselineToInstruction();
 
   return (
     <>
@@ -91,27 +92,42 @@ export default function BaselinePage() {
         </div>
       ))}
 
-      <h2>What happens next</h2>
-      <div className="grid cols-2">
-        <div className="card">
-          <h3>It becomes support, automatically</h3>
-          <p className="sub">The baseline seeds {p.studentId === 'S-311' ? 'Noah' : 'the'}’s learning plan.</p>
-          <p style={{ fontSize: '0.92rem' }}>
-            {p.ilpHypotheses.length} evidence-based hypotheses now feed the assign-once compiler, so his very
-            first lessons already start with the right supports (read-aloud, chunking, extra time) —
-            <strong> access first</strong>, plus a plan to <strong>strengthen the underlying skill over time</strong>.
-            None of it lowers what he’s expected to learn.
+      <h2>From screening to instruction — automatically</h2>
+      <div className="callout" style={{ marginBottom: 14 }}>
+        <p style={{ margin: 0 }}>
+          The baseline doesn’t sit in a report. Its {p.ilpHypotheses.length} evidence-based hypotheses feed the
+          <strong> assign-once compiler</strong> directly. Below is what the compiler <em>actually selected</em> for
+          {' '}{wire.displayName} on the next assignment — computed live, not asserted.
+        </p>
+      </div>
+      {wire.manifest && (
+        <div className="card" style={{ marginBottom: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
+            <h3 style={{ margin: 0 }}>{wire.displayName}’s auto-selected delivery</h3>
+            <PatternBadge pattern={wire.manifest.pattern as DeliveryPattern} />
+            <span className="pill muted">Objective locked</span>
+          </div>
+          <p className="sub" style={{ marginTop: 0 }}>Assignment: <strong>{wire.objectiveTitle}</strong> — same standard, same rigor for every student.</p>
+          <ul className="rationale" style={{ margin: 0 }}>
+            {wire.manifest.rationale.map((r, i) => (
+              <li key={i}>{r.replace(/\.\.$/, '.')}</li>
+            ))}
+          </ul>
+          <p className="thresh" style={{ marginTop: 10 }}>
+            Supports tagged <em>access</em> keep the rigor unchanged; <em>scaffolds</em> fade as {wire.displayName}
+            {' '}gains independence. The teacher can override any of it — the compiler recommends, the teacher decides.
           </p>
         </div>
-        <div className="card">
-          <h3>The family hears about it — right away</h3>
-          <p className="sub">No surprises. Aligned with Florida’s K-3 notification rule.</p>
-          {p.familyNotification ? (
-            <p style={{ fontSize: '0.92rem', fontStyle: 'italic', borderLeft: '3px solid var(--brand)', paddingLeft: 12 }}>“{p.familyNotification}”</p>
-          ) : (
-            <p style={{ fontSize: '0.92rem' }}>No family notification required this cycle.</p>
-          )}
-        </div>
+      )}
+
+      <div className="card">
+        <h3>The family hears about it — right away</h3>
+        <p className="sub">No surprises. Aligned with Florida’s K-3 notification rule.</p>
+        {p.familyNotification ? (
+          <p style={{ fontSize: '0.92rem', fontStyle: 'italic', borderLeft: '3px solid var(--brand)', paddingLeft: 12 }}>“{p.familyNotification}”</p>
+        ) : (
+          <p style={{ fontSize: '0.92rem' }}>No family notification required this cycle.</p>
+        )}
       </div>
 
       <p className="footnote">
