@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/library', label: 'Content library' },
   { href: '/class', label: 'My class' },
   { href: '/assign', label: 'Assign once' },
+  { href: '/adaptive', label: 'Adaptive delivery' },
   { href: '/grading', label: 'Grading review' },
   { href: '/flags', label: 'Help signals' },
   { href: '/author', label: 'Learning Objective builder' },
