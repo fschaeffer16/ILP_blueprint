@@ -131,6 +131,7 @@
       </ul>
       <div class="links">
         <a class="btn" href="/">Teacher command center</a>
+        <a class="btn ghost" href="/messages">Parent messages (with receipts)</a>
         <a class="btn ghost" href="/flags">Help signals (what Navi flags)</a>
         <a class="btn ghost" href="/baseline">Baseline screener</a>
       </div>
@@ -138,15 +139,15 @@
 
     <div class="card">
       <div class="role"><span class="n">DELIVERABLE 3</span><span class="badge live">Live</span></div>
-      <h3>Parent</h3>
-      <p>Real-time academic progress with no surprises — including time in collaboration and simulations, growth, and safety.</p>
+      <h3>Parent app <span id="parent-unread" class="unread" hidden>0 new</span></h3>
+      <p>Real-time academic progress with no surprises — plus acknowledge-to-clear notifications that reopen the teacher↔parent line with no gaps.</p>
       <ul>
+        <li>Non-dismissible pop-ups: new assignments, work turned in, quiz grades, teacher messages — cleared only by acknowledging (a read-receipt to the teacher)</li>
         <li>Right-now work, time in each part of ILP, growth this year</li>
-        <li>Collaboration &amp; simulation activity, with a clear privacy line</li>
         <li>Safety status and plain-language alerts — you see patterns, never peers’ messages</li>
       </ul>
       <div class="links">
-        <a class="btn" href="/parent">Family view</a>
+        <a class="btn" href="/parent">Parent app</a>
       </div>
     </div>
 
@@ -196,6 +197,24 @@
     const n = dark ? 'light' : 'dark'; apply(n);
     try { localStorage.setItem('ilp-theme', n); } catch (e) {}
   });
+
+  // Unread badge on the Parent-app tile: total notifications minus the ones the
+  // parent has acknowledged (same localStorage the parent app writes on acknowledge).
+  (function () {
+    const KNOWN = ['N-1', 'N-2', 'N-3', 'N-4'];
+    const el = document.getElementById('parent-unread');
+    if (!el) return;
+    let acks = {};
+    try { acks = JSON.parse(localStorage.getItem('ilp-parent-acks') || '{}'); } catch (e) {}
+    const unread = KNOWN.filter(id => !acks[id]).length;
+    if (unread > 0) {
+      el.textContent = unread + ' new';
+      el.hidden = false;
+      el.style.cssText = 'display:inline-block;margin-left:8px;font-size:.72rem;font-weight:700;vertical-align:middle;background:#e11d48;color:#fff;border-radius:999px;padding:2px 9px;';
+    } else {
+      el.hidden = true;
+    }
+  })();
 </script>
 </body>
 </html>

@@ -14,7 +14,8 @@ const LINKS = [
   { href: '/lesson', label: 'Lesson builder' },
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/baseline', label: 'Baseline' },
-  { href: '/parent', label: 'Family view' },
+  { href: '/messages', label: 'Parent messages' },
+  { href: '/parent', label: 'Parent app' },
   { href: '/student', label: 'Student app' },
 ];
 

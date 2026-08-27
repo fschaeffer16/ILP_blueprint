@@ -10,7 +10,7 @@ import { ThemeToggle } from './ThemeToggle';
 // and show a compact app bar with a Home button back to the console, so the demo
 // spends its screen on the product, not the menu.
 const ROLE_APPS: Record<string, string> = {
-  '/parent': 'Family app',
+  '/parent': 'Parent app',
   '/student': 'Student app',
 };
 

@@ -22,7 +22,7 @@ export default function ParentPage() {
   return (
     <>
       <div className="eyebrow" style={{ color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '.08em', fontSize: '.72rem', fontWeight: 700, marginBottom: 8 }}>
-        Family view · updated continuously
+        Parent app · updated continuously
       </div>
       <h1>{s.studentName}’s week</h1>
       <p className="lede">
