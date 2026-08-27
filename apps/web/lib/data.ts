@@ -109,7 +109,15 @@ export function getNaviFlagReport() {
   return summarizeAssistantFlags(SAMPLE_NAVI_FLAGS, CONTENT_LIBRARY.objectives);
 }
 
-/** One objective's full content: its catalog entry, authored lesson, items, sources. */
+/** The module definition (module code, pass mark, built-in reteach) for an objective,
+ * when it appears on the sample exam — else null. Every objective is a module; this
+ * returns the concrete _M# tag and remediation config where one is defined. */
+export function getModuleFor(objectiveId: string) {
+  return SAMPLE_MODULES.find((m) => m.objectiveId === objectiveId) ?? null;
+}
+
+/** One objective's full content: its catalog entry, authored lesson, items, sources,
+ * plus its module framing (module = Learning Objective; lessons live inside it). */
 export function getLibraryObjective(objectiveId: string) {
   const objective = CONTENT_LIBRARY.objectives.find((o) => o.objectiveId === objectiveId);
   if (!objective) return null;
@@ -118,7 +126,7 @@ export function getLibraryObjective(objectiveId: string) {
   const items = CONTENT_LIBRARY.items.filter((i) => i.objectiveId === objectiveId);
   const sourceById = new Map(CONTENT_LIBRARY.sources.map((s) => [s.id, s]));
   const sources = [...new Set(objective.sourceIds)].map((id) => sourceById.get(id)).filter(Boolean);
-  return { entry, objective, lesson, items, sources };
+  return { entry, objective, lesson, items, sources, module: getModuleFor(objectiveId) };
 }
 
 /** The baseline task bank for the interactive "take the screening" demo (no answer keys

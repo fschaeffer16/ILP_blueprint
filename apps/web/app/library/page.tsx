@@ -26,11 +26,13 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
       <div className="eyebrow" style={{ color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '.08em', fontSize: '.72rem', fontWeight: 700, marginBottom: 8 }}>
         District-approved content · grade 3
       </div>
-      <h1>Content library</h1>
+      <h1>Content library · modules</h1>
       <p className="lede">
-        The approved curriculum content a teacher builds from — Learning Objectives, authored lessons,
-        assessment items, and vetted sources. Every item below has passed every guardrail
-        (standard-mapped, approved sources, lesson covers the reasoning, items trace and don’t leak).
+        The approved curriculum, organized as <strong>modules</strong>. A module is one Learning
+        Objective: its lessons live inside it, its assessment items are tagged to it, and its
+        remediation is built in. Every card below has passed every guardrail (standard-mapped,
+        approved sources, lesson covers the reasoning, items trace and don’t leak). Open one to see
+        the module’s lesson, its items, and its pass-mark-triggered reteach.
       </p>
 
       <div className="kpis" style={{ marginBottom: 12 }}>
@@ -114,15 +116,39 @@ function BestCoverage() {
 function ObjectiveDetail({ id }: { id: string }) {
   const data = getLibraryObjective(id);
   if (!data) return <><h1>Not found</h1><p><Link href="/library">← Back to the library</Link></p></>;
-  const { entry, objective, lesson, items, sources } = data;
+  const { entry, objective, lesson, items, sources, module } = data;
+  const passPct = Math.round((module?.passThreshold ?? objective.mastery.threshold) * 100);
+  const teachingBlocks = lesson?.blocks.filter((b) => b.kind === 'instruction' || b.kind === 'worked_example').length ?? 0;
 
   return (
     <>
       <p style={{ marginBottom: 10 }}><Link href="/library">← Content library</Link></p>
       <div className="eyebrow" style={{ color: 'var(--brand)', textTransform: 'uppercase', letterSpacing: '.08em', fontSize: '.72rem', fontWeight: 700, marginBottom: 8 }}>
-        {SUBJECT_LABEL[objective.subject] ?? objective.subject} · {objective.objectiveId} · {objective.standardRefs.join(', ')} {entry.ok && <span className="pill ok" style={{ marginLeft: 8 }}>✓ passes every gate</span>}
+        Module · {SUBJECT_LABEL[objective.subject] ?? objective.subject} · {objective.objectiveId} · {objective.standardRefs.join(', ')} {entry.ok && <span className="pill ok" style={{ marginLeft: 8 }}>✓ passes every gate</span>}
       </div>
       <h1>{objective.studentOutcome}</h1>
+
+      <div className="callout" style={{ margin: '14px 0 20px' }}>
+        <h3 style={{ marginBottom: 6 }}>
+          This is a module {module && <span className="pill brand" style={{ marginLeft: 6 }}>tag {module.moduleId}</span>}
+        </h3>
+        <p style={{ marginBottom: 8 }}>
+          A module is one Learning Objective. Its lessons live inside it, and remediation is built in:
+          every quiz/exam question for this module is tagged{' '}
+          <span className="mono">_{module?.moduleId ?? 'M#'}</span> so results track by module — student, class,
+          school, district.
+        </p>
+        <div className="mini">
+          <div className="m"><div className="n">{teachingBlocks || 1}</div><div className="l">lesson{teachingBlocks === 1 ? '' : 's'} inside this module</div></div>
+          <div className="m"><div className="n">{items.length}</div><div className="l">assessment items, all tagged to it</div></div>
+          <div className="m"><div className="n">{passPct}%</div><div className="l">pass mark — below it, remediation auto-triggers</div></div>
+        </div>
+        <p className="sub" style={{ margin: '10px 0 0' }}>
+          <strong>Built-in remediation:</strong> score below {passPct}% on this module and a materially-different
+          reteach auto-assigns, then the student retakes <em>only this module’s questions</em> — no waiting for the next test.
+          {' '}<Link href="/exam">See it tracked on an exam →</Link>
+        </p>
+      </div>
 
       <div className="locked" style={{ margin: '14px 0 20px' }}>
         <span className="k">Locked contract</span> — required reasoning: <strong>{objective.requiredReasoning.join(', ')}</strong> ·
@@ -130,7 +156,7 @@ function ObjectiveDetail({ id }: { id: string }) {
         transfer {objective.mastery.transferRequired ? 'required' : 'optional'}.
       </div>
 
-      <h2>The lesson: {lesson?.title}</h2>
+      <h2>The lesson inside this module: {lesson?.title}</h2>
       {lesson?.blocks.map((b) => (
         <div className="block" key={b.id}>
           <div className="bhead">
