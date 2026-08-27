@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Where Your Data Lives</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1E2731; --ink-soft:#54606D; --ink-faint:#8894A2;
+  --line:#E4DFD4; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A;
+  --apricot:#E8843C; --gold:#C98A16;
+  --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4;
+    --apricot:#F0A25A; --gold:#E0B44A;
+    --red:#E27A65; --green:#5FBE86;
+    --tint:#13282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4;
+  --apricot:#F0A25A; --gold:#E0B44A;
+  --red:#E27A65; --green:#5FBE86;
+  --tint:#13282E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3,.disp{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0 0 1.05em}
+a{color:var(--teal-deep);text-decoration:none;border-bottom:1px solid rgba(14,143,158,.3)}
+sup a{border:0;font-weight:800;font-size:11px;padding:0 1px}
+.wrap{max-width:820px;margin:0 auto;padding:0 26px}
+
+.hero{background:radial-gradient(120% 90% at 88% -10%, rgba(62,154,107,.13), transparent 55%),
+  radial-gradient(110% 90% at 0% 0%, rgba(14,143,158,.15), transparent 52%);border-bottom:1px solid var(--line)}
+.hero .wrap{padding:60px 26px 48px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal-deep);margin-bottom:20px}
+.kicker .mk{width:24px;height:2px;background:var(--apricot)}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:600;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--teal-deep)}
+.hero .sub{font-size:clamp(18px,2.5vw,21px);color:var(--ink-soft);margin-top:20px;max-width:34em;line-height:1.5}
+
+section{padding:46px 0}
+section+section{border-top:1px solid var(--line-soft)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--apricot);margin-bottom:12px}
+h2{font-size:clamp(24px,4vw,33px);font-weight:600;letter-spacing:-.01em;margin-bottom:.55em}
+h3{font-size:18px;font-weight:600;margin:1.3em 0 .25em}
+.lead{font-size:18.5px;color:var(--ink-soft)}
+strong{color:var(--ink)}
+ul{margin:0 0 1.05em;padding-left:20px}
+li{margin-bottom:7px}
+
+/* three hosting options */
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0 6px}
+@media(max-width:720px){.opts{grid-template-columns:1fr}}
+.opt{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--card)}
+.opt.pick{background:var(--tint);border-color:rgba(14,143,158,.34)}
+.opt .tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;background:rgba(14,143,158,.14);color:var(--teal-deep)}
+.opt.pick .tag{background:var(--teal-deep);color:#fff}
+.opt h3{margin:0 0 8px;font-size:19px}
+.opt p{font-size:14.5px;color:var(--ink-soft);margin-bottom:.7em}
+.opt .who{font-size:12.5px;font-weight:700;color:var(--ink);margin-top:6px}
+
+/* comparison table */
+.tbl{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:15px}
+thead th{background:var(--panel);text-align:left;padding:13px 16px;font-family:"Nunito Sans";
+  font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+tbody td{padding:13px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.dim{color:var(--ink);font-weight:700;width:32%}
+@media(max-width:640px){table,thead,tbody,tr,td{display:block}thead{display:none}
+  td.dim{font-family:Fraunces,serif;font-size:16px;color:var(--teal-deep);padding-bottom:2px;width:auto}
+  tbody tr{border-bottom:1px solid var(--line);padding:6px 0}}
+
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15px}
+.callout b{color:var(--teal-deep)}
+.callout.warn{border-left-color:var(--apricot)}
+.callout.warn b{color:var(--apricot)}
+
+.pull{margin:30px 0;padding:6px 0 6px 24px;border-left:4px solid var(--apricot);
+  font-family:Fraunces,serif;font-size:clamp(20px,2.8vw,26px);line-height:1.34;font-weight:500}
+.pull span{color:var(--teal-deep)}
+
+.gates{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 24px;margin:22px 0}
+.gates ol{margin:14px 0;padding-left:22px}
+.gates li{margin-bottom:9px;font-size:15.5px}
+.gates li b{color:var(--teal-deep)}
+
+.backlink{display:inline-block;margin-top:8px;font-size:14px;font-weight:700}
+
+footer{border-top:1px solid var(--line);padding:30px 0 56px;font-size:13px;color:var(--ink-faint)}
+footer .wrap{display:block}
+footer h4{font-family:"Nunito Sans";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px}
+footer ol{margin:0;padding-left:20px;line-height:1.5}
+footer li{margin-bottom:5px}
+footer .disc{margin-top:16px;font-style:italic}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker"><span class="mk"></span> ILP · A briefing for district IT &amp; leadership</div>
+  <h1>Your data never<br><em>leaves your control.</em></h1>
+  <p class="sub">The first question a district asks a new platform is <em>“where does our
+    students’ data live?”</em> Here is the straight answer — the hosting options, the privacy
+    guardrails that apply the moment real data is involved, and an honest line on what is and
+    isn’t real in today’s demo.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">The short answer</div>
+  <h2>“The district’s server” means a server the district <em>controls</em> — not necessarily one it racks and cools</h2>
+  <p class="lead">There are three ways to run ILP for real. In every one, the student data is
+    <strong>legally the district’s</strong>, governed by a signed data-privacy agreement, and never
+    sold or repurposed. They differ only in <em>who operates the machines</em>.</p>
+
+  <div class="opts">
+    <div class="opt pick">
+      <span class="tag">Most common</span>
+      <h3>District cloud tenant</h3>
+      <p>ILP runs in a cloud account (AWS, Azure, or Google Cloud) provisioned <em>for the
+        district</em> — their tenant, their encryption keys, their region. This is how Canvas,
+        Skyward, and IXL themselves largely run.</p>
+      <div class="who">Runs on: district’s cloud · Data owner: the district</div>
+    </div>
+    <div class="opt">
+      <span class="tag">Maximum control</span>
+      <h3>District data center (on-prem)</h3>
+      <p>For districts whose policy requires student data on hardware they physically own, ILP
+        installs there. It’s a standard TypeScript/Node app with a normal database — no exotic
+        dependencies — so their IT team can host it.</p>
+      <div class="who">Runs on: district hardware · Data owner: the district</div>
+    </div>
+    <div class="opt">
+      <span class="tag">Fastest to pilot</span>
+      <h3>Vendor-hosted subscription</h3>
+      <p>ILP hosts it and the district subscribes — exactly the model they already use for IXL.
+        The data is still theirs by contract; the servers are ours. Lowest lift to get a pilot
+        running.</p>
+      <div class="who">Runs on: ILP’s cloud · Data owner: the district (by contract)</div>
+    </div>
+  </div>
+  <p style="margin-top:20px">So the instinct “that would have to be on the district’s server” is
+    right in spirit: the real, live version runs on infrastructure the <strong>district owns or
+    controls</strong> — whichever of the three fits their policy.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Honest status</div>
+  <h2>What’s live today is a demo on <em>synthetic</em> data</h2>
+  <p>The working system at <a href="https://ilp-blueprint-web.vercel.app">ilp-blueprint-web.vercel.app</a>
+    holds <strong>no real student information</strong>. Every name, score, and message is invented
+    for the demo. That is deliberate — and it’s why the parent-notification receipt loop is
+    presenter-controlled and lives only in your browser right now: there is intentionally no backend
+    holding real data yet.</p>
+  <div class="callout warn"><b>The line that matters.</b> The moment ILP touches a real child’s
+    grade or a real parent’s phone, that data must live under the district’s data-governance
+    umbrella. Nothing about the demo shortcuts that — it’s a gate to pass, on purpose.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The guardrails</div>
+  <h2>What applies the moment the data is real</h2>
+  <p class="lead">These aren’t features to bolt on later — they’re conditions ILP is designed to
+    meet before a single real student is enrolled.</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Requirement</th><th>What it means in ILP</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">FERPA</td><td>Education records stay under district control; access is role-scoped and logged; no third-party resale. ILP is the processor, the district is the owner.</td></tr>
+      <tr><td class="dim">Florida student-data privacy</td><td>Aligns with Florida’s student-data-privacy requirements and the district’s existing data-sharing agreements — the same framework governing i-Ready and IXL today.</td></tr>
+      <tr><td class="dim">Encryption &amp; access</td><td>Encrypted in transit and at rest; least-privilege access; a full audit trail (the engine already writes an append-only log of grade decisions).</td></tr>
+      <tr><td class="dim">Data residency</td><td>Runs in the region and tenant the district specifies — their cloud or their hardware.</td></tr>
+      <tr><td class="dim">Retention &amp; deletion</td><td>Retention windows and deletion-on-request follow district policy, not the vendor’s convenience.</td></tr>
+      <tr><td class="dim">The privacy line, in code</td><td>Parents see patterns, time, growth, and safety — never their child’s or other children’s messages. There is deliberately <em>no message-content field</em> in the parent data model.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="gates">
+    <h3>Before real students — the pilot gates, in order</h3>
+    <ol>
+      <li><b>Technical feasibility</b> on synthetic data with teacher review <span style="color:var(--green);font-weight:700">— done</span></li>
+      <li><b>Content &amp; assessment review</b> by subject experts and psychometric advisors</li>
+      <li><b>Privacy, security &amp; district legal approval</b> — this page’s subject</li>
+      <li><b>Small classroom usability pilot</b> without high-stakes grading</li>
+      <li><b>Controlled instructional pilot</b> with predefined outcome measures</li>
+      <li><b>Independent evaluation</b> before any broader expansion</li>
+    </ol>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Why this is a strength, not a hurdle</div>
+  <h2>Owning your data beats renting a black box</h2>
+  <p>A district can’t promise a parent much about what a vendor does with their child’s data inside
+    a rented platform. With ILP, the answer is simple and true: <strong>your data stays under your
+    control, and the content is yours.</strong> That’s a promise a black box can’t make — and it’s a
+    reason a district feels <em>safer</em> choosing this path, not warier.</p>
+  <div class="pull">The question isn’t whether we’ll protect your data. It’s that
+    <span>it was never ours to begin with.</span></div>
+  <a class="backlink" href="/case.html">▸ Back to the case for ILP</a> &nbsp;·&nbsp;
+  <a class="backlink" href="/demo.html">▸ See the live system</a>
+</div></section>
+
+<footer><div class="wrap">
+  <h4>References &amp; notes</h4>
+  <ol>
+    <li>FERPA — Family Educational Rights and Privacy Act (20 U.S.C. § 1232g; 34 CFR Part 99). <a href="https://studentprivacy.ed.gov/">studentprivacy.ed.gov</a></li>
+    <li>Florida student-data privacy &amp; security — FLDOE. <a href="https://www.fldoe.org/">fldoe.org</a>; district data-sharing agreements govern current tools (i-Ready, IXL).</li>
+  </ol>
+  <p class="disc">Prepared for ILP district discovery. This page describes an intended architecture
+    and the standards it is built to meet; it is not a completed security audit. Formal privacy,
+    security, and legal review is pilot gate 3 above and happens with the district before any real
+    student data is processed. All data in the current demo is synthetic.</p>
+</div></footer>
+
+<button id="__ttoggle" aria-label="Toggle light or dark mode" style="position:fixed;top:14px;right:14px;z-index:99999;font:700 12px/1 -apple-system,'Segoe UI',Roboto,sans-serif;cursor:pointer;border:1px solid rgba(128,128,128,.4);background:rgba(150,150,150,.16);color:inherit;border-radius:8px;padding:7px 11px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">&#9790; Dark</button>
+<script>(function(){var b=document.getElementById('__ttoggle'),r=document.documentElement,K='ilp-theme';
+function d(){var a=r.getAttribute('data-theme');if(a==='dark')return true;if(a==='light')return false;try{return matchMedia('(prefers-color-scheme: dark)').matches}catch(e){return false}}
+function L(){b.innerHTML=d()?'&#9728; Light':'&#9790; Dark'}
+function A(t){if(t==='light'||t==='dark')r.setAttribute('data-theme',t);else r.removeAttribute('data-theme');L()}
+try{var s=localStorage.getItem(K);if(s)A(s)}catch(e){}L();
+b.addEventListener('click',function(){var n=d()?'light':'dark';A(n);try{localStorage.setItem(K,n)}catch(e){}})})();</script>
+</body>
+</html>

@@ -46,6 +46,7 @@ Individual views:
 | --- | --- |
 | Why FAST & i-Ready become obsolete ("After the Test") | https://ilp-blueprint-web.vercel.app/after-the-test.html |
 | Growth & partnership proposal ("Built by Teachers") | https://ilp-blueprint-web.vercel.app/built-by-teachers.html |
+| Where your data lives (for IT & legal) | https://ilp-blueprint-web.vercel.app/where-your-data-lives.html |
 
 *(All public — anyone with the link can open them, no account.)*
 
