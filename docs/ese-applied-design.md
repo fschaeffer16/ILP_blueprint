@@ -115,6 +115,17 @@ Same standard where possible, same *platform* always.
 
 ## 6. The placement gap — evidence for the least restrictive environment
 
+> **The claim, stated plainly: we can save a percentage of children from ever developing
+> behavior issues — by challenging them in the mainstream instead of locking them down in a
+> classroom where the whole day revolves around redirecting behavior.**
+>
+> This is a *prevention* claim, not an accommodation claim, and that is what makes it powerful:
+> the behaviors are treated as an acquired outcome of placement, not a fixed trait of the child.
+> It is honest — *a percentage*, not every child — and it is **measurable**: no district has ever
+> been able to test it, because no one could compare what a nonverbal child actually learned and
+> how they actually behaved across settings. ILP's per-module, per-setting evidence makes this a
+> testable pilot outcome for the first time.
+
 The largest failure in ESE today is not inside any classroom. It is the decision about **which
 classroom** — and the thin evidence that decision runs on.
 
