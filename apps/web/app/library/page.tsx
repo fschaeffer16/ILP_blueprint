@@ -28,11 +28,11 @@ export default function LibraryPage({ searchParams }: { searchParams: { o?: stri
       </div>
       <h1>Content library · modules</h1>
       <p className="lede">
-        The approved curriculum, organized as <strong>modules</strong>. A module is one Learning
-        Objective: its lessons live inside it, its assessment items are tagged to it, and its
-        remediation is built in. Every card below has passed every guardrail (standard-mapped,
-        approved sources, lesson covers the reasoning, items trace and don’t leak). Open one to see
-        the module’s lesson, its items, and its pass-mark-triggered reteach.
+        The approved <strong>grade-3</strong> curriculum (the demo pack), organized as
+        <strong> modules</strong>. A module is one Learning Objective: its lessons live inside it, its
+        assessment items are tagged to it, and its remediation is built in. Every card below has passed
+        every guardrail (standard-mapped, approved sources, lesson covers the reasoning, items trace and
+        don’t leak). Open one to see the module’s lesson, its items, and its pass-mark-triggered reteach.
       </p>
 
       <div className="kpis" style={{ marginBottom: 12 }}>

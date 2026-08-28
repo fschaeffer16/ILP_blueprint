@@ -2,7 +2,7 @@
 
 The special-education track for ILP. This is the research-backed design doc for meeting
 students with disabilities **where they are, without lowering the standard** — the deliberate
-next major track after the general elementary experience is polished. It is a *plan*, not yet
+next major track after the general grade-3 experience is polished. It is a *plan*, not yet
 built. Geographic emphasis: U.S. federal law → Florida → St. Lucie Public Schools (SLPS).
 
 > **Design order (unchanged):** build one strong system for every student first, then extend it
