@@ -16,6 +16,7 @@ const LINKS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/exam', label: 'Exam analysis' },
   { href: '/baseline', label: 'Baseline' },
+  { href: '/early-grades', label: 'Kindergarten' },
   { href: '/messages', label: 'Parent messages' },
   { href: '/parent', label: 'Parent app' },
   { href: '/student', label: 'Student app' },

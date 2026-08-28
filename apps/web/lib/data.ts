@@ -48,6 +48,10 @@ import {
   SAMPLE_EXAM_RESPONSES,
   SAMPLE_EXAM_ROSTER,
   SAMPLE_MODULES,
+  EARLY_K_LIBRARY,
+  EARLY_K_OBJECTIVES,
+  EARLY_K_ASSIGNMENT,
+  EARLY_K_STUDENTS,
   SAMPLE_CHANNELS,
   SAMPLE_POSTS,
   SAMPLE_MEMBERS,
@@ -99,6 +103,30 @@ export function getStudentChannels() {
 /** The content-library catalog (every objective validated against every gate). */
 export function getLibrary() {
   return buildCatalog(CONTENT_LIBRARY);
+}
+
+/** Kindergarten "meet them where they are" showcase: one gate-validated K counting
+ * objective, four kindergartners with sharply different baselines, and the delivery the
+ * assign-once compiler auto-selects for each — same objective, decided by the baseline. */
+export function getKindergartenShowcase() {
+  const objective = EARLY_K_OBJECTIVES.find(
+    (o) => o.objectiveId === EARLY_K_ASSIGNMENT.objectiveVersionRefs[0]?.objectiveId,
+  )!;
+  const catalog = buildCatalog(EARLY_K_LIBRARY);
+  const students = EARLY_K_STUDENTS.map((st) => {
+    const profile = buildBaselineProfile(st.baseline, { gradeBand: 'K', today: new Date('2026-09-01') });
+    const ilp = studentILPFromBaseline(profile, st.name);
+    const result = compileAssignment({
+      assignment: EARLY_K_ASSIGNMENT,
+      objectives: EARLY_K_OBJECTIVES,
+      roster: [ilp],
+      adaptationCatalog: SAMPLE_ADAPTATIONS,
+      today: new Date('2026-09-01'),
+    });
+    const growthAreas = profile.ilpHypotheses.map((h) => ({ domain: h.domain, readiness: h.readiness }));
+    return { studentId: st.studentId, name: st.name, blurb: st.blurb, manifest: result.manifests[0] ?? null, growthAreas };
+  });
+  return { objective, allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, students };
 }
 
 export function getStandardsCoverage() {

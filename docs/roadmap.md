@@ -23,6 +23,14 @@ B.E.S.T. spine ships as structured data in
 [`standards.ts`](../packages/core/src/fixtures/standards.ts) and `/library` renders coverage
 benchmark-by-benchmark.
 
+**A Kindergarten slice + baseline showcase.** A small, separately gate-validated K pack (3
+B.E.S.T.-mapped objectives with lessons, items, sources) drives the
+[`/early-grades`](../apps/web/app/early-grades) "meet them where they are" showcase: four
+kindergartners with sharply divergent baselines take the *same* K counting objective, and the
+assign-once compiler auto-selects a different delivery for each (core / visual-first /
+vocabulary-supported / guided-practice) — same standard, decided by the baseline. Grades 1 and 2
+mirror this exact setup; full K/1/2 coverage is an authoring track, not yet claimed.
+
 - **Assign-once compiler** — one teacher assignment → a reproducible, individualized delivery
   manifest per student, with the objective, rigor and mastery rule locked identically.
 - **Assessment engine** — rubrics, specs, items, and a deterministic item-integrity gate
