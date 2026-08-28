@@ -137,13 +137,35 @@ IEP, and pull-aside instruction can be the difference between an adult on the sp
 without behavior patterns that follow them for life. Environment teaches — that is the entire
 premise of school — and it teaches in self-contained rooms too.
 
-**The law already presumes what this child needs.** LRE (34 CFR §300.114) requires education with
-non-disabled peers *to the maximum extent appropriate, with supplementary aids and services* —
-removal is legal only when general-ed placement **with supports** cannot work. In practice the
-presumption gets inverted for nonverbal children because nobody can produce evidence of what they
-know. **That evidence is exactly what ILP produces.**
+**Follow the money — why the trap persists.** The self-contained default is not only an evidence
+problem; it is a **funding architecture** problem. ESE dollars flow from two streams — federal
+(IDEA Part B) and state — and every state sets its own criteria for how much a child generates.
+The common thread: **higher-support designations generate more money.** In Florida this is
+concrete and already in our research: the **Matrix of Services** rates need across five domains
+into Support Levels 1–5, producing FEFP cost factors (251–255) — and a nonverbal child rated at
+Level 4–5 in a self-contained ASD room generates substantially more revenue than the same child
+mainstreamed with supports. Worse, **many states do not require ESE-generated dollars to be spent
+on ESE** — the money lands in the general budget, so the higher funding a restrictive placement
+generates doesn't even reliably buy that child services. The result is a quiet structural
+incentive: the placement that harms the mis-placed child is the placement that pays the district
+most, and the surplus can vanish into the general fund. Nobody has to intend any of this for it to
+happen. *(State-by-state mechanics vary; verify per state before quoting — the Florida Matrix
+mechanics are sourced in [`ese-iep-track.md`](ese-iep-track.md).)*
 
-**ILP's three answers:**
+**The lever that gets a child out.** In practice, the mainstreaming question turns on one thing:
+**is this child a danger to themselves or others?** If not — and the parent requests the
+general-education placement — the LRE presumption plus FAPE means the district must not only
+place the child but **provide and pay for whatever support the placement needs**: a trained
+behavior tech for class transitions and lunch, an aide, whatever the IEP requires, at no cost to
+the family. This is not theoretical. **The lived proof:** one 11th-grader in a Florida district,
+on the spectrum and semi-verbal, has been mainstreamed for years with a district-funded outside
+behavior tech supporting transitions between classes and lunch — never bullied, no outbursts, a
+standing refutation of every assumption a self-contained placement would have made about him. The
+lever exists in law. What most families lack is (a) knowing it exists, and (b) the **evidence** to
+swing it. ILP supplies the evidence; the family-facing side of the platform can make sure they
+know the lever exists.
+
+**ILP's answers:**
 
 1. **Prove what they know.** AAC-channel mastery evidence on the *same* Learning Objectives as
    peers — timestamped, per-module, prompt-level honest. The IEP-meeting conversation changes
@@ -160,12 +182,25 @@ know. **That evidence is exactly what ILP produces.**
 3. **Keep the placement defended.** Continuous per-module progress in the mainstream setting is
    the standing answer to every "maybe he'd be better off in the self-contained room"
    reconsideration. The IEP-meeting evidence packet (build step 6) includes placement-relevant
-   evidence: mastery by setting, independence trend, supports actually used.
+   evidence: mastery by setting, independence trend, supports actually used — **and the safety
+   record**: for the child with no incidents, the documented *absence* of danger-to-self-or-others
+   is half the mainstreaming lever, and ILP's evidence layer keeps it on the record, not in
+   anyone's impression.
+4. **Make the money visible.** ILP cannot rewrite state finance law, but it can end the opacity
+   the incentive hides in. Because every delivered support is logged (which accommodations ran,
+   which pull-aside module sessions happened, which behavior-tech-supported transitions occurred),
+   a district using ILP can show — and a district leader can *demand* — that **the dollars a child
+   generates follow that child visibly**: funding tier on one side, services actually delivered on
+   the other. The same rollup that audits referral disproportionality can audit
+   placement-vs-progress: a self-contained placement that generates Level-4/5 funding while
+   producing flat progress data is a question the dashboard now asks out loud.
 
-**Honest limits.** ILP cannot diagnose, cannot decide placement, and cannot staff a behavior
-tech — those are human and budget decisions. What it can do is destroy the evidence vacuum those
-decisions currently hide in, and make the inclusive option cheap enough to run that "we can't
-support him in gen-ed" stops being true.
+**Honest limits.** ILP cannot diagnose, cannot decide placement, cannot staff a behavior tech,
+and cannot change how a state disburses or ring-fences ESE money — those are human, budget, and
+legislative decisions. What it can do is destroy the evidence vacuum those decisions currently
+hide in, make the inclusive option cheap enough to run that "we can't support him in gen-ed"
+stops being true, and make the money's path visible enough that spending it elsewhere has to be
+defended in daylight.
 
 ## 7. What this gives each role
 
