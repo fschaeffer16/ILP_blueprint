@@ -165,6 +165,17 @@ lever exists in law. What most families lack is (a) knowing it exists, and (b) t
 swing it. ILP supplies the evidence; the family-facing side of the platform can make sure they
 know the lever exists.
 
+**None of this requires a villain.** The deciding room usually holds professionals offering the
+default they know — *"your child is autistic; they need to be in the autism class"* — delivered in
+the voice of expertise, and parents who **don't know what they don't know** and trust it. That
+sentence sounds like a medical fact; it is a *placement opinion*, and the law presumes the
+opposite. The trap is an information asymmetry sitting on top of a funding incentive, and it
+closes on families acting in good faith on both sides of the table. Which is why the fix is not
+blame — it is **an informed parent holding evidence**: the parent app's job, in plain language,
+includes telling families what the process is, what the team is deciding, what their rights at
+that table are, and what questions to ask. Not legal advice — the missing half of the
+conversation.
+
 **ILP's answers:**
 
 1. **Prove what they know.** AAC-channel mastery evidence on the *same* Learning Objectives as
