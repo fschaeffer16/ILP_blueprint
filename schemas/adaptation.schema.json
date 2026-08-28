@@ -59,7 +59,7 @@
     },
     "contributesToPattern": {
       "type": "string",
-      "enum": ["core", "vocabulary_supported", "visual_first", "guided_practice", "advanced_transfer"]
+      "enum": ["core", "vocabulary_supported", "visual_first", "guided_practice", "aac_supported", "advanced_transfer"]
     },
     "costWeight": {
       "type": "number",

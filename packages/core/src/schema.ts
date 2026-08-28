@@ -46,6 +46,7 @@ const deliveryPattern = z.enum([
   'vocabulary_supported',
   'visual_first',
   'guided_practice',
+  'aac_supported',
   'advanced_transfer',
 ]);
 

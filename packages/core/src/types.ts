@@ -47,6 +47,7 @@ export type DeliveryPattern =
   | 'vocabulary_supported'
   | 'visual_first'
   | 'guided_practice'
+  | 'aac_supported' // AAC / alternate response channel (symbol, switch, speech-to-text)
   | 'advanced_transfer';
 
 export interface MasteryRule {

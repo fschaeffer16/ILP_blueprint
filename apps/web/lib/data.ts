@@ -25,6 +25,7 @@ import {
   lessonFor,
   SURFACE_LABEL,
   domainLabel,
+  iepToConstraints,
   SCREENING_DOMAINS,
   CROSS_CUTTING_FILTERS,
   SIGNAL_ROUTING,
@@ -56,6 +57,8 @@ import {
   EARLY_K_OBJECTIVES,
   EARLY_K_ASSIGNMENT,
   EARLY_K_STUDENTS,
+  ESE_SHOWCASE_STUDENTS,
+  ESE_ACCESS_POINTS_STUDENT,
   SAMPLE_CHANNELS,
   SAMPLE_POSTS,
   SAMPLE_MEMBERS,
@@ -240,6 +243,47 @@ export function getParentSummary() {
  * class / student scope, with auto-triggered reteach-and-retake remediation. */
 export function getExamAnalysis() {
   return analyzeExam(SAMPLE_EXAM, SAMPLE_EXAM_RESPONSES, SAMPLE_EXAM_ROSTER, SAMPLE_MODULES);
+}
+
+/** The ESE showcase: six students with documented plans, one grade-3 Learning Objective.
+ * Each plan's accommodations are forced into the compiler (IEP as live input); five are
+ * pure accommodation-lane (objective locked); the sixth is the documented Access-Points
+ * lane the engine never computes. */
+export function getEseShowcase() {
+  const objective = SAMPLE_OBJECTIVES.find(
+    (o) => o.objectiveId === SAMPLE_ASSIGNMENT.objectiveVersionRefs[0]?.objectiveId,
+  )!;
+  const adaptationById = new Map(SAMPLE_ADAPTATIONS.map((a) => [a.id, a]));
+  const students = ESE_SHOWCASE_STUDENTS.map((st) => {
+    const profile = buildBaselineProfile(st.baseline, { gradeBand: '3', today: new Date('2026-09-08') });
+    const ilp = studentILPFromBaseline(profile, st.name);
+    const constraints = st.plan ? iepToConstraints(st.plan) : {};
+    const result = compileAssignment({
+      assignment: { ...SAMPLE_ASSIGNMENT, teacherConstraints: constraints },
+      objectives: SAMPLE_OBJECTIVES,
+      roster: [ilp],
+      adaptationCatalog: SAMPLE_ADAPTATIONS,
+      today: new Date('2026-09-08'),
+    });
+    const manifest = result.manifests[0] ?? null;
+    const applied = (manifest?.appliedAdaptationIds ?? []).map((id) => {
+      const a = adaptationById.get(id);
+      const fromPlan = st.plan?.accommodations.find((acc) => acc.adaptationId === id) ?? null;
+      return {
+        id,
+        label: a?.label ?? id,
+        permanent: a?.fadeRule == null, // access channels never fade
+        fromPlan: fromPlan ? { planText: fromPlan.planText, planType: st.plan!.planType } : null,
+      };
+    });
+    return {
+      name: st.name, documented: st.documented, whereTheyAre: st.whereTheyAre,
+      pattern: manifest?.pattern ?? 'core', applied,
+      excluded: st.plan?.excludedAdaptations ?? [],
+      objectiveModified: manifest?.objectiveModified ?? false,
+    };
+  });
+  return { objective, students, accessPoints: ESE_ACCESS_POINTS_STUDENT };
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */

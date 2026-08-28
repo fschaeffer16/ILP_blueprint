@@ -5,6 +5,7 @@ const PATTERN_LABEL: Record<DeliveryPattern, string> = {
   vocabulary_supported: 'Vocabulary-supported',
   visual_first: 'Visual-first',
   guided_practice: 'Guided practice',
+  aac_supported: 'AAC / alternate response',
   advanced_transfer: 'Advanced transfer',
 };
 

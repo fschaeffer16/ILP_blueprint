@@ -201,7 +201,9 @@ h2 { font-size: 1.15rem; margin: 28px 0 12px; }
 .badge.visual_first { background: #f0ecff; color: #6b3fd0; }
 .badge.guided_practice { background: #fff2e6; color: #9a5a00; }
 .badge.advanced_transfer { background: #e6f7ee; color: #1c7c4a; }
+.badge.aac_supported { background: #e6f4f6; color: #0a6e7a; }
 @media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .badge.aac_supported { background: #13282e; color: #57c7d4; }
   :root:not([data-theme="light"]) .badge.vocabulary_supported { background: #1c2740; color: #9db8ff; }
   :root:not([data-theme="light"]) .badge.visual_first { background: #241c40; color: #b9a6ff; }
   :root:not([data-theme="light"]) .badge.guided_practice { background: #33290f; color: #e0b357; }

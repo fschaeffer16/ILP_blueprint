@@ -57,6 +57,7 @@ export const DEFAULT_POLICY: AdaptationPolicy = {
 /** Precedence used to name a manifest's single delivery pattern. */
 const PATTERN_PRECEDENCE: readonly DeliveryPattern[] = [
   'advanced_transfer',
+  'aac_supported', // the access channel defines the delivery when present
   'guided_practice',
   'visual_first',
   'vocabulary_supported',

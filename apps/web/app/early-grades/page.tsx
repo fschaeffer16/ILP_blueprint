@@ -27,6 +27,7 @@ const WHAT_THEY_SEE: Record<DeliveryPattern, string> = {
   visual_first: 'The same count, shown first with counters and a ten-frame — a picture to reason from before the symbols.',
   vocabulary_supported: 'The directions read aloud, with key words pre-taught — so language never hides what they can do with numbers.',
   guided_practice: 'One step at a time with check-ins, the multi-step task chunked — the scaffold fades as independence grows.',
+  aac_supported: 'The same task, answered through their own AAC symbols or alternate response channel — the channel changes, the objective doesn’t.',
   advanced_transfer: 'Extended within the same objective — more challenge, never a lower standard.',
 };
 

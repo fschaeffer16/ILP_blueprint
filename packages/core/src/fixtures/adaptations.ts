@@ -85,6 +85,45 @@ export const SAMPLE_ADAPTATIONS: readonly Adaptation[] = [
     contributesToPattern: 'advanced_transfer',
     costWeight: 2,
   },
+  // --- ESE access channels: IEP-declared, never inferred ---------------------
+  // No auto-triggers ON PURPOSE: the algorithm never guesses a child's communication
+  // channel from a score. These are applied via the IEP layer (forced adaptations) and,
+  // as pure access, they never fade (fadeRule: null) — you never fade a child's wheelchair.
+  {
+    id: 'aac_symbol_response',
+    label: 'AAC / symbol response channel',
+    adaptationClass: 'access',
+    permittedChange:
+      'Accept responses via the student’s own AAC vocabulary — symbol selection, switch scanning, or eye-gaze — as full evidence of mastery.',
+    prohibitedChange: 'Reduce what the response must demonstrate, or report supported responses as independent.',
+    triggers: [],
+    fadeRule: null,
+    contributesToPattern: 'aac_supported',
+    costWeight: 2,
+  },
+  {
+    id: 'speech_to_text_response',
+    label: 'Speech-to-text response channel',
+    adaptationClass: 'access',
+    permittedChange: 'Accept dictated/spoken responses in place of handwriting or typing.',
+    prohibitedChange: 'Waive the content the written response must demonstrate.',
+    triggers: [],
+    fadeRule: null,
+    contributesToPattern: 'aac_supported',
+    costWeight: 1,
+  },
+  {
+    id: 'captions_visual_supports',
+    label: 'Captions & visual-channel delivery',
+    adaptationClass: 'access',
+    permittedChange:
+      'Deliver all audio as captions/transcripts and lead with visual presentation; no listening-dependent tasks.',
+    prohibitedChange: 'Remove content because it was originally auditory.',
+    triggers: [],
+    fadeRule: null,
+    contributesToPattern: 'visual_first',
+    costWeight: 1,
+  },
   // --- Rigor-changing adaptations: expressible, but guarded ------------------
   {
     id: 'reduce_to_recognition_only',

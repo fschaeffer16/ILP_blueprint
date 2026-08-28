@@ -17,6 +17,7 @@ const LINKS = [
   { href: '/exam', label: 'Exam analysis' },
   { href: '/baseline', label: 'Baseline' },
   { href: '/early-grades', label: 'Kindergarten' },
+  { href: '/ese', label: 'ESE' },
   { href: '/messages', label: 'Parent messages' },
   { href: '/parent', label: 'Parent app' },
   { href: '/student', label: 'Student app' },

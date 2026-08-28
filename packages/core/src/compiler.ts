@@ -42,6 +42,7 @@ const EMPTY_PATTERN_COUNTS: () => Record<DeliveryPattern, number> = () => ({
   vocabulary_supported: 0,
   visual_first: 0,
   guided_practice: 0,
+  aac_supported: 0,
   advanced_transfer: 0,
 });
 

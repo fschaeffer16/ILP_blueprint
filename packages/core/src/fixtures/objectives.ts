@@ -28,6 +28,10 @@ export const OBJ_M3_NF_01: ObjectiveVersion = {
     'worked_example_fade',
     'chunked_prompt',
     'advanced_transfer_case',
+    // ESE access channels — IEP-declared; the channel changes, the objective doesn't.
+    'aac_symbol_response',
+    'speech_to_text_response',
+    'captions_visual_supports',
   ],
   prohibitedAdaptations: ['reduce_to_recognition_only', 'remove_explanation'],
   misconceptions: ['larger denominator means larger fraction'],
