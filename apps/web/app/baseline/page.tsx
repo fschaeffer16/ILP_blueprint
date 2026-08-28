@@ -1,26 +1,15 @@
 import Link from 'next/link';
-import { getBaseline, getBaselineToInstruction } from '../../lib/data';
+import { getBaseline, getBaselineToInstruction, getScreeningReference } from '../../lib/data';
 import { PatternBadge } from '../../components/ui';
-import type { DeliveryPattern, NextStep, ProcessingDomain, SignalStrength } from '@ilp/core';
+import { domainLabel } from '@ilp/core';
+import type { DeliveryPattern, NextStep, SignalStrength } from '@ilp/core';
 
-const DOMAIN_LABEL: Record<ProcessingDomain, string> = {
-  phonological_awareness: 'Phonological awareness',
-  letter_sound_decoding: 'Letter–sound decoding',
-  rapid_naming: 'Rapid naming',
-  oral_language: 'Oral language',
-  working_memory: 'Working memory',
-  processing_speed: 'Processing speed',
-  sustained_attention: 'Sustained attention',
-  number_sense: 'Number sense',
-  visual_motor: 'Visual-motor / handwriting',
-  oral_written_gap: 'Oral-vs-written gap',
-  performance_conditions: 'Performance conditions',
-};
 const STEP_LABEL: Record<NextStep, { text: string; cls: string }> = {
   continue_monitoring: { text: 'Keep monitoring', cls: '' },
   classroom_support: { text: 'Classroom support', cls: '' },
   targeted_intervention: { text: 'Targeted intervention', cls: '' },
   specialist_screening_referral: { text: 'Specialist screening referral', cls: 'referral' },
+  recommend_formal_evaluation: { text: 'Recommend formal evaluation', cls: 'referral' },
   family_notification: { text: 'Notify family', cls: 'notify' },
 };
 const SIG_LABEL: Record<SignalStrength, string> = { none: 'None', monitor: 'Monitor', emerging: 'Emerging', notable: 'Notable' };
@@ -29,6 +18,7 @@ const pctS = (f: number) => `${Math.round(f * 100)}%`;
 export default function BaselinePage() {
   const p = getBaseline();
   const wire = getBaselineToInstruction();
+  const ref = getScreeningReference();
 
   return (
     <>
@@ -66,7 +56,7 @@ export default function BaselinePage() {
         <div className="bars">
           {p.domains.map((d) => (
             <div className="bar-row" key={d.domain}>
-              <span className="name" title={DOMAIN_LABEL[d.domain]}>{DOMAIN_LABEL[d.domain]}</span>
+              <span className="name" title={domainLabel(d.domain)}>{domainLabel(d.domain)}</span>
               <span className="bar-track"><span className={`bar-fill ${d.readiness >= 0.6 ? 'good' : d.readiness >= 0.45 ? 'mid' : 'low'}`} style={{ width: `${Math.max(3, d.readiness * 100)}%` }} /></span>
               <span className="val">{pctS(d.readiness)} <small>· conf {pctS(d.confidence)}</small></span>
             </div>
@@ -79,7 +69,7 @@ export default function BaselinePage() {
       {p.indicators.map((i) => (
         <div className="indicator" key={i.domain}>
           <div className="head">
-            <span className="dom">{DOMAIN_LABEL[i.domain]}</span>
+            <span className="dom">{domainLabel(i.domain)}</span>
             <span className={`sig ${i.signal}`}>{SIG_LABEL[i.signal]}</span>
             <span className="pill muted">{i.indicatorType}</span>
           </div>
@@ -130,10 +120,59 @@ export default function BaselinePage() {
         )}
       </div>
 
+      <h2>What ILP is prepared to screen for</h2>
+      <p className="lede" style={{ marginTop: 0 }}>
+        {ref.domainCount} processing domains across the common learning differences — dyslexia, dyscalculia,
+        dysgraphia, ADHD, speech/language, autism-spectrum social-communication signals, sensory, and more.
+        The engine watches a <em>signal per domain</em> and routes it to a person. It flags conditions to look
+        into; it never assigns a label.
+      </p>
+      <div className="grid cols-2">
+        {ref.byGroup.filter((g) => g.domains.length > 0).map((g) => (
+          <div className="card" key={g.group}>
+            <h3 style={{ marginTop: 0 }}>{g.group}</h3>
+            <div className="worklist">
+              {g.domains.map((d) => (
+                <div className="workitem" key={d.label} style={{ alignItems: 'flex-start' }}>
+                  <span className="t" style={{ fontSize: '0.9rem' }}>{d.label}</span>
+                  <span className="s" style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'right' }}>{d.implicates.join(' · ')}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2>How a signal becomes a referral — the gateway to evaluation</h2>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>Signal</th><th>What it means</th><th>The system does</th><th>A person does</th></tr></thead>
+          <tbody>
+            {ref.routing.map((r) => (
+              <tr key={r.signal}>
+                <td><span className={`sig ${r.signal}`}>{SIG_LABEL[r.signal]}</span></td>
+                <td>{r.meaning}</td>
+                <td>{r.automatedStep}</td>
+                <td>{r.humanStep}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="callout" style={{ marginTop: 12 }}>
+        <p style={{ margin: 0 }}>
+          <strong>The referral threshold is the gateway into ESE</strong> — and it is human-decided. At a durable,
+          cross-domain signal the engine <em>stops escalating on its own</em>, assembles the evidence, and
+          <strong> recommends a formal evaluation</strong>; a qualified team, with the family and written consent,
+          decides. Four cross-cutting filters guard every signal against over-identification:
+          {' '}{ref.filters.map((f) => f.label).join(' · ')}.
+        </p>
+      </div>
+
       <p className="footnote">
         Computed by <span className="mono">@ilp/core</span> (<span className="mono">buildBaselineProfile</span>) on synthetic data.
         Modeled on MTSS/RTI universal screening and Florida’s K-3 dyslexia-screening statute (F.S. 1008.25). The data model has
-        no field in which a diagnosis could be stored.
+        no field in which a diagnosis could be stored. Full taxonomy &amp; sources: <span className="mono">docs/screening-taxonomy.md</span>.
       </p>
     </>
   );

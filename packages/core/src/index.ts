@@ -20,6 +20,7 @@ export * from './examAnalysis.js';
 export * from './engagement.js';
 export * from './baseline.js';
 export * from './baselineTasks.js';
+export * from './screeningTaxonomy.js';
 export * from './library.js';
 export * from './collaboration.js';
 export * from './student.js';

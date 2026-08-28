@@ -8,6 +8,7 @@ const STEP_LABEL: Record<NextStep, { text: string; cls: string }> = {
   classroom_support: { text: 'Classroom support', cls: '' },
   targeted_intervention: { text: 'Targeted intervention', cls: 'referral' },
   specialist_screening_referral: { text: 'Specialist screening referral', cls: 'referral' },
+  recommend_formal_evaluation: { text: 'Recommend formal evaluation', cls: 'referral' },
   family_notification: { text: 'Notify family', cls: 'notify' },
 };
 

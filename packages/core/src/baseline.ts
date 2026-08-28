@@ -24,19 +24,50 @@
 
 import type { EvidenceDomain, GradeBand, ILPHypothesis, StudentILP } from './types.js';
 
-/** How a child receives and processes information — the screening domains. */
+/**
+ * How a child receives and processes information — the screening domains.
+ * This is the expanded universal-screening taxonomy (see docs/screening-taxonomy.md):
+ * the engine watches a *signal per domain* and routes it to a person. It never diagnoses.
+ * Each domain implicates one or more conditions but maps to no eligibility category —
+ * that is always a human/team determination.
+ */
 export type ProcessingDomain =
+  // Reading / language
   | 'phonological_awareness' // reading / dyslexia-characteristic predictor
   | 'letter_sound_decoding' // reading / dyslexia-characteristic predictor
   | 'rapid_naming' // RAN — reading / dyslexia-characteristic predictor
-  | 'oral_language' // listening comprehension
+  | 'orthographic_processing' // spelling/letter form — dyslexia/dysgraphia
+  | 'reading_fluency' // decoding speed & accuracy — dyslexia
+  | 'reading_comprehension' // inferential comprehension — NVLD/ASD/SLI
+  | 'oral_language' // receptive language / listening comprehension
+  | 'oral_language_expressive' // expressive language — SLI
+  | 'articulation' // speech-sound production — speech impairment
+  | 'auditory_processing' // understanding speech in noise — CAPD
+  // Math
+  | 'number_sense' // math / dyscalculia-characteristic indicator
+  | 'math_reasoning' // reasoning & procedures — dyscalculia
+  | 'visual_spatial' // spatial reasoning — NVLD / dyscalculia
+  // Attention / executive / cognition
   | 'working_memory'
   | 'processing_speed'
   | 'sustained_attention'
-  | 'number_sense' // math / dyscalculia-characteristic predictor
-  | 'visual_motor' // fine-motor / handwriting
+  | 'executive_function' // planning, initiation, flexibility — ADHD/ASD/NVLD
+  | 'adaptive_cognitive' // broad cognitive/adaptive — intellectual disability
+  // Motor / visual
+  | 'visual_motor' // fine-motor / handwriting — dysgraphia
+  | 'fine_motor'
+  | 'gross_motor' // motor planning / coordination — DCD/dyspraxia
+  | 'visual_processing' // visual discrimination/figure-ground — VPD
+  // Social / emotional / sensory
+  | 'social_communication' // pragmatics, joint attention — ASD/NVLD
+  | 'emotional_regulation' // anxiety, mood — ED / performance conditions
+  | 'sensory_regulation' // over/under-responsivity — ASD/DCD
+  | 'auditory_acuity' // hearing — sensory (rule out first)
+  | 'visual_acuity' // vision — sensory (rule out first)
+  // Cross-cutting
   | 'oral_written_gap' // understands orally but not in writing
-  | 'performance_conditions'; // timing pressure / test anxiety
+  | 'performance_conditions' // timing pressure / test anxiety
+  | 'advanced_ability'; // ready-to-advance / gifted / 2e signal
 
 export type ObservationMethod = 'game_task' | 'teacher_observation' | 'tablet_task' | 'oral' | 'written';
 
@@ -57,6 +88,7 @@ export type NextStep =
   | 'classroom_support'
   | 'targeted_intervention'
   | 'specialist_screening_referral'
+  | 'recommend_formal_evaluation' // the ESE gateway — human-decided, requires parental consent
   | 'family_notification';
 
 /**
@@ -116,7 +148,33 @@ const DOMAIN_META: Record<ProcessingDomain, { label: string; indicator: string; 
   visual_motor: { label: 'Visual-motor / handwriting', indicator: 'fine-motor / handwriting indicator', reading: false, evidence: 'written_expression' },
   oral_written_gap: { label: 'Oral-vs-written gap', indicator: 'expression-channel indicator (knows it, can’t yet write it)', reading: false, evidence: 'written_expression' },
   performance_conditions: { label: 'Performance conditions (timing pressure)', indicator: 'test-conditions indicator', reading: false, evidence: 'assessment_conditions' },
+  // Expanded taxonomy (docs/screening-taxonomy.md). Each maps to an existing evidence
+  // domain so the compiler is unaffected; reading:true routes statute-aligned notification.
+  orthographic_processing: { label: 'Orthographic processing / spelling', indicator: 'reading-writing / dyslexia-dysgraphia indicator', reading: true, evidence: 'written_expression' },
+  reading_fluency: { label: 'Reading fluency & decoding', indicator: 'reading / dyslexia-characteristic indicator', reading: true, evidence: 'language_access' },
+  reading_comprehension: { label: 'Reading comprehension (inferential)', indicator: 'comprehension indicator (NVLD/ASD/SLI-associated)', reading: false, evidence: 'language_access' },
+  oral_language_expressive: { label: 'Oral language — expressive', indicator: 'expressive-language / speech-language indicator', reading: false, evidence: 'language_access' },
+  articulation: { label: 'Articulation / speech production', indicator: 'speech-sound / articulation indicator', reading: false, evidence: 'language_access' },
+  auditory_processing: { label: 'Auditory processing (understanding in noise)', indicator: 'auditory-processing / CAPD indicator', reading: false, evidence: 'language_access' },
+  math_reasoning: { label: 'Math reasoning & procedures', indicator: 'math / dyscalculia-characteristic indicator', reading: false, evidence: 'mathematical_reasoning' },
+  visual_spatial: { label: 'Visual-spatial reasoning', indicator: 'visual-spatial indicator (NVLD/dyscalculia-associated)', reading: false, evidence: 'mathematical_reasoning' },
+  executive_function: { label: 'Executive function (planning, initiation, flexibility)', indicator: 'executive-function / ADHD-associated indicator', reading: false, evidence: 'assessment_conditions' },
+  adaptive_cognitive: { label: 'Adaptive & general cognition', indicator: 'broad developmental indicator', reading: false, evidence: 'prerequisite_knowledge' },
+  fine_motor: { label: 'Fine motor', indicator: 'fine-motor indicator', reading: false, evidence: 'written_expression' },
+  gross_motor: { label: 'Gross motor / coordination', indicator: 'motor-coordination / DCD-dyspraxia indicator', reading: false, evidence: 'assessment_conditions' },
+  visual_processing: { label: 'Visual processing', indicator: 'visual-processing indicator', reading: false, evidence: 'written_expression' },
+  social_communication: { label: 'Social communication / pragmatics', indicator: 'social-communication indicator (ASD/NVLD-associated)', reading: false, evidence: 'language_access' },
+  emotional_regulation: { label: 'Emotional / self-regulation', indicator: 'emotional-regulation / anxiety indicator', reading: false, evidence: 'assessment_conditions' },
+  sensory_regulation: { label: 'Sensory processing / regulation', indicator: 'sensory-regulation indicator', reading: false, evidence: 'assessment_conditions' },
+  auditory_acuity: { label: 'Hearing (auditory acuity)', indicator: 'sensory (hearing) indicator — rule out first', reading: false, evidence: 'language_access' },
+  visual_acuity: { label: 'Vision (visual acuity)', indicator: 'sensory (vision) indicator — rule out first', reading: false, evidence: 'written_expression' },
+  advanced_ability: { label: 'Advanced ability / acceleration', indicator: 'ready-to-advance / gifted / 2e signal', reading: false, evidence: 'objective_mastery' },
 };
+
+/** Plain-language label for any screening domain (the app renders this). */
+export function domainLabel(domain: ProcessingDomain): string {
+  return DOMAIN_META[domain]?.label ?? domain;
+}
 
 export interface BaselineOptions {
   readonly gradeBand: GradeBand;
@@ -214,8 +272,10 @@ function signalFor(readiness: number, confidence: number): SignalStrength {
 
 function nextStepsFor(signal: SignalStrength, reading: boolean): NextStep[] {
   if (signal === 'notable') {
-    const base: NextStep[] = ['targeted_intervention', 'specialist_screening_referral', 'family_notification'];
-    return base;
+    // Referral threshold: assemble evidence and hand off to a human team. The engine
+    // *recommends* a formal evaluation (the ESE gateway); it never decides eligibility,
+    // and any evaluation requires informed written parental consent.
+    return ['targeted_intervention', 'specialist_screening_referral', 'recommend_formal_evaluation', 'family_notification'];
   }
   if (signal === 'emerging') {
     // Reading deficiencies trigger immediate intervention + family notification (statute-aligned).

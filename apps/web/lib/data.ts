@@ -24,6 +24,10 @@ import {
   buildStudyGuide,
   lessonFor,
   SURFACE_LABEL,
+  domainLabel,
+  SCREENING_DOMAINS,
+  CROSS_CUTTING_FILTERS,
+  SIGNAL_ROUTING,
   type CompileResult,
   type DeliveryManifest,
   type FinalGrade,
@@ -182,6 +186,23 @@ export function getBaselineTasks() {
 /** The baseline screening profile for one child (screening, never a diagnosis). */
 export function getBaseline() {
   return buildBaselineProfile(SAMPLE_BASELINE, { gradeBand: '3', today: new Date('2026-09-06') });
+}
+
+/** The universal-screening taxonomy the screener is prepared to flag: the domains grouped,
+ * the cross-cutting bias filters, and the signal → next-step routing ladder (the ESE gateway). */
+export function getScreeningReference() {
+  const groups: Record<string, string> = {
+    reading_language: 'Reading & language', math: 'Math & spatial',
+    attention_cognition: 'Attention, memory & executive', motor_visual: 'Motor & visual',
+    social_emotional_sensory: 'Social, emotional & sensory', cross_cutting: 'Cross-cutting',
+  };
+  const byGroup = Object.keys(groups).map((g) => ({
+    group: groups[g]!,
+    domains: SCREENING_DOMAINS.filter((d) => d.group === g).map((d) => ({
+      label: domainLabel(d.domain), implicates: d.implicates,
+    })),
+  }));
+  return { byGroup, filters: CROSS_CUTTING_FILTERS, routing: SIGNAL_ROUTING, domainCount: SCREENING_DOMAINS.length };
 }
 
 /** Prove the wire: feed the baseline result straight into the assign-once compiler and
