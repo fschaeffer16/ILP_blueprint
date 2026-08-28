@@ -5,9 +5,13 @@ A doable, credible program a district can actually run — the operational form 
 nodded at, not bristled at: it asks for a small start, keeps every legally-required human
 decision human, and measures itself honestly.
 
-> **The program's one-sentence thesis:** we can save a percentage of children from ever
-> developing behavior issues — by challenging them in the mainstream instead of locking them
-> down in a classroom where the whole day revolves around redirecting behavior.
+> **The case, in full:** the nonverbal, the semi-verbal, and the just-plain-quiet child — no
+> tantrums, no outbursts — should be **mainstreamed as soon as possible**. Because the behavior
+> problems ESE spends years managing don't appear from nowhere: a percentage of them are **grown,
+> out of frustration** — the frustration of not being heard, and the frustration of sitting in a
+> classroom below the level of your own intelligence, being asked to do basic tasks you mastered
+> long ago. Move the quiet, capable child early, challenge them, and give them a channel to be
+> heard — and that percentage of behavior problems is never born at all.
 
 ---
 
@@ -16,8 +20,15 @@ decision human, and measures itself honestly.
 The child this program exists for: **nonverbal or semi-verbal, on the spectrum or with a
 communication-channel disability, not a danger to themselves or others** — the child whose
 barrier is *how they show what they know*, not behavior. Today that child is often placed by
-default. This program gives their team a real alternative, and gives every other ESE student the
-same meet-them-where-they-are machinery along the way.
+default, and the clock matters: **every month in a room below their level is a month of
+compounding frustration** — unheard, and re-drilled on tasks they already own. That frustration
+is where a percentage of "behavior kids" are made. So the program's bias is **early**: identify
+the quiet capable child fast, and get the placement conversation happening as soon as possible —
+before the behaviors have a chance to form. (ILP makes the under-challenge itself visible: when a
+child's mastery data shows a module was conquered long ago, being asked to repeat it stops
+looking like instruction and starts looking like what it is.) This program gives their team a
+real alternative, and gives every other ESE student the same meet-them-where-they-are machinery
+along the way.
 
 It is **not** a program to empty self-contained classrooms. Some children genuinely need that
 setting, and their teams will keep choosing it. It is a program to make sure nobody lands there

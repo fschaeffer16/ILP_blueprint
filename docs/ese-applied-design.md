@@ -115,9 +115,11 @@ Same standard where possible, same *platform* always.
 
 ## 6. The placement gap — evidence for the least restrictive environment
 
-> **The claim, stated plainly: we can save a percentage of children from ever developing
-> behavior issues — by challenging them in the mainstream instead of locking them down in a
-> classroom where the whole day revolves around redirecting behavior.**
+> **The claim, stated plainly: mainstream the nonverbal, semi-verbal, and just-plain-quiet
+> child — no tantrums, no outbursts — as soon as possible, and a percentage of children never
+> develop behavior issues at all.** Because those behaviors are grown, out of frustration: the
+> frustration of **not being heard**, and the frustration of **sitting in a class below the level
+> of your own intelligence**, asked to do basic tasks you mastered long ago.
 >
 > This is a *prevention* claim, not an accommodation claim, and that is what makes it powerful:
 > the behaviors are treated as an acquired outcome of placement, not a fixed trait of the child.
