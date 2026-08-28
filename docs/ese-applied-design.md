@@ -148,20 +148,12 @@ IEP, and pull-aside instruction can be the difference between an adult on the sp
 without behavior patterns that follow them for life. Environment teaches — that is the entire
 premise of school — and it teaches in self-contained rooms too.
 
-**Follow the money — why the trap persists.** The self-contained default is not only an evidence
-problem; it is a **funding architecture** problem. ESE dollars flow from two streams — federal
-(IDEA Part B) and state — and every state sets its own criteria for how much a child generates.
-The common thread: **higher-support designations generate more money.** In Florida this is
-concrete and already in our research: the **Matrix of Services** rates need across five domains
-into Support Levels 1–5, producing FEFP cost factors (251–255) — and a nonverbal child rated at
-Level 4–5 in a self-contained ASD room generates substantially more revenue than the same child
-mainstreamed with supports. Worse, **many states do not require ESE-generated dollars to be spent
-on ESE** — the money lands in the general budget, so the higher funding a restrictive placement
-generates doesn't even reliably buy that child services. The result is a quiet structural
-incentive: the placement that harms the mis-placed child is the placement that pays the district
-most, and the surplus can vanish into the general fund. Nobody has to intend any of this for it to
-happen. *(State-by-state mechanics vary; verify per state before quoting — the Florida Matrix
-mechanics are sourced in [`ese-iep-track.md`](ese-iep-track.md).)*
+**Background context (not an argument to lead with).** ESE funding formulas — federal IDEA Part B
+plus each state's own system — generally weight higher-support designations more heavily (in
+Florida, the Matrix of Services levels; see [`ese-iep-track.md`](ese-iep-track.md)), and states
+vary in how those dollars are budgeted. This is worth *knowing* only because it means placement
+patterns won't self-correct on their own — but it is background, not the pitch. **No bad faith is
+implied and none is needed**; the program case is made entirely on outcomes for children.
 
 **The lever that gets a child out.** In practice, the mainstreaming question turns on one thing:
 **is this child a danger to themselves or others?** If not — and the parent requests the
@@ -208,21 +200,16 @@ conversation.
    record**: for the child with no incidents, the documented *absence* of danger-to-self-or-others
    is half the mainstreaming lever, and ILP's evidence layer keeps it on the record, not in
    anyone's impression.
-4. **Make the money visible.** ILP cannot rewrite state finance law, but it can end the opacity
-   the incentive hides in. Because every delivered support is logged (which accommodations ran,
-   which pull-aside module sessions happened, which behavior-tech-supported transitions occurred),
-   a district using ILP can show — and a district leader can *demand* — that **the dollars a child
-   generates follow that child visibly**: funding tier on one side, services actually delivered on
-   the other. The same rollup that audits referral disproportionality can audit
-   placement-vs-progress: a self-contained placement that generates Level-4/5 funding while
-   producing flat progress data is a question the dashboard now asks out loud.
+4. **Show the plan being kept.** Every delivered support is logged — which accommodations ran,
+   which pull-aside module sessions happened, which supported transitions occurred — so the IEP
+   team and the family can see, at every review, that **the child received exactly what the plan
+   promised**. Service fidelity, framed for the child, is something every honest educator wants
+   on the record too.
 
-**Honest limits.** ILP cannot diagnose, cannot decide placement, cannot staff a behavior tech,
-and cannot change how a state disburses or ring-fences ESE money — those are human, budget, and
-legislative decisions. What it can do is destroy the evidence vacuum those decisions currently
-hide in, make the inclusive option cheap enough to run that "we can't support him in gen-ed"
-stops being true, and make the money's path visible enough that spending it elsewhere has to be
-defended in daylight.
+**Honest limits.** ILP cannot diagnose, cannot decide placement, and cannot staff a behavior
+tech — those are human and budget decisions. What it can do is destroy the evidence vacuum those
+decisions currently hide in, and make the inclusive option workable enough that "we can't
+support him in gen-ed" stops being true.
 
 ## 7. What this gives each role
 
