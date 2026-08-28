@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ESE State Benchmark</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1E2731; --ink-soft:#54606D; --ink-faint:#8894A2;
+  --line:#E4DFD4; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A;
+  --apricot:#E8843C; --gold:#C98A16;
+  --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4;
+    --apricot:#F0A25A; --gold:#E0B44A;
+    --red:#E27A65; --green:#5FBE86;
+    --tint:#13282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4;
+  --apricot:#F0A25A; --gold:#E0B44A;
+  --red:#E27A65; --green:#5FBE86;
+  --tint:#13282E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0 0 1.05em}
+a{color:var(--teal-deep);text-decoration:none;border-bottom:1px solid rgba(14,143,158,.3)}
+.wrap{max-width:840px;margin:0 auto;padding:0 26px}
+.hero{background:radial-gradient(120% 90% at 88% -10%, rgba(62,154,107,.13), transparent 55%),
+  radial-gradient(110% 90% at 0% 0%, rgba(14,143,158,.15), transparent 52%);border-bottom:1px solid var(--line)}
+.hero .wrap{padding:56px 26px 44px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal-deep);margin-bottom:18px}
+.kicker .mk{width:24px;height:2px;background:var(--apricot)}
+.hero h1{font-size:clamp(32px,5.5vw,52px);font-weight:600;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--teal-deep)}
+.hero .sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);margin-top:18px;max-width:36em;line-height:1.5}
+section{padding:40px 0}
+section+section{border-top:1px solid var(--line-soft)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--apricot);margin-bottom:12px}
+h2{font-size:clamp(23px,3.8vw,31px);font-weight:600;letter-spacing:-.01em;margin-bottom:.55em}
+h3{font-size:18px;font-weight:600;margin:1.2em 0 .3em}
+.lead{font-size:18px;color:var(--ink-soft)}
+strong{color:var(--ink)}
+ul,ol{margin:0 0 1.05em;padding-left:20px}
+li{margin-bottom:8px}
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15.5px}
+.callout b{color:var(--teal-deep)}
+.callout.warn{border-left-color:var(--apricot)}
+.callout.warn b{color:var(--apricot)}
+.pull{margin:26px 0;padding:6px 0 6px 24px;border-left:4px solid var(--apricot);
+  font-family:Fraunces,serif;font-size:clamp(19px,2.7vw,25px);line-height:1.35;font-weight:500}
+.pull span{color:var(--teal-deep)}
+.tblwrap{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+thead th{background:var(--panel);text-align:left;padding:12px 14px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.el{font-weight:700;width:26%}
+td.verdict{width:22%;font-weight:800}
+.v-match{color:var(--green)} .v-strong{color:var(--teal-deep)} .v-novel{color:var(--gold)} .v-soft{color:var(--apricot)}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.stat b{font-family:Fraunces,serif;font-size:22px;color:var(--teal-deep)}
+footer{border-top:1px solid var(--line);padding:28px 0 56px;font-size:13px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker"><span class="mk"></span> ILP · ESE program review · internal</div>
+  <h1>How the thesis stacks up against the <em>best states</em> for ESE</h1>
+  <p class="sub">Which states actually rate highest for special education, what they do differently,
+    and a frank, sourced scorecard of our "meet them where they are" ESE thesis — written for review
+    before we build.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">The headline</div>
+  <h2>You're not fighting best practice. You're describing it — plus one thing nobody measures.</h2>
+  <div class="callout"><b>The most important local finding:</b> Florida already has this program's
+    classroom model <em>in statute</em>. <strong>"Support facilitation"</strong> — an ESE teacher
+    delivering specially designed instruction inside the general-ed room, on the same curriculum —
+    is Florida's own named service-delivery model. In St. Lucie, this program isn't an outside
+    philosophy. It's <em>"run Florida's own model at full strength, with evidence no one has had
+    before."</em></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">How "best" is measured</div>
+  <h2>No official ranking exists — four proxies, and they disagree</h2>
+  <ol>
+    <li><strong>Federal ratings (U.S. DoE, annual).</strong> 20 states earned "Meets Requirements"
+      in the 2026 cycle — <strong>Florida among them</strong>. Only five states have earned it every
+      year since 2014 (Kansas, Massachusetts, Missouri, Pennsylvania, Wisconsin). Measures compliance
+      more than lived quality.</li>
+    <li><strong>Inclusion rates</strong> — % of students with disabilities in regular class 80%+ of
+      the day. National average ~67–68% and rising. <strong>Alabama leads (~83–84%)</strong>;
+      <strong>Vermont</strong> tops a 2025 fifty-state index; <strong>New Jersey is the most
+      restrictive (~44.6%)</strong> with the heaviest separate-school use in the country.</li>
+    <li><strong>Outcomes</strong> — test scores and graduation rates for students with disabilities
+      (graduation ~70.6% nationally and rising; Florida among the fastest improvers).</li>
+    <li><strong>Third-party indexes</strong> — a 2025 index ranks Vermont #1, North Carolina #2, Maine #3.</li>
+  </ol>
+  <div class="callout warn"><b>The proxies conflict — and that's the lesson.</b> Alabama is #1 on
+    inclusion with middling outcomes; New Jersey is the most segregated yet rates "Meets
+    Requirements" with strong graduation numbers. Inclusion, compliance, and outcomes are three
+    different things — which is exactly why a program that honestly measures <em>its own outcomes</em>
+    stands apart.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Florida's position</div>
+  <h2>Better than you'd guess</h2>
+  <div class="stat"><b>Meets Requirements</b> — 2026 federal determination.</div>
+  <div class="stat"><b>Top-tier inclusion</b> — roughly top 5–10 nationally: ~75–78% of ESE students
+    in regular class 80%+ of the week.</div>
+  <div class="stat"><b>Support facilitation</b> — the in-room, same-curriculum ESE support model is
+    Florida's own, in statute and course codes.</div>
+  <div class="stat"><b>Funding doesn't reward restrictive placement</b> — Florida's Matrix of
+    Services weights by a student's service intensity, not by placement setting.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">What the top states do differently</div>
+  <h2>Five moves, all familiar</h2>
+  <ul>
+    <li><strong>They operationalize the gen-ed presumption.</strong> Alabama built statewide
+      co-teaching demonstration sites; research confirms placement is driven by <em>beliefs and
+      district policy</em>, not student characteristics — so presumption genuinely moves placement.</li>
+    <li><strong>MTSS in general education as the chassis</strong> (the SWIFT framework — Vermont,
+      Maryland, New Hampshire, Oregon, Mississippi). The same architecture ILP is built on.</li>
+    <li><strong>In-class support models</strong> — co-teaching nationally; support facilitation in Florida.</li>
+    <li><strong>Early identification and preschool inclusion</strong>, with gains that persist —
+      backing the program's "as soon as possible" bias.</li>
+    <li><strong>Funding designed not to reward segregation</strong> (Vermont's 2018 reform; Florida's
+      intensity-based Matrix). Nuance: funding design alone doesn't produce inclusion — New Jersey
+      proves it.</li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The scorecard</div>
+  <h2>Our thesis vs. the evidence</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Thesis element</th><th>Verdict</th><th>Grounding</th></tr></thead>
+    <tbody>
+      <tr><td class="el">Mainstream early; presume gen-ed</td><td class="verdict v-match">Matches best practice</td><td>Alabama's inclusion machinery; Vermont/SWIFT; federal early-inclusion policy and preschool research.</td></tr>
+      <tr><td class="el">Pull-aside support on the <em>same</em> curriculum</td><td class="verdict v-match">Matches — Florida names this model</td><td>FL support facilitation; a 2025 meta-analysis shows <em>supported</em>-inclusion interventions produce large effects.</td></tr>
+      <tr><td class="el">A communication channel (AAC) as behavior prevention</td><td class="verdict v-strong">Strongest-evidenced plank</td><td>Functional Communication Training is one of the best-replicated findings in the behavioral literature — give the child a channel, challenging behavior drops. Meta-analyses show <strong>larger effects in younger children</strong>: direct backing for "as soon as possible."</td></tr>
+      <tr><td class="el">Nonverbal / semi-verbal kids are the right target group</td><td class="verdict v-match">Solid</td><td>Communication impairment is a leading predictor of the very behaviors the program aims to prevent.</td></tr>
+      <tr><td class="el">Frustration from mismatched instruction drives behavior</td><td class="verdict v-match">Well-supported, one nuance</td><td>Task mismatch produces escape behavior; fixing it reduces behavior. Nuance: <em>too-hard</em> is better evidenced than <em>too-easy</em> — the bulletproof wording is "mismatched to the learner, in either direction." (ILP uniquely makes the too-easy case <em>visible</em> via mastery data.)</td></tr>
+      <tr><td class="el">Peer models require inclusion</td><td class="verdict v-match">Solid</td><td>Peer-mediated interventions improve social communication for children with ASD — and peer models only exist where peers are.</td></tr>
+      <tr><td class="el">"A % of behavior problems are acquired — and preventable"</td><td class="verdict v-novel">Credible, unquantified, genuinely novel</td><td>Prevention studies show behavior emergence <em>can</em> be prevented in controlled settings. <strong>No state and no study measures this at scale. Nobody.</strong> Framed as the hypothesis the pilot tests, it's the program's research contribution.</td></tr>
+      <tr><td class="el">Segregated rooms breed behavior (mimicry)</td><td class="verdict v-soft">Suggestive — state as risk, not fact</td><td>Peer-contagion research is robust for aggregated at-risk groups (documented from age 5); not yet demonstrated for self-contained ASD/ID rooms specifically.</td></tr>
+      <tr><td class="el">Presume competence</td><td class="verdict v-soft">Right instinct — use the careful version</td><td>Anchor to the "least dangerous assumption" (when uncertain, the costlier error is assuming inability) <em>plus</em> individualized AAC assessment. Avoid implying every nonverbal child hides grade-level ability.</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Recommended adjustments · your call</div>
+  <h2>Four nuances the program should absorb</h2>
+  <ol>
+    <li><strong>Supported inclusion, never bare placement.</strong> The evidence backs inclusion
+      <em>with</em> the behavior tech, the channel, and the facilitation. Placement alone guarantees
+      nothing — keep the supports attached to every claim.</li>
+    <li><strong>Mismatch cuts both ways.</strong> Broaden "below their intelligence" to "mismatched
+      to the learner — in either direction." Claims both the well-evidenced too-hard case and the
+      too-easy case that ILP makes visible.</li>
+    <li><strong>Inclusion ≠ outcomes automatically</strong> (the Alabama / New Jersey paradox).
+      The program's answer is its honest self-measurement.</li>
+    <li><strong>Presume competence, assessed.</strong> The least-dangerous-assumption decision rule,
+      paired with individualized AAC assessment.</li>
+  </ol>
+  <div class="pull">Keep the percentage a hypothesis, keep the supports attached — and this program
+    is defensible in front of <span>any ESE director in the country.</span></div>
+</div></section>
+
+<footer><div class="wrap">
+  <p><strong>Verification notes:</strong> exact state inclusion rankings beyond Alabama/Vermont/New Jersey/Florida
+    were cross-checked against secondary sources; confirm against the raw federal IDEA §618 state tables
+    (data.ed.gov) before any formal presentation. Key figures as reported: Alabama ~83–84% and NJ ~44.6% on the
+    80%+ measure; Florida ~75–78%; national ~67–68%.</p>
+  <p>Principal sources: U.S. DoE OSEP 2026 determinations · GAO-26-107814 · IDEA §618 state data · Annual Disability
+    Statistics Compendium · Disability Rights Florida &amp; Florida Inclusion Network (support facilitation) ·
+    FDOE Matrix of Services · NCSI Alabama spotlight · SWIFT Center · Vermont Act 173 · FCT/AAC meta-analyses
+    (Carr &amp; Durand lineage; Walker &amp; Snell 2013; 2025 Behav. Sci. meta-analysis) · McClintock et al. 2003 ·
+    Dunlap et al. curricular-revision studies · Cosier et al. 2013 · Agran et al. 2020 · peer-mediated-intervention
+    reviews · Hanley Preschool Life Skills · Fahmie et al. 2016 · Dishion &amp; Dodge peer-contagion literature ·
+    Kim et al. 2025 supported-inclusion meta-analysis. Full URL list in the repo:
+    <span style="font-family:monospace">docs/ese-state-benchmark.md</span>.</p>
+  <p style="font-style:italic">Internal review document for ILP program design. Verify figures against primary
+    sources before formal use. All program claims remain subject to specialist co-design.</p>
+</div></footer>
+
+<button id="__ttoggle" aria-label="Toggle light or dark mode" style="position:fixed;top:14px;right:14px;z-index:99999;font:700 12px/1 -apple-system,'Segoe UI',Roboto,sans-serif;cursor:pointer;border:1px solid rgba(128,128,128,.4);background:rgba(150,150,150,.16);color:inherit;border-radius:8px;padding:7px 11px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">&#9790; Dark</button>
+<script>(function(){var b=document.getElementById('__ttoggle'),r=document.documentElement,K='ilp-theme';
+function d(){var a=r.getAttribute('data-theme');if(a==='dark')return true;if(a==='light')return false;try{return matchMedia('(prefers-color-scheme: dark)').matches}catch(e){return false}}
+function L(){b.innerHTML=d()?'&#9728; Light':'&#9790; Dark'}
+function A(t){if(t==='light'||t==='dark')r.setAttribute('data-theme',t);else r.removeAttribute('data-theme');L()}
+try{var s=localStorage.getItem(K);if(s)A(s)}catch(e){}L();
+b.addEventListener('click',function(){var n=d()?'light':'dark';A(n);try{localStorage.setItem(K,n)}catch(e){}})})();</script>
+</body>
+</html>
