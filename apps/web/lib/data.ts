@@ -113,8 +113,10 @@ export function getKindergartenShowcase() {
     (o) => o.objectiveId === EARLY_K_ASSIGNMENT.objectiveVersionRefs[0]?.objectiveId,
   )!;
   const catalog = buildCatalog(EARLY_K_LIBRARY);
+  let disclaimer = '';
   const students = EARLY_K_STUDENTS.map((st) => {
     const profile = buildBaselineProfile(st.baseline, { gradeBand: 'K', today: new Date('2026-09-01') });
+    disclaimer = profile.disclaimer;
     const ilp = studentILPFromBaseline(profile, st.name);
     const result = compileAssignment({
       assignment: EARLY_K_ASSIGNMENT,
@@ -124,9 +126,16 @@ export function getKindergartenShowcase() {
       today: new Date('2026-09-01'),
     });
     const growthAreas = profile.ilpHypotheses.map((h) => ({ domain: h.domain, readiness: h.readiness }));
-    return { studentId: st.studentId, name: st.name, blurb: st.blurb, manifest: result.manifests[0] ?? null, growthAreas };
+    const indicators = profile.indicators.map((i) => ({
+      signal: i.signal, indicatorType: i.indicatorType, plainLanguage: i.plainLanguage, nextSteps: i.nextSteps,
+    }));
+    return {
+      studentId: st.studentId, name: st.name, blurb: st.blurb,
+      manifest: result.manifests[0] ?? null, growthAreas,
+      indicators, familyNotification: profile.familyNotification,
+    };
   });
-  return { objective, allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, students };
+  return { objective, allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, students, disclaimer };
 }
 
 export function getStandardsCoverage() {
