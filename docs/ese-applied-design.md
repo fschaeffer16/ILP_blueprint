@@ -113,7 +113,61 @@ these students to separate "special" software; ILP's position is that **belongin
 accommodation too** — the delivery adapts inside a shared world, it doesn't build a separate one.
 Same standard where possible, same *platform* always.
 
-## 6. What this gives each role
+## 6. The placement gap — evidence for the least restrictive environment
+
+The largest failure in ESE today is not inside any classroom. It is the decision about **which
+classroom** — and the thin evidence that decision runs on.
+
+**How the gap opens.** Many children on the spectrum are identified at ages 2–4; many others slip
+through — never screened, families unaware, or **misdiagnosed across the ASD/ADHD boundary in
+either direction** (the two overlap heavily on attention, executive function, and regulation, and
+masking hides many children, especially girls). The universal K-entry baseline is the catch-net
+for the never-screened, and the taxonomy deliberately models the overlapping domains — a
+social-communication + sensory-regulation cluster routes differently than an attention-only
+pattern, toward *evaluation*, never assumption.
+
+**The self-contained trap.** A nonverbal or semi-verbal child who cannot show what they know on
+the usual channels is routinely presumed unable to learn grade-level content, and placed in an
+ASD self-contained classroom — often alongside children whose primary need is intensive behavior
+support. For the child whose need was a *communication channel*, not behavior support, two
+predictable outcomes follow: they **mimic the outbursts** that visibly command the adults'
+attention, or they **retreat into a shell** to get away from it all. Either way, the placement
+*manufactures* the profile it assumed. The same child mainstreamed with a behavior tech, a strong
+IEP, and pull-aside instruction can be the difference between an adult on the spectrum with or
+without behavior patterns that follow them for life. Environment teaches — that is the entire
+premise of school — and it teaches in self-contained rooms too.
+
+**The law already presumes what this child needs.** LRE (34 CFR §300.114) requires education with
+non-disabled peers *to the maximum extent appropriate, with supplementary aids and services* —
+removal is legal only when general-ed placement **with supports** cannot work. In practice the
+presumption gets inverted for nonverbal children because nobody can produce evidence of what they
+know. **That evidence is exactly what ILP produces.**
+
+**ILP's three answers:**
+
+1. **Prove what they know.** AAC-channel mastery evidence on the *same* Learning Objectives as
+   peers — timestamped, per-module, prompt-level honest. The IEP-meeting conversation changes
+   from "we believe he's not ready for gen-ed" to *"he mastered 14 grade-level Learning
+   Objectives this quarter through his AAC device — on what evidence is a self-contained room the
+   least restrictive environment?"* The platform arms the family and the team; it never makes the
+   placement decision, which is and must remain the team's.
+2. **Make the mainstream placement workable.** The reason districts default to self-contained is
+   logistics: gen-ed teachers can't hand-build an AAC child's materials. ILP removes that excuse —
+   the compiler carries the IEP into every assignment automatically, the behavior tech / support
+   facilitator sees the child's plan and today board, and **pull-aside instruction is the module
+   system itself**: the resource session works the same module chain as the classroom, so pull-out
+   never becomes a parallel curriculum.
+3. **Keep the placement defended.** Continuous per-module progress in the mainstream setting is
+   the standing answer to every "maybe he'd be better off in the self-contained room"
+   reconsideration. The IEP-meeting evidence packet (build step 6) includes placement-relevant
+   evidence: mastery by setting, independence trend, supports actually used.
+
+**Honest limits.** ILP cannot diagnose, cannot decide placement, and cannot staff a behavior
+tech — those are human and budget decisions. What it can do is destroy the evidence vacuum those
+decisions currently hide in, and make the inclusive option cheap enough to run that "we can't
+support him in gen-ed" stops being true.
+
+## 7. What this gives each role
 
 - **Teacher:** assign once still means assign once — the compiler carries every IEP accommodation
   automatically, and per-goal progress data writes itself. The half-day-per-week of ESE paperwork
@@ -125,7 +179,7 @@ Same standard where possible, same *platform* always.
   referral rates against the disproportionality guardrails (3.00 risk ratio, 1% alternate cap).
 - **The student:** the right door into the same room as everyone else.
 
-## 7. Build sequence (proposed, in order)
+## 8. Build sequence (proposed, in order)
 
 Each step is contained, testable, and demo-able; specialist co-design remains the gate before any
 of this is presented as pilot-ready.
@@ -148,7 +202,7 @@ of this is presented as pilot-ready.
 6. **Progress export** — the per-goal evidence packet formatted for the compliance system of
    record (EdPlan/PowerSchool/Focus) and the IEP meeting.
 
-## 8. Guardrails (standing, from the research — restated as build constraints)
+## 9. Guardrails (standing, from the research — restated as build constraints)
 
 - The engine **screens and recommends; humans diagnose, decide eligibility, and authorize
   modifications.** No exceptions, enforced in types.
