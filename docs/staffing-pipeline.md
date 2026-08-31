@@ -34,12 +34,18 @@ Compiled August 2026; items marked *confirm* need a phone call, not more researc
   program's status under the BACB's new Pathway 2 attestation system that replaced the old
   verified-course-sequence system on 1/1/2026.*)
 - **Existing St. Lucie placements** (above) and **FAU CARD Port St. Lucie** — free autism
-  consultation and teacher/para PD on paper. **Reality check from local family experience:
-  CARD has been around for years and has done little visible work in this district's
-  schools.** Treat it as an entity to be *activated*, not assumed: a written agreement with
-  named deliverables (X training sessions, Y consult hours per semester), logged on the
-  program's service-fidelity record — the same standard as every other provider. If it won't
-  commit to deliverables, leave it out of the plan.
+  consultation and teacher/para PD on paper. **Reality check, independently verified:** no
+  documented CARD program activity in St. Lucie schools could be found (district PD calendars
+  and training pages don't reference it), and the capacity math explains why — FAU CARD
+  reports 3,500+ registered constituents across five counties on a legislative appropriation
+  historically in the ~$700K/year range, with a single staff member working from the Port St.
+  Lucie office *while also covering Martin and Okeechobee counties*. The statewide CARD model
+  is resource-and-referral with consultation on request, not embedded school service. This
+  matches local family experience: years of presence on paper, little visible work in this
+  district's schools. So treat CARD as an entity to be *activated*, not assumed: a written
+  agreement with named deliverables (X training sessions, Y consult hours per semester),
+  logged on the program's service-fidelity record — the same standard as every other
+  provider. If it won't commit to deliverables, leave it out of the plan.
 - Note: FAU's physical Treasure Coast education campus closed in 2012; its presence here is the
   placement network + CARD, and the ABA master's is online — which suits working locals.
 
