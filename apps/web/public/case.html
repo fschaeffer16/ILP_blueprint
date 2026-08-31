@@ -280,8 +280,30 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
     </section>
 
     <!-- 8 -->
+    <section class="step">
+      <div class="ey"><span class="n">08</span> Outside resources</div>
+      <h2 class="q">You don't fund this alone.<br>The <em>outside resources</em> are waiting.</h2>
+      <p class="sub">Trained staffing and pilot money are the two objections every district raises.
+        Both have outside answers ready to use: local colleges whose students <b>must</b> log supervised
+        classroom hours to graduate, and funders who pay districts to try teaching techniques and
+        record the data.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">1,500+</div><div class="l">Supervised fieldwork hours every behavior-analyst trainee must log — district classrooms can be the approved site. FAU already places student teachers in St. Lucie (and its autism center has a Port St. Lucie office); IRSC trains ESE teachers in Fort Pierce; Keiser's Port St. Lucie campus adds behavioral-health trainees</div></div>
+        <div class="stat"><div class="n">$1M</div><div class="l">Federal ED/IES SBIR Phase II pays for a full school-based pilot evaluation; the Spencer Foundation adds up to $400K for a district–university research partnership</div></div>
+        <div class="stat"><div class="n">$0</div><div class="l">What Florida's Para-to-Teacher and teacher-apprenticeship programs cost the district — the state pays tuition for working paras to become certified ESE teachers</div></div>
+      </div>
+      <div class="note"><b>And it can start without winning a single competition:</b> federal ESSA rules let
+        existing funds pay for an intervention precisely by committing to evaluate it — the evaluation is what
+        ILP does natively — and IDEA lets up to 15% of the district&rsquo;s allocation fund early supports in general
+        education. Local money — the Children&rsquo;s Services Council of St. Lucie County — already funds
+        school-success programs in this exact county.
+        <a href="https://ilp-blueprint-web.vercel.app/staffing-and-funding.html" target="_blank" rel="noopener">The full staffing &amp; funding research →</a></div>
+      <div class="glue">The ask isn&rsquo;t &ldquo;buy software.&rdquo; <span>It&rsquo;s &ldquo;anchor a partnership outside money wants to fund.&rdquo;</span></div>
+    </section>
+
+    <!-- 9 -->
     <section class="step ask">
-      <div class="ey"><span class="n">08</span> The ask</div>
+      <div class="ey"><span class="n">09</span> The ask</div>
       <p class="disp">Not a district-wide purchase.<br>One grade. <em>Built by your teachers.</em></p>
       <p class="sub">A contained pilot on synthetic data, teachers in full control — the first grade of the transition, not another tool bolted next to the others. When it works, it starts replacing the reasons you needed them.</p>
       <div class="ctas">
@@ -307,7 +329,7 @@ h2.q em{font-style:italic;color:var(--teal-deep)}
   var dotsWrap = document.getElementById('dots');
   var prev = document.getElementById('prev'), next = document.getElementById('next'), hint = document.getElementById('hint');
   var i = 0;
-  var labels = ['Vision','Today','The gap','ILP','Head to head','Traceable','Why here','The ask'];
+  var labels = ['Vision','Today','The gap','ILP','Head to head','Traceable','Why here','Resources','The ask'];
   steps.forEach(function(s,idx){
     var b=document.createElement('button'); b.className='dot'+(idx===0?' on':''); b.title=labels[idx]||('Step '+(idx+1));
     b.setAttribute('aria-label',b.title); b.addEventListener('click',function(){go(idx);}); dotsWrap.appendChild(b);

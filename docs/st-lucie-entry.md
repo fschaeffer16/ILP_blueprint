@@ -58,6 +58,32 @@ before existing managed devices are audited; a final special-education/IEP solut
 | School leaders | Which classrooms, schedules, training windows and outcome measures are feasible? |
 | Families/students | What consent, transparency, take-home, accessibility and support expectations must be met? |
 
+## Outside resources available to utilize
+
+The proposal does not ask the district to carry staffing or pilot costs alone. Two researched
+tracks — [`staffing-pipeline.md`](staffing-pipeline.md) and
+[`research-funding.md`](research-funding.md), digest at
+[/staffing-and-funding.html](https://ilp-blueprint-web.vercel.app/staffing-and-funding.html) —
+identify outside resources that are available now:
+
+| Resource | What it provides |
+| --- | --- |
+| **FAU College of Education** | Already places student teachers in St. Lucie (15-week internships); expandable into ESE / support-facilitation placements. Its online ABA master's students need BCBA fieldwork sites — 1,500–2,000 supervised hours each — that district classrooms can supply |
+| **FAU CARD (Port St. Lucie office)** | Free autism consultation and teacher/para professional development, serving this county today |
+| **Indian River State College** | B.S. Exceptional Student Education and Elementary Ed with required field placements, in Fort Pierce; a candidate site for a joint grow-your-own teacher-apprenticeship application |
+| **Keiser University (Port St. Lucie)** | Behavioral-health master's and psychology practicum students needing supervised hours |
+| **Florida tuition programs** | UWF Para-to-Teacher and the PCOG-GYO apprenticeship pay tuition for working paras to become certified ESE teachers — at no district cost |
+| **RBT grow-your-own** | A sponsored 40-hour training certifies district paras as registered behavior technicians, a role Florida schools already recognize |
+| **Grant funding** | Ranked paths: ED/IES SBIR ($250K → $1M school-based pilot evaluation, paid to the platform company), Spencer Foundation research-practice partnership (up to $400K), IES/NCSER special-education research ($2M+ ceiling, watch fall 2026), OAR ($50K, autism-specific) |
+| **Local funders** | Children's Services Council of St. Lucie County (school-success programs with mandatory outcome measurement), Community Foundation Martin–St. Lucie, St. Lucie Education Foundation |
+| **No-competition bridges** | ESSA Tier-4 evidence flexibility (existing funds pay for an intervention by committing to evaluate it) and IDEA voluntary early-intervening funds (up to 15% of the district's allocation for supports in general education) |
+
+The winning structure is a **triad — district + university + platform**: the university brings
+the researcher, research oversight, and the intern pipeline; the district brings the classrooms
+and the question; ILP brings the delivery and the data. Items flagged in the source documents
+(current agreement statuses, program lists, live grant deadlines) must be confirmed directly
+before any presentation names specifics.
+
 ## The ask
 
 > Authorize a joint **discovery and prototype-validation** phase — not a districtwide

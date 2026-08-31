@@ -146,7 +146,9 @@ the district's system of record, the support-facilitator view, per-setting progr
 parent-facing plain-language process guide — and above all, **Phase 0 itself**: none of this is
 pilot-ready until the specialists have shaped it. Costs the district must still own: the humans —
 the behavior tech, the ESE staffing, the specialist time. The program makes those investments
-work; it does not replace them.
+work; it does not replace them. But the district doesn't carry them alone: local-college intern
+pipelines and grant funding are mapped in [`staffing-pipeline.md`](staffing-pipeline.md) and
+[`research-funding.md`](research-funding.md).
 
 ---
 
