@@ -1,10 +1,12 @@
 # The ESE device plan: phone-first, on purpose
 
 Part of the ["Meet Them Where They Are" ESE Program](ese-program.md). ILP runs on a computer
-and an iPad — and for the ESE student's school day, **the primary device is a phone**: a
-large-screen (Pro Max-class) handset, district-purchased refurbished, locked down by the
-district, with ILP loaded on it. This document is the plan and the reasoning, including the
-Florida phone-law analysis a superintendent will ask for on the spot.
+and an iPad — and **for ESE students 12 and older**, the primary device for the school day is
+a phone: a large-screen (Pro Max-class) handset, district-purchased refurbished, locked down
+by the district, with ILP loaded on it. **Students under 12 stay on iPads and computers** —
+the phone plan is a middle-and-high-school plan, matched to the age when a phone in hand is
+what every peer carries. This document is the plan and the reasoning, including the Florida
+phone-law analysis a superintendent will ask for on the spot.
 
 > **The one-sentence why:** a support that lives in a backpack is a support that isn't there.
 > The ESE day is won and lost in the in-between — the bus loop, the hallway, the cafeteria,
@@ -117,10 +119,11 @@ conversation: this is a school tool and a voice, not a phone plan.
 
 ## 6. Rollout gates (mirrors the program's phases)
 
-1. **Phase 0 (co-design):** SLPs/AAC specialists confirm phone-first fits each pilot child's
-   motor/vision profile — for some children a larger screen or dedicated AAC device is the
-   right call, and the plan yields to the IEP every time. Phone-first is the default, not a
-   mandate: *the device, like everything else, meets the child where they are.*
+1. **Phase 0 (co-design):** the plan applies to students **12 and older**; for each of them,
+   SLPs/AAC specialists confirm phone-first fits the student's motor/vision profile — for
+   some a larger screen or dedicated AAC device is the right call, and the plan yields to
+   the IEP every time. Phone-first is the default for 12+, not a mandate: *the device, like
+   everything else, meets the child where they are.*
 2. **Phase 1:** demo the full phone day on synthetic students (installable app already live).
 3. **Phase 2 pilot:** a device-per-child cohort with MDM lockdown, IEP language in place,
    counsel sign-off on the HB 1105 analysis, and breakage/replacement logistics tested.
