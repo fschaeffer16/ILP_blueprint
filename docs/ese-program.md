@@ -106,6 +106,28 @@ separate room except 25 intentional minutes.
 | **ESE director** | Program integrity, compliance, staffing | Per-goal evidence, service-fidelity logs, and export to the IEP system of record |
 | **The family** | The other half of every decision | Plain-language progress between meetings, and plain-language explanation of the process and their seat at the table |
 
+**The outside bench — because in ESE, "where they are" includes who they need beside them.**
+General education has a fixed structure to adapt; ESE has far less. Each child's plan is
+effectively its own curriculum of supports, and what a child needs is often a *person or
+service* the school doesn't have on staff — a behavior tech for transitions, an AAC-fluent
+specialist, an evaluator, a second trained adult in the inclusion room. So this program treats
+the outside network as a first-class program resource, not background logistics: when a
+child's plan calls for a support, the program should know **which outside entity supplies it
+and how it gets paid for.** The researched bench, matched to the needs it meets:
+
+| When a plan calls for… | The outside entity that supplies it |
+| --- | --- |
+| Autism consultation; teacher/para training | **FAU CARD's Port St. Lucie office** — free, serving this county today |
+| A second trained adult in the inclusion room | **FAU / IRSC teacher candidates** on required field placements; **FAU / Keiser behavior-analyst trainees** logging their 1,500–2,000 supervised fieldwork hours ([`staffing-pipeline.md`](staffing-pipeline.md)) |
+| Behavior-tech coverage from existing staff | **District paras certified as RBTs** via a sponsored 40-hour training, with state Para-to-Teacher / apprenticeship money paying tuition for the ones who go further |
+| Analyst-level behavior work (FBAs, behavior plans, data systems) | The **required "unrestricted hours"** BCBA trainees must log anyway — real work the district needs, delivered as fieldwork |
+| Money to run and measure the pilot | The ranked funders in [`research-funding.md`](research-funding.md), plus the **Children's Services Council of St. Lucie County** for family-engagement wraparound — and the no-competition ESSA/IDEA bridges to start now |
+| The research partner the measurement needs | The same university relationship — one partnership covers the interns, the principal investigator, and the research oversight |
+
+ILP's job in this: the child's plan already drives the software; it should also *name the
+humans and services attached to it*, so service fidelity — supports delivered exactly as
+promised — is on the record for outside providers the same as for district staff.
+
 ## 6. How it rolls out (small, gated, credible)
 
 - **Phase 0 — Co-design (before any child).** ESE teachers, SLPs, OTs, AAC specialists, and
@@ -143,7 +165,9 @@ acknowledge-to-clear communication.
 
 **Still to build:** prompt-level capture in mastery records, the IEP import/export interfaces to
 the district's system of record, the support-facilitator view, per-setting progress views, the
-parent-facing plain-language process guide — and above all, **Phase 0 itself**: none of this is
+parent-facing plain-language process guide, the **outside-resource directory** (a child's plan
+calls for a support → the program knows which outside entity supplies it and which funding
+source pays for it, per §5's outside bench) — and above all, **Phase 0 itself**: none of this is
 pilot-ready until the specialists have shaped it. Costs the district must still own: the humans —
 the behavior tech, the ESE staffing, the specialist time. The program makes those investments
 work; it does not replace them. But the district doesn't carry them alone: local-college intern
