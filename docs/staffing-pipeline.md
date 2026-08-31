@@ -15,7 +15,9 @@ Compiled August 2026; items marked *confirm* need a phone call, not more researc
 > student-teaching internship in those districts. The agreements, placement office, and clinical
 > procedures already exist — the ask is *expansion into ESE and ABA placements*, not creation.
 > And **FAU CARD (Center for Autism and Related Disabilities) has an office in Port St. Lucie**
-> serving this exact county, providing free professional development to teachers.
+> offering free professional development to teachers — though see the reality check in §1A:
+> its local school footprint has been thin, so it is a resource to activate with written
+> deliverables, not to assume.
 
 ---
 
@@ -32,7 +34,12 @@ Compiled August 2026; items marked *confirm* need a phone call, not more researc
   program's status under the BACB's new Pathway 2 attestation system that replaced the old
   verified-course-sequence system on 1/1/2026.*)
 - **Existing St. Lucie placements** (above) and **FAU CARD Port St. Lucie** — free autism
-  consultation and teacher/para PD, likely needing no board action at all.
+  consultation and teacher/para PD on paper. **Reality check from local family experience:
+  CARD has been around for years and has done little visible work in this district's
+  schools.** Treat it as an entity to be *activated*, not assumed: a written agreement with
+  named deliverables (X training sessions, Y consult hours per semester), logged on the
+  program's service-fidelity record — the same standard as every other provider. If it won't
+  commit to deliverables, leave it out of the plan.
 - Note: FAU's physical Treasure Coast education campus closed in 2012; its presence here is the
   placement network + CARD, and the ABA master's is online — which suits working locals.
 
@@ -150,7 +157,7 @@ St. Lucie is the kind of gap-filler that report was written to provoke.
 | **Extend the existing FAU relationship** | FAU Office for School Engagement | A target number of ESE / support-facilitation placements, plus an **ABA fieldwork-site addendum** naming St. Lucie an approved site for FAU M.Ed.-ABA students, with designated BCBA supervision |
 | **Clinical-placement MOU** | IRSC | ESE and Elementary Ed field placements prioritized into inclusion classrooms; joint **PCOG-GYO apprenticeship application** for district paras |
 | **Practicum + fieldwork MOU** | Keiser Port St. Lucie | Psychology / M.S. Behavioral Health practicum students, plus **OTA clinical-fieldwork placements** under the district's supervising OTs |
-| **Service relationship (likely no board action)** | FAU CARD Port St. Lucie | Free teacher/para professional development and autism consultation |
+| **Deliverables agreement (not a handshake)** | FAU CARD Port St. Lucie | Teacher/para PD and autism consultation — but only under named, scheduled deliverables tracked like any provider's; its local school track record is thin (§1A) |
 
 **Who does what in the classroom:**
 - *Teacher-prep candidates (FAU/IRSC):* early field experiences → practica → the 15-week

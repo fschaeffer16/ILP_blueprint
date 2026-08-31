@@ -69,7 +69,7 @@ identify outside resources that are available now:
 | Resource | What it provides |
 | --- | --- |
 | **FAU College of Education** | Already places student teachers in St. Lucie (15-week internships); expandable into ESE / support-facilitation placements. Its online ABA master's students need BCBA fieldwork sites — 1,500–2,000 supervised hours each — that district classrooms can supply |
-| **FAU CARD (Port St. Lucie office)** | Free autism consultation and teacher/para professional development, serving this county today |
+| **FAU CARD (Port St. Lucie office)** | Free autism consultation and teacher/para PD — on paper; its visible footprint in local schools has been thin, so engage it only under a written deliverables agreement |
 | **Indian River State College** | B.S. Exceptional Student Education and Elementary Ed with required field placements, in Fort Pierce; a candidate site for a joint grow-your-own teacher-apprenticeship application |
 | **Keiser University (Port St. Lucie)** | Behavioral-health master's and psychology practicum students needing supervised hours; an accredited occupational-therapy-assistant degree whose students need clinical fieldwork placements |
 | **Therapy-assistant pipelines** | Florida-licensed speech-language pathology assistants (one SLP may supervise up to two full-time) and OTAs/PTAs extend the reach of the therapists the district already employs — more hands on deck without more headcount |
