@@ -95,6 +95,13 @@ the parent app that evening and sees what he mastered, at what independence leve
 this day required his teacher to build special materials, and nothing about it happened in a
 separate room except 25 intentional minutes.
 
+And the device carrying his whole day — the schedule, the assignment, his AAC channel, the
+line to his support tech — is deliberately **a phone in his pocket, not a tablet in his
+backpack**: always present in the transitions where the day is won, and invisible in a
+hallway full of teenagers holding phones. The full device plan (including the Florida
+phone-law analysis and the refurbished-hardware math) is
+[`ese-device-strategy.md`](ese-device-strategy.md).
+
 ## 5. Roles (and what ILP does for each)
 
 | Role | Their job in the program | What ILP handles |
