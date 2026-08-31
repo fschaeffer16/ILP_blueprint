@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staffing &amp; Funding the Pilot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --card:#FFFFFF; --panel:#FBF9F4; --ink:#1E2731; --ink-soft:#54606D; --ink-faint:#8894A2;
+  --line:#E4DFD4; --line-soft:#EFEBE1;
+  --teal:#0E8F9E; --teal-deep:#0A6E7A;
+  --apricot:#E8843C; --gold:#C98A16;
+  --red:#C4503A; --green:#3E9A6B;
+  --tint:#E9F3F3;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme:dark){
+    --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+    --line:#28323D; --line-soft:#212B34;
+    --teal:#3FC3D2; --teal-deep:#2CA6B4;
+    --apricot:#F0A25A; --gold:#E0B44A;
+    --red:#E27A65; --green:#5FBE86;
+    --tint:#13282E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151B; --card:#171F27; --panel:#141B22; --ink:#EBEFF3; --ink-soft:#A2AEBA; --ink-faint:#71808E;
+  --line:#28323D; --line-soft:#212B34;
+  --teal:#3FC3D2; --teal-deep:#2CA6B4;
+  --apricot:#F0A25A; --gold:#E0B44A;
+  --red:#E27A65; --green:#5FBE86;
+  --tint:#13282E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16.5px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0 0 1.05em}
+a{color:var(--teal-deep);text-decoration:none;border-bottom:1px solid rgba(14,143,158,.3)}
+.wrap{max-width:840px;margin:0 auto;padding:0 26px}
+.hero{background:radial-gradient(120% 90% at 88% -10%, rgba(62,154,107,.13), transparent 55%),
+  radial-gradient(110% 90% at 0% 0%, rgba(14,143,158,.15), transparent 52%);border-bottom:1px solid var(--line)}
+.hero .wrap{padding:56px 26px 44px}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal-deep);margin-bottom:18px}
+.kicker .mk{width:24px;height:2px;background:var(--apricot)}
+.hero h1{font-size:clamp(32px,5.5vw,52px);font-weight:600;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--teal-deep)}
+.hero .sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-soft);margin-top:18px;max-width:36em;line-height:1.5}
+section{padding:40px 0}
+section+section{border-top:1px solid var(--line-soft)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--apricot);margin-bottom:12px}
+h2{font-size:clamp(23px,3.8vw,31px);font-weight:600;letter-spacing:-.01em;margin-bottom:.55em}
+h3{font-size:18px;font-weight:600;margin:1.2em 0 .3em}
+.lead{font-size:18px;color:var(--ink-soft)}
+strong{color:var(--ink)}
+ul,ol{margin:0 0 1.05em;padding-left:20px}
+li{margin-bottom:8px}
+.callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:16px 20px;margin:20px 0;font-size:15.5px}
+.callout b{color:var(--teal-deep)}
+.callout.warn{border-left-color:var(--apricot)}
+.callout.warn b{color:var(--apricot)}
+.pull{margin:26px 0;padding:6px 0 6px 24px;border-left:4px solid var(--apricot);
+  font-family:Fraunces,serif;font-size:clamp(19px,2.7vw,25px);line-height:1.35;font-weight:500}
+.pull span{color:var(--teal-deep)}
+.tblwrap{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+thead th{background:var(--panel);text-align:left;padding:12px 14px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.el{font-weight:700;width:30%}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.stat b{font-family:Fraunces,serif;font-size:22px;color:var(--teal-deep)}
+.num{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;
+  background:var(--tint);color:var(--teal-deep);font-weight:800;font-size:14px;margin-right:8px}
+footer{border-top:1px solid var(--line);padding:28px 0 56px;font-size:13px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kicker"><span class="mk"></span> ILP · pilot logistics · internal</div>
+  <h1>Staffing it and <em>funding it</em>: the two questions that answer each other</h1>
+  <p class="sub">Can local colleges supply trained hands in exchange for intern hours? Can grant
+    money pay for trying teaching techniques and recording the data? Both answers are yes — and
+    the same university partnership unlocks both. Research digest, August 2026.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="eyebrow">The headline</div>
+  <h2>The machinery mostly already exists</h2>
+  <div class="callout"><b>FAU already places student teachers in St. Lucie.</b> FAU's College of
+    Education lists a current placement relationship with the St. Lucie district (among six),
+    including the 15-week full-time student-teaching internship. And <strong>FAU CARD — its
+    Center for Autism and Related Disabilities — has an office in Port St. Lucie</strong> serving
+    this exact county, with free professional development for teachers. The partnership ask is
+    <em>expansion into ESE and behavior-analyst placements</em>, not creation from scratch.</div>
+  <div class="pull">Intern hours are the one labor supply that <span>renews itself every
+    semester</span> — and arrives pre-supervised.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Question 1 · Staffing</div>
+  <h2>The currency is real: hours students must log anyway</h2>
+  <ul>
+    <li><strong>Teacher candidates</strong> (FAU ESE &amp; Elementary Ed; IRSC's B.S. in
+      Exceptional Student Education and Elementary Ed, right in Fort Pierce) must complete
+      supervised field placements and a full-time internship to graduate. Florida law even gives
+      properly assigned student teachers the same legal protections as certified educators.</li>
+    <li><strong>Behavior-analyst trainees</strong> must log <strong>1,500–2,000 supervised
+      fieldwork hours</strong> to sit for the BCBA exam — and certification rules explicitly
+      allow those hours to accrue in schools, including on the job for district-employed paras
+      enrolled in a program. FAU runs a fully online ABA master's whose students need exactly
+      these community fieldwork sites; Keiser's Port St. Lucie campus adds behavioral-health
+      master's and psychology students needing practicum hours.</li>
+    <li><strong>Grow-your-own for district paras:</strong> a sponsored 40-hour training makes a
+      para a certified <strong>RBT</strong> (registered behavior technician — already a
+      recognized role in Florida schools); state programs (UWF Para-to-Teacher, the PCOG-GYO
+      apprenticeship) pay tuition for working paras to become ESE teachers.
+      <strong>IRSC isn't on the apprenticeship recipient list yet — a joint district + IRSC
+      application is the obvious move.</strong></li>
+  </ul>
+  <div class="callout warn"><b>The legal checklist is routine and precedented:</b> Level&nbsp;2
+    fingerprint screening for every placed student (Jessica Lunsford Act), a board-approved
+    affiliation agreement (Lee and Pasco counties' signed MOUs are public templates), Clinical
+    Educator Training for the cooperating teachers, and a designated BCBA supervisor for the
+    behavior-analyst trainees. No new law needed anywhere.</div>
+  <h3>What each side gets</h3>
+  <p>Students and paras get required hours, free or cheap credentials, and hiring priority. The
+    district gets a continuous supply of screened, supervised, trained adults in inclusion
+    classrooms — the exact staffing the ESE program's mainstream day depends on. The colleges get
+    guaranteed placement capacity, their binding constraint. <strong>Nobody writes a big
+    check.</strong></p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Question 2 · Funding</div>
+  <h2>Yes — and the pilot is shaped like what funders pay for</h2>
+  <p class="lead">The program's own research question — <em>does early supported inclusion
+    prevent a percentage of acquired behavior problems?</em> — is a genuine, unanswered
+    question, and the platform is the data-collection instrument no prior study has had.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Ranked path</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td class="el"><span class="num">1</span>ED/IES SBIR</td>
+        <td>Federal money paid <strong>directly to the ed-tech company</strong>: $250K to add/validate
+        the ESE module, then <strong>$1M over 2 years</strong> for a full school-based pilot evaluation —
+        the district is the site, not the applicant. Operating now; annual spring cycle.</td></tr>
+      <tr><td class="el"><span class="num">2</span>Spencer Foundation RPP grant</td>
+        <td>Up to <strong>$400K / 3 years</strong>, purpose-built for a district–university partnership
+        studying a locally defined problem. Our question is a textbook fit. Annual cycle.</td></tr>
+      <tr><td class="el"><span class="num">3</span>Federal special-ed research (IES/NCSER)</td>
+        <td>The highest ceiling (<strong>~$2M–$3.8M</strong>) and the best scientific home — but the
+        agency is only now restarting after 2025 cuts; watch the fall 2026 announcements. Hedge:
+        the same design fits NIH's behavior/communication lanes.</td></tr>
+      <tr><td class="el"><span class="num">4</span>Fund year one now: OAR + local</td>
+        <td>Organization for Autism Research applied-research grants (<strong>$50K</strong>, autism-specific,
+        fast) + the <strong>Children's Services Council of St. Lucie County</strong> — a local taxing
+        district that funds school-success programs in this exact county and demands the outcome
+        measurement this pilot is built around.</td></tr>
+      <tr><td class="el"><span class="num">5</span>Second wave</td>
+        <td>OSEP "Stepping-Up" technology implementation (~$500K/yr) once the pilot has evidence;
+        NSF's K-12 program if framed on adaptive STEM learning with AI.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b>And two no-competition bridges let the district start immediately:</b>
+    ESSA's Tier-4 evidence flexibility lets existing formula funds pay for an intervention
+    <em>precisely by committing to evaluate it</em> — the evaluation is what ILP does natively —
+    and IDEA lets up to 15% of the district's allocation fund early supports for
+    not-yet-identified students in general education: a direct statutory hook for prevention.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Why they interlock</div>
+  <h2>One partnership, both problems</h2>
+  <p>The winning grant structure is a <strong>triad: the platform + a university partner + the
+    district</strong>. The university supplies the principal investigator, the research oversight
+    (IRB), and — through the placement pipeline above — the trained hands in classrooms. The
+    district supplies the site and the question. The platform supplies the delivery and the data.
+    So the ask to a superintendent is not "buy software." It is: <em>join a district + university
+    + platform pilot that outside money wants to fund, that can begin under flexibility you
+    already have, and that answers a question no district has ever been able to measure.</em></p>
+  <div class="stat"><b>Confirm by phone before naming specifics:</b><br>
+    IRSC placement-agreement status and hour counts · Keiser Port St. Lucie's exact program
+    list · FAU/Keiser ABA programs' current BCBA-pathway status · whether the district employs
+    BCBAs today · every grant deadline against the live solicitation.</div>
+</div></section>
+
+<footer><div class="wrap">
+  Research digest, compiled August 2026. Full sourced documents in the repository:
+  <em>staffing-pipeline.md</em> and <em>research-funding.md</em> (docs folder). Figures and dates
+  reflect the most recent published cycles; verify against primary sources before formal use.
+</div></footer>
+</body>
+</html>
