@@ -108,9 +108,11 @@ separate room except 25 intentional minutes.
 
 **The outside bench — because in ESE, "where they are" includes who they need beside them.**
 General education has a fixed structure to adapt; ESE has far less. Each child's plan is
-effectively its own curriculum of supports, and what a child needs is often a *person or
-service* the school doesn't have on staff — a behavior tech for transitions, an AAC-fluent
-specialist, an evaluator, a second trained adult in the inclusion room. So this program treats
+effectively its own curriculum of supports, and what a child needs is often a *person*. Districts
+already staff the clinical core — SLPs and OTs delivering IEP service minutes are in-house
+(they're in the roles table above). The gap is everything around them: the behavior tech for
+transitions, the second trained adult who makes the inclusion room workable, coverage that
+keeps a mainstream placement from failing for lack of hands. So this program treats
 the outside network as a first-class program resource, not background logistics: when a
 child's plan calls for a support, the program should know **which outside entity supplies it
 and how it gets paid for.** The researched bench, matched to the needs it meets:
