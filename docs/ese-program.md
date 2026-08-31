@@ -109,19 +109,25 @@ separate room except 25 intentional minutes.
 **The outside bench — because in ESE, "where they are" includes who they need beside them.**
 General education has a fixed structure to adapt; ESE has far less. Each child's plan is
 effectively its own curriculum of supports, and what a child needs is often a *person*. Districts
-already staff the clinical core — SLPs and OTs delivering IEP service minutes are in-house
-(they're in the roles table above). The gap is everything around them: the behavior tech for
-transitions, the second trained adult who makes the inclusion room workable, coverage that
-keeps a mainstream placement from failing for lack of hands. So this program treats
+already staff the clinical core — SLPs and OTs delivering IEP service minutes are in-house —
+and St. Lucie already **contracts with outside agencies for behavior-tech services** (three
+different companies today), the very model that has kept one semi-verbal 11th-grader in this
+district successfully mainstreamed for years. So the outside bench is not about filling a
+void. It is about the program's operating principle for the mainstream day: **the more hands
+on deck, the better.** More trained adults in the inclusion classroom, and more assistant-level
+hands extending the reach of the therapists the district already employs. This program treats
 the outside network as a first-class program resource, not background logistics: when a
 child's plan calls for a support, the program should know **which outside entity supplies it
 and how it gets paid for.** The researched bench, matched to the needs it meets:
 
 | When a plan calls for… | The outside entity that supplies it |
 | --- | --- |
+| Behavior-tech service for transitions, lunch, regulation | **The contracted agencies the district already uses** (three companies today) — ILP's job is to put their service on the child's plan and the service-fidelity record, same as district staff |
 | Autism consultation; teacher/para training | **FAU CARD's Port St. Lucie office** — free, serving this county today |
-| A second trained adult in the inclusion room | **FAU / IRSC teacher candidates** on required field placements; **FAU / Keiser behavior-analyst trainees** logging their 1,500–2,000 supervised fieldwork hours ([`staffing-pipeline.md`](staffing-pipeline.md)) |
-| Behavior-tech coverage from existing staff | **District paras certified as RBTs** via a sponsored 40-hour training, with state Para-to-Teacher / apprenticeship money paying tuition for the ones who go further |
+| More trained adults in the inclusion classroom | **FAU / IRSC teacher candidates** on required field placements; **FAU / Keiser behavior-analyst trainees** logging their 1,500–2,000 supervised fieldwork hours ([`staffing-pipeline.md`](staffing-pipeline.md)) |
+| More hands behind the district's OTs | **Keiser Port St. Lucie's accredited occupational-therapy-assistant (OTA) degree** requires in-person clinical fieldwork — placements the district can host, and certified OTAs work under the OTs already on staff |
+| More hands behind the district's speech therapists | **Florida-licensed speech-language pathology assistants (SLPAs)** — one SLP may supervise up to two full-time assistants, extending every district SLP's reach; SLPA candidates need supervised clinical experience. (IRSC's physical-therapist-assistant program follows the same pattern where an IEP includes PT) |
+| Growing coverage from existing staff | **District paras certified as RBTs** via a sponsored 40-hour training, with state Para-to-Teacher / apprenticeship money paying tuition for the ones who go further |
 | Analyst-level behavior work (FBAs, behavior plans, data systems) | The **required "unrestricted hours"** BCBA trainees must log anyway — real work the district needs, delivered as fieldwork |
 | Money to run and measure the pilot | The ranked funders in [`research-funding.md`](research-funding.md), plus the **Children's Services Council of St. Lucie County** for family-engagement wraparound — and the no-competition ESSA/IDEA bridges to start now |
 | The research partner the measurement needs | The same university relationship — one partnership covers the interns, the principal investigator, and the research oversight |

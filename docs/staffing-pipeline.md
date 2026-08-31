@@ -59,6 +59,11 @@ Compiled August 2026; items marked *confirm* need a phone call, not more researc
   Psychology students (ABA concentration exists at some campuses) needing experience. Not a
   teacher-prep pipeline; an MOU here would be new and smaller. (*Confirm: the Port St. Lucie
   campus's exact program list and the behavioral programs' current BCBA-pathway status.*)
+- **Verified addition: Keiser runs an ACOTE-accredited A.S. in Occupational Therapy Assistant
+  at multiple Florida campuses including Port St. Lucie** — two years, with required in-person
+  clinical fieldwork, leading to national certification (NBCOT) and state licensure. OTA
+  students need fieldwork placements; school-based practice is a recognized OTA setting. This
+  is a direct local pipeline for hands behind the district's own occupational therapists.
 
 ## 2. The credential mechanics (why intern-hours-for-classroom-time works)
 
@@ -80,6 +85,23 @@ Keiser's) program can log fieldwork *on the job*, if a qualified BCBA supervises
 a formal process for an agency to become an approved fieldwork site hosting master's students
 at ~20 hours/week — the model to copy. (*Confirm: whether St. Lucie currently employs any
 BCBAs; if not, supervision is contracted from the university side — a standard arrangement.*)
+
+**Therapy-assistant pipelines — more hands behind the therapists the district already
+employs.** The district's clinical core (SLPs, OTs) is in-house, and its behavior-tech service
+is already contracted to outside agencies (three companies today, per district experience —
+*confirm names and contract terms in discovery*). The "more hands on deck" play is
+assistant-level extension of that core:
+- **OTA (occupational therapy assistant):** Keiser Port St. Lucie's accredited program (above)
+  requires clinical fieldwork; certified OTAs then work under supervising OTs — each district
+  OT's caseload reach grows.
+- **SLPA (speech-language pathology assistant):** **Florida licenses SLPAs**, with a licensed
+  SLP permitted to supervise **up to two full-time (or three part-time) assistants** who screen,
+  administer assessment tools and therapy activities, prepare materials, and document — under
+  direct supervision (the SLP in the same facility). Every district SLP can double their hands
+  without doubling their headcount, and SLPA candidates need supervised clinical experience.
+  (*Confirm: which local programs feed SLPA licensure, and district SLP supervision capacity.*)
+- **PTA (physical therapist assistant):** **IRSC runs an accredited A.S. PTA program** in Fort
+  Pierce — the same pattern where an IEP includes physical therapy as a related service.
 
 **Statewide context that strengthens the grant case:** the Florida Developmental Disabilities
 Council's 2023 report documents the behavior-therapist shortage — 34 approved 40-hour training
@@ -127,7 +149,7 @@ St. Lucie is the kind of gap-filler that report was written to provoke.
 | --- | --- | --- |
 | **Extend the existing FAU relationship** | FAU Office for School Engagement | A target number of ESE / support-facilitation placements, plus an **ABA fieldwork-site addendum** naming St. Lucie an approved site for FAU M.Ed.-ABA students, with designated BCBA supervision |
 | **Clinical-placement MOU** | IRSC | ESE and Elementary Ed field placements prioritized into inclusion classrooms; joint **PCOG-GYO apprenticeship application** for district paras |
-| **Smaller practicum MOU** | Keiser Port St. Lucie | Psychology / M.S. Behavioral Health practicum students |
+| **Practicum + fieldwork MOU** | Keiser Port St. Lucie | Psychology / M.S. Behavioral Health practicum students, plus **OTA clinical-fieldwork placements** under the district's supervising OTs |
 | **Service relationship (likely no board action)** | FAU CARD Port St. Lucie | Free teacher/para professional development and autism consultation |
 
 **Who does what in the classroom:**
@@ -157,8 +179,10 @@ university partnership is the research partner the funding paths in
 [`research-funding.md`](research-funding.md) require — one relationship, both problems.
 
 **Items to confirm by phone before any pitch names specifics:** IRSC hour counts and current
-St. Lucie agreement status; Keiser Port St. Lucie's program list; FAU/Keiser ABA programs'
-current BCBA-pathway attestation status; whether the district employs BCBAs today.
+St. Lucie agreement status; Keiser Port St. Lucie's program list and OTA fieldwork-placement
+process; FAU/Keiser ABA programs' current BCBA-pathway attestation status; whether the district
+employs BCBAs today; the names and terms of the district's three contracted behavior-service
+agencies; district SLP capacity to supervise licensed SLPAs; local SLPA-feeding programs.
 
 ---
 
@@ -169,7 +193,11 @@ experience), ESE degree pages, M.Ed. ABA concentration + program preview PDF, CA
 UPressOnline (2012 Treasure Coast campus closure). **IRSC:** irsc.edu teacher-education program
 page; IRSC catalog (B.S. ESE); NCTQ student-teaching standard documentation; stlucie.k12.fl.us
 dual enrollment. **Keiser:** keiseruniversity.edu campuses, Port St. Lucie, M.S. Behavioral
-Health, education programs; onlineabaprograms.org directory. **BACB/ABA mechanics:** bacb.com
+Health, education programs, occupational-therapy-assistant A.S. page + program-disclosure PDF;
+onlineabaprograms.org and otaflorida.com directories. **Therapy assistants:** ASHA Florida
+state-information page; Florida SLPA licensure guides (speechpathologistprograms.com); FLDOE
+technical-assistance paper on speech-language assistants in schools; irsc.edu
+physical-therapist-assistant program page. **BACB/ABA mechanics:** bacb.com
 (supervised-fieldwork FAQs; RBT 40-hour curriculum + competency-assessment PDFs; university
 training pages); thebehavioracademy.com, abaresourcecenter.com, appliedbehavioranalysisedu.org
 (fieldwork/RBT summaries; VCS-sunset explainer); USF ABA practicum/fieldwork-site pages;

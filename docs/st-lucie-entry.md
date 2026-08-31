@@ -71,7 +71,8 @@ identify outside resources that are available now:
 | **FAU College of Education** | Already places student teachers in St. Lucie (15-week internships); expandable into ESE / support-facilitation placements. Its online ABA master's students need BCBA fieldwork sites — 1,500–2,000 supervised hours each — that district classrooms can supply |
 | **FAU CARD (Port St. Lucie office)** | Free autism consultation and teacher/para professional development, serving this county today |
 | **Indian River State College** | B.S. Exceptional Student Education and Elementary Ed with required field placements, in Fort Pierce; a candidate site for a joint grow-your-own teacher-apprenticeship application |
-| **Keiser University (Port St. Lucie)** | Behavioral-health master's and psychology practicum students needing supervised hours |
+| **Keiser University (Port St. Lucie)** | Behavioral-health master's and psychology practicum students needing supervised hours; an accredited occupational-therapy-assistant degree whose students need clinical fieldwork placements |
+| **Therapy-assistant pipelines** | Florida-licensed speech-language pathology assistants (one SLP may supervise up to two full-time) and OTAs/PTAs extend the reach of the therapists the district already employs — more hands on deck without more headcount |
 | **Florida tuition programs** | UWF Para-to-Teacher and the PCOG-GYO apprenticeship pay tuition for working paras to become certified ESE teachers — at no district cost |
 | **RBT grow-your-own** | A sponsored 40-hour training certifies district paras as registered behavior technicians, a role Florida schools already recognize |
 | **Grant funding** | Ranked paths: ED/IES SBIR ($250K → $1M school-based pilot evaluation, paid to the platform company), Spencer Foundation research-practice partnership (up to $400K), IES/NCSER special-education research ($2M+ ceiling, watch fall 2026), OAR ($50K, autism-specific) |
