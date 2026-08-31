@@ -54,10 +54,11 @@ law — it does the opposite of blocking this plan:
   and for documented medical need. The exact population this program serves is the population
   the legislature exempted — a child's AAC/communication device belongs in the IEP, which
   makes the exemption airtight and individual.
-- A **district-purchased, MDM-supervised, locked-down device is district instructional
-  technology** that happens to have a phone's shape — not the student's personal phone the
-  law regulates. It has no personal apps, no social media, no open browser, and communicates
-  only through ILP's moderated, verified channels.
+- A **district-purchased, dedicated device is district instructional technology** that
+  happens to have a phone's shape — not the student's personal phone the law regulates.
+  Whether the school holds it to ILP via Guided Access or complete MDM lockdown (§3, their
+  choice), it has no personal apps, no social media, no open browser, and communicates only
+  through ILP's moderated, verified channels.
 - Bonus: the district-issued device gives administrators a *cleaner* story than today's,
   where an ESE student's personal phone doubles as their AAC — the plan separates "the
   child's voice and schoolwork" (district device, always allowed, on the IEP) from "a
@@ -76,9 +77,16 @@ IEP/504 language naming the device as the student's communication/instructional 
   web-app manifest, so *Add to Home Screen* puts the ILP icon on the phone and opens it
   full-screen with no browser chrome. On a district-managed device, MDM places that web clip
   on every home screen automatically — no App Store account, no per-device fiddling.
-- **Lockdown for assessments:** managed devices support single-app/guided modes, so a quiz
-  or exam can run with the device held to ILP alone — the same integrity story as any
-  testing device, in the child's pocket-sized form factor.
+- **These are dedicated devices — the school chooses how to lock them.** The phone is an ILP
+  device, period; it is never a general-purpose phone. Two proven routes get there, and the
+  choice belongs to the school/district, not to us:
+  - **Guided Access** — the built-in iOS feature: the device is pinned to ILP, exits require
+    a staff passcode. Zero extra infrastructure; a teacher can set it up in a minute.
+  - **Complete lockdown (MDM Single App Mode / restricted supervision)** — the district's MDM
+    holds the device to ILP centrally: survives restarts, nothing can be exited on-device,
+    managed at fleet scale.
+  Either way the outcome is identical — a dedicated device — and assessments inherit the same
+  integrity story: a quiz or exam runs with the device held to ILP alone.
 - **In the deployed district build** (on district servers, per the deployment plan), the
   same PWA gains offline caching for the day's assignments and the AAC symbol set — the bus
   ride and the dead-zone hallway don't take the child's voice away.
