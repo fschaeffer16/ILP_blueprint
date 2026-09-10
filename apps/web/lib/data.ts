@@ -96,6 +96,14 @@ import {
   MIDDLE_6_PERIOD1,
   MIDDLE_6_PERIOD4,
   MIDDLE_6_STUDENTS,
+  HIGH_9_LIBRARY,
+  HIGH_9_OBJECTIVES,
+  HIGH_9_STUDENTS,
+  ALG1_ASSIGNMENT,
+  ALG1_EOC_CHECK,
+  ALG1_EOC_RESPONSES,
+  ALG1_EOC_ROSTER,
+  ALG1_MODULES,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -215,6 +223,64 @@ export function getMiddleGradesShowcase() {
     };
   });
   return { allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, periods };
+}
+
+/**
+ * The grade-9 showcase: Algebra 1 as a graduation-stakes course. Three students
+ * compiled live on the linear-equations objective (Dre's IEP riding along), and
+ * the EOC practice check run through the real module analysis with auto
+ * remediation.
+ */
+export function getHighSchoolShowcase() {
+  const catalog = buildCatalog(HIGH_9_LIBRARY);
+  const adaptationById = new Map(SAMPLE_ADAPTATIONS.map((a) => [a.id, a]));
+  const students = HIGH_9_STUDENTS.map((st) => {
+    const profile = buildBaselineProfile(st.baseline, { gradeBand: '9', today: new Date('2026-09-01') });
+    const ilp = studentILPFromBaseline(profile, st.name);
+    const constraints = st.plan ? iepToConstraints(st.plan) : {};
+    const result = compileAssignment({
+      assignment: { ...ALG1_ASSIGNMENT, teacherConstraints: constraints },
+      objectives: HIGH_9_OBJECTIVES,
+      roster: [ilp],
+      adaptationCatalog: SAMPLE_ADAPTATIONS,
+      today: new Date('2026-09-01'),
+    });
+    const m = result.manifests[0] ?? null;
+    return {
+      name: st.name,
+      blurb: st.blurb,
+      pattern: m?.pattern ?? 'core',
+      objectiveModified: m?.objectiveModified ?? false,
+      applied: (m?.appliedAdaptationIds ?? []).map((id) => ({
+        id,
+        label: adaptationById.get(id)?.label ?? id,
+        fromPlan: !!st.plan?.accommodations.some((acc) => acc.adaptationId === id),
+      })),
+    };
+  });
+  const analysis = analyzeExam(ALG1_EOC_CHECK, ALG1_EOC_RESPONSES, ALG1_EOC_ROSTER, ALG1_MODULES);
+  const cls = analysis.classScopes[0]!;
+  return {
+    allValid: catalog.summary.allValid,
+    objectiveCount: catalog.summary.objectives,
+    classLabel: ALG1_ASSIGNMENT.classId,
+    objective: HIGH_9_OBJECTIVES.find((o) => o.objectiveId === 'A1.AR.01')!,
+    students,
+    eoc: {
+      title: ALG1_EOC_CHECK.title,
+      studentCount: analysis.studentCount,
+      overallPct: cls.overallPct,
+      byModule: cls.byModule,
+      remediationQueue: analysis.remediationQueue.map((r) => ({
+        studentName: r.studentName,
+        moduleId: r.moduleId,
+        title: r.title,
+        correctPct: r.correctPct,
+        reteachLessonId: r.reteachLessonId,
+        retakeCount: r.retakeQuestionIds.length,
+      })),
+    },
+  };
 }
 
 export function getStandardsCoverage() {
