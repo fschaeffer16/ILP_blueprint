@@ -30,6 +30,8 @@ import {
   INDEPENDENCE_WEIGHT,
   validateIEPGoal,
   goalProgressFrom,
+  buildFacilitatorDay,
+  incidentFreeStreak,
   renderSymbolItem,
   scoreSymbolResponse,
   PROMPT_LEVELS,
@@ -85,6 +87,10 @@ import {
   ESE_INDEPENDENCE_ATTEMPTS,
   INDEPENDENCE_STORIES,
   ESE_IEP_GOALS,
+  LEO_DAY_PLAN,
+  LEO_SERVICE_LOGS,
+  SCHOOL_DAYS,
+  SAMPLE_INCIDENTS,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -321,6 +327,37 @@ export function getIndependence() {
     );
     return { name: s.name, scaffold: s.scaffold, note: s.note, trend, attempts };
   });
+}
+
+/**
+ * IEP build, step 5: the support facilitator's day — Leo's day plan merged with
+ * the service log, fidelity computed by the engine, incident-free streak live.
+ */
+export function getFacilitatorDay() {
+  const adaptationById = new Map(SAMPLE_ADAPTATIONS.map((a) => [a.id, a.label]));
+  const today = buildFacilitatorDay('E-LEO', LEO_DAY_PLAN, LEO_SERVICE_LOGS, '2026-09-09');
+  const yesterday = buildFacilitatorDay('E-LEO', LEO_DAY_PLAN, LEO_SERVICE_LOGS, '2026-09-08');
+  const missedYesterday = yesterday.items.find((i) => i.status === 'missed') ?? null;
+  return {
+    studentName: 'Leo',
+    date: today.date,
+    items: today.items.map((i) => ({
+      taskId: i.task.taskId,
+      time: i.task.time,
+      block: i.task.block,
+      title: i.task.title,
+      detail: i.task.detail,
+      supports: i.task.planAccommodationIds.map((id) => adaptationById.get(id) ?? id),
+      status: i.status,
+      note: i.note ?? null,
+    })),
+    fidelity: today.fidelity,
+    yesterdayFidelity: yesterday.fidelity,
+    missedYesterday: missedYesterday
+      ? { title: missedYesterday.task.title, note: missedYesterday.note ?? '' }
+      : null,
+    incidentFreeDays: incidentFreeStreak('E-LEO', SCHOOL_DAYS, SAMPLE_INCIDENTS),
+  };
 }
 
 /**

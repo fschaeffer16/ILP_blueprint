@@ -25,6 +25,7 @@ export * from './ese.js';
 export * from './symbolResponse.js';
 export * from './independence.js';
 export * from './iepGoals.js';
+export * from './facilitator.js';
 export * from './library.js';
 export * from './collaboration.js';
 export * from './student.js';

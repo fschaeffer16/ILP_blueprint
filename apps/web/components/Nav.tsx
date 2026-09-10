@@ -19,6 +19,7 @@ const LINKS = [
   { href: '/early-grades', label: 'Kindergarten' },
   { href: '/ese', label: 'ESE' },
   { href: '/iep', label: 'IEP plan' },
+  { href: '/facilitator', label: 'Facilitator' },
   { href: '/messages', label: 'Parent messages' },
   { href: '/parent', label: 'Parent app' },
   { href: '/student', label: 'Student app' },

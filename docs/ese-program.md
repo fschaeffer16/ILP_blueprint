@@ -182,8 +182,15 @@ surfaces fade-semantics mismatches — step 2), fade-vs-permanent support semant
 system that makes pull-aside the same curriculum, the screening taxonomy with human-routed
 referral, and the family app with acknowledge-to-clear communication.
 
-**Still to build:** prompt-level capture in mastery records, the IEP import/export interfaces to
-the district's system of record, the support-facilitator view, per-setting progress views, the
+**Also built since (IEP build steps 3–5, live at `/ese`, `/iep`, `/facilitator`):**
+prompt-level evidence and the independence trend (support measured, never a grade discount;
+fade conversations earned from data), IEP goals as module chains (progress accrues from
+everyday instruction; criteria name their prompt level), and the support-facilitator view
+(the child's day as logged promises — service fidelity grades the adults, incident-free days
+accrue on the record).
+
+**Still to build:** the IEP import/export interfaces to
+the district's system of record, per-setting progress views, the
 parent-facing plain-language process guide, the **outside-resource directory** (a child's plan
 calls for a support → the program knows which outside entity supplies it and which funding
 source pays for it, per §5's outside bench) — and above all, **Phase 0 itself**: none of this is
