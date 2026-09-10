@@ -293,6 +293,29 @@ export function getEseShowcase() {
 }
 
 /**
+ * IEP build, step 2: the plan-builder screen's server data — the adaptation
+ * catalog with fade semantics, seeded with Leo's documented plan.
+ */
+export function getIepBuilder() {
+  const leo = ESE_SHOWCASE_STUDENTS.find((s) => s.name === 'Leo');
+  const seed: Record<string, { planText: string; kind: 'access' | 'support' }> = {};
+  for (const acc of leo?.plan?.accommodations ?? []) {
+    seed[acc.adaptationId] = { planText: acc.planText, kind: acc.kind };
+  }
+  return {
+    seedName: leo?.name ?? 'Leo',
+    seed,
+    catalog: SAMPLE_ADAPTATIONS.map((a) => ({
+      id: a.id,
+      label: a.label,
+      adaptationClass: a.adaptationClass,
+      fadeRule: a.fadeRule,
+      permittedChange: a.permittedChange,
+    })),
+  };
+}
+
+/**
  * IEP build, step 1: the picture-response item, computed live. The same approved
  * compare-fractions question rendered two ways — text for the class, tappable
  * picture buttons for the AAC student — with every possible tap pre-scored by the

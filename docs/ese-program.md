@@ -172,11 +172,15 @@ promised — is on the record for outside providers the same as for district sta
 
 ## 8. Honest status — what exists today vs. what this program still needs
 
-**Already built and demonstrable** (live at `/ese`): the IEP-as-live-input compiler (forced +
-excluded accommodations), the AAC/alternate-response channel as full mastery evidence on the
-same objectives, fade-vs-permanent support semantics, the module system that makes pull-aside
-the same curriculum, the screening taxonomy with human-routed referral, and the family app with
-acknowledge-to-clear communication.
+**Already built and demonstrable** (live at `/ese` and `/iep`): the IEP-as-live-input compiler
+(forced + excluded accommodations), the AAC/alternate-response channel as full mastery evidence
+on the same objectives, **picture-response items** (the same approved question answered by
+tapping picture buttons, scored by the same rule, tagged with channel + prompt level + module —
+IEP build step 1), **the IEP plan screen with its validation gate** (the team enters the plan
+once in its own wording; the gate blocks objective modifications in the accommodation lane and
+surfaces fade-semantics mismatches — step 2), fade-vs-permanent support semantics, the module
+system that makes pull-aside the same curriculum, the screening taxonomy with human-routed
+referral, and the family app with acknowledge-to-clear communication.
 
 **Still to build:** prompt-level capture in mastery records, the IEP import/export interfaces to
 the district's system of record, the support-facilitator view, per-setting progress views, the
