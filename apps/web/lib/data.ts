@@ -26,6 +26,8 @@ import {
   SURFACE_LABEL,
   domainLabel,
   iepToConstraints,
+  buildIndependenceTrend,
+  INDEPENDENCE_WEIGHT,
   renderSymbolItem,
   scoreSymbolResponse,
   PROMPT_LEVELS,
@@ -78,6 +80,8 @@ import {
   FRACTION_SYMBOLS,
   SYMBOL_DEMO_ITEM,
   LIBRARY_OBJECTIVES,
+  ESE_INDEPENDENCE_ATTEMPTS,
+  INDEPENDENCE_STORIES,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -290,6 +294,30 @@ export function getEseShowcase() {
     };
   });
   return { objective, students, accessPoints: ESE_ACCESS_POINTS_STUDENT };
+}
+
+/**
+ * IEP build, step 3: prompt-level evidence → the independence trend, computed
+ * live from the synthetic attempt log for three ESE students on module M2.
+ */
+export function getIndependence() {
+  return INDEPENDENCE_STORIES.map((s) => {
+    const trend = buildIndependenceTrend(ESE_INDEPENDENCE_ATTEMPTS, {
+      studentId: s.studentId,
+      objectiveId: 'M3.NF.02',
+      moduleId: 'M2',
+    });
+    const attempts = ESE_INDEPENDENCE_ATTEMPTS.filter((a) => a.studentId === s.studentId).map(
+      (a) => ({
+        date: a.date,
+        correct: a.correct,
+        promptLevel: a.promptLevel,
+        responseChannel: a.responseChannel,
+        weight: INDEPENDENCE_WEIGHT[a.promptLevel],
+      }),
+    );
+    return { name: s.name, scaffold: s.scaffold, note: s.note, trend, attempts };
+  });
 }
 
 /**

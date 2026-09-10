@@ -1,12 +1,14 @@
 import Link from 'next/link';
-import { getEseShowcase, getPictureResponse } from '../../lib/data';
+import { getEseShowcase, getPictureResponse, getIndependence } from '../../lib/data';
 import { PatternBadge } from '../../components/ui';
 import { PictureResponse } from '../../components/PictureResponse';
+import { IndependenceTrends } from '../../components/IndependenceTrends';
 import type { DeliveryPattern } from '@ilp/core';
 
 export default function EsePage() {
   const s = getEseShowcase();
   const pr = getPictureResponse();
+  const ind = getIndependence();
 
   return (
     <>
@@ -104,6 +106,16 @@ export default function EsePage() {
         hasn’t passed the integrity gate (<span className="mono">renderSymbolItem</span> /{' '}
         <span className="mono">scoreSymbolResponse</span>, test-pinned).
       </p>
+
+      <h2 style={{ marginTop: 26 }}>The independence trend — support, measured</h2>
+      <p className="lede" style={{ fontSize: '1rem' }}>
+        Step 3: every attempt is tagged with the help the adult noted — independent, gestural prompt,
+        modeled, or full support. Two rules keep it honest: <strong>prompt level never changes
+        correctness</strong> (a supported right answer is still right), and the trend is{' '}
+        <strong>evidence for the team, never a decision</strong>. Scaffolds earn their fade
+        conversation from data; access channels are exempt by construction — they never fade.
+      </p>
+      <IndependenceTrends rows={ind} />
 
       <div className="banner" style={{ marginTop: 18 }}>
         <span className="ic">🤝</span>
