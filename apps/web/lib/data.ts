@@ -91,6 +91,11 @@ import {
   LEO_SERVICE_LOGS,
   SCHOOL_DAYS,
   SAMPLE_INCIDENTS,
+  MIDDLE_6_LIBRARY,
+  MIDDLE_6_OBJECTIVES,
+  MIDDLE_6_PERIOD1,
+  MIDDLE_6_PERIOD4,
+  MIDDLE_6_STUDENTS,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -162,6 +167,54 @@ export function getKindergartenShowcase() {
     };
   });
   return { objective, allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, students, disclaimer };
+}
+
+/**
+ * The grade-6 departmentalized showcase: two periods, two teachers, one profile.
+ * Each student is compiled live for each period; Mateo's IEP constraints ride
+ * into both compiles from the same plan, entered once.
+ */
+export function getMiddleGradesShowcase() {
+  const catalog = buildCatalog(MIDDLE_6_LIBRARY);
+  const adaptationById = new Map(SAMPLE_ADAPTATIONS.map((a) => [a.id, a]));
+  const compileFor = (assignment: typeof MIDDLE_6_PERIOD1, st: (typeof MIDDLE_6_STUDENTS)[number]) => {
+    const profile = buildBaselineProfile(st.baseline, { gradeBand: '6', today: new Date('2026-09-01') });
+    const ilp = studentILPFromBaseline(profile, st.name);
+    const constraints = st.plan ? iepToConstraints(st.plan) : {};
+    const result = compileAssignment({
+      assignment: { ...assignment, teacherConstraints: constraints },
+      objectives: MIDDLE_6_OBJECTIVES,
+      roster: [ilp],
+      adaptationCatalog: SAMPLE_ADAPTATIONS,
+      today: new Date('2026-09-01'),
+    });
+    const m = result.manifests[0] ?? null;
+    return {
+      name: st.name,
+      blurb: st.blurb,
+      hasPlan: !!st.plan,
+      pattern: m?.pattern ?? 'core',
+      objectiveModified: m?.objectiveModified ?? false,
+      applied: (m?.appliedAdaptationIds ?? []).map((id) => {
+        const a = adaptationById.get(id);
+        const fromPlan = st.plan?.accommodations.find((acc) => acc.adaptationId === id) ?? null;
+        return { id, label: a?.label ?? id, permanent: a?.fadeRule == null, fromPlan: !!fromPlan };
+      }),
+    };
+  };
+  const periods = [
+    { assignment: MIDDLE_6_PERIOD1, objectiveId: 'M6.AR.01' },
+    { assignment: MIDDLE_6_PERIOD4, objectiveId: 'R6.CI.01' },
+  ].map(({ assignment, objectiveId }) => {
+    const objective = MIDDLE_6_OBJECTIVES.find((o) => o.objectiveId === objectiveId)!;
+    return {
+      classLabel: assignment.classId,
+      objectiveId,
+      outcome: objective.studentOutcome,
+      students: MIDDLE_6_STUDENTS.map((st) => compileFor(assignment, st)),
+    };
+  });
+  return { allValid: catalog.summary.allValid, objectiveCount: catalog.summary.objectives, periods };
 }
 
 export function getStandardsCoverage() {

@@ -22,3 +22,4 @@ export * from './symbols.js';
 export * from './independence.js';
 export * from './iepGoals.js';
 export * from './facilitatorDay.js';
+export * from './middleGrades6.js';

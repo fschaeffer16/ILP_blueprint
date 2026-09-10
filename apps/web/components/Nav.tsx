@@ -17,6 +17,7 @@ const LINKS = [
   { href: '/exam', label: 'Exam analysis' },
   { href: '/baseline', label: 'Baseline' },
   { href: '/early-grades', label: 'Kindergarten' },
+  { href: '/middle-grades', label: 'Middle school' },
   { href: '/ese', label: 'ESE' },
   { href: '/iep', label: 'IEP plan' },
   { href: '/facilitator', label: 'Facilitator' },
