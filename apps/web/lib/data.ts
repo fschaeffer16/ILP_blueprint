@@ -28,6 +28,8 @@ import {
   iepToConstraints,
   buildIndependenceTrend,
   INDEPENDENCE_WEIGHT,
+  validateIEPGoal,
+  goalProgressFrom,
   renderSymbolItem,
   scoreSymbolResponse,
   PROMPT_LEVELS,
@@ -82,6 +84,7 @@ import {
   LIBRARY_OBJECTIVES,
   ESE_INDEPENDENCE_ATTEMPTS,
   INDEPENDENCE_STORIES,
+  ESE_IEP_GOALS,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -317,6 +320,26 @@ export function getIndependence() {
       }),
     );
     return { name: s.name, scaffold: s.scaffold, note: s.note, trend, attempts };
+  });
+}
+
+/**
+ * IEP build, step 4: goals as module chains — validated against the class's own
+ * modules, with progress accrued live from the step-3 attempt log.
+ */
+export function getIepGoals() {
+  const nameById = new Map(ESE_SHOWCASE_STUDENTS.map((s) => [s.studentId, s.name]));
+  const moduleById = new Map(SAMPLE_MODULES.map((m) => [m.moduleId, m]));
+  return ESE_IEP_GOALS.map((g) => {
+    const findings = validateIEPGoal(g, SAMPLE_MODULES);
+    const progress = goalProgressFrom(g, ESE_INDEPENDENCE_ATTEMPTS);
+    return {
+      goal: g,
+      studentName: nameById.get(g.studentId) ?? g.studentId,
+      moduleTitles: g.moduleIds.map((id) => ({ id, title: moduleById.get(id)?.title ?? id })),
+      findings,
+      progress,
+    };
   });
 }
 

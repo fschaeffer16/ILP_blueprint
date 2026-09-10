@@ -20,3 +20,4 @@ export * from './earlyGradesK.js';
 export * from './eseStudents.js';
 export * from './symbols.js';
 export * from './independence.js';
+export * from './iepGoals.js';
