@@ -32,6 +32,10 @@ import {
   goalProgressFrom,
   buildFacilitatorDay,
   incidentFreeStreak,
+  routeStatus,
+  routeNotifications,
+  riderStatus,
+  transitionShift,
   renderSymbolItem,
   scoreSymbolResponse,
   PROMPT_LEVELS,
@@ -104,6 +108,10 @@ import {
   ALG1_EOC_RESPONSES,
   ALG1_EOC_ROSTER,
   ALG1_MODULES,
+  BUS_NOW,
+  BUS_PINGS,
+  BUS_ROUTES,
+  RIDER_SCANS,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -280,6 +288,32 @@ export function getHighSchoolShowcase() {
         retakeCount: r.retakeQuestionIds.length,
       })),
     },
+  };
+}
+
+/**
+ * The transportation showcase: three routes, three honest states, computed live
+ * by the v1 engine at the frozen demo moment — plus the rider scan and the
+ * facilitator-day tie-in for Leo's late bus.
+ */
+export function getBusShowcase() {
+  const statuses = BUS_ROUTES.map((r) => ({
+    route: { routeId: r.routeId, busNumber: r.busNumber, label: r.label, driver: r.driver },
+    status: routeStatus(r, BUS_PINGS, BUS_NOW),
+    notifications: routeNotifications(r, routeStatus(r, BUS_PINGS, BUS_NOW)),
+  }));
+  const r42 = statuses.find((s) => s.route.routeId === 'R42')!;
+  const leoStop = r42.status.stops.find((s) => s.stopId === 'S42-4')!;
+  return {
+    now: BUS_NOW.slice(11, 16),
+    statuses,
+    leo: {
+      stop: leoStop,
+      rider: riderStatus('E-LEO', RIDER_SCANS, BUS_NOW),
+      shift: transitionShift(r42.status, 'S42-4'),
+      notification: r42.notifications[0] ?? null,
+    },
+    dre: { rider: riderStatus('H-DRE', RIDER_SCANS, BUS_NOW) },
   };
 }
 

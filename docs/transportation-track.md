@@ -2,7 +2,11 @@
 
 The research-backed design doc for a modern, reliable ILP school-transportation module, to
 replace the "50/50 at best" experience of the current stack. Emphasis: Florida / St. Lucie
-Public Schools (SLPS). This is a *plan*, not yet built.
+Public Schools (SLPS). **Status: the v1 engine is now built and demonstrable** — honest
+freshness/signal-loss states, affected-stop-only delay alerts with acknowledge-to-clear,
+scan-based rider custody, and the facilitator-day tie-in, live at `/bus` and test-pinned
+(`packages/core/src/transportation.ts`). The predictive-ETA service, driver tablet, dispatch
+console, and SIS sync below remain the deployed-build track.
 
 ## Executive summary
 

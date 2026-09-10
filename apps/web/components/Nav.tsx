@@ -22,6 +22,7 @@ const LINKS = [
   { href: '/ese', label: 'ESE' },
   { href: '/iep', label: 'IEP plan' },
   { href: '/facilitator', label: 'Facilitator' },
+  { href: '/bus', label: 'Bus' },
   { href: '/messages', label: 'Parent messages' },
   { href: '/parent', label: 'Parent app' },
   { href: '/student', label: 'Student app' },
