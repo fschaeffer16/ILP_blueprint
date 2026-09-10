@@ -189,8 +189,12 @@ everyday instruction; criteria name their prompt level), and the support-facilit
 (the child's day as logged promises — service fidelity grades the adults, incident-free days
 accrue on the record).
 
-**Still to build:** the IEP import/export interfaces to
-the district's system of record, per-setting progress views, the
+**Specified, gated on district discovery:** the IEP import/export interface to the district's
+system of record — fully specified in [`iep-interop-spec.md`](iep-interop-spec.md) (ILP is
+never the system of record; imports land as drafts the ESE teacher confirms through the same
+gate; exports are the review evidence packet steps 3–5 already compute).
+
+**Still to build:** per-setting progress views, the
 parent-facing plain-language process guide, the **outside-resource directory** (a child's plan
 calls for a support → the program knows which outside entity supplies it and which funding
 source pays for it, per §5's outside bench) — and above all, **Phase 0 itself**: none of this is
