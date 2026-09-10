@@ -26,6 +26,9 @@ import {
   SURFACE_LABEL,
   domainLabel,
   iepToConstraints,
+  renderSymbolItem,
+  scoreSymbolResponse,
+  PROMPT_LEVELS,
   SCREENING_DOMAINS,
   CROSS_CUTTING_FILTERS,
   SIGNAL_ROUTING,
@@ -72,6 +75,9 @@ import {
   SAMPLE_RUBRIC,
   SAMPLE_SOURCES,
   SAMPLE_SUBMISSIONS,
+  FRACTION_SYMBOLS,
+  SYMBOL_DEMO_ITEM,
+  LIBRARY_OBJECTIVES,
 } from '@ilp/core/fixtures';
 
 const TEACHER_ID = 'T-100';
@@ -284,6 +290,33 @@ export function getEseShowcase() {
     };
   });
   return { objective, students, accessPoints: ESE_ACCESS_POINTS_STUDENT };
+}
+
+/**
+ * IEP build, step 1: the picture-response item, computed live. The same approved
+ * compare-fractions question rendered two ways — text for the class, tappable
+ * picture buttons for the AAC student — with every possible tap pre-scored by the
+ * engine so the demo shows real evidence records (channel, prompt level, module).
+ */
+export function getPictureResponse() {
+  const objective = LIBRARY_OBJECTIVES.find((o) => o.objectiveId === SYMBOL_DEMO_ITEM.objectiveId)!;
+  const { rendering, findings } = renderSymbolItem(SYMBOL_DEMO_ITEM, FRACTION_SYMBOLS, objective);
+  if (!rendering) throw new Error(`picture rendering failed: ${findings.map((f) => f.code).join(',')}`);
+  const outcomes: Record<string, { correct: boolean; value: string; moduleId: string | null }> = {};
+  for (const c of rendering.choices) {
+    const ev = scoreSymbolResponse(SYMBOL_DEMO_ITEM, rendering, c.choiceId)!;
+    outcomes[c.choiceId] = { correct: ev.correct, value: ev.value, moduleId: ev.moduleId };
+  }
+  return {
+    objectiveOutcome: objective.studentOutcome,
+    itemId: SYMBOL_DEMO_ITEM.itemId,
+    vocabId: rendering.vocabId,
+    promptText: rendering.promptText,
+    textOptions: [...SYMBOL_DEMO_ITEM.answerKey, ...SYMBOL_DEMO_ITEM.distractors].sort(),
+    choices: rendering.choices.map((c) => ({ choiceId: c.choiceId, glyph: c.symbol.glyph, label: c.symbol.label })),
+    outcomes,
+    promptLevels: [...PROMPT_LEVELS],
+  };
 }
 
 /** The full set of rollups for the analytics dashboard (student → district). */

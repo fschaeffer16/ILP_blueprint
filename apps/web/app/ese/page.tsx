@@ -1,10 +1,12 @@
 import Link from 'next/link';
-import { getEseShowcase } from '../../lib/data';
+import { getEseShowcase, getPictureResponse } from '../../lib/data';
 import { PatternBadge } from '../../components/ui';
+import { PictureResponse } from '../../components/PictureResponse';
 import type { DeliveryPattern } from '@ilp/core';
 
 export default function EsePage() {
   const s = getEseShowcase();
+  const pr = getPictureResponse();
 
   return (
     <>
@@ -85,6 +87,23 @@ export default function EsePage() {
           </div>
         </div>
       </div>
+
+      <h2 style={{ marginTop: 26 }}>The picture-response item — try it</h2>
+      <p className="lede" style={{ fontSize: '1rem' }}>
+        Step 1 of the IEP build, running live: the identical approved question from the module on{' '}
+        <em>{pr.objectiveOutcome}</em>, rendered two ways. The class reads text; the nonverbal student
+        taps pictures — no reading, no typing. Tap an answer below and watch the engine record the{' '}
+        <strong>same mastery evidence</strong>, tagged with the response channel, the prompt level the
+        adult noted, and the question’s module — so a symbol tap counts in class, school, and district
+        rollups exactly like every other answer.
+      </p>
+      <PictureResponse data={pr} />
+      <p className="footnote" style={{ marginTop: 8 }}>
+        The picture buttons are honest part-whole glyphs standing in for the student’s own AAC symbol
+        set, which a deployed build imports rather than replaces. Rendering refuses any item that
+        hasn’t passed the integrity gate (<span className="mono">renderSymbolItem</span> /{' '}
+        <span className="mono">scoreSymbolResponse</span>, test-pinned).
+      </p>
 
       <div className="banner" style={{ marginTop: 18 }}>
         <span className="ic">🤝</span>

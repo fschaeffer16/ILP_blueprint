@@ -18,3 +18,4 @@ export * from './student.js';
 export * from './exam.js';
 export * from './earlyGradesK.js';
 export * from './eseStudents.js';
+export * from './symbols.js';
